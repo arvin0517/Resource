@@ -1,0 +1,1172 @@
+
+
+------------------------------------------------------------------------------
+
+搭建 struts2：
+
+
+1、要导入的包：（共9个）
+
+commons-fileupload(上传下载包)
+commons-io（输入输出包）
+commons-lang 3-3.2（基础包）
+commons-logging（日志包）
+freemarker(模板引擎，通过模板生成文本输出的通用工具)
+structs2-core（核心包）
+xwork-core(一些类基于xwork)
+ognl（表达式）
+javassist-3.11.0.GA.jar（解析java类文件的一个包）
+
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2、之后配置web.xml文档
+
+web项目在启动tomcat时第一个启动的文件就是web.xml
+
+首先定义过滤器：
+
+<filter>
+<filter-name>struct2</filter-name>
+<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+这里写完后按住ctrl点击鼠标左键如果可以跳转则证明正确
+</filter>
+
+
+filter的映射：
+
+<filter-mapping>
+<filter-name>struct2</filter-name>
+<url-pattern>/*</url-pattern>
+/*是所有的都需要过滤
+</filter-mapping>
+
+映射与文件的filter-name应该保持一致
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~·
+
+3、之后再src中创建struts的核心xml  struts.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+</struts>
+
+
+4、之后创建action包
+
+  创建action类让其继承ActionSupport
+
+  Struts2中有一个默认的方法不指定方法名的话有一个execute()方法
+
+  之后去配置struts.xml中的action文
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+struts.properties内容   (Struts.properties核心文件，自动加载，放在与Struts.xml文件相同的路径即可，也可以不需要)
+
+1.#指定默认编码集，对于请求参数带有中文的情况应该设置成GBK或GB2312，默认值UTF-8
+
+2.struts.i18n,encoding = GB2312
+
+3.#是否每次HTTP请求到达时，都重新加载国际化资源文件，默认值false
+
+4.struts.i18n.reload = true
+
+5.#当struts.xml改动后，是否重新加载该文件。在开发阶段建议将此属性设置为“true”，提高开发效率，默认为false
+
+6.struts.configuration.xml.reload =true
+
+7.#是否使用Struts2的开发模式，可以获得更多报错信息，便于调试。在开发阶段设置为true。默认为false
+
+8.struts.devMode = true
+
+9.#设置浏览器是否缓存静态页面，开发阶段设置为false，以获得最新响应。默认值为true
+
+10.struts.serve.static.browserCache = true
+
+11.#指定后缀为.action形式的请求可被Struts2处理，可配置多个请求后缀，比如.do,.struts2等，配置时多个后缀用逗号隔开
+
+12.struts.action.extension = action,do,struts2
+
+13.#配置服务器运行时的端口号。一般情况下改属性不修改，如果端口号占用则重新分配端口号，默认值80
+
+14.struts.url.http.port = 8080
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+常量属性也可以在 struts.xml 中配置：
+
+<struts>
+
+   <constant name="struts.enable.DynamicMethodInvocation" value="false"></constant>
+   <constant name="struts.devMode" value="true"></constant>
+    ... 
+    ...
+
+</struts>
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Struts.xml文件的标签
+
+<struts>
+	<include file="">包含其他的独立xml配置文件
+
+	<package提供了将多个action组织为一个模块的方式
+		名字必须唯一，
+		name：package名称
+		extends：继承父package名称
+		abstract：设置package的属性为抽象的package不能定义action，值true：false
+		namespace:定义package命名空间影响到URL的地址，例如命名空间为/test，那么访问的地址为http：//localhost：8080/struts2/test/xx.action
+
+**以下介绍都是写在<package>与</package>之间的**
+
+	<interceptor>定义拦截器
+		name：拦截器名称
+		class：拦截器类路径
+	<interceptor-stacck name="">定义拦截器栈
+	<default-interceptor-ref name="">定义默认拦截器
+	
+	定义全局result配置
+	<global-results>
+		<result name="error">/error.jsp</result>
+	</golbal-result>
+
+	<action>
+		name:action名称，影响//localhost：8080/struts2/xx.action
+		class：对应类的路径
+		method：调用action的方法名
+	在action中可以定义拦截器，定义返回result，定义参数例如URL
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1.开始第一个初始化加载的配置文件：web.xml
+2:对Struts进行配置的配置文件：structs2.xml
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+一 工作原理
+
+
+在Struts2框架中的处理大概分为以下几个步骤:
+
+1 客户端初始化一个指向Servlet容器（例如Tomcat）的请求 
+
+2 这个请求经过一系列的过滤器（Filter）（这些过滤器中有一个叫做ActionContextCleanUp的可选过滤器，这个过滤器对于Struts2和其他框架的集成很有帮助，例如：SiteMesh Plugin）
+ 
+3 接着FilterDispatcher核心过滤器（2.0-2.1.2版本）被调用，【StrutsPrepareAndExecuteFilter（2.1.3版本后开始使用，替代FilterDispatcher）】FilterDispatcher询问ActionMapper来决定这个请是否需要调用某个Action 
+
+4 如果ActionMapper决定需要调用某个Action，FilterDispatcher把请求的处理交给ActionProxy 
+
+5 ActionProxy通过Configuration Manager询问框架的配置文件，找到需要调用的Action类 
+
+6 ActionProxy创建一个ActionInvocation的实例。 
+
+7 ActionInvocation实例使用命名模式来调用，在调用Action的过程前后，涉及到相关拦截器（Intercepter）的调用。
+ 
+8 一旦Action执行完毕，ActionInvocation负责根据struts.xml中的配置找到对应的返回结果。返回结果通常是（但不总是，也可 能是另外的一个Action链）一个需要被表示的JSP或者FreeMarker的模版。在表示的过程中可以使用Struts2 框架中继承的标签。在这个过程中需要涉及到ActionMapper 
+
+
+
+      注意： StrutsPrepareAndExecuteFilter 替代FilterDispatcher 的原因:
+
+                  一般我们想写 过滤器 都会写在 struts 的顶端（在执行其他过滤器之前），而不能写在执行action之前，
+
+                 StrutsPrepareAndExecuteFilter 替代FilterDispatcher 的原因就是为了能在执行action之前写过滤器.
+
+流程：
+
+    客户端-->一系列过滤器-->ActionMapper-->核心过滤器-->ActionProxy-->ActionInvocation-->拦截器、返回Result-->Template、拦截器-->Response-->客户端
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+二 工作流程
+
+1、客户端浏览器发出HTTP请求.
+
+2、根据web.xml配置，该请求被FilterDispatcher接收
+
+3、根据struts.xml配置，找到需要调用的Action类和方法， 并通过IoC方式，将值注入给Aciton
+
+4、Action调用业务逻辑组件处理业务逻辑，这一步包含表单验证。
+
+5、Action执行完毕，根据struts.xml中的配置找到对应的返回结果result，并跳转到相应页面
+
+6、返回HTTP响应到客户端浏览器
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+4-1 本章概述-深入Struts2 
+
+4-2 访问Servelt API
+
+
+      1、servlet api：
+
+                      httpRequest、httpResponse、servletContext
+
+                      3个api对应jsp面向对象：request、response、application
+                      
+                      servlet中可以直接调用servlet api
+
+
+      struts2 Action中execute没有任何参数，也就是不存在servlet api
+
+
+      2、struts2 提供了3种方式访问servlet api：
+
+                        1.ActionContext类
+
+                        2.实现***Aware接口: 如： sessionAware
+
+                        3.ServletActionCotext类
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+4-3 Action搜索顺序
+
+
+Action搜索顺序：
+
+http://localhost:8080/struts2/path1/path2/path3/student.action
+
+
+第一步：判断package是否存在，如：path1/path2/path3/
+
+     如果package存在
+
+          第二步：则判断该package中action是否存在，如果不存在则去默认namespace的package里面寻找action
+
+          第三步：如果没有，则报错
+
+
+     如果package不存在：
+
+          第二步：检查上一级路径的package是否存在（直到默认namespace），重复第一步
+
+          第三步：如果没有则报错
+
+    如果请求为/login.action，系统会根据根命名空间（"/"）中查找名为login的Action，如果在根命名空间中找到了名为login的Action，则该Action处理用户的请求；否则系统将转为在默认命名空间中寻找名为login的Action，
+
+    如果默认的命名空间中有名为login的Action，则由该Action处理用户的请求。如果两个命名空间中都找不到名为login的Action，那么系统将出现错误。
+
+      注意：
+
+           命名空间只有一个级别。如果请求的URL是/bookservice/search/get.action系统将先在/bookservice/search的命名空间下查找名为get的Action，
+           如果在该系统命名空间内找到名为get的Action，则由该Action处理该用户的请求；
+
+           如果在该命名空间中没有找到名为get的Action，系统将直接进入默认的命名空间中查找名为get的Action，而不会在bookservice的命名空间下查找名为get的Action。
+
+           可以多个包使用同一个命名空间，但是相同的命名空间相当于同一个模块，也就是同一个包。
+
+           一个包中可以有name值相同的action，但是后面的action会把前面同名的action覆盖掉
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+4-4 动态方法调用
+
+
+动态方法调用：
+      
+       动态方法调用是为了解决一个Action对应多个请求的处理，以免Action太多。
+
+
+三种方式：
+           指定method属性、
+
+           感叹号方式(不推荐)、
+
+           通配符方式（推荐使用）
+
+
+1：<action name="add" method="add" class="com.imooc.action.HelloWorldAction">
+
+2：<constant name="struts.enable.DynamicMethodInvocation" value="false"></constant>
+
+      <action name="helloWorld" class="com.Action.HelloWorldAction">
+            <result >/result.jsp</result>
+            <result name="add">/add.jsp</result>
+            <result name="update">/update.jsp</result>
+      </action>
+
+      http://localhost:8080/HelloWorld/HelloWorld!add（或update）.action
+
+3: 第一个*代替{1}，第二个*代替{2}，result里的name是Action的返回值，action的里method是Action里的方法名，调用某个方法时最后目标就输入 {1}_{2}.action；这样可以访问多个Action里的方法.
+
+   
+      <action name="*_*" method="{2}" class="com.imooc.action.{1}Action">
+               <result >/result.jsp</result>
+               <result name="add">/{2}.jsp</result>
+               <result name="update">/{2}.jsp</result>
+      </action>
+
+      http://localhost:8080/HelloWorld/HelloWorld_add.action
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+4-5 指定多个配置文件
+
+
+    指定多个配置文件防止所有action都写在一个xml配置中，也实现了组件化。
+
+    如有乱码问题可在每个xml文件中设置下面编码方式防止乱码问题
+
+    指定多个配置文件，如果项目比较大，xml配置文件比较多，那么可以在struts.xml中使用include标签，将多个配置文件包括进来。
+
+           <include file="***.xml"> </include>
+
+           <constant name="struts.i18n.encoding" value="UTF-8"> </constant>
+
+    注意：
+
+           1.被include的标签一定要符合struts的dtd规范。也就是说被include的xml文件的内部格式要符合struts的xml文件规范。
+
+           2.xml文件的编码格式要相同，如果是utf-8，那么都是utf-8。
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+4-6 默认Action
+
+
+默认Action,在网页找不到原来输入的网址的情况下，跳转的页面:
+
+新建
+
+   <default-action-ref name = "xxx"></default-action-ref>//这是默认跳转指令，name中的名字可以自定义
+
+   <action name= "xxx">//这里的name必须跟<default-action-ref>中的name一样
+
+         <result>xxxx.jsp</result>//需要默认跳转到的jsp页面
+
+   </action>//结束action
+
+
+
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+注意：
+
+  【找不到默认action的原因和解决方法】
+
+        <default-action-ref name="index"></default-action-ref>
+    	
+     	<action name="index">
+    		<result>/error.jsp</result>
+    	</action>   	
+    	
+    	<action name="log_*" method="{1}"  class="com.wayne.action.LoginAction">
+    		<result name="login">/login.jsp</result>
+    		<result name="logout">/logout.jsp</result>
+    	</action>
+
+
+     通配符会覆盖掉默认action，所以不能有【*_*】这样子的action，要改成【log_*_*】这类型的命名，
+
+     否则，【*_*】里面的第一个*就包括了所有的字符，直接进入了这个action进行处理，无法进入默认的action了。
+
+
+
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  
+   <global-results>
+	    
+           <result name="error">/error.jsp</result>
+
+   </global-results>
+
+   整个包共用
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+4-7 Struts2后缀
+
+
+    Struts2后缀，默认是.action或者是空值
+
+    如何要设置，请在Struts2的三大核心文件中设置（三种方法）
+
+    1、在strts.xml中的配置语句
+
+         <constant name = "strts.action.extension" value = "xxx,xx,yyy"></constant>//name是固定的，value是指定的后缀，可以是空值
+
+    2、在struts.properties中的配置
+
+         struts.action.extension = xxxx,xxx,xx//可以配置多个，以，号分隔
+
+    3、在web.xml中的配置
+
+        <filter>//过滤器
+
+            <init-param>过滤器中假如<init-param>
+
+            <param-name>struts.action.extension</param-name>//struts.action.extension为固定
+
+            <param-value>do</param-value>//do为可选后缀
+
+            </init-param>//结束init-param
+
+        </filter>//结束过滤器
+
+
+ 注：要先将web.xml中filter-mapping的url-pattern配置成/*，然后将此处的struts.action.extension配置成html才会起效果，否则不会达到效果。
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+4-8 接收参数
+               3种方法（推荐第三种方法）：   可以传送给对象的list<String>类型参数和list<User>类型参数
+                     
+
+接收参数三个方法，推荐使用ModeIDriven接收
+
+
+    第一种接收参数的方法：
+ 
+                          直接在action类中创建相应的属性和getter和setter，和前端的name名字相同。
+
+                          eg:前端的username，在action类中就要建立一个private String username; Struts会自动映射为这个属性赋值
+
+  
+    第二种接受参数的方法：
+
+                          使用DomainModel，将username 和password两个属性封装为一个类User（必须是标准的JavaBean），
+
+                          在action中声明这个属性：private User user; 同时必须为user设置getter和setter；
+
+                          在前端中的name需要设置为user.name和user.password,才能映射成功。
+
+                          如果private User user=new User();是没有办法映射成功的
+
+
+    第三种接收参数的方法：
+
+                          使用ModelDriven<T>接口，这个action必须实现这个接口的public T getModel()方法。
+
+                          此时声明的属性必须实例化，eg: private User user = new User(); 同时不需要getter和setter。
+
+                          前端的name也只需要写username和password就可以，不需要再加域了。这种方法时最推荐的方法，因为可以减少前后端的耦合
+
+
+    注意：
+ 
+          1、使用Action的属性接受参数，在Action中定义需要接受的属性，并写它的set/get方法。
+
+          2、使用DomainModel接受参数，创建实体类定义需要接受的属性，并set/get方法，在Action中创建实体类名属性。并在界面进行指定。
+
+          3、使用ModelDriver接受参数，在Action中实现ModelDriver<实体类名>接口，并实现方法返回当前需要转换的对象，删除set/get方法，并对 对象 进行实例化，并取消指定。
+
+          4、获取List集合中的参数。获取多个参数
+
+
+
+ 
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+3种方法（推荐第三种方法）：   可以传送给对象的list<String>类型参数和list<User>类型参数
+
+
+
+    list<String>： private List<String> bookName;
+
+                   <input type="text" name="bookName[0]">
+                   <input type="text" name="bookName[1]">
+
+
+    list<User>：   private List<User> listUser;
+
+                   <input type="text" name="listUser[0].userName">
+                   <input type="text" name="listUser[1].userName">
+ 
+    
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+4-9 处理结果类型概述
+      
+          有5个值：
+                   SUCCESS  
+                   NONE  
+                   ERROR  
+                   LOGIN 
+                   INPUT(比较特殊)：当有错误，跳转到原先的页面，（1）当参数类型转换错误   （2）当this.addFieldError( , )  值不为空
+
+
+Struts2：处理结果是字符串。
+
+  注意：<result>/success.jsp</result>:
+
+           有“/”：绝对路径，开始是整个项目的上下文路径
+
+           无“/”：相当于执行该action namespace指定的路径
+
+
+    【Structs2处理流程】:
+  
+             用户请求Structs框架控制器(Action)Structs框架视图资源
+
+             返回String，提供代码复用性，有利于框架分离。
+
+
+    【Action中五种内置属性(com.opensymphony.xwork2.Action)】
+
+             (1) SUCCESS     Action正确的执行完成，返回相应的视图，success是name属性的默认值。 
+
+             (2) NONE	     表示Action正确的执行完成，但并不返回任何事视图。
+
+             (3) ERROR	     表示Action执行失效，返回错误处理视图。
+
+             (4) LOGIN	     Action因为用户没有登录的原因没有正确执行，将返回该登录视图，要求用户进行登录验证
+
+             (5) INPUT	     Action的执行，需要从前端界面获取参数，INPUT就是代表这个参数输入界面，一般在应用中，会对这些 参数进行验证，如果验证没有通过，将自动返回该视图。
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+ 
+4-10 关于input的代码演示
+
+
+   结果类型input的效果(有两种情况)
+
+       * 1.当参数类型转换错误时，如age输入框中的类型是字母等情况，方法自动返回input
+
+       * 2.当action中存在addFiledError时：
+
+         *    1）addFileError放在一般执行方法，addFieldError("", "");语句后面有返回input(return input;)的语句
+
+         *    2）addFileError放在validate()中,则不需要return INPUT;
+
+
+ FileError的表现形式：
+
+ *    在jsp页面中使用<s:fielderror></s:fielderror>标签，该标签name属性为addFieldError方法中的参数fieldName，在jsp页面中使用struts标签，
+
+ *    需要导入标签库  语句：<%@ taglib prefix="s" uri="/struts-tags"  %>
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+
+
+s:fielderror输出指定错误信息，而不是输出全部错误信息
+
+        在struts2框架中，例如在完成数据类型转换、数据校验时如果出现错误信息，
+
+        我们会利用ActionSupport类中addFieldError方法来添加错误信息内容
+         （如：在Action中使用this.addFieldError("username" , "用户名已存在!");）。
+        
+        在JSP页面中利用<s:fielderror/>标签在相应的字段处输出错误信息。
+
+       （如：JSP页面：<s:textfield name="username" label="用户名"/>，在该处后面使用<s:fielderror/>标签， 那么上面的错误信息也就会显示到username这个输入框的旁边。）
+
+
+      但是，在实际开发中，<s:fielderror/>它会输出全部的错误信息内容。而如果想选择性地输出指定错误信息。我们可以使用如下代码解决：
+
+         第一种方法：
+
+                  <s:fielderror>  
+                      <s:param>username</s:param> <!--显示指定的 username字段的 错误消息-->  
+                      <s:param>username2</s:param> <!--显示指定的 username2字段的 错误消息-->  
+                  <s:fielderror/>  
+
+         第二种方法：
+
+                  <s:fielderror fieldName="username"/> <!--显示指定的 username字段的 错误消息-->  
+
+                  <s:fielderror fieldName="username2"/> <!--显示指定的 username2字段的 错误消息-->
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+4-11 处理结果类型——局部结果与全局结果
+
+
+           全局： <global-results><global-results>
+
+
+       处理结果的两种类型：
+
+            1.局部结果：作为action子元素配置
+
+            2.全局结果：作为global-result元素的子元素配置。
+
+ 
+                   <global-results>
+	    
+                          <result name="error">/error.jsp</result>
+
+                   </global-results>
+
+
+       处理结果类型-result标签下还有param标签：
+
+            1）location：该属性定义了该视图对应的实际视图资源
+
+            2）parse：该参数指定是否可以再实际视图名字中使用OGNL表达式，默认值为TRUE，支持OGNL（Object-Graph Navigation Language）表达式
+
+               ognl表达式可以在jsp页面去写，也可以在struts2页面中去写，在实际开发中是不常用的，默认情况下ognl是允许的，是打开状态
+
+
+        <param name="parse">true</param>
+
+        <param name="location">...地址</param>
+
+        ognl表达式使用：<param name="location">/${#request.path}.jsp</param>  //也可以是${#session.path}
+
+        在action类中对应的方法中写request.setAttribute("path","返回的jsp页面名称");
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+4-12 处理结果类型——type属性
+
+
+（1）在result里面最重要的属性是type类型，type的默认值为dispatcher（转发），这个类型支持JSP视图技术。
+
+（2）Struts2支持多种视图技术，例如JSP、Valocity（模板引擎）、FreeMaker（模板引擎）等。
+
+（3）常用三个：chain，redirect，plaintext,redirectAction
+
+             1、chain：将action和另外一个action链接起来。
+
+             2、redirect：重定向（会丢失请求参数）。
+
+             3、plaintext：返回网页源代码。
+
+             4、stream：返回inputstream用于文件下载。
+           
+             5、redirectAction: 重定向到另一个Action
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+自定义拦截器
+
+    （1）、方式一、实现Interceptor接口
+
+    （2）、方式二（推荐）、继承AbstractInterceptor类
+                        --提供了init()和destroy()方法的空实现
+                        --只需要实现intercept方法即可
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+Struts2中使用Session的两种方法：
+
+   在Struts2里，如果需要在Action中使用到session，可以使用下面两种方式：
+
+                       1、通过ActionContext 类中的方法getSession得到
+
+                       2、Action实现org.apache.struts2.interceptor.SessionAware接口的方式来对session进行操作
+
+
+1、下面先看一个采用第一种方式，在action中得到session的例子
+
+public class SessionTestAction extends ActionSupport {
+
+    public String execute() {
+
+       ActionContext actionContext = ActionContext.getContext();
+       Map session = actionContext.getSession();
+       session.put("user", "Test User");
+       return SUCCESS;
+    }
+}
+
+在这个例子中，通过ActionContext得到session，并往session里放置一个key为user，值为Test User的内容。
+
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+2、下面是一个实现org.apache.struts2.interceptor.SessionAware接口来对session操作的例子
+
+public class SessionTest1Action extends ActionSupport implements SessionAware {
+
+    private Map session;
+    //private Map<String,Object> session;
+
+    public void setSession(Map session) {
+
+       this.session = session;
+
+    }
+
+    public String execute() {
+
+       this.session.put("user", "Test User 1");
+       return SUCCESS;
+
+    }
+}
+
+在这个例子中实现了接口SessionAware中的setSession方法。
+
+
+
+    上面两种方式都可以得到session，能实现的功能都一样。
+
+    推荐通过第二种方式来使用session，便于单体测试，用第二种方式，只需要构造一个Map就可以对action进行单体测试了。
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+注销session的方法：
+
+// 注销
+public String logout() throws Exception {
+
+  ((org.apache.struts2.dispatcher.SessionMap<String, Object>) this.session).invalidate();
+
+  return SUCCESS;
+}
+
+
+删除session中的某个值:
+
+	//注销用户
+	public String logout(){
+		
+		ActionContext.getContext().getSession().remove("existUser");
+		
+		return "logout";
+		
+	}
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+struts2接收参数的几种形式
+
+
+1. 用Action的属性：
+
+在action 里面定义要接收的参数，并提供相应的setter,getter,和提交参数的名称一致，并不用做数据类型的转换。
+
+相应提交方式可以用get 和post，如：testAction? name=admin
+
+
+如：
+
+ jsp:
+
+<form action="login" method="post" name="form1">
+
+  用户名：<s:textfield name="username"/><br/>
+   密 码：<s:password name="password"/><br/>
+               <s:submit value="提交"/> 
+ </form>
+
+
+  #############################
+
+java:
+
+
+public class TestAction extends ActionSupport{  
+
+     private String username;
+     private String password;
+ 
+     public String getUsername() {
+      return username;
+     }
+     public void setUsername(String username) {
+      this.username = username;
+     }
+     public String getPassword() {
+      return password;
+     }
+     public void setPassword(String password) {
+      this.password = password;
+     }
+ } 
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+2. 使用DomainModel：
+
+在Action 里面不用很多的属性，而是用Model 层用到的模型，保存它的一个对象。相应提交方式可以用get 和post，
+
+如：testAction? resBananRc.name=admin
+
+如：
+
+jsp:
+
+<form action="login" method="post" name="form1">
+
+  用户名：<s:textfield name="users.username"/><br/>
+   密 码：<s:password name="users.password"/><br/>
+               <s:submit value="提交"/> 
+
+</form>
+
+###############################
+
+
+java
+
+action:
+
+public class TestAction extends ActionSupport{
+
+//错误的写法，不能自己实例化，struts会自动实例化 private Users users = new Users();
+
+private Users users;
+
+public Users getUsers(){
+
+return users;
+
+}
+
+public void setUsers(Users users){
+
+this.users=users;
+
+}
+
+#######################################3
+
+entity:
+
+
+public class Users{ 
+ private String username;
+ private String password;
+ 
+ public String getUsername() {
+  return username;
+ }
+ public void setUsername(String username) {
+  this.username = username;
+ }
+ public String getPassword() {
+  return password;
+ }
+ public void setPassword(String password) {
+  this.password = password;
+ }
+}
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+3. 使用DTO--数据传输对象
+
+      它的作用是接收参数，传递参数，并不是项目中的实体类。
+
+      如用户注册时，会用到确认密码，所以要先把参数接收过来，做处理后，再传递给相应方法去创建User 对象。
+
+      提交参数的方式的Domain Model 方式的相同。
+
+
+DTO：
+
+public class UserDTO {  
+    private String name;  
+    private String password;  
+    private String confirm;  
+  
+    public String getName() {  
+        return name;  
+    }  
+    public void setName(String name) {  
+        this.name = name;  
+    }  
+    public String getPassword() {  
+        return password;  
+    }  
+    public void setPassword(String password) {  
+        this.password = password;  
+    }  
+    public String getConfirm() {  
+        return confirm;  
+    }  
+    public void setConfirm(String confirm) {  
+        this.confirm = confirm;  
+    }  
+}
+
+#############################
+
+Action：
+
+
+
+ 1     public class TestAction extends ActionSupport{  
+
+ 2         private static final long serialVersionUID = -7463970150000893325L; 
+ 
+ 3         private UserDTO userDTO;  
+ 4       
+ 5         public UserDTO getUserDTO() {  
+ 6             return userDTO;  
+ 7         }  
+ 8         public void setUserDTO(UserDTO userDTO) {  
+ 9             this.userDTO = userDTO;  
+10         }  
+11         public void execeute() {  
+12             System.out.println("姓名: " + userDTO.getName());  
+13         }  
+14     }  
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+4.使用ModelDriven:
+
+
+   在创建Action 的时候，Action 实现了ModelDriven 接口，去调用接口的getModel()方法，取到了相关对象。
+
+   相应提交方式可以用get 和post，如：testAction? name=admin
+
+jsp：
+
+<form action="login" method="post" name="form1">
+  用户名：<s:textfield name="username"/><br/>
+   密 码：<s:password name="password"/><br/>
+               <s:submit value="提交"/> 
+ </form>
+
+
+
+####################################
+
+
+java:
+
+
+public class sysAction extends ActionSupport implements ModelDriven<User>{     
+
+    private User user = new User();  //手动实例化   
+      
+    public User getModel() {        
+        return user;  //返回实例   
+    }     
+}
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+5.使用request对象:
+
+  此方法与传统的JSP 等传接参数一样，即使用request. getParameter(“”)方法
+
+
+ public class TestAction extends ActionSupport{  
+     private static final long serialVersionUID = -7463970150000893325L;  
+   
+     public void execeute() { 
+ 
+         String name = super.getRequest().getParameter("paraName");  
+         System.out.println("姓名：" + name);
+  
+     }  
+ }
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+   获取request 和 response 的方法:
+
+                ActionContext ac = ActionContext.getContext();
+
+                HttpServletRequest request = (HttpServletRequest) ac.get(StrutsStatics.HTTP_REQUEST);
+			
+                HttpServletResponse response = (HttpServletResponse) ac.get(StrutsStatics.HTTP_RESPONSE);
+
+   转发:
+
+           RequestDispatcher rd = request.getRequestDispatcher("loginUser.jsp");
+
+     			     rd.forward(request, response);
+  
+
+  关键字:
+          转发：  dispatcher   (不会丢失请求参数)
+
+        重定向：  redirect    （会丢失请求参数）
+----------------------------------------------------------------------------------------------------------------------------------------
+
+拦截器例子:
+
+
+java:
+
+package wei.interceptor;
+
+import java.util.Map;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.StrutsStatics;
+
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionInvocation;
+import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
+
+public class LoginInterceptor extends AbstractInterceptor {
+
+	@Override
+	public String intercept(ActionInvocation invocation) throws Exception {
+
+		ActionContext ac = ActionContext.getContext();
+		Map<String, Object> session = ac.getSession();
+
+		if (session.get("existUser") != null) {
+
+			String result = invocation.invoke();
+			// invocation.invoke()表示如果后面还有拦截器，则继续执行后面的拦截器，若没有，则执行Action
+			return result;
+
+		} else {
+
+			HttpServletRequest request = (HttpServletRequest) ac.get(StrutsStatics.HTTP_REQUEST);
+			HttpServletResponse response = (HttpServletResponse) ac.get(StrutsStatics.HTTP_RESPONSE);
+			System.out.println("goodId:" + request.getParameter("goodId"));
+
+			// String formerUrl =
+			// "buyGoodsAction_findOneGoodById.action?goodId="+request.getParameter("goodId");
+			if (request.getParameter("goodId") == null) {
+
+				request.setAttribute("formerUrl",
+						"selectGameType.jsp");
+
+			} else {
+
+				request.setAttribute("formerUrl",
+						"buyGoodsAction_findOneGoodById.action?goodId=" + request.getParameter("goodId"));
+			}
+
+			// session.put("formerUrl",
+			// "buyGoodsAction_findOneGoodById.action?goodId="+request.getParameter("goodId"));
+			// System.out.println(request.getAttribute("formerUrl"));
+			// ac.getValueStack().push(formerUrl);
+			RequestDispatcher rd = request.getRequestDispatcher("loginUser.jsp");
+			rd.forward(request, response);
+			return null;
+		}
+
+	}
+
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+struts.xml: 
+
+      <!-- 注册拦截器 -->
+      <interceptors>
+        <interceptor name="auth" class="wei.interceptor.LoginInterceptor"></interceptor>
+<!--         自定义拦截器栈  组合defaultStack 和 auth -->
+        <interceptor-stack name="myStack">
+          <interceptor-ref name="defaultStack"></interceptor-ref>
+          <interceptor-ref name="auth"></interceptor-ref>
+        </interceptor-stack>
+      </interceptors>   
+
+
+      ..................................................................
+
+ 
+      <action name="manFormAction_getGoodByGid" class="manFormAction" method="getGoodByGid">
+           <result name="goodToForm" type="redirect" >/createform.jsp</result>
+           <result name="login" type="redirect" >/loginUser.jsp</result>
+           <!-- 引用自定义的拦截器栈 -->
+           <interceptor-ref name="myStack"></interceptor-ref>  
+      </action>
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

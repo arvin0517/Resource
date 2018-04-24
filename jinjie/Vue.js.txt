@@ -1,0 +1,298 @@
+
+Vue.js 教程：
+
+       Vue.js（读音 /vju/, 类似于 view） 是一套构建用户界面的渐进式框架。
+
+       Vue 只关注视图层， 采用自底向上增量开发的设计。
+
+       Vue 的目标是通过尽可能简单的 API 实现响应的数据绑定和组合的视图组件。
+
+       Vue 学习起来非常简单，本教程基于 Vue 2.1.8 版本测试。
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+一、Vue.js 安装
+
+     
+    1、独立版本
+
+          我们可以在 Vue.js 的官网上直接下载 vue.min.js 并用 <script> 标签引入。
+
+
+    2、使用 CDN 方法
+
+          以下推荐国外比较稳定的两个 CDN，国内还没发现哪一家比较好，目前还是建议下载到本地。
+
+            BootCDN（国内） : https://cdn.bootcss.com/vue/2.2.2/vue.min.js
+
+            unpkg：https://unpkg.com/vue/dist/vue.js, 会保持和 npm 发布的最新的版本一致。
+
+            cdnjs : https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.min.js
+
+
+            例子：<script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+
+
+    3、NPM 方法
+
+            由于 npm 安装速度慢，本教程使用了淘宝的镜像及其命令 cnpm，安装使用介绍参照：使用淘宝 NPM 镜像。
+
+            npm 版本需要大于 3.0，如果低于此版本需要升级它：
+
+
+                   # 查看版本
+                   $ npm -v
+                   2.3.0
+
+                   #升级 npm
+                   cnpm install npm -g
+
+
+            在用 Vue.js 构建大型应用时推荐使用 NPM 安装：
+
+                  # 最新稳定版
+                  $ cnpm install vue
+
+
+
+    4、命令行工具
+
+           Vue.js 提供一个官方命令行工具，可用于快速搭建大型单页应用。
+
+# 全局安装 vue-cli
+$ cnpm install --global vue-cli
+# 创建一个基于 webpack 模板的新项目
+$ vue init webpack my-project
+# 这里需要进行一些配置，默认回车即可
+This will install Vue 2.x version of the template.
+
+For Vue 1.x use: vue init webpack#1.0 my-project
+
+? Project name my-project
+? Project description A Vue.js project
+? Author runoob <test@runoob.com>
+? Vue build standalone
+? Use ESLint to lint your code? Yes
+? Pick an ESLint preset Standard
+? Setup unit tests with Karma + Mocha? Yes
+? Setup e2e tests with Nightwatch? Yes
+
+   vue-cli · Generated "my-project".
+
+   To get started:
+   
+     cd my-project
+     npm install
+     npm run dev
+   
+   Documentation can be found at https://vuejs-templates.github.io/webpack
+
+
+进入项目，安装并运行：
+$ cd my-project
+$ cnpm install
+$ cnpm run dev
+ DONE  Compiled successfully in 4388ms
+
+> Listening at http://localhost:8080
+
+成功执行以上命令后访问 http://localhost:8080/，输出结果如下所示：http://www.runoob.com/vue2/vue-install.html
+
+ 
+   注意：Vue.js 不支持 IE8 及其以下 IE 版本。
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+  二、Vue.js 目录结构
+
+ 上一章节中我们使用了 npm 安装项目，我们在 IDE（Eclipse、Atom等） 中打开该目录，
+
+ 结构如下所示：
+
+
+目录解析
+目录/文件	说明
+
+build	        最终发布的代码存放位置。
+
+config	        配置目录，包括端口号等。我们初学可以使用默认的。
+
+node_modules	npm 加载的项目依赖模块
+
+
+src	        这里是我们要开发的目录，基本上要做的事情都在这个目录里。里面包含了几个目录及文件：
+
+                     assets: 放置一些图片，如logo等。
+
+                     components: 目录里面放了一个组件文件，可以不用。
+
+                     App.vue: 项目入口文件，我们也可以直接将组件写这里，而不使用 components 目录。
+
+                     main.js: 项目的核心文件。
+
+
+static	        静态资源目录，如图片、字体等。
+
+test	        初始测试目录，可删除
+
+.xxxx文件	这些是一些配置文件，包括语法配置，git配置等。
+
+index.html	首页入口文件，你可以添加一些 meta 信息或同统计代码啥的。
+
+package.json	项目配置文件。
+
+README.md	项目的说明文档，markdown 格式
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+ 三、Vue.js 模板语法
+
+        Vue.js 使用了基于 HTML 的模版语法，允许开发者声明式地将 DOM 绑定至底层 Vue 实例的数据。
+
+        Vue.js 的核心是一个允许你采用简洁的模板语法来声明式的将数据渲染进 DOM 的系统。
+
+        结合响应系统，在应用状态改变时， Vue 能够智能地计算出重新渲染组件的最小代价并应用到 DOM 操作上。 
+
+
+  1、插值
+
+
+    （1）文本
+
+     数据绑定最常见的形式就是使用 {{...}}（双大括号）的文本插值：
+
+          <!DOCTYPE html>
+          <html>
+          <head>
+          <meta charset="utf-8">
+          <title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+          <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+          </head>
+          <body>
+          <div id="app">
+            <p>{{ message }}</p>
+          </div>
+
+          <script>
+          new Vue({
+            el: '#app',
+            data: {
+              message: 'Hello Vue.js!'
+            }
+          })
+          </script>
+          </body>
+          </html>
+
+
+   （2）Html
+
+         使用 v-html 指令用于输出 html 代码：
+
+            <!DOCTYPE html>
+            <html>
+            <head>
+            <meta charset="utf-8">
+            <title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+            <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+            </head>
+            <body>
+            <div id="app">
+                <div v-html="message"></div>
+            </div>
+	
+            <script>
+            new Vue({
+              el: '#app',
+              data: {
+                message: '<h1>菜鸟教程</h1>'
+              }
+            })
+            </script>
+            </body>
+            </html>
+
+
+   （3）属性
+
+         HTML 属性中的值应使用 v-bind 指令。
+
+         以下实例判断 class1 的值，如果为 true 使用 class1 类的样式，否则不使用该类：
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

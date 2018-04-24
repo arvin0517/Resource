@@ -1,0 +1,4138 @@
+jQuery教程
+
+     jQuery 是一个 JavaScript 库。 jQuery 极大地简化了 JavaScript 编程。 jQuery 很容易学习。
+
+     jQuery的字面意思其实就是JavaScript和查询（Query），即用于辅助开发JavaScript的库。jQuery是继prototype之后的又一个优质的Javascript库，属于开源编程语言。
+
+     jQuery使用户可以更加方便地处理HTML（标准通用标记语言下的一个应用）、events、实现动画效果，而且方便地为网站提供AJAX交互。
+
+     jQuery还有一个比较大的优势是，它的文档说明很全，而且各种应用也说得很详尽，同时还有很多成熟的插件可供选择。
+
+     jQuery可以使用户的html页面保持代码和html的内容分离，也就是说，不需要再在html里面插入一堆js来调用命令了，只需要定义id即可。
+
+     操作文档对象、选择DOM元素、制作动画效果、事件处理、使用Ajax以及其他功能
+
+     除此之外，jQuery提供API让开发者编写插件。其模块化的使用方式使开发者可以很轻松的开发出功能强大的静态或动态网页。
+
+
+     jQuery的缺点：
+
+         1、不能向后兼容。每一个新版本不能兼容早期的版本。 
+
+         2、插件兼容性不是太好，与上一点类似。 
+
+         3、在同一页面上使用多个插件时，很容易碰到冲突现象，尤其是这些插件依赖相同事件或selector时最为明显。 
+
+         4、在大型框架中，jQuery核心代码库对动画和特效的支持相对较差。但是实际上这不是一个问题。目前在这方面有一个单独的jQuery UI项目和众多插件来弥补此点。
+
+
+--------------------------------------------------------------
+
+一、jQuery 教程
+
+
+    1、jQuery 教程导读
+
+        jQuery 教程导读：
+
+                  jQuery 是一个 JavaScript 库。
+
+                  jjQuery 极大地简化了 JavaScript 编程。
+
+                  jQuery 很容易学习。
+
+             ---------------------------------
+
+    2、jQuery 简介
+
+         jQuery 库可以通过一行简单的标记被添加到网页中。
+
+         
+       （1）什么是 jQuery ？
+
+                jQuery是一个JavaScript函数库。
+
+                jQuery是一个轻量级的"写的少，做的多"的JavaScript库。
+
+                jQuery库包含以下功能：
+
+                                  HTML 元素选取
+
+                                  HTML 元素操作
+
+                                  CSS 操作
+
+                                  HTML 事件函数
+
+                                  JavaScript 特效和动画
+
+                                  HTML DOM 遍历和修改
+
+                                  AJAX
+
+                                  Utilities
+
+
+      （2）为什么使用 jQuery ？
+
+               目前网络上有大量开源的 JS 框架, 但是 jQuery 是目前最流行的 JS 框架，而且提供了大量的扩展。
+               
+               很多大公司都在使用 jQuery， 例如: Google、Microsoft、IBM、Netflix
+
+
+      （3）jQuery是否适用于所有浏览器?
+
+               jQuery 团体知道JS在不同浏览器中存在着大量的兼容性问题，目前jQuery兼容于所有主流浏览器, 包括Internet Explorer 6!
+ 
+
+
+              ----------------------------------
+
+
+      3、jQuery 安装
+
+
+         （1）网页中添加 jQuery
+
+                  可以通过多种方法在网页中添加 jQuery。 您可以使用以下方法：
+
+                                    从 jquery.com 下载 jQuery 库
+
+                                    从 CDN 中载入 jQuery, 如从 Google 中加载 jQuery
+
+
+
+
+         （2）下载 jQuery：
+
+                有两个版本的 jQuery 可供下载：
+                   
+                        Production version - 用于实际的网站中，已被精简和压缩。
+                   
+                        Development version - 用于测试和开发（未压缩，是可读的代码）
+
+            
+                jQuery 库是一个 JavaScript 文件，您可以使用 HTML 的 <script> 标签引用它：
+ 
+                      <head>
+                           <script src="jquery-1.10.2.min.js"></script>
+                      </head> 
+
+
+                提示： 将下载的文件放在网页的同一目录下，就可以使用jQuery。
+
+                
+                注意：
+                       您是否很疑惑为什么我们没有在 <script> 标签中使用 type="text/javascript" ？
+                  
+                              在 HTML5 中，不必那样做了。JavaScript 是 HTML5 以及所有现代浏览器中的默认脚本语言！
+                 
+
+        （3）替代方案（不想下载jQuery的js文件时）
+
+                如果您不希望下载并存放 jQuery，那么也可以通过 CDN（内容分发网络） 引用它。
+
+                百度、又拍云、新浪、谷歌和微软的服务器都存有 jQuery 。
+
+                如果你的站点用户是国内的，建议使用百度、又拍云、新浪等国内CDN地址，如果你站点用户是国外的可以使用谷歌和微软。
+
+ 
+              如需从百度、又拍云、新浪、谷歌或微软引用 jQuery，请使用以下代码之一：
+
+                ①百度Baidu CDN:
+
+                       <head>
+                          <script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+                          </script>
+                       </head>
+
+
+                ②新浪 CDN:
+
+                       <head>
+                          <script src="http://lib.sinaapp.com/js/jquery/2.0.2/jquery-2.0.2.min.js">
+                          </script>
+                       </head>
+
+
+                ③Google CDN:
+
+                       <head>
+                          <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+                          </script>
+                       </head>
+
+                  注意1：
+
+                      通过 Google CDN 来获得最新可用的版本：
+
+                           不大推荐使用Google CDN来获取版本，因为Google产品在中国很不稳定。
+
+                           如果您观察上什么的 Google URL - 在 URL 中规定了 jQuery 版本 (1.8.0)。如果您希望使用最新版本的 jQuery，也可以从版本字符串的末尾（比如本例 1.8）删除一个数字，谷歌会返回 1.8 系列中最新的可用版本（1.8.0、1.8.1 等等），或者也可以只剩第一个数字，那么谷歌会返回 1 系列中最新的可用版本（从 1.1.0 到 1.9.9）。
+
+
+                  注意2：
+
+                      使用百度、又拍云、新浪、谷歌或微软的 jQuery，有一个很大的优势：
+
+                          许多用户在访问其他站点时，已经从百度、又拍云、新浪、谷歌或微软加载过 jQuery。所有结果是，当他们访问您的站点时，会从缓存中加载 jQuery，这样可以减少加载时间。同时，大多数 CDN 都可以确保当用户向其请求文件时，会从离用户最近的服务器上返回响应，这样也可以提高加载速度。
+
+
+
+
+
+                 -----------------------------------
+
+      4、jQuery 语法
+
+                       通过 jQuery，您可以选取（查询，query） HTML 元素，并对它们执行"操作"（actions）。
+
+
+               （1）jQuery 语法是通过选取 HTML 元素，并对选取的元素执行某些操作。
+
+
+                        基础语法： $(selector).action()：
+
+                                      美元符号定义 jQuery
+
+                                      选择符（selector）"查询"和"查找" HTML 元素
+
+                                      jQuery 的 action() 执行对元素的操作
+
+
+                            实例：
+
+                                   $(this).hide()       - 隐藏当前元素
+
+                                   $("p").hide()        - 隐藏所有段落
+
+                                   $("p .test").hide()  - 隐藏所有 class="test" 的段落
+
+                                   $("#test").hide()    - 隐藏所有 id="test" 的元素
+
+
+                    -----------------------------------
+
+             （2）文档就绪事件
+
+                     实例中的所有 jQuery 函数位于一个 document ready 函数中：
+
+                         ①       $(document).ready(function(){
+
+                                     // 开始写 jQuery 代码...
+
+                                   }); 
+
+                        这是为了防止文档在完全加载（就绪）之前运行 jQuery 代码。
+
+                        如果在文档没有完全加载之前就运行函数，操作可能失败。
+
+                        下面是两个具体的例子：
+
+                               试图隐藏一个不存在的元素
+
+                               获得未完全加载的图像的大小
+
+
+                         ②提示：简洁写法（与以上写法效果相同）:
+
+                                  $(function(){
+
+                                     // 开始写 jQuery 代码...
+
+                                   }); 
+
+                     以上两种方式你可以选择你喜欢的方式实现文档就绪后执行jQuery方法。
+
+      
+
+                 --------------------------------
+
+       5、jQuery 选择器
+
+             （1）jQuery 选择器
+
+                    jQuery 选择器允许您对 HTML 元素组或单个元素进行操作。
+
+                    jQuery 选择器基于元素的 id、类、类型、属性、属性值等"查找"（或选择）HTML 元素。它基于已经存在的 CSS 选择器，除此之外，它还有一些自定义的选择器。
+
+                    jQuery 中所有选择器都以美元符号开头：$()。
+
+                   =============================
+
+                 ① 元素选择器:  jQuery 元素选择器基于元素名选取元素。
+
+                    如：在页面中选取所有 <p> 元素:   $("p") 
+
+                   实例：
+                        用户点击按钮后，所有 <p> 元素都隐藏：
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>W3Cschool教程(w3cschool.cn)</title> 
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $("p").hide();
+  });
+});
+</script>
+</head>
+
+<body>
+<h2>这是一个标题</h2>
+<p>这是一个段落。</p>
+<p>这是另一个段落。</p>
+<button>点我</button>
+</body>
+</html>
+
+               =====================
+ 
+             ② #id 选择器
+
+                 jQuery #id 选择器通过 HTML 元素的 id 属性选取指定的元素。
+
+                 页面中元素的 id 应该是唯一的，所以您要在页面中选取唯一的元素需要通过 #id 选择器。
+
+                 通过 id 选取元素语法如下：
+
+                                           $("#test")
+
+                 例子：
+                     当用户点击按钮后，有 id="test" 属性的元素将被隐藏：
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>W3Cschool教程(w3cschool.cn)</title> 
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $("#test").hide();
+  });
+});
+</script>
+</head>
+
+<body>
+<h2>这是一个标题</h2>
+<p>这是一个段落</p>
+<p id="test">这是另外一个段落</p>
+<button>点我</button>
+</body>
+
+</html>
+                    
+
+            =========================
+
+
+          ③ .class 选择器
+
+                 jQuery 类选择器可以通过指定的 class 查找元素。
+
+                 语法如下： 
+                           $(".test")
+
+
+              用户点击按钮后所有带有 class="test" 属性的元素都隐藏：
+
+                 $(document).ready(function(){
+
+                       $("button").click(function(){
+
+                           $(".test").hide();
+
+                        });
+                   });
+ 
+
+            ==========================
+
+
+          ④ 更多实例
+
+
+                    语法	                          描述	  
+
+
+                    $("*")	                          选取所有元素	
+
+                    $(this)	                          选取当前 HTML 元素	
+
+                    $("p.intro")	                  选取 class 为 intro 的 <p> 元素
+
+                    $("p:first")	                  选取第一个 <p> 元素	
+
+                    $("ul li:first")	                  选取第一个 <ul> 元素的第一个 <li> 元素	
+ 
+                    $("ul li:first-child")	          选取每个 <ul> 元素的第一个 <li> 元素	
+
+                    $("[href]")	                          选取带有 href 属性的元素	
+
+                    $("a[target='_blank']")	          选取所有 target 属性值等于 "_blank" 的 <a> 元素
+
+                    $("a[target!='_blank']")	          选取所有 target 属性值不等于 "_blank" 的 <a> 元素	
+
+                    $(":button")	                  选取所有 type="button" 的 <input> 元素 和 <button> 元素	
+
+                    $("tr:even")	                  选取偶数位置的 <tr> 元素	
+
+                    $("tr:odd")                     	  选取奇数位置的 <tr> 元素	
+
+
+
+
+       ⑤详细例子
+
+
+         例1：     $("p.intro") ：选取 class 为 intro 的 <p> 元素
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>W3Cschool教程(w3cschool.cn)</title>
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $(".intro").hide();
+  });
+});
+</script>
+</head>
+<body>
+
+<h2 class="intro">这是一个标题</h2>
+<p class="intro">这是一个段落，点击按钮隐藏。</p>
+<p>这是另一个段落，点击按钮不会隐藏。</p>
+<button>点我</button>
+
+</body>
+</html>
+
+
+             ===========================
+
+           例2： $("[href]")  ：选取带有 href 属性的元素
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $("[href]").hide();
+  });
+});
+</script>
+</head>
+<body>
+
+<h2>这是标题</h2>
+<p>这是一个段落。</p>
+<p>这是另外一个段落。</p>
+<p><a href="http://www.w3cschool.cn/html/">HTML 教程</a></p>
+<p><a href="http://www.w3cschool.cn/css/">CSS 教程</a></p>
+<button>点我</button>
+
+</body>
+</html>
+
+
+             ===========================
+
+          例3： 注意这三个的区别
+
+
+                    $("p:first")	                  选取第一个 <p> 元素	
+
+                    $("ul li:first")	                  选取第一个 <ul> 元素的第一个 <li> 元素	
+ 
+                    $("ul li:first-child")	          选取每个 <ul> 元素的第一个 <li> 元素
+
+
+
+             ===========================
+
+          例4： 注意这两个的区别
+        
+                    $("a[target='_blank']")	     选取所有 target 属性值等于 "_blank" 的 <a> 元素
+
+                    $("a[target!='_blank']")	     选取所有 target 属性值不等于 "_blank" 的 <a> 元素	
+
+
+
+
+             $("a[target='_blank']")：
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $("a[target='_blank']").hide();
+  });
+});
+</script>
+</head>
+<body>
+
+<h2>这是标题</h2>
+<p>这是一个段落。</p>
+<p>这是另外一个段落。</p>
+<p><a href="http://www.w3cschool.cn/html/" target="_blank">HTML 教程</a></p>
+<p><a href="http://www.w3cschool.cn/css/">CSS 教程</a></p>
+<button>点我</button>
+
+</body>
+</html>
+
+
+
+             ===========================
+
+
+           例5： $(":button")  ： 选取所有 type="button" 的 <input> 元素 和 <button> 元素
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $(":button").hide();
+  });
+});
+</script>
+</head>
+<body>
+
+<h2>这是标题</h2>
+<p>这是一个段落。</p>
+<p>这是另外一个段落。</p>
+<button>点我</button>
+<input type="button" value="haha"/>
+
+</body>
+</html>
+
+
+
+              ===========================
+
+
+           例6 取 奇数位置，偶数位置
+
+                    $("tr:even"）    选取偶数位置的 <tr> 元素	
+
+                    $("tr:odd")      选取奇数位置的 <tr> 元素
+
+
+
+              取奇数位置：
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("tr:odd").css("background-color","yellow");
+});
+</script>
+</head>
+<body>
+
+<h1>欢迎访问我的主页</h1>
+
+<table border="1">
+<tr>
+  <th>网站名</th>
+  <th>网址</th>
+</tr>
+<tr>
+<td>Google</td>
+<td>http://www.google.com</td>
+</tr>
+<tr>
+<td>Baidu</td>
+<td>http://www.baidu.com</td>
+</tr>
+<tr>
+<td>W3Cschool教程</td>
+<td>http://www.w3cschool.cn</td>
+</tr>
+<tr>
+<td>淘宝</td>
+<td>http://www.taobao.com</td>
+</tr>
+<tr>
+<td>Facebook</td>
+<td>http://www.facebook.com</td>
+</tr>
+</table>
+
+</body>
+
+
+
+           ====
+
+
+             取偶数位置：
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("tr:even").css("background-color","yellow");
+});
+</script>
+</head>
+<body>
+
+<h1>欢迎访问我的主页</h1>
+
+<table border="1">
+<tr>
+  <th>网站名</th>
+  <th>网址</th>
+</tr>
+<tr>
+<td>Google</td>
+<td>http://www.google.com</td>
+</tr>
+<tr>
+<td>Baidu</td>
+<td>http://www.baidu.com</td>
+</tr>
+<tr>
+<td>W3Cschool教程</td>
+<td>http://www.w3cschool.cn</td>
+</tr>
+<tr>
+<td>淘宝</td>
+<td>http://www.taobao.com</td>
+</tr>
+<tr>
+<td>Facebook</td>
+<td>http://www.facebook.com</td>
+</tr>
+</table>
+
+</body>
+
+
+        =======================
+
+          ⑥ 独立文件中使用 jQuery 函数
+
+              如果您的网站包含许多页面，并且您希望您的 jQuery 函数易于维护，那么请把您的 jQuery 函数放到独立的 .js 文件中。
+
+              当我们在教程中演示 jQuery 时，会将函数直接添加到 <head> 部分中。不过，把它们放到一个单独的文件中会更好，就像这样（通过 src 属性来引用文件）：
+
+                      
+                          <head>
+                               <scriptsrc="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+                               </script>
+
+                               <script src="my_jquery_functions.js"></script>
+                          </head>
+
+  
+
+
+
+        ----------------------------------------------
+
+
+       6、jQuery 事件
+
+            jQuery 是为事件处理特别设计的。
+
+
+          （1）什么是事件？
+
+                页面对不同访问者的响应叫做事件。
+
+                事件处理程序指的是当 HTML 中发生某些事件时所调用的方法。
+
+
+            实例：
+
+                在元素上移动鼠标
+
+                选取单选按钮
+
+                点击元素
+
+
+            在事件中经常使用术语"触发"（或"激发"）例如： "当您按下按键时触发 keypress 事件"。
+
+
+            常见 DOM 事件：
+
+                        鼠标事件	    键盘事件      	 表单事件	    文档/窗口事件
+
+                        click	            keypress	         submit	               load
+
+                        dblclick	    keydown	         change	               resize
+
+                        mouseenter	    keyup	         focus	               scroll
+
+                        mouseleave	                         blur	               unload
+
+
+               =========================
+
+
+            （2）jQuery 事件方法语法
+
+                   在 jQuery 中，大多数 DOM 事件都有一个等效的 jQuery 方法。
+
+                   页面中指定一个点击事件：   $("p").click(); 
+
+                   下一步是定义什么时间触发事件。您可以通过一个事件函数实现：
+
+                              $("p").click(function(){
+
+                                 // action goes here!!
+
+                               }); 
+
+                ==========================
+
+           
+            （3）常用的 jQuery 事件方法
+
+                  ① $(document).ready()： 
+
+                       $(document).ready() 方法允许我们在文档完全加载完后执行函数。
+
+                  
+                  ② click()：
+
+                       click() 方法是当按钮点击事件被触发时会调用一个函数。
+
+                       该函数在用户点击 HTMl 元素时执行。
+
+              
+                  在下面的实例中，当点击事件在某个 <p> 元素上触发时，隐藏当前的 <p> 元素：
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>W3Cschool教程(w3cschool.cn)</title> 
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("p").click(function(){
+    $(this).hide();
+  });
+});
+</script>
+</head>
+<body>
+
+<p>如果你点我，我就会消失。</p>
+<p>点我消失!</p>
+<p>点我也消失!</p>
+
+</body>
+</html>
+
+
+                    ③ dblclick() ：
+
+                         当双击元素时，会发生 dblclick 事件。
+
+                         dblclick() 方法触发 dblclick 事件，或规定当发生 dblclick 事件时运行的函数：
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>W3Cschool教程(w3cschool.cn)</title> 
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("p").dblclick(function(){
+    $(this).hide();
+  });
+});
+</script>
+</head>
+<body>
+
+<p>双击鼠标左键的，我就消失。</p>
+<p>双击我消失！</p>
+<p>双击我也消失！</p>
+
+</body>
+</html>
+
+
+
+                    ④ mouseenter()   当鼠标移入时
+
+                          当鼠标指针穿过元素时，会发生 mouseenter 事件。
+
+                          mouseenter() 方法触发 mouseenter 事件，或规定当发生 mouseenter 事件时运行的函数：
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>W3Cschool教程(w3cschool.cn)</title> 
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("#p1").mouseenter(function(){
+    alert("您的鼠标移到了 id=p1 的元素上!");
+  });
+});
+</script>
+</head>
+<body>
+
+<p id="p1">鼠标指针进入此处，会看到弹窗。</p>
+
+</body>
+</html>
+
+
+
+
+
+                    ⑤ mouseleave()   当鼠标移出时
+
+                         当鼠标指针离开元素时，会发生 mouseleave 事件。
+
+                         mouseleave() 方法触发 mouseleave 事件，或规定当发生 mouseleave 事件时运行的函数：
+
+
+                             $("#p1").mouseleave(function(){
+
+                                             alert("Bye! You now leave p1!");
+                              });
+
+
+
+
+
+                    ⑥ mousedown()   
+
+                         当鼠标指针移动到元素上方，并按下鼠标按键时，会发生 mousedown 事件。
+
+                         mousedown() 方法触发 mousedown 事件，或规定当发生 mousedown 事件时运行的函数：
+
+                                     $("#p1").mousedown(function(){
+
+                                                   alert("Mouse down over p1!");
+                                         });
+
+
+
+
+
+                     ⑦ mouseup()
+
+                         当在元素上松开鼠标按钮时，会发生 mouseup 事件。
+
+                         mouseup() 方法触发 mouseup 事件，或规定当发生 mouseup 事件时运行的函数：
+
+                                   $("#p1").mouseup(function(){
+  
+                                                    alert("Mouse up over p1!");
+                                       });
+
+
+
+
+
+                     ⑧ hover(函数1，函数2)
+
+                         hover()方法用于模拟光标悬停事件。
+
+                         当鼠标移动到元素上时，会触发指定的第一个函数(mouseenter);当鼠标移出这个元素时，会触发指定的第二个函数(mouseleave)。
+
+
+                         实例：
+
+                               $("#p1").hover(function(){
+
+                                         alert("You entered p1!");
+                                    },
+                                      function(){
+
+                                        alert("Bye! You now leave p1!");
+                                 });
+
+
+
+
+                     ⑨ focus()
+
+                         当元素获得焦点时，发生 focus 事件。
+
+                         当通过鼠标点击选中元素或通过 tab 键定位到元素时，该元素就会获得焦点。
+
+                         focus() 方法触发 focus 事件，或规定当发生 focus 事件时运行的函数：
+
+                           $("input").focus(function(){
+
+                                     $(this).css("background-color","#cccccc");
+                              });
+
+
+
+
+                     ⑩ blur()
+
+                         当元素失去焦点时，发生 blur 事件。
+
+                         blur() 方法触发 blur 事件，或规定当发生 blur 事件时运行的函数：
+
+                                    $("input").blur(function(){
+
+                                            $(this).css("background-color","#ffffff");
+                                      });
+
+
+
+例子：  focus()选中  和  blur() 没选中  
+               
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>W3Cschool教程(w3cschool.cn)</title> 
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("input").focus(function(){
+    $(this).css("background-color","#cccccc");
+  });
+  $("input").blur(function(){
+    $(this).css("background-color","#ffffff");
+  });			
+});
+</script>
+</head>
+<body>
+
+Name: <input type="text" name="fullname"><br>
+Email: <input type="text" name="email">
+
+</body>
+</html>
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+二、jQuery 效果
+
+
+ 1、jQuery 效果 – 隐藏和显示
+
+           ①  jQuery hide() 和 show()
+
+
+通过 jQuery，您可以使用 hide() 和 show() 方法来隐藏和显示 HTML 元素：
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $(".hide").click(function(){
+    $("p").hide();
+  });
+  $(".show").click(function(){
+    $("p").show();
+  });
+});
+</script>
+</head>
+<body>
+<input type="text" id="text"><br>
+<p>如果你点击“隐藏” 按钮，我将会消失。</p>
+<button class="hide">隐藏</button>
+<button class="show">显示</button>
+</body>
+</html>
+
+
+
+          ② 带参数的 hide() 和 show()
+
+
+                语法:
+                      $(selector).hide(speed,callback);
+
+                      $(selector).show(speed,callback); 
+
+
+            可选的 speed 参数规定隐藏/显示的速度，可以取以下值："slow"、"fast" 或毫秒。
+
+            可选的 callback 参数是隐藏或显示完成后所执行的函数名称。
+
+例子：
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $("p").hide(3000,function(){
+	
+	    $("p").show(1000);
+	});
+  });
+});
+</script>
+</head>
+<body>
+<button>隐藏</button>
+<p>这是个段落，内容比较少。</p>
+<p>这是另外一个小段落</p>
+</body>
+</html>
+
+
+ 
+
+
+           ③ jQuery toggle()
+
+              通过 jQuery，您可以使用 toggle() 方法来切换 hide() 和 show() 方法。
+
+              显示被隐藏的元素，并隐藏已显示的元素：
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $("p").toggle("slow");
+  });
+});
+</script>
+</head>
+<body>
+
+<button>隐藏/显示</button>
+<p>这是一个文本段落。</p>
+<p>这是另外一个文本段落。</p>
+</body>
+</html>
+
+
+
+          ④ 带参数的 jQuery toggle()
+
+              语法:
+                    $(selector).toggle(speed,callback); 
+
+
+              可选的 speed 参数规定隐藏/显示的速度，可以取以下值："slow"、"fast" 或毫秒。
+
+              可选的 callback 参数是 toggle() 方法完成后所执行的函数名称。
+
+
+
+       ==================================================
+
+
+     2、jQuery 效果 - 淡入淡出
+
+
+            jQuery Fading 方法
+
+            通过 jQuery，您可以实现元素的淡入淡出效果。
+
+
+            jQuery 拥有下面四种 fade 方法：
+
+                              jQuery fadeIn()
+
+                              jQuery fadeOut()
+
+                              jQuery fadeToggle()
+
+                              jQuery fadeTo()
+
+
+
+            ① jQuery fadeIn() 用于淡入已隐藏的元素。
+
+                语法:
+                       $(selector).fadeIn(speed,callback);
+
+                可选的 speed 参数规定效果的时长。它可以取以下值："slow"、"fast" 或毫秒。.
+
+                可选的 callback 参数是 fading 完成后所执行的函数名称。
+
+                下面的例子演示了带有不同参数的 fadeIn() 方法：
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+
+    $("#div1").fadeIn();
+    $("#div2").fadeIn("slow");
+    $("#div3").fadeIn(3000);
+
+  });
+});
+</script>
+</head>
+
+<body>
+<p>以下实例演示了 fadeIn() 使用了不同参数的效果。</p>
+<button>点击淡入 div 元素。</button>
+<br><br>
+<div id="div1" style="width:80px;height:80px;display:none;background-color:red;"></div><br>
+<div id="div2" style="width:80px;height:80px;display:none;background-color:green;"></div><br>
+<div id="div3" style="width:80px;height:80px;display:none;background-color:blue;"></div>
+
+</body>
+</html>
+
+
+
+
+             ② jQuery fadeOut() 方法用于淡出可见元素
+
+                   语法:
+                          $(selector).fadeOut(speed,callback);
+
+
+                 可选的 speed 参数规定效果的时长。它可以取以下值："slow"、"fast" 或毫秒。
+
+                 可选的 callback 参数是 fading 完成后所执行的函数名称。
+
+                 下面的例子演示了带有不同参数的 fadeOut() 方法：
+
+                     $("button").click(function(){
+
+                       $("#div1").fadeOut();
+                       $("#div2").fadeOut("slow");
+                       $("#div3").fadeOut(3000);
+
+                     });
+
+
+
+              ③ jQuery fadeToggle() 方法可以在 fadeIn() 与 fadeOut() 方法之间进行切换
+
+                   如果元素已淡出，则 fadeToggle() 会向元素添加淡入效果。
+
+                   如果元素已淡入，则 fadeToggle() 会向元素添加淡出效果。
+
+                   语法:
+                          $(selector).fadeToggle(speed,callback);
+
+ 
+                   可选的 speed 参数规定效果的时长。它可以取以下值："slow"、"fast" 或毫秒。
+
+                   可选的 callback 参数是 fading 完成后所执行的函数名称。
+
+                   下面的例子演示了带有不同参数的 fadeToggle() 方法：
+
+                                    $("button").click(function(){
+
+                                      $("#div1").fadeToggle();
+                                      $("#div2").fadeToggle("slow");
+                                      $("#div3").fadeToggle(3000);
+
+                                    });
+
+
+
+
+               ④ jQuery fadeTo() 方法允许渐变为给定的不透明度（值介于 0 与 1 之间）
+
+                    语法:
+                            $(selector).fadeTo(speed,opacity,callback);
+
+                    必需的 speed 参数规定效果的时长。它可以取以下值："slow"、"fast" 或毫秒
+
+                    必需的 opacity 参数将淡入淡出效果设置为给定的不透明度（值介于 0 与 1 之间）
+
+                    可选的 callback 参数是该函数完成后所执行的函数名称
+
+
+                    下面的例子演示了带有不同参数的 fadeTo() 方法：
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+
+    $("#div1").fadeTo("slow",0.15);
+    $("#div2").fadeTo("slow",0.4);
+    $("#div3").fadeTo("slow",0.7);
+
+  });
+});
+</script>
+</head>
+
+<body>
+<p>演示 fadeTo() 使用不同参数</p>
+<button>点我让颜色变淡</button>
+<br><br>
+<div id="div1" style="width:80px;height:80px;background-color:red;"></div><br>
+<div id="div2" style="width:80px;height:80px;background-color:green;"></div><br>
+<div id="div3" style="width:80px;height:80px;background-color:blue;"></div>
+
+</body>
+</html>
+
+
+
+
+      ===============================================
+
+
+     3、 jQuery 效果 – 滑动
+
+
+        jQuery 拥有以下滑动方法：
+
+                     jQuery slideDown()
+
+                     jQuery slideUp()
+
+                     jQuery slideToggle()
+
+
+
+        ① jQuery slideDown() 方法
+
+              jQuery slideDown() 方法用于向下滑动元素。
+ 
+              语法:
+ 
+                      $(selector).slideDown(speed,callback);
+
+
+              可选的 speed 参数规定效果的时长。它可以取以下值："slow"、"fast" 或毫秒。
+
+              可选的 callback 参数是滑动完成后所执行的函数名称。
+
+              下面的例子演示了 slideDown() 方法：
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script> 
+$(document).ready(function(){
+  $("#flip").click(function(){
+    $("#panel").slideDown("slow");
+  });
+});
+</script>
+ 
+<style type="text/css"> 
+#panel,#flip
+{
+	padding:5px;
+	text-align:center;
+	background-color:#e5eecc;
+	border:solid 1px #c3c3c3;
+}
+#panel
+{
+	padding:50px;
+	display:none;
+}
+</style>
+</head>
+<body>
+ 
+<div id="flip">点我滑下面板</div>
+<div id="panel">Hello world!</div>
+
+</body>
+</html>
+
+
+            =================================
+
+           ② jQuery slideUp() 方法
+
+              jQuery slideUp() 方法用于向上滑动元素
+            
+              语法:
+                    $(selector).slideUp(speed,callback);
+
+              可选的 speed 参数规定效果的时长。它可以取以下值："slow"、"fast" 或毫秒
+
+              可选的 callback 参数是滑动完成后所执行的函数名称
+                  
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script> 
+$(document).ready(function(){
+  $("#flip").click(function(){
+    $("#panel").slideUp("slow");
+  });
+});
+</script>
+ 
+<style type="text/css"> 
+#panel,#flip
+{
+	padding:5px;
+	text-align:center;
+	background-color:#e5eecc;
+	border:solid 1px #c3c3c3;
+}
+#panel
+{
+	padding:50px;
+}
+</style>
+</head>
+<body>
+ 
+<div id="flip">点我拉起面板</div>
+<div id="panel">Hello world!</div>
+
+</body>
+
+
+        
+
+           ================================
+
+
+          ③ jQuery slideToggle() 方法
+
+              jQuery slideToggle() 方法可以在 slideDown() 与 slideUp() 方法之间进行切换。
+
+                  如果元素向下滑动，则 slideToggle() 可向上滑动它们。
+
+                  如果元素向上滑动，则 slideToggle() 可向下滑动它们。
+
+              $(selector).slideToggle(speed,callback);
+
+                 可选的 speed 参数规定效果的时长。它可以取以下值："slow"、"fast" 或毫秒。
+
+                 可选的 callback 参数是滑动完成后所执行的函数名称。
+
+              下面的例子演示了 slideToggle() 方法：
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script> 
+$(document).ready(function(){
+  $("#flip").click(function(){
+    $("#panel").slideToggle("slow");
+  });
+});
+</script>
+ 
+<style type="text/css"> 
+#panel,#flip
+{
+	padding:5px;
+	text-align:center;
+	background-color:#e5eecc;
+	border:solid 1px #c3c3c3;
+}
+#panel
+{
+	padding:50px;
+	display:none;
+}
+</style>
+</head>
+<body>
+ 
+<div id="flip">点我，显示或隐藏面板。</div>
+<div id="panel">Hello world!</div>
+
+</body>
+</html>
+
+
+
+           =======================================================
+
+
+
+      4、jQuery 效果- 动画
+
+             jQuery animate() 方法允许您创建自定义的动画。
+
+
+         ① jQuery 动画 - animate() 方法
+
+           jQuery animate() 方法用于创建自定义动画。
+
+           语法：
+                 $(selector).animate({params},speed,callback);
+
+                   必需的 params 参数定义形成动画的 CSS 属性。
+ 
+                   可选的 speed 参数规定效果的时长。它可以取以下值："slow"、"fast" 或毫秒。
+
+                   可选的 callback 参数是动画完成后所执行的函数名称。
+
+           下面的例子演示 animate() 方法的简单应用。它把 <div> 元素往右边移动了 250 像素：
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script> 
+$(document).ready(function(){
+  $("button").click(function(){
+    $("div").animate({left:'250px'},2000);
+  });
+});
+</script> 
+</head>
+ 
+<body>
+<button>开始动画</button>
+<p>默认情况下，所有的 HTML 元素有一个静态的位置，且是不可移动的。 
+如果需要改变为，我们需要将元素的 position 属性设置为 relative, fixed, 或 absolute!</p>
+<div style="background:#98bf21;height:100px;width:100px;position:absolute;">
+</div>
+
+</body>
+</html>
+
+
+        注意： 
+              默认情况下，所有的 HTML 元素有一个静态的位置，且是不可移动的。 如果需要改变为，我们需要将元素的 position 属性设置为 relative, fixed, 或 absolute!
+
+
+
+       ============================================
+
+
+      ② jQuery animate() - 操作多个属性
+
+         请注意，生成动画的过程中可同时使用多个属性：
+
+                       $("button").click(function(){
+
+                         $("div").animate({
+
+                           left:'250px',
+                              opacity:'0.5',
+                                 height:'150px',
+                                      width:'150px'
+
+                         });
+                       }); 
+
+
+具体实例：
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script> 
+$(document).ready(function(){
+  $("button").click(function(){
+    $("div").animate({
+      left:'250px',
+      opacity:'0.5',
+      height:'150px',
+      width:'150px'
+    });
+  });
+});
+</script> 
+</head>
+ 
+<body>
+<button>开始动画</button>
+<p>默认情况下，所有的 HTML 元素有一个静态的位置，且是不可移动的。 
+如果需要改变为，我们需要将元素的 position 属性设置为 relative, fixed, 或 absolute!</p>
+
+<div style="background:#98bf21;height:100px;width:100px;position:absolute;">
+
+</div>
+
+</body>
+</html>
+
+
+       ~~~~~~~~~~~~~~~~~~~~~~~
+
+        注意： 
+               可以用 animate() 方法来操作所有 CSS 属性吗？
+               
+                   是的，几乎可以！不过，需要记住一件重要的事情：当使用 animate() 时，必须使用 Camel 标记法书写所有的属性名，
+
+                   比如，必须使用 paddingLeft 而不是 padding-left，使用 marginRight 而不是 margin-right，等等。
+
+                   同时，色彩动画并不包含在核心 jQuery 库中。 如果需要生成颜色动画，您需要从 jquery.com 下载 Color Animations 插件。
+
+
+
+           ====================================
+
+
+
+           ③ jQuery animate() - 使用相对值
+
+                 也可以定义相对值（该值相对于元素的当前值）。需要在值的前面加上 += 或 -=：
+
+                               $("button").click(function(){
+
+                                 $("div").animate({
+
+                                   left:'250px',
+                                   height:'+=150px',
+                                   width:'+=150px'
+
+                                 });
+                               });
+
+
+           =======================================
+
+
+          ④ jQuery animate() - 使用预定义的值
+
+               您甚至可以把属性的动画值设置为 "show"、"hide" 或 "toggle"
+
+                                $("button").click(function(){
+
+                                  $("div").animate({
+
+                                    height:'toggle'    //使用预定义的值
+
+                                  });
+                                }); 
+
+
+           =========================================
+
+
+         ⑤ jQuery animate() - 使用队列功能
+
+            默认地，jQuery 提供针对动画的队列功能。
+
+            这意味着如果您在彼此之后编写多个 animate() 调用，jQuery 会创建包含这些方法调用的"内部"队列。然后逐一运行这些 animate 调用。
+  
+            实例 1 ：
+                     $("button").click(function(){
+
+                       var div=$("div");
+
+                       div.animate({height:'300px',opacity:'0.4'},"slow");
+                       div.animate({width:'300px',opacity:'0.8'},"slow");
+                       div.animate({height:'100px',opacity:'0.4'},"slow");
+                       div.animate({width:'100px',opacity:'0.8'},"slow");
+
+                     }); 
+
+
+                   这里相当于使用回调函数：
+
+                     $(document).ready(function(){
+                       $("button").click(function(){
+                         var div=$("div");
+                         div.animate({height:'300px',opacity:'0.4'},"slow",function(){
+	
+                     	        div.animate({width:'300px',opacity:'0.8'},"slow",function(){
+			 
+                     			    div.animate({height:'100px',opacity:'0.4'},"slow",function(){
+							
+                     		                   div.animate({width:'100px',opacity:'0.8'});
+							         });
+			                     });
+	                     });      
+                       });
+                     });
+
+
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+          实例 2 ： 
+          
+            下面的例子把 <div> 元素往右边移动了 100 像素，然后增加文本的字号：
+
+                         $("button").click(function(){
+
+                           var div=$("div");
+                           div.animate({left:'100px'},"slow");
+                           div.animate({fontSize:'3em'},"slow");  //fontSize 可以称为复合属性，第二个单词首字母大写
+
+                         });
+
+
+
+
+
+           ===========================================================
+
+
+
+         5、jQuery 效果 – 停止动画
+
+                 jQuery stop() 方法用于在动画或效果完成前对它们进行停止。
+
+           
+             jQuery stop() 滑动
+
+             jQuery stop() 动画(带参数)
+
+         
+            ① jQuery stop() 方法
+
+                  jQuery stop() 方法用于停止动画或效果，在它们完成之前。
+
+                  stop() 方法适用于所有 jQuery 效果函数，包括滑动、淡入淡出和自定义动画。
+
+                语法:
+                       $(selector).stop(stopAll,goToEnd);
+
+                        可选的 stopAll 参数规定是否应该清除动画队列。默认是 false，即仅停止活动的动画，允许任何排入队列的动画向后执行。
+
+                        可选的 goToEnd 参数规定是否立即完成当前动画。默认是 false。若为true,即是停止动画，但完成动作
+
+                        因此，默认地，stop() 会清除在被选元素上指定的当前动画。
+
+
+             例1：  下面的例子演示 stop() 方法，不带参数：
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script> 
+$(document).ready(function(){
+  $("#flip").click(function(){
+    $("#panel").slideDown(5000);
+  });
+  $("#stop").click(function(){
+    $("#panel").stop();
+  });
+});
+</script>
+ 
+<style type="text/css"> 
+#panel,#flip
+{
+	padding:5px;
+	text-align:center;
+	background-color:#e5eecc;
+	border:solid 1px #c3c3c3;
+}
+#panel
+{
+	padding:50px;
+	display:none;
+}
+</style>
+</head>
+<body>
+ 
+<button id="stop">停止滑动</button>
+<div id="flip">点我向下滑动面板</div>
+<div id="panel">Hello world!</div>
+
+</body>    
+
+
+
+
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+         例2 ： 
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script> 
+$(document).ready(function(){
+  $("#start").click(function(){
+    $("div").animate({left:'100px'},5000);
+    $("div").animate({fontSize:'3em'},5000);
+  });
+  
+  $("#stop").click(function(){
+    $("div").stop();
+  });
+
+  $("#stop2").click(function(){
+    $("div").stop(true);
+  });
+
+  $("#stop3").click(function(){
+    $("div").stop(true,true);
+  });
+  
+});
+</script> 
+</head>
+<body>
+
+<button id="start">开始</button>
+<button id="stop">停止</button>
+<button id="stop2">停止所有</button>
+<button id="stop3">停止动画，但完成动作</button>
+<p>点击 "开始" 按钮开始动画。</p>
+<p>点击 "停止" 按钮停止当前激活的动画，但之后我们能再动画队列中再次激活。</p>
+<p>点击 "停止所有" 按钮停止当前动画，并清除动画队列，所以元素的所有动画都会停止。</p>
+<p>点击 "停止动画，但完成动作" 快速完成动作，并停止它。</p> 
+
+<div style="background:#98bf21;height:100px;width:200px;position:absolute;">HELLO</div>
+
+</body>
+
+
+
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+      注意：
+
+           （1） 若是用slideDown()，开始下拉动画时，用 stop() 方法 停止动画后，无法重新开始动画，
+
+                 原因是想使用slideDown()的元素 需具有“display:none;”,当第一次使用slideDown()时，display会被改成 “display:block;”,
+
+                 所以无法再次调用slideDown()
+
+
+           （2）而用自定义动画animate() 时，用 stop() 方法 停止动画后，可以重新开始动画。
+
+
+
+
+         ===================================================================================
+
+
+
+
+     6、jQuery Callback 方法 （回调函数）
+
+
+           Callback 函数在当前动画 100% 完成之后执行。
+
+       
+         （1）jQuery 动画的问题
+
+                 许多 jQuery 函数涉及动画。这些函数也许会将 speed 或 duration 作为可选参数。
+
+                 例子：$("p").hide("slow")
+
+                 speed 或 duration 参数可以设置许多不同的值，比如 "slow", "fast", "normal" 或毫秒。
+
+
+             ① 以下实例在隐藏效果完全实现后回调函数:
+
+                  使用 callback 实例：
+
+                               $("button").click(function(){
+
+                                 $("p").hide("slow",function(){
+
+                                   alert("The paragraph is now hidden");  //警告框会在隐藏效果完全实现后弹出
+
+                                 });
+
+                               });
+
+
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+             ② 以下实例没有回调函数，警告框会在隐藏效果完成前弹出：
+
+                 没有 callback(回调)：
+
+                               $("button").click(function(){
+
+                                 $("p").hide(1000);
+                                 alert("The paragraph is now hidden");  //警告框会在隐藏效果完成前弹出
+
+                               });
+
+
+
+          ===============================================================================
+
+   
+
+        7、jQuery Chaining  （注意：仅适用于相同的元素）
+
+
+               通过 jQuery，可以把动作/方法链接在一起。
+
+               Chaining 允许我们在一条语句中运行多个 jQuery 方法（在相同的元素上）。
+
+      
+         （1）  jQuery 方法链接：
+
+                直到现在，我们都是一次写一条 jQuery 语句（一条接着另一条）。
+
+                不过，有一种名为链接（chaining）的技术，允许我们在相同的元素上运行多条 jQuery 命令，一条接着另一条。
+
+
+                提示： 这样的话，浏览器就不必多次查找相同的元素。
+
+
+             如需链接一个动作，您只需简单地把该动作追加到之前的动作上。
+ 
+
+   下面的例子把 css()、slideUp() 和 slideDown() 链接在一起。"p1" 元素首先会变为红色，然后向上滑动，再然后向下滑动：  
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function()
+  {
+
+  $("button").click(function(){
+
+    $("#p1").css("color","red").slideUp(2000).slideDown(2000);  // "p1" 元素首先会变为红色，然后向上滑动，再然后向下滑动
+
+  });
+});
+</script>
+</head>
+<body>
+
+<p id="p1">W3Cschool教程!!</p>
+<button>点我</button>
+
+</body>
+</html>          
+
+       
+            如果需要，我们也可以添加多个方法调用。
+
+
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+       （2） 提示：当进行链接时，代码行会变得很差。不过，jQuery 语法不是很严格；您可以按照希望的格式来写，包含换行和缩进。
+
+             如下书写也可以很好地运行：（书写规范）
+
+
+            将   $("#p1").css("color","red").slideUp(2000).slideDown(2000);  书写成以下样子：
+
+
+                            $("#p1").css("color","red")
+
+                              .slideUp(2000)
+
+                              .slideDown(2000); 
+
+
+             jQuery 会抛掉多余的空格，并当成一行长代码来执行上面的代码行。
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+三、 jQuery HTML
+
+ 
+    1、jQuery 捕获
+
+         jQuery - 获取内容和属性   
+
+           jQuery 拥有可操作 HTML 元素和属性的强大方法。
+
+
+       （1）jQuery DOM 操作
+
+               jQuery 中非常重要的部分，就是操作 DOM 的能力。
+
+               jQuery 提供一系列与 DOM 相关的方法，这使访问和操作元素和属性变得很容易。
+
+
+             DOM = Document Object Model（文档对象模型）
+
+                 DOM 定义访问 HTML 和 XML 文档的标准：
+
+                         "W3C 文档对象模型独立于平台和语言的界面，允许程序和脚本动态访问和更新文档的内容、结构以及样式。"
+
+
+
+       （2）获得内容 - text()、html() 以及 val()
+
+
+                三个简单实用的用于 DOM 操作的 jQuery 方法：
+
+                            text() - 设置或返回所选元素的文本内容
+
+                            html() - 设置或返回所选元素的内容（包括 HTML 标记）
+
+                            val() - 设置或返回表单字段的value值
+                     
+                            jQuery attr() 方法用于获取属性值。
+
+
+      ① 下面的例子演示如何通过 jQuery text() 和 html() 方法来获得内容：
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("#btn1").click(function(){
+    alert("Text: " + $("#test").text());
+  });
+  $("#btn2").click(function(){
+    alert("HTML: " + $("#test").html());
+  });
+});
+</script>
+</head>
+
+<body>
+<p id="test">这是段落中的 <b>粗体</b> 文本。</p>
+<button id="btn1">显示文本</button>
+<button id="btn2">显示 HTML</button>
+</body>
+</html>
+
+
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+      ② 下面的例子演示如何通过 jQuery val() 方法获得输入字段的值：
+
+
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    alert("值为: " + $("#test").val());
+  });
+});
+</script>
+</head>
+
+<body>
+<p>名称: <input type="text" id="test" value="W3Cschool教程"></p>
+<button>显示值</button>
+</body>
+</html>
+
+
+
+       =========================================================
+
+
+      (2) 获取属性值 - attr()
+
+           jQuery attr() 方法用于获取属性值。
+
+
+       下面的例子演示如何获得链接中 href 属性的值：
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+
+    alert($("#runoob").attr("href"));    //获得链接中 href 属性的值 
+
+  });
+});
+</script>
+</head>
+
+<body>
+<p><a href="http://www.w3cschool.cn" id="runoob">W3Cschool教程</a></p>
+<button>显示 href 属性的值</button>
+</body>
+</html>
+
+
+
+
+   ======================================================================
+
+
+  2、jQuery 设置
+
+         jQuery - 设置内容和属性
+
+
+    （1）  设置内容 - text()、html() 以及 val()           //修改其内容就是为这三个函数传一个参数值，参数值就是要修改成的内容
+
+          我们将使用前一章中的三个相同的方法来设置内容：
+
+
+                            text() - 设置或返回所选元素的文本内容
+
+                            html() - 设置或返回所选元素的内容（包括 HTML 标记）
+
+                            val() - 设置或返回表单字段的值
+
+
+      下面的例子演示如何通过 text()、html() 以及 val() 方法来设置内容：
+
+
+           <!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("#btn1").click(function(){
+    $("#test1").text("Hello world!");
+  });
+  $("#btn2").click(function(){
+    $("#test2").html("<b>Hello world!</b>");
+  });
+  $("#btn3").click(function(){
+    $("#test3").val("W3Cschool");
+  });
+});
+</script>
+</head>
+
+<body>
+<p id="test1">这是一个段落。</p>
+<p id="test2">这是另外一个段落。</p>
+<p>输入框: <input type="text" id="test3" value="W3Cschool教程"></p>
+<button id="btn1">设置文本</button>
+<button id="btn2">设置 HTML</button>
+<button id="btn3">设置值</button>
+</body>
+</html>
+
+
+
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+      （2）text()、html() 以及 val() 的回调函数
+
+            上面的三个 jQuery 方法：text()、html() 以及 val()，同样拥有回调函数。
+
+            回调函数由两个参数：被选元素列表中当前元素的下标，以及原始（旧的）值。然后以函数新值返回您希望使用的字符串。
+  
+              例 ：  $("#test1").text(function(i,origText){ return “新内容”;})
+
+
+        ① 下面的例子演示带有回调函数的 text() 和 html()：
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("#btn1").click(function(){
+    $("#test1").text(function(i,origText){
+      return "旧文本: " + origText + " 新文本: Hello world! (index: " + i + ")"; 
+    });
+  });
+
+  $("#btn2").click(function(){
+    $("#test2").html(function(i,origText){
+      return "旧 html: " + origText + " 新 html: Hello <b>world!</b> (index: " + i + ")"; 
+    });
+  });
+
+});
+</script>
+</head>
+
+<body>
+<p id="test1">这是一个有 <b>粗体</b> 字的段落。</p>
+<p id="test2">这是另外一个有 <b>粗体</b> 字的段落。</p>
+<button id="btn1">显示 新/旧 文本</button>
+<button id="btn2">显示 新/旧 HTML</button>
+</body>
+</html>
+
+
+
+
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+       ② 设置属性 - attr()
+
+            jQuery attr() 方法也用于设置/改变属性值。
+
+
+          例1 （修改单一属性） ：下面的例子演示如何改变（设置）链接中 href 属性的值： 
+
+                 $("button").click(function(){
+
+                    $("#w3s").attr("href","//www.w3cschool.cn/jquery");
+
+                 });           
+
+
+             =========================
+
+
+          例2 （同时修改多个属性，参数由json的形式传）： attr() 方法也允许您同时设置多个属性
+        
+              下面的例子演示如何同时设置 href 和 title 属性：
+
+                         $("button").click(function(){
+
+                           $("#w3s").attr({
+
+                             "href" : "//www.w3cschool.cn/jquery",
+                             "title" : "jQuery 教程"
+
+                           });
+                         });
+              
+
+            =========================
+
+
+           例3 attr() 的回调函数
+
+                jQuery 方法 attr()，也提供回调函数。回调函数由两个参数：被选元素列表中当前元素的下标，以及原始（旧的）值。
+
+                然后以函数新值返回您希望使用的字符串。
+
+
+           下面的例子演示带有回调函数的 attr() 方法：
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>W3Cschool在线教程(w3cschool.cn)</title> 
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("#w3cschool").attr("href", function(i, origValue){
+
+            return origValue + "/jquery";                  //点击修改链接， 新链接在旧链接的基础上做修改
+
+        });
+    });
+});
+</script>
+</head>
+
+<body>
+<p><a href="http://www.w3cschool.cn" id="w3cschool">W3Cschool教程</a></p>
+<button>修改 href值</button>
+<p>点击按钮修改后，可以点击链接查看 href 属性是否变化。</p>
+</body>
+</html>
+
+
+
+
+
+    =================================================================
+
+
+   3、jQuery 添加元素
+
+           jQuery - 添加元素
+
+             通过 jQuery，可以很容易地添加新元素/内容 
+
+
+           添加新的 HTML 内容
+
+           我们将学习用于添加新内容的四个 jQuery 方法：
+
+                         append() - 在被选元素内部的结尾插入指定内容
+
+                         prepend() - 在被选元素内部的开头插入指定内容
+
+                         after() - 在被选元素之后插入内容
+
+                         before() - 在被选元素之前插入内容     
+
+
+
+         （1）jQuery append() 方法   //注意：是在被选元素内部的结尾插入指定内容
+
+                 jQuery append() 方法在被选元素的结尾插入内容  
+
+
+实例:    
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("#btn1").click(function(){
+    $("p").append(" <b>追加文本</b>。");
+  });
+
+  $("#btn2").click(function(){
+    $("ol").append("<li>追加列表项</li>");
+  });
+});
+</script>
+</head>
+
+<body>
+<p>这是一个段落。</p>
+<p>这是另外一个段落。</p>
+<ol>
+<li>List item 1</li>
+<li>List item 2</li>
+<li>List item 3</li>
+</ol>
+<button id="btn1">添加文本</button>
+<button id="btn2">添加列表项</button>
+</body>
+</html>   
+
+
+
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+      （2）jQuery prepend() 方法  // 注意：是在被选元素的开头插入内容
+
+            jQuery prepend() 方法在被选元素的开头插入内容。
+
+实例：
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("#btn1").click(function(){
+    $("p").prepend("<b>在开头追加文本</b>。 ");
+  });
+  $("#btn2").click(function(){
+    $("ol").prepend("<li>在开头添加列表项</li>");
+  });
+});
+</script>
+</head>
+
+<body>
+<p>这是一个段落。</p>
+<p>这是另外一个段落。</p>
+<ol>
+<li>List item 1</li>
+<li>List item 2</li>
+<li>List item 3</li>
+</ol>
+<button id="btn1">添加文本</button>
+<button id="btn2">添加列表项</button>
+</body>
+</html>
+
+
+
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+      （3）通过 append() 和 prepend() 方法添加若干新元素
+
+
+             在上面的例子中，我们只在被选元素的开头/结尾插入文本/HTML。
+
+             不过，append() 和 prepend() 方法能够通过参数接收无限数量的新元素。
+
+             可以通过 jQuery 来生成文本/HTML（就像上面的例子那样），或者通过 JavaScript 代码和 DOM 元素。
+
+
+
+      在下面的例子中，我们创建若干个新元素。
+
+      这些元素可以通过 text/HTML、jQuery 或者 JavaScript/DOM 来创建。
+
+      然后我们通过 append() 方法把这些新元素追加到文本中（对 prepend() 同样有效）：
+
+
+例子： 演示 3种不同的方法创建元素，并且调用append 传入三个参数 同时将 3个新元素添加进去 被选元素的内部的结尾
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+function appendText()
+{
+	var txt1="<p>文本。</p>";              // ① 使用 HTML 标签创建文本
+
+	var txt2=$("<p></p>").text("文本。");  // ② 使用 jQuery 创建文本
+
+	var txt3=document.createElement("p");
+	txt3.innerHTML="文本。";               // ③ 使用 DOM 创建文本 text with DOM
+ 
+	$("body").append(txt1,txt2,txt3);      // 追加新元素    调用append 传入三个参数 同时将 3个新元素添加进去
+}
+</script>
+</head>
+<body>
+
+<p>这是一个段落。</p>
+<button onclick="appendText()">追加文本</button>
+
+</body>
+</html>
+
+
+
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+       （4）jQuery after() 和 before() 方法
+
+               jQuery after() 方法在被选元素之后插入内容。
+
+               jQuery before() 方法在被选元素之前插入内容。
+
+
+例子： 
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+
+  $("#btn1").click(function(){
+    $("img").before("<b>之前</b>");
+  });
+
+  $("#btn2").click(function(){
+    $("img").after("<i>之后</i>");
+  });
+
+});
+</script>
+</head>
+
+<body>
+<img src="/statics/images/logo.png" >
+<br><br>
+<button id="btn1">之前插入</button>
+<button id="btn2">之后插入</button>
+</body>
+</html>
+
+
+
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        （5）通过 after() 和 before() 方法添加若干新元素
+
+
+             after() 和 before() 方法能够通过参数接收无限数量的新元素。
+
+             可以通过 text/HTML、jQuery 或者 JavaScript/DOM 来创建新元素。
+
+             在下面的例子中，我们创建若干新元素。这些元素可以通过 text/HTML、jQuery 或者 JavaScript/DOM 来创建。
+
+             然后我们通过 after() 方法把这些新元素插到文本中（对 before() 同样有效）：
+
+
+例子：演示 3种不同的方法创建元素，并且调用after(txt1,txt2,txt3) 传入三个参数 同时将 3个新元素添加到 被选元素之后
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+function afterText()
+{
+	var txt1="<b>I </b>";                    // 使用 HTML 创建元素
+	var txt2=$("<i></i>").text("love ");     // 使用 jQuery 创建元素
+	var txt3=document.createElement("big");  // 使用 DOM 创建元素
+	txt3.innerHTML="jQuery!";
+	$("img").after(txt1,txt2,txt3);          // 在图片后添加文本
+}
+</script>
+</head>
+<body>
+
+<img src="/statics/images/w3c/logo.png" >
+<br><br>
+<button onclick="afterText()">之后插入</button>
+
+</body>
+</html>
+
+
+
+   
+
+     ============================================================================
+
+
+     4、jQuery 删除元素
+
+          jQuery - 删除元素
+
+              通过 jQuery，可以很容易地删除已有的 HTML 元素
+
+
+           删除元素/内容
+
+           如需删除元素和内容，一般可使用以下两个 jQuery 方法：
+
+                             remove() - 删除被选元素（及其子元素）
+
+                             empty() - 从被选元素中删除子元素
+
+
+
+         （1）jQuery remove() 方法
+
+                 jQuery remove() 方法删除被选元素及其子元素。
+
+实例：
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $("#div1").remove();
+  });
+});
+</script>
+</head>
+<body>
+
+<div id="div1" style="height:100px;width:300px;border:1px solid black;background-color:yellow;">
+
+这是 div 中的一些文本。
+<p>这是在 div 中的一个段落。</p>
+<p>这是在 div 中的另外一个段落。</p>
+
+</div>
+<br>
+<button>移除div元素</button>
+
+</body>
+</html>
+
+
+
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    （2）jQuery empty() 方法
+
+             jQuery empty() 方法删除被选元素的子元素。
+
+
+实例：  注意：  empty()仅仅只是删除被选元素的子元素。
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $("#div1").empty();
+  });
+});
+</script>
+</head>
+<body>
+
+<div id="div1" style="height:100px;width:300px;border:1px solid black;background-color:yellow;">
+
+这是 div 中的一些文本。
+<p>这是在 div 中的一个段落。</p>
+<p>这是在 div 中的另外一个段落。</p>
+
+</div>
+<br>
+<button>清空div元素</button>
+
+</body>
+</html>
+
+
+
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+      (3) 过滤被删除的元素
+
+             jQuery remove() 方法也可接受一个参数，允许您对被删元素进行过滤。
+
+             该参数可以是任何 jQuery 选择器的语法。
+
+
+ 下面的例子删除 class="italic" 的所有 <p> 元素：
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+
+    $("p").remove(".italic");   //删除 class="italic" 的所有 <p> 元素
+
+  });
+});
+</script>
+</head>
+<body>
+
+<p>这是一个段落。</p>
+<p class="italic"><i>这是另外一个段落。</i></p>
+<p class="italic"><i>这是另外一个段落。</i></p>
+<button>移除所有  class="italic" 的 p 元素。</button>
+
+</body>
+</html>
+
+
+
+   ==============================================================================================================
+
+
+
+   5、jQuery CSS 类
+
+         jQuery - 获取并设置 CSS 类
+
+
+         jQuery 操作 CSS
+
+
+         jQuery 拥有若干进行 CSS 操作的方法。我们将学习下面这些：
+
+                              addClass() - 向被选元素添加一个或多个类
+
+                              removeClass() - 从被选元素删除一个或多个类
+
+                              toggleClass() - 对被选元素进行添加/删除类的切换操作
+
+                              css() - 设置或返回样式属性
+
+                           
+
+
+     （1）jQuery addClass() 方法
+
+
+          ① 下面的例子展示如何向不同的元素添加 class 属性。当然，在添加类时，您也可以选取多个元素：
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+
+  $("button").click(function(){
+	  
+    $("h1,h2,p").addClass("blue");     //"blue" ，"important"  是类名
+    $("div").addClass("important");
+ 
+  });
+});
+</script>
+<style type="text/css">
+.important
+{
+	font-weight:bold;
+	font-size:xx-large;
+}
+.blue
+{
+	color:blue;
+}
+</style>
+</head>
+<body>
+
+<h1>标题 1</h1>
+<h2>标题 2</h2>
+<p>这是一个段落。</p>
+<p>这是另外一个段落。</p>
+<div>这是一些重要的文本!</div>
+<br>
+<button>为元素添加 class</button>
+
+</body>
+
+
+
+        ② 您也可以在 addClass() 方法中规定多个类：
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+
+    $("#div1").addClass("important blue");  //添加多个类
+
+  });
+});
+</script>
+<style type="text/css">
+.important
+{
+	font-weight:bold;
+	font-size:xx-large;
+}
+.blue
+{
+	color:blue;
+}
+</style>
+</head>
+<body>
+
+<div id="div1">这是一些文本。</div>
+<div id="div2">这是一些文本。</div>
+<br>
+<button>为第一个 div 元素添加类</button>
+
+</body>
+</html>
+
+
+
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~     														
+
+    （2）jQuery removeClass() 方法
+
+              
+           下面的例子演示如何在不同的元素中删除指定的 class 属性：
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $("h1,h2,p").removeClass("blue");
+  });
+});
+</script>
+<style type="text/css">
+.important
+{
+	font-weight:bold;
+	font-size:xx-large;
+}
+.blue
+{
+	color:blue;
+}
+</style>
+</head>
+<body>
+
+<h1 class="blue">标题 1</h1>
+<h2 class="blue">标题 2</h2>
+<p class="blue">这是一个段落。</p>
+<p>这是另外一个段落。</p>
+<br>
+<button>从元素中移除 class</button>
+</body>
+</html>             
+
+
+ 
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+    （3）jQuery toggleClass() 方法
+
+
+     下面的例子将展示如何使用 jQuery toggleClass() 方法。该方法对被选元素进行添加/删除类的切换操作：
+       
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $("h1,h2,p").toggleClass("blue");
+  });
+});
+</script>
+<style type="text/css">
+.blue
+{
+color:blue;
+}
+</style>
+</head>
+<body>
+
+<h1 class="blue">标题 1</h1>
+<h2 class="blue">标题 2</h2>
+<p class="blue">这是一个段落。</p>
+<p>这是另外一个段落。</p>
+<br>
+<button>切换 class</button>
+</body>
+</html>
+
+
+
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    =======================================================================================================
+
+   
+    6、jQuery css() 方法
+
+
+         jQuery css() Method
+
+             css() 方法设置或返回被选元素的一个或多个样式属性。
+
+
+        （1）返回 CSS 属性
+
+                 如需返回指定的 CSS 属性的值，请使用如下语法：
+
+                                 css("propertyname")
+
+ 下面的例子将返回首个匹配元素的 background-color 值：
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    alert("背景颜色 = " + $("p").css("background-color"));  //注意：这里只是返回第一个 "p" 的颜色 
+  });
+});
+</script>
+</head>
+
+<body>
+<h2>这是一个标题</h2>
+
+<p style="background-color:#ff0000">这是一个段落。</p>
+<p style="background-color:#00ff00">这是一个段落。</p>
+<p style="background-color:#0000ff">这是一个段落。</p>
+
+<button>返回 p 元素的 background-color </button>
+</body>
+</html>
+
+
+   
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   （2）设置 CSS 属性
+
+           如需设置指定的 CSS 属性，请使用如下语法：
+
+                          css("propertyname","value");
+
+
+     下面的例子将为所有匹配元素设置 background-color 值：
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $("p").css("background-color","yellow");
+  });
+});
+</script>
+</head>
+
+<body>
+<h2>这是一个标题</h2>
+<p style="background-color:#ff0000">这是一个段落。</p>
+<p style="background-color:#00ff00">这是一个段落。</p>
+<p style="background-color:#0000ff">这是一个段落。</p>
+<p>这是一个段落。</p>
+<button>设置 p 元素的 background-color </button>
+</body>
+</html>
+
+
+  注意：
+
+          #ff0000 红色      #00ff00 绿色       #0000ff 蓝色
+ 
+         
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+   （3）设置多个 CSS 属性
+
+         如需设置多个 CSS 属性，请使用如下语法：
+
+                             css({"propertyname":"value","propertyname":"value",...});
+
+
+       下面的例子将为所有匹配元素设置 background-color 和 font-size：
+
+              $("p").css({"background-color":"yellow","font-size":"200%"});
+
+
+    ==========================================================================
+
+
+    7、jQuery 尺寸
+
+
+        jQuery 提供多个处理尺寸的重要方法：
+
+                       width()             （不包括内边距、边框或外边距）。
+
+                       innerWidth()        （包括内边距）
+
+                       outerWidth()        （包括内边距和边框）
+
+                       outerWidth(true)    （包括内边距、边框或外边距）
+
+                       height()             (同上)
+ 
+                       innerHeight()        (同上)
+
+                       outerHeight()        (同上)
+
+                       outerHeight(true)    (同上)
+
+
+
+      （1）jQuery width() 和 height() 方法
+
+
+              width() 方法设置或返回元素的宽度（不包括内边距、边框或外边距）。
+
+              height() 方法设置或返回元素的高度（不包括内边距、边框或外边距）。
+
+
+下面的例子返回指定的 <div> 元素的宽度和高度：
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    var txt="";
+    txt+="Width of div: " + $("#div1").width() + "</br>";
+    txt+="Height of div: " + $("#div1").height();
+    $("#div1").html(txt);
+  });
+});
+</script>
+</head>
+<body>
+
+<div id="div1" style="height:100px;width:300px;padding:10px;margin:3px;border:1px solid blue;background-color:lightblue;"></div>
+<br>
+<button>显示 div 元素的尺寸</button>
+<p>width() - 返回元素的宽度</p>
+<p>height() - 返回元素的高度</p>
+
+</body>
+</html>
+
+ 
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+      （2）jQuery innerWidth() 和 innerHeight() 方法
+
+               innerWidth() 方法返回元素的宽度（包括内边距）。
+
+               innerHeight() 方法返回元素的高度（包括内边距）。
+
+
+      下面的例子返回指定的 <div> 元素的 inner-width/height：
+
+ 
+$("button").click(function(){
+
+  var txt="";
+  txt+="Inner width: " + $("#div1").innerWidth() + "</br>";
+  txt+="Inner height: " + $("#div1").innerHeight();
+  $("#div1").html(txt);
+
+});
+
+  
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    （3）jQuery outerWidth() 和 outerHeight() 方法
+
+            outerWidth() 方法返回元素的宽度（包括内边距和边框）。
+
+            outerHeight() 方法返回元素的高度（包括内边距和边框）。
+
+ 
+     下面的例子返回指定的 <div> 元素的 outer-width/height：
+
+
+$("button").click(function(){
+
+  var txt="";
+  txt+="Outer width: " + $("#div1").outerWidth() + "</br>";
+  txt+="Outer height: " + $("#div1").outerHeight();
+  $("#div1").html(txt);
+
+});
+
+
+
+      ---------------------------------------------------------------------------------------------------------------------------------------
+
+
+ 四、jQuery 遍历
+
+
+    1、jQuery 遍历
+
+        ① 什么是遍历？
+
+           jQuery 遍历，意为"移动"，用于根据其相对于其他元素的关系来"查找"（或选取）HTML 元素。以某项选择开始，并沿着这个选择移动，直到抵达您期望的元素为止。
+
+
+       注意：  祖先是父、祖父、曾祖父等等。后代是子、孙、曾孙等等。同胞拥有相同的父。
+
+
+
+       ② 遍历 DOM
+
+              jQuery 提供了多种遍历 DOM 的方法。
+
+              遍历方法中最大的种类是树遍历（tree-traversal）。
+
+
+      ==================================================================
+
+
+    2、jQuery 遍历 - 祖先
+
+
+            祖先是父、祖父或曾祖父等等。
+
+            通过 jQuery，您能够向上遍历 DOM 树，以查找元素的祖先。
+
+
+      （1）向上遍历 DOM 树
+
+            这些 jQuery 方法很有用，它们用于向上遍历 DOM 树：
+
+                                    parent()
+
+                                    parents()
+
+                                    parentsUntil()
+
+
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+      （2）jQuery parent() 方法  （返回直接父元素）
+
+             parent() 方法返回被选元素的直接父元素。
+
+             该方法只会向上一级对 DOM 树进行遍历。
+
+
+  下面的例子返回每个 <span> 元素的的直接父元素：
+
+                         <script>
+                         $(document).ready(function(){
+
+                                $("span").parent().css({"color":"red","border":"2px solid red"});
+
+                         });
+                         </script>
+
+
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+      （3）jQuery parents() 方法  （返回所有的祖先元素）
+
+             parents() 方法返回被选元素的所有祖先元素，它一路向上直到文档的根元素 (<html>)。
+
+         
+     ① 下面的例子返回所有 <span> 元素的所有祖先：
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+.ancestors *
+{ 
+	display: block;
+	border: 2px solid lightgrey;
+	color: lightgrey;
+	padding: 5px;
+	margin: 15px;
+}
+</style>
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+
+  $("span").parents().css({"color":"red","border":"2px solid red"});  //设置所有祖先的css
+
+});
+</script>
+</head>
+
+<body class="ancestors">body (曾曾祖父元素)
+  <div style="width:500px;">div (曾祖父元素)
+    <ul>ul (祖父元素)  
+      <li>li (父元素)
+        <span>span</span>
+      </li>
+    </ul>   
+  </div>
+</body>
+
+</html>
+
+
+     *******************************
+
+
+     ② parents(参数)     当parents 带参数时，表示过滤祖先
+  
+        您也可以使用可选参数来过滤对祖先元素的搜索。
+
+
+      下面的例子返回所有 <span> 元素的所有祖先，并且它是 <ul> 元素：
+
+$(document).ready(function(){
+
+  $("span").parents("ul");
+
+});
+
+
+
+ 
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    （4）jQuery parentsUntil() 方法
+
+          parentsUntil() 方法返回介于两个给定元素之间的所有祖先元素。
+
+
+
+下面的例子返回介于 <span> 与 <div> 元素之间的所有祖先元素：
+
+   注意： 例子中返回介于 <span> 与 <div> 元素之间的所有祖先元素：  在这里是 ul 和 li 
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+.ancestors *
+{ 
+	display: block;
+	border: 2px solid lightgrey;
+	color: lightgrey;
+	padding: 5px;
+	margin: 15px;
+}
+</style>
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("span").parentsUntil("div").css({"color":"red","border":"2px solid red"});//返回介于 <span> 与 <div> 元素之间的所有祖先元素
+});
+</script>
+</head>
+
+<body class="ancestors"> body (曾曾祖父元素)
+  <div style="width:500px;">div (曾祖父元素)
+    <ul>ul (祖父元素)  
+      <li>li (父元素)
+        <span>span</span>
+      </li>
+    </ul>   
+  </div>
+</body>
+
+</html>
+
+
+
+      ===================================================================
+
+
+   3、jQuery 遍历 – 后代
+
+         后代是子、孙、曾孙等等。
+
+         通过 jQuery，您能够向下遍历 DOM 树，以查找元素的后代。
+
+
+     （1）向下遍历 DOM 树
+           
+            下面是两个用于向下遍历 DOM 树的 jQuery 方法：
+
+                  children()
+ 
+                  find()
+
+
+     （2）jQuery children() 方法  （只返回所有直接子元素）
+
+            children() 方法返回被选元素的所有直接子元素。
+
+            该方法只会向下一级对 DOM 树进行遍历。
+
+
+      ①（无参的children() 方法 ） 下面的例子返回每个 <div> 元素的所有直接子元素：
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+.descendants *
+{ 
+	display: block;
+	border: 2px solid lightgrey;
+	color: lightgrey;
+	padding: 5px;
+	margin: 15px;
+}
+</style>
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+
+	$("div").children().css({"color":"red","border":"2px solid red"}); //返回每个 <div> 元素的所有直接子元素
+
+});
+</script>
+</head>
+<body>
+
+<div class="descendants" style="width:500px;">div (当前元素) 
+  <p>p (儿子元素)
+    <span>span (孙子元素)</span>     
+  </p>
+  <p>p (儿子元素)
+    <span>span (孙子元素)</span>
+  </p> 
+</div>
+
+</body>
+</html>
+
+
+        ******************************
+
+
+    ②（有参的children() 方法 ）  对子元素进行过滤
+
+          您也可以使用可选参数来过滤对子元素的搜索
+
+
+
+     下面的例子返回类名为 "1" 的所有 <p> 元素，并且它们是 <div> 的直接子元素： 
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+.descendants *
+{ 
+	display: block;
+	border: 2px solid lightgrey;
+	color: lightgrey;
+	padding: 5px;
+	margin: 15px;
+}
+</style>
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("div").children("p.1").css({"color":"red","border":"2px solid red"});
+});
+</script>
+</head>
+<body>
+
+<div class="descendants" style="width:500px;">div (当前元素) 
+  <p class="1">p (儿子元素)
+    <span>span (孙子元素)</span>     
+  </p>
+  <p class="2">p (儿子元素)
+    <span>span (孙子元素)</span>
+  </p> 
+</div>
+
+</body>
+</html>
+
+
+
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  （3）jQuery find(参数) 方法   （返回所有后代，包括子、孙、曾孙等等。）
+
+        find() 方法返回被选元素的后代元素，一路向下直到最后一个后代。
+
+
+       注意：find()  需带参数，
+
+               如：     find("span") 表示：<div> 后代的所有 <span> 元素,包括子、孙、曾孙等等.
+
+                        find("*")   表示：返回所有后代元素，包括子、孙、曾孙等等。
+
+  
+    下面的例子返回属于 <div> 后代的所有 <span> 元素：
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+.descendants *
+{ 
+	display: block;
+	border: 2px solid lightgrey;
+	color: lightgrey;
+	padding: 5px;
+	margin: 15px;
+}
+</style>
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("div").find("span").css({"color":"red","border":"2px solid red"});
+});
+</script>
+</head>
+<body>
+
+<div class="descendants" style="width:500px;">div (当前元素) 
+  <p>p (儿子元素)
+    <span>span (孙子元素)</span>     
+  </p>
+  <p>p (儿子元素)
+    <span>span (孙子元素)</span>
+  </p> 
+</div>
+
+</body>
+</html>
+
+
+
+   ===============================================================================
+
+
+    4、jQuery 遍历 – 同胞(siblings)
+
+
+            同胞拥有相同的父元素。
+
+            通过 jQuery，您能够在 DOM 树中遍历元素的同胞元素。
+
+
+     （1）在 DOM 树中水平遍历
+
+           有许多有用的方法让我们在 DOM 树进行水平遍历：
+
+                                 siblings()        返回被选元素的所有同胞元素：包括 有参 和 无参 两种情况
+
+                                 next()            返回被选元素的下一个同胞元素
+
+                                 nextAll()         返回被选元素的所有跟随的同胞元素
+
+                                 nextUntil()       返回介于两个给定参数之间的所有跟随的同胞元素
+
+                                 prev()           （同上）
+
+                                 prevAll()        （同上）
+
+                                 prevUntil()      （同上）
+ 
+
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    （2）jQuery siblings() 方法
+
+                 siblings() 方法返回被选元素的所有同胞元素
+
+
+        ①（无参的siblings() 方法） 下面的例子返回 <h2> 的所有同胞元素：包括（"p"、"span"、"h3"、"p"）
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+.siblings *
+{ 
+	display: block;
+	border: 2px solid lightgrey;
+	color: lightgrey;
+	padding: 5px;
+	margin: 15px;
+}
+</style>
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+	$("h2").siblings().css({"color":"red","border":"2px solid red"});
+});
+</script>
+</head>
+<body class="siblings">
+
+<div>div (父元素)
+
+  <p>p</p>
+  <span>span</span>
+  <h2>h2</h2>
+  <h3>h3</h3>
+  <p>p</p>
+
+</div>
+
+</body>
+</html>
+
+
+      *****************************************
+
+
+        ②（有参的siblings() 方法）
+
+             您也可以使用可选参数来过滤对同胞元素的搜索。
+
+             下面的例子返回属于 <h2> 的同胞元素的所有 <p> 元素：
+
+                                    $(document).ready(function(){
+
+                                         $("h2").siblings("p");
+
+                                    });
+
+
+
+
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+  （3）jQuery next() 方法  （ 该方法只返回一个元素。）
+
+
+            next() 方法返回被选元素的下一个同胞元素。
+
+
+       下面的例子返回 <h2> 的下一个同胞元素：
+  
+  
+                 $(document).ready(function(){
+
+                   $("h2").next();            //返回 "h2" 的下一个同胞元素
+
+                 });
+
+
+         //$("h2").next().css({"color":"red","border":"2px solid red"});
+
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+  （4）jQuery nextAll() 方法
+
+          nextAll() 方法返回被选元素的所有跟随的同胞元素。
+
+
+     下面的例子返回 <h2> 的所有跟随的同胞元素：
+
+
+                        $(document).ready(function(){
+
+                          $("h2").nextAll();  //返回 "h2" 的所有跟随的同胞元素,即在它后面的所有同胞元素    
+
+                        });
+
+
+            //$("h2").nextAll().css({"color":"red","border":"2px solid red"});
+
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   （5）jQuery nextUntil() 方法
+
+          nextUntil() 方法返回介于两个给定参数之间的所有跟随的同胞元素。
+
+
+   下面的例子返回介于 <h2> 与 <h6> 元素之间的所有同胞元素：
+
+              $(document).ready(function(){
+
+                                 $("h2").nextUntil("h6");  //返回介于 <h2> 与 <h6> 元素之间的所有同胞元素
+
+                });
+
+         
+            //$("h2").nextUntil("h6").css({"color":"red","border":"2px solid red"});
+
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    （6）jQuery prev(), prevAll() & prevUntil() 方法
+
+           prev(), prevAll() 以及 prevUntil() 方法的工作方式与上面的方法类似，
+
+           只不过方向相反而已：它们返回的是前面的同胞元素（在 DOM 树中沿着同胞元素向后遍历，而不是向前）。
+
+
+  ==========================================================================================================
+
+
+
+  5、jQuery 遍历- 过滤
+
+
+        缩写搜索元素的范围
+
+        三个最基本的过滤方法是：first(), last() 和 eq()，它们允许您基于其在一组元素中的位置来选择一个特定的元素。
+
+        其他过滤方法，比如 filter() 和 not() 允许您选取匹配或不匹配某项指定标准的元素。
+
+    
+     （1）jQuery first() 方法
+
+             first() 方法返回被选元素的首个元素。
+
+
+下面的例子选取首个 <div> 元素内部的第一个 <p> 元素：（返回首个XX的首个xx）
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+
+  $("div p").first().css("background-color","yellow");   //注意：这里返回的是首个 <div> 元素内部的第一个 <p> 元素
+
+});
+</script>
+</head>
+<body>
+
+<h1>欢迎访问我的主页</h1>
+<div>
+	<p>这是 div 中的一个段落。</p>
+</div>
+
+<div>
+	<p>这是另外一个 div 中的一个段落。</p>
+</div>
+
+<p>这是一个段落。</p>
+
+</body>
+</html>
+
+
+
+   
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+   (2)jQuery last() 方法
+
+
+        last() 方法返回被选元素的最后一个元素。
+
+
+下面的例子选择最后一个 <div> 元素中的最后一个 <p> 元素：（返回最后一个XX的最后一个xx） 
+
+              $(document).ready(function(){
+
+                       $("div p").last();  //返回最后一个 <div> 元素中的最后一个 <p> 元素
+
+                });
+
+
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+   （3）jQuery eq() 方法
+
+          eq() 方法返回被选元素中带有指定索引号的元素。
+
+         索引号从 0 开始，因此首个元素的索引号是 0 而不是 1。
+
+
+     下面的例子选取第二个 <p> 元素（索引号 1）：
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+
+  $("p").eq(1).css("background-color","yellow");   //返回第二个 <p> 元素（索引号 1）
+
+});
+</script>
+</head>
+<body>
+
+<h1>欢迎访问我的主页</h1>
+<p>W3Cschool教程 (index 0).</p>
+<p>http://www.w3cschool.cn (index 1)。</p>
+<p>google (index 2).</p>
+<p>http://www.google.com (index 3)。</p>
+
+</body>
+</html>
+
+
+
+
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+    （4）jQuery filter() 方法
+
+            filter() 方法允许您规定一个标准。不匹配这个标准的元素会被从集合中删除，匹配的元素会被返回。
+
+
+     下面的例子返回带有类名 "intro" 的所有 <p> 元素：          
+
+          
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+
+   $("p").filter(".url").css("background-color","yellow");
+
+});
+</script>
+</head>
+<body>
+
+<h1>欢迎访问我的主页</h1>
+<p>W3Cschool教程 (index 0).</p>
+<p class="url">http://www.w3cschool.cn (index 1)。</p>
+<p>google (index 2).</p>
+<p class="url">http://www.google.com (index 3)。</p>
+
+</body>
+</html>
+
+
+
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   
+    （5）jQuery not() 方法
+
+            not() 方法返回不匹配标准的所有元素。
+
+
+            提示：not() 方法与 filter() 相反。
+
+下面的例子返回不带有类名 "intro" 的所有 <p> 元素：
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+   $("p").not(".url").css("background-color","yellow");  //返回不匹配标准的所有元素。
+});
+</script>
+</head>
+<body>
+
+<h1>欢迎访问我的主页</h1>
+<p>W3Cschool教程 (index 0).</p>
+<p class="url">http://www.w3cschool.cn (index 1)。</p>
+<p>google (index 2).</p>
+<p class="url">http://www.google.com (index 3)。</p>
+
+</body>
+</html>
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+五、jQuery Ajax
+
+
+   1、jQuery - AJAX 简介
+
+          AJAX 是与服务器交换数据的技术，它在不重载全部页面的情况下，实现了对部分网页的更新。
+ 
+                 
+      （1）什么是 AJAX？
+
+             AJAX = 异步 JavaScript 和 XML（Asynchronous JavaScript and XML）。
+
+             简短地说，在不重载整个网页的情况下，AJAX 通过后台加载数据，并在网页上进行显示。
+
+             使用 AJAX 的应用程序案例：谷歌地图、腾讯微博、优酷视频、人人网等等。
+
+
+
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+      （2）关于 jQuery 与 AJAX
+
+            jQuery 提供多个与 AJAX 有关的方法。
+
+            通过 jQuery AJAX 方法，
+
+        您能够使用 HTTP Get 和 HTTP Post 从远程服务器上请求文本、HTML、XML 或 JSON - 同时您能够把这些外部数据直接载入网页的被选元素中。
+
+
+       提示：  如果没有 jQuery，AJAX 编程还是有些难度的。
+
+               编写常规的 AJAX 代码并不容易，因为不同的浏览器对 AJAX 的实现并不相同。
+
+               这意味着您必须编写额外的代码对浏览器进行测试。
+
+               不过，jQuery 团队为我们解决了这个难题，我们只需要一行简单的代码，就可以实现 AJAX 功能。
+
+
+    ===========================================================================================
+
+
+
+   2、jQuery – AJAX load() 方法
+
+
+     （1）jQuery load() 方法
+
+            jQuery load() 方法是简单但强大的 AJAX 方法。
+
+            load() 方法从服务器加载数据，并把返回的数据放入被选元素中。
+
+
+           语法:
+                 $(selector).load(URL,data,callback); 
+
+
+           必需的 URL 参数规定您希望加载的 URL。
+
+           可选的 data 参数规定与请求一同发送的查询字符串键/值对集合。
+
+           可选的 callback 参数是 load() 方法完成后所执行的函数名称。
+
+
+    这是示例文件（"demo_test.txt"）的内容：
+
+                 <h2>jQuery and AJAX is FUN!!!</h2>
+
+                 <p id="p1">This is some text in a paragraph.</p>
+
+
+ ① 下面的例子会把文件 "demo_test.txt" 的内容加载到指定的 <div> 元素中：
+      
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+
+    $("#div1").load("/statics/demosource/demo_test.txt");  //从服务器加载数据，并把返回的数据放入被选元素中。
+
+  });
+});
+</script>
+</head>
+<body>
+
+<div id="div1"><h2>使用 jQuery AJAX</h2></div>
+<button>获取外部内容</button>
+
+</body>
+</html>
+
+
+
+   *****************************************************
+
+      也可以把 jQuery 选择器添加到 URL 参数
+
+
+
+    这是示例文件（"demo_test.txt"）的内容：
+
+                 <h2>jQuery and AJAX is FUN!!!</h2>
+
+                 <p id="p1">This is some text in a paragraph.</p>
+
+
+ ② 下面的例子把 "demo_test.txt" 文件中 id="p1" 的元素的内容，加载到指定的 <div> 元素中：
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+
+    $("#div1").load("/statics/demosource/demo_test.txt #p1");
+                                                            //把 "demo_test.txt" 文件中 id="p1" 的元素的内容，加载到指定的 <div> 元素中
+  });
+});
+</script>
+</head>
+<body>
+
+<div id="div1"><h2>使用 jQuery AJAX 修改文本</h2></div>
+<button>获取外部文本</button>
+
+</body>
+</html>
+
+
+
+   **********************************************************
+
+
+
+  可选的 callback 参数规定当 load() 方法完成后所要允许的回调函数。回调函数可以设置不同的参数：
+
+
+                                 responseTxt - 包含调用成功时的结果内容
+
+                                 statusTXT - 包含调用的状态
+
+                                 xhr - 包含 XMLHttpRequest 对象
+        
+
+
+  ③下面的例子会在 load() 方法完成后显示一个提示框。
+
+         如果 load() 方法已成功，则显示"外部内容加载成功！"，而如果失败，则显示错误消息：
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $("#div1").load("/statics/demosource/demo_tes.txt",function(responseTxt,statusTxt,xhr){
+      if(statusTxt=="success")
+        alert("外部内容加载成功!");
+      if(statusTxt=="error")
+        alert("Error: "+xhr.status+": "+xhr.statusText);
+    });
+  });
+});
+</script>
+</head>
+<body>
+
+<div id="div1"><h2>使用 jQuery AJAX 修改该文本</h2></div>
+<button>获取外部内容</button>
+
+</body>
+</html>
+
+
+         注意： 
+
+               当上面的加载成功时，会弹出对话框。对话框内容为："外部内容加载成功!"
+
+               当加载失败时，会弹出会话框。对话框内容为："Error:404 Not Found 
+
+
+                                    成功              失败
+
+               xhr.status           200               404
+
+               xhr.statusText      "OK"              "Not Found"
+
+               statusTXT           "success"         "error"
+
+
+         
+ 
+
+      ============================================================================
+
+
+
+    3、jQuery – AJAX get() 和 post() 方法
+
+          jQuery get() 和 post() 方法用于通过 HTTP GET 或 POST 请求从服务器请求数据。
+
+
+     （1）HTTP 请求：GET vs. POST
+
+
+           两种在客户端和服务器端进行请求-响应的常用方法是：GET 和 POST。
+
+
+                GET - 从指定的资源请求数据
+
+                POST - 向指定的资源提交要处理的数据
+
+
+           GET 基本上用于从服务器获得（取回）数据。
+
+                                     注释：GET 方法可能返回缓存数据。
+
+           POST 也可用于从服务器获取数据。不过，POST 方法不会缓存数据，并且常用于连同请求一起发送数据。
+
+
+
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+          
+
+     （2）jQuery $.get() 方法
+
+               $.get() 方法通过 HTTP GET 请求从服务器上请求数据。
+
+
+                     语法：
+                           $.get(URL,callback);
+
+                        必需的 URL 参数规定您希望请求的 URL
+
+                        可选的 callback 参数是请求成功后所执行的函数名。
+
+
+下面的例子使用 $.get() 方法从服务器上的一个文件中取回数据：
+
+<!DOCTYPE html>
+<html>
+<head> 
+<meta charset="utf-8"> 
+<title>W3Cschool在线教程(w3cschool.cn)</title> 
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+	$("button").click(function(){
+		$.get("/statics/demosource/demo_test.php",function(data,status){
+			alert("数据: " + data + "\n状态: " + status);
+		});
+	});
+});
+</script>
+</head>
+<body>
+
+<button>发送一个 HTTP GET 请求并获取返回结果</button>
+
+</body>
+</html>
+
+
+        注意：
+                $.get() 的第一个参数是我们希望请求的 URL（"demo_test.php"）。
+
+                第二个参数是回调函数：
+
+                                      第一个回调参数存有被请求页面的内容，
+
+                                      第二个回调参数存有请求的状态。
+
+
+                提示： 这个 PHP 文件 ("demo_test.php") 类似这样：
+
+                     <?php
+                           echo "This is some text from an external PHP file.";
+                     ?>
+
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+     （3）jQuery $.post() 方法
+
+               $.post() 方法通过 HTTP POST 请求从服务器上请求数据
+
+             语法:
+                   $.post(URL,data,callback); 
+
+                         必需的 URL 参数规定您希望请求的 URL。
+
+                         可选的 data 参数规定连同请求发送的数据。
+
+                         可选的 callback 参数是请求成功后所执行的函数名。
+
+   
+         下面的例子使用 $.post() 连同请求一起发送数据：
+  
+
+$("button").click(function(){
+  $.post("demo_test_post.html",
+  {
+    name:"Donald Duck",
+    city:"Duckburg"
+  },
+  function(data,status){
+    alert("Data: " + data + "nStatus: " + status);
+  });
+});
+
+
+             注意： 
+                    $.post() 的第一个参数是我们希望请求的 URL ("demo_test_post.php")
+
+                    然后我们连同请求（name 和 city）一起发送数据
+
+                    "demo_test_post.php" 中的 PHP 脚本读取这些参数，对它们进行处理，然后返回结果。
+
+                    第三个参数是回调函数。第一个回调参数存有被请求页面的内容，而第二个参数存有请求的状态。
+
+
+                    提示： 这个 PHP 文件 ("demo_test_post.php") 类似这样：
+ 
+                            <?php
+                             $name = isset($_POST['name']) ? htmlspecialchars($_POST['name']) : '';
+                             $city = isset($_POST['city']) ? htmlspecialchars($_POST['city']) : '';
+                             echo 'Dear ' . $name;
+                             echo 'Hope you live well in ' . $city;
+                            ?>
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+    jQuery ajax() 方法
+
+             ajax() 方法用于执行 AJAX（异步 HTTP）请求
+
+
+
+
+
+
+
+
+

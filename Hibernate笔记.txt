@@ -1,0 +1,1797 @@
+
+Hibernate 将 Java 类映射到数据库表中，从 Java 数据类型中映射到 SQL 数据类型中，并把开发人员从 95% 的公共数据持续性编程工作中解放出来。
+
+
+Hibernate初探之单表映射
+
+第1章 Hibernate初识
+
+1-1 课程介绍
+
+1-2 什么是ORM
+
+
+减少sql语句的书写
+
+对象关系映射(英语:Object Relational Mapping，简称ORM，或O/RM，或O/R mapping)，是一种程序技术，用于实现面向对象编程语言里不同类型系统的数据之间的转换。从效果上说，它其实是创建了一个可在编程语言里使用的"虚拟对象数据库"。
+
+ORM方法论基于三个核心原则: 
+
+                 简单:以最基本的形式建模数据。
+
+                 传达性:数据库结构被任何人都能理解的语言文档化。
+
+                 精确性:基于数据模型创建正确标准化了的结构。
+
+
+
+
+
+
+1-3 Hibernate简介
+
+Hibernate是一个开放源代码的对象关系映射框架，它对JDBC进行了非常轻量级的对象封装，使得Java程序员可以随心所欲的使用对象编程思维来操纵数据库。
+
+
+Hibernate的核心类和接口一共有6个，
+
+分别为:Session、SessionFactory、Transaction、Query、Criteria和Configuration。
+
+这6个核心类和接口在任何开发中都会用到。
+
+
+
+Session
+
+Session接口负责执行被持久化对象的CRUD操作(CRUD的任务是完成与数据库的交流，包含了很多常见的SQL语句。)。但需要注意的是Session对象是非线程安全的。同时，Hibernate的session不同于JSP应用中的HttpSession。这里当使用session这个术语时，其实指的是Hibernate中的session，而以后会将HttpSession对象称为用户session。
+
+----------
+
+SessionFactory
+
+SessionFactory接口负责初始化Hibernate。它充当数据存储源的代理，并负责创建Session对象。这里用到了工厂模式。需要注意的是SessionFactory并不是轻量级的，因为一般情况下，一个项目通常只需要一个SessionFactory就够，当需要操作多个数据库时，可以为每个数据库指定一个SessionFactory。
+
+----------
+
+Transaction
+
+Transaction 接口是一个可选的API，可以选择不使用这个接口，取而代之的是Hibernate 的设计者自己写的底层事务处理代码。 Transaction 接口是对实际事务实现的一个抽象，这些实现包括JDBC的事务、JTA 中的UserTransaction、甚至可以是CORBA 事务。之所以这样设计是能让开发者能够使用一个统一事务的操作界面，使得自己的项目可以在不同的环境和容器之间方便地移植。
+
+
+
+----------
+
+Query
+
+Query接口让你方便地对数据库及持久对象进行查询，它可以有两种表达方式:HQL语言或本地数据库的SQL语句。Query经常被用来绑定查询参数、限制查询记录数量，并最终执行查询操作。
+
+
+----------------
+
+
+
+Criteria
+
+Criteria接口与Query接口非常类似，允许创建并执行面向对象的标准化查询。值得注意的是Criteria接口也是轻量级的，它不能在Session之外使用。
+
+
+
+----------------
+
+Configuration
+
+Configuration 类的作用是对Hibernate 进行配置，以及对它进行启动。在Hibernate 的启动过程中，Configuration 类的实例首先定位映射文档的位置，读取这些配置，然后创建一个SessionFactory对象。虽然Configuration 类在整个Hibernate 项目中只扮演着一个很小的角色，但它是启动hibernate 时所遇到的第一个对象。
+
+
+
+
+1-4 Hibernate开发前准备
+
+建工程
+
+导包（hibernate所需的包 和 Mysql所需的包） 如果要做测试，还要导junit的包
+
+
+
+1-5 编写第一个Hibernate例子
+
+--创建Hibernate的配置文件
+
+--创建持久化类
+
+--创建对象-关系映射文件
+
+--通过Hibernate API编写访问数据库的代码
+
+
+
+
+
+1-6 创建hibernate工程
+
+1-7 hibernate配置文档
+
+
+
+
+1-8 创建持久化类
+
+
+持久化类要求：
+
+--公有的类
+
+--提供公有的不带参数的默认的构造方法,  为了方便生成对象，再提供一个带参数的构造函数
+
+--属性私有
+
+--属性setter/getter封装
+
+
+
+
+
+
+1-9 创建对象-关系映射文件和...
+
+
+
+1-10 使用JUnit进行测试
+ 
+      使用JUnit进行测试
+                    
+               --@Test：被@Test注释的方法为    测试方法
+
+               --@Before：被@Before注释的方法为  初始化方法
+
+               --@After：被@After注释的方法为   释放资源方法
+
+
+例子：
+
+
+	 @Before
+	 public void init(){
+		 
+		 //创建配置对象
+		 Configuration config = new Configuration().configure();
+		 //创建服务注册对象
+		 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(config.getProperties()).configure().build();
+		 //创建会话工厂对象
+		 sessionFactory = config.buildSessionFactory(serviceRegistry);
+		 //会话对象
+		 session = sessionFactory.openSession();
+		 //开启事务
+		 transation = session.beginTransaction();
+	 }
+	 
+
+
+	 @After  //释放资源
+	 public void destroy(){
+		 
+		 transation.commit();    //提交事务
+		 session.close();        //关闭会话
+		 sessionFactory.close(); //关闭会话工厂
+	 }
+
+
+	 @Test
+	 public void testDeleteStudents(){
+		 
+		 Students s = (Students)session.get(Students.class, 1); //1代表主键
+         session.delete(s);
+	 }
+
+
+1-11 通过Hibernate API编写访...
+
+
+
+
+
+
+
+第2章 Hibernate进阶
+
+2-1 本章简介 
+
+
+2-2 hibernate常用配置  
+
+hibernate.cfg.xml的常用配置
+
+
+== <!--hibernate.dialect 只是Hibernate使用的数据库方言,就是要用Hibernate连接那种类型的数据库服务器。--> 
+          <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect </property> 
+
+
+== //是否在控制台打印sql语句    
+    <prop key="hibernate.show_sql">true </prop>  
+
+
+== //输出格式化后的sql,更方便查看    
+  <prop key="hibernate.format_sql">true </prop> 
+
+
+==<property name="hbm2ddl.auto">create </property>  
+        <!-- create表示删原表，重新创表， update表示在原表添加数据 --> 
+
+
+==<!-- <property name="hibernate.default_schema">hibernate</property> --><!--默认数据库表名前缀：这里如：表名为：hibernate.STUDENTS -->
+
+
+
+
+
+2-3 session简介
+
+
+查看hibernate笔记
+
+session 可以理解为操作数据库的对象
+
+session 与 connection，是多对一关系，每个session都有一个与之对应的connection，一个connection不同时刻可以供多个session使用 
+
+
+session的各种方法：
+
+==Serializable save(Object object)  保存对象到数据库表
+先分配一个生成的标识，以保持给定的瞬时状态实例。
+
+==Session get(String entityName, Serializable id)
+返回给定命名的且带有给定标识符或 null 的持久化实例（若无该种持久化实例）
+
+
+==void update(Object object)
+更新带有标识符且是给定的处于脱管状态的实例的持久化实例。
+
+
+==void delete(String entityName, Object object)
+从数据存储中删除持久化实例。
+
+
+
+
+
+
+2-4 transaction简介 
+
+hebernate 对数据的操作都是封装在事务当中，并且默认是非自动提交的方式。所以用session保存对象时，如果不开启事务，
+并且手动提交事务，对象并不会真正保存在数据库中
+
+
+若想自动提交事务，必须调用session对象的doWork（）方法，获得jdbc的connection后，设置其为自动提交事务模式（注意：通常不推荐这么做）
+
+若设置其为自动提交事务模式：注意在最后不能少了 session.flush(); 强制输出
+
+             格式：
+
+		 //开启事务（一般方法init（）方法中）
+		 transation = session.beginTransaction();
+
+                  。。。数据库操作。。。
+
+                 //提交事务（一般方法distory（）方法中）
+                  transation.commit();    
+
+
+
+
+2-5 session详解（上） 
+2-6 session详解（下） 
+
+-如何获取session对象
+
+1）openSession  （通常使用这个）
+
+         //会话对象
+		 session = sessionFactory.openSession();
+      
+
+2）getCurrenSession
+
+         //会话对象
+		 session = sessionFactory.getCurrenSession();
+
+
+关闭session：
+       session.close();
+
+注意:
+
+1.openSession和getCurrentSession的区别？
+
+   *openSession必须关闭，getCurrentSession在事务结束后自动关闭
+
+   *openSession没有和当前线程绑定，getCurrentSession和当前线程绑定
+
+   
+     ==getcurrentSession在事务提交或者回滚之后会自动关闭，而openSession需要你手动关闭。如果使用openSession而没有手动关闭，多次之后会导致连接池溢出
+
+     ==openSession每次创建新的session对象，getCurrentSession使用现有的session对象
+
+     ==比较两个对象（如：transaction对象）是否一样，可以比较它们的 hashCode 是否相同
+
+     ==openSession每次会创建新的session对象，而getCurrentSession使用session对象后，会自动关闭，下次还可以再使用这个session对象
+  
+
+2.如果使用getCurrentSession需要在hibernate.cfg.xml文件中进行配置：
+
+   *如果是本地事务（jdbc事务）
+
+     <propertyname="hibernate.current_session_context_class">thread</property>
+
+
+   *如果是全局事务（jta事务）
+
+      <propertyname="hibernate.current_session_context_class">jta</property>
+
+
+全局事务：资源管理器管理和协调的事务，可以跨越多个数据库和进程。资源管理器一般使用XA 二阶段提交协议与“企业信息系统”(EIS) 或数据库进行交互。
+ 
+本地事务：在单个 EIS或数据库的本地并且限制在单个进程内的事务。本地事务不涉及多个数据来源。
+
+
+
+
+
+
+
+
+2-7 hbm配置文档 
+
+
+       配置文件的基本结构如下：
+
+<?xml version="1.0" encoding='UTF-8'?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+
+                            "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+
+<hibernate-mapping package="包名">
+
+<class name="类名" table="表名">
+
+                  <id name="主键在java类中的字段名" column="对应表中字段" type="类型 ">
+
+                    <generator class="主键生成策略"/>
+
+</id>
+
+         ……
+
+    </class>
+
+</hibernate-mapping>
+
+
+
+
+
+ 1、 Hibernate的主键生成策略有如下几种：
+
+
+主键配置举例如下：
+<id name="id" column="id" type="java.lang.Integer">
+
+             <generator class="native"/>
+
+</id>
+
+
+  1)  assigned（手动设置主键的值）
+
+           主键由外部程序负责生成，在 save() 之前指定。（手动设置主键的值）
+
+       ....
+
+  7)  native（自增长）
+
+    由 Hibernate 根据使用的数据库自行判断采用 identity、hilo、sequence 其中一种作为主键生成方式。
+
+
+
+
+ 2. 普通属性（property）
+
+它的各属性中比较常用的有：
+
+      name（对应的java类的属性名称）、
+
+      column（对应的表中的字段）、
+
+      type（属性的类型，eg.java.lang.String）、
+
+      not-null（设置该属性是否为空，为true时表示非空，默认为false）
+
+      length(字段的长度限制)。
+
+
+
+
+
+
+
+
+ 3-1 本章简介 
+
+ 3-2 [Hibernate单表操作] 单一主键 
+
+    主键生成策略：
+
+      1)  assigned（手动设置主键的值）
+
+           主键由外部程序负责生成，在 save() 之前指定。（手动设置主键的值）
+
+
+      2)  native（自增长）
+
+            由 Hibernate 根据使用的数据库自行判断采用 identity、hilo、sequence 其中一种作为主键生成方式。
+
+
+       <id name="sid" column="SID" >   <!-- 主键 -->
+	    <generator class="assigned" />       <!-- <generator class="主键生成策略"  native 自增长, assigned 手动加入值/> -->
+       </id>
+
+
+
+
+
+
+    -------------------------
+
+ 3-3 [Hibernate单表操作] 基本类型（可以到文件夹中查看图）
+
+     基本类型指的是： int， string, date, time......等等
+
+
+     注意容易出错的基本类型：   时间
+
+
+   持久化类中声明birthday属性：
+
+     	         private Date birthday;
+
+   测试类中：  
+
+               设置对象的birthday属性  ---》 s3.setBirthday(new Date());
+
+
+   对象关系映射文件XXX.hbm.xml中：
+
+                 <property name="birthday" column="BIRTHDAY" type="java.util.Date" />
+
+     
+       type属性设置的类型有两种： 映射类型 和 java类型
+
+   
+         ①当type属性设置为 java类型 中的 "java.util.Date"  时 ,代表的是 时间 和 日期
+
+               <property name="birthday" column="BIRTHDAY" type="java.util.Date" />
+
+                  显示的是年、月、日、时、分、秒 -》yyyy-MM-dd hh:mi:ss
+
+                  如： 2015-05-03 00:14:44
+
+
+         ②当type属性设置为 映射类型 中的 "date"  时 ,代表的是 日期
+
+               <property name="birthday" column="BIRTHDAY" type="date" />
+
+                 显示的是年、月、日 -》yyyy-MM-dd
+
+                 如： 2015-05-03
+
+
+         ③当type属性设置为 映射类型 中的 "time"  时 ,代表的是 时间
+
+               <property name="birthday" column="BIRTHDAY" type="time" />
+
+                 显示的是时、分、秒 -》 hh:mi:ss
+
+                 如： 00:14:44
+
+
+         ④当需要显示  年、月、日、时、分、秒 -》yyyy-MM-dd hh:mi:ss
+
+                  一种是： 设置为 java类型 中的 "java.util.Date"
+
+                                <property name="birthday" column="BIRTHDAY" type="java.util.Date" />
+
+
+                  另一种是：设置为 映射类型中的 "timestamp"
+
+                                  <property name="birthday" column="BIRTHDAY" type="timestamp" />
+
+
+                 如： 2015-05-03 00:14:44
+
+
+例子：
+
+ 往数据库存时间  Student.java中添加：
+
+      （1）private Date birthday; //出生日期
+                  添加 setter 和 getter 方法 
+
+       
+      （2）.在Student的关系映射文件Student.hbm.xml中添加：
+
+             <proterty name="birthday" type="java.util.Date">
+                <column name="BIRTHDAY" />
+             </proterty>
+
+       (3).在测试类StudentTest.java中
+ 
+             @Test
+             public void testSaveStudents(){
+                      
+                       Students s = new Students(); //生成学生对象
+
+                       s.setBirthday(new Date()); //设置时间
+
+                       s.set...       //设置学生类其他属性
+                 
+                       session.save(s); //保存对象进入数据库
+             }
+
+
+
+
+
+
+
+
+
+
+ 3-4 [Hibernate单表操作] 对象类型 （可以到文件夹中查看图）
+
+   --Mysql 不支持标准 SQL 的 CLOB 类型，在Mysql中， 用TEXT，MEDIUMTEXT 及 LONGTEXT 类型来表示长度超过255 的长文本数据
+
+   
+   对象类型： 主要指：大文本类型TEXT 和 图片类型Blob
+
+
+①往数据库存图片（Blob 在数据库中映射成 longBlob 类型）
+
+    （1）.Student.java中添加：
+
+          private Blob picture;  //照片   
+             添加 setter 和 getter 方法  
+
+
+    （2）.在Student的关系映射文件Student.hbm.xml中添加：
+
+             <proterty name="picture" type="java.sql.Blob">
+                <column name="PICTURE" />
+             </proterty>
+
+
+       (3).在测试类StudentTest.java中    
+
+             @Test
+             public void testWriteBlob() throws Exception{
+
+                       Students s = new Students(1，"张三丰",);
+  
+                 //先获得照片文件 ，文件放在D盘下
+                   File f = new File("d:" + File.separator + "boy.jpg")  // File.separator 表示 文件分隔符
+                   
+                 //获得照片文件的输入流
+                  InputStream input = new FileInputStream(f);  //抛出异常throws Exception
+            
+                 //创建一个Blob对象           
+                 //两个参数：第一个表示从哪个输入流读取， 
+                             第二个表示读取的长度，这里inout.available()代表input可用的字节数
+                  Blob image = Hibernate.getLobCreator(session).createBlob(input,input.available());
+          
+                 //设置学生的照片属性
+                   s.setPicture(image);
+
+                 //保存学生 
+                    session.save(s);
+                }
+
+
+②从数据库读取图片     （导入包时，是 "java.io" 中的包）
+ 
+
+       (1).在测试类StudentTest.java中    
+
+             @Test
+             public void testReadBlob() throws Exception{
+                    
+                Students s = (Students)session.get(Student.class,1);
+
+                //获得Blob对象
+                   Blob image = s.getPicture();
+
+                //获得照片的输入流
+                   InputStream input = image.getBinaryStream();
+
+                //创建输出流
+                   File f = new File("d:" + File.separator + "dest.jpg"); //这里表示图片输出后，所存放的位置
+                
+                //获得输出流
+                   OutputStream output = new FileOutputStream(f);
+
+                //创建缓冲区
+                   byte[]buff = new byte[input.availble()];
+                   input.read(buff);   //读入缓冲区
+                   output.write(buff);
+            
+                //关闭流
+                  input.close();
+                  ouput.close();
+ 
+              }
+
+
+
+
+
+
+----------------------
+
+
+
+ 3-5 [Hibernate单表操作] 组件属性 
+
+   
+   组件属性： 实体类中的某个属性属于用户自定义的类的对象
+
+        <!-- <property name="address" column="ADDRESS" type="java.lang.String" />  -->
+        <component name="address" class="Address">
+           <property name="postcode" column="POSTCODE"></property>
+           <property name="phone" column="PHONE"></property>
+           <property name="address" column="ADDRESS"></property>
+        </component>
+
+
+
+    具体实现看代码。。。
+
+
+
+
+
+
+ 3-6 [Hibernate单表操作] 单表操作CRUD实例
+
+
+   * save
+ 
+   * update
+
+   * delete
+
+   * get/load(查询单个记录)
+
+    
+
+  注意：get 和 load 的区别
+
+       (1)、在不考虑缓存的情况下，get方法会在调用之后立即向数据库发出sql语句，返回持久化对象。
+            
+             load方法会在调用后返回一个代理对象，该代理对象只保存了实体对象的id,直到使用对象的非法键属性时(即真正用到对象时)才会发出sql语句
+                     
+              可以用： System.out.println(s.getClass().getName()); 看出它们的不同
+
+       (2)、 查询数据库中不存在的数据时，get方法返回 null，
+             load 方法抛出异常org.hibernate.ObjectNotFoundException
+
+
+
+
+所有方法的例子：
+
+
+	 @Test
+	 public void testSaveStudents(){
+		 
+		//生成学生对象
+//		 Students s = new Students(1,"郑玮","男",new Date(),"榕五");
+		 
+//		 Students s2 = new Students();
+//		 s2.setSid(1);
+//		 s2.setSname("郑玮");
+//		 s2.setGender("男");
+//		 s2.setBirthday(new Date());
+//		 s2.setAddress("榕五");
+		 
+		 Students s3 = new Students();
+		 s3.setSid(1);
+		 s3.setSname("郑玮");
+		 s3.setGender("男");
+		 s3.setBirthday(new Date());
+		 Address address = new Address("123456","7890","吉林大学");
+		 s3.setAddress(address);
+		 session.save(s3); //保存对象进数据库，无需书写sql语句
+	 }
+	 
+	 @Test
+	 public void testGetStudents(){
+		 
+		 Students s = (Students)session.get(Students.class, 1); //1代表主键
+		 System.out.println(s);
+	 }
+	 
+	 @Test
+	 public void testLoadStudents(){
+		 
+		 Students s = (Students)session.get(Students.class, 1); //1代表主键
+		 System.out.println(s);
+	 }
+	 
+	 @Test
+	 public void testUpdateStudents(){
+		 
+		 Students s = (Students)session.get(Students.class, 1); //1代表主键
+		  s.setGender("女");
+		  session.save(s);
+		 System.out.println(s);
+	 }
+	 
+	 @Test
+	 public void testDeleteStudents(){
+		 
+		 Students s = (Students)session.get(Students.class, 1); //1代表主键
+                 session.delete(s);
+	 }
+
+
+
+
+
+
+
+
+
+--------------------------------------------
+
+
+1.往数据库存时间  Student.java中添加：
+
+      （1）private Date birthday; //出生日期
+                  添加 setter 和 getter 方法 
+
+       
+      （2）.在Student的关系映射文件Student.hbm.xml中添加：
+
+             <proterty name="birthday" type="java.util.Date">
+                <column name="BIRTHDAY" />
+             </proterty>
+
+       (3).在测试类StudentTest.java中
+ 
+             @Test
+             public void testSaveStudents(){
+                      
+                       Students s = new Students(); //生成学生对象
+
+                       s.setBirthday(new Date()); //设置时间
+
+                       s.set...       //设置学生类其他属性
+                 
+                       session.save(s); //保存对象进入数据库
+             }
+            
+
+2.往数据库存图片（Blob 在数据库中映射成 longBlob 类型）
+
+    （1）.Student.java中添加：
+
+          private Blob picture;  //照片   
+             添加 setter 和 getter 方法  
+
+
+    （2）.在Student的关系映射文件Student.hbm.xml中添加：
+
+             <proterty name="picture" type="java.sql.Blob">
+                <column name="PICTURE" />
+             </proterty>
+
+
+       (3).在测试类StudentTest.java中    
+
+             @Test
+             public void testWriteBlob() throws Exception{
+
+                       Students s = new Students(1，"张三丰",);
+  
+                 //先获得照片文件 ，文件放在D盘下
+                   File f = new File("d:" + File.separator + "boy.jpg")  // File.separator 表示 文件分隔符
+                   
+                 //获得照片文件的输入流
+                  InputStream input = new FileInputStream(f);  //抛出异常throws Exception
+            
+                 //创建一个Blob对象           
+                 //两个参数：第一个表示从哪个输入流读取， 
+                             第二个表示读取的长度，这里inout.available()代表input可用的字节数
+                  Blob image = Hibernate.getLobCreator(session).createBlob(input,inout.available());
+          
+                 //设置学生的照片属性
+                   s.setPicture(image);
+
+                 //保存学生 
+                    session.save(s);
+                }
+
+
+3.从数据库读取图片     （导入包时，是 "java.io" 中的包）
+ 
+
+       (1).在测试类StudentTest.java中    
+
+             @Test
+             public void testReadBlob() throws Exception{
+                    
+                Students s = (Students)session.get(Student.class,1);
+
+                //获得Blob对象
+                   Blob image = s.getPicture();
+
+                //获得照片的输入流
+                   InputStream input = image.getBinaryStream();
+
+                //创建输出流
+                   File f = new File("d:" + File.separator + "dest.jpg"); //这里表示图片输出后，所存放的位置
+                
+                //获得输出流
+                   OutputStream output = new FileOutputStream(f);
+
+                //创建缓冲区
+                   byte[]buff = new byte[input.availble()];
+                   input.read(buff);   //读入缓冲区
+                   output.write(buff);
+            
+                //关闭流
+                  input.close();
+                  ouput.close();
+ 
+              }
+
+
+
+------------------------------------------------------------
+
+
+Hibernate初探之一对多映射
+
+
+ 2-1 一对多映射简介 
+
+
+==什么是一对多的关系呢？
+
+       就像班级和学生。站在班级的角度看。班级和学生就是一对多的关系。单向的
+
+
+
+
+==那怎么样实现这种关系呢？
+
+     1.在数据库中，可以通过添加主外键的关联，表现一对多的关系；
+
+     2.在java中，通过在一方持有多方的集合实现，即在“一”的一端中使用<set>元素表示持有“多”的一端的对象。
+
+
+-----------------------------------
+
+ 2-2 使用MyEclipse进行hibernate的基本配置
+
+
+    hibernate.cfg.xml为了实现不乱码， 其url可以这样写：
+ 
+       jdbc:mysql://localhost:3306/hibernate(数据库名)?useUnicode=true&characterEncoding=utf8
+
+
+
+    另一种写法：<![CDATA[jdbc:mysql://localhost:3306/hibernate?useUnicode=true&characterEncoding=utf8]]>
+
+                      任何xml中的数据都会被解析，但是在CDATA中的数据不会被解析
+
+
+    CDATA 指的是不由 XML 解析器进行解析的文本数据。
+
+    CDATA 部分中的所有内容都会被解析器忽略。
+
+
+
+
+-----------------------
+
+ 2-3 创建HibernateUtil工具类 
+
+
+hibernate4.3的初始化
+用于会话的获取和关闭：
+
+public class HibernateUtil {
+
+	private static SessionFactory sessionFactory;
+	private static Session session;
+	
+	static{
+
+		//创建configuration对象，读取hibernate.cfg.xml文件，完成初始化
+		Configuration config=new Configuration().configure();
+		StandardServiceRegistryBuilder ssrb=new StandardServiceRegistryBuilder().applySettings(config.getProperties());
+		StandardServiceRegistry ssr=ssrb.build();
+		sessionFactory=config.buildSessionFactory(ssr);	
+
+	}
+
+
+	//获取SessionFactory对象
+	public static SessionFactory getsessionFactory(){
+		return sessionFactory;
+	}
+
+
+	//获取Session对象
+	public static Session getSession(){
+		return sessionFactory.openSession();
+	}
+
+
+	//关闭Session对象
+	public static void closeSession(Session session){
+		if(session!=null){
+			session.close();
+		}
+	}
+}
+
+
+
+
+
+---------------------------------
+
+ 2-4 在MySQL数据库中建立表
+
+
+在数据库中创建表：
+
+
+    //班级表
+create table grade(
+   gid int primary key,
+   gname varchar(20) not null,
+   gdesc varchar(50)
+);
+
+
+    //学生表
+create table student(   //生成数据库表，以及修改外键，外键为gid，对应主表的gid
+
+   sid int primary key,
+   sname varchar(20) not null,
+   sex varchar(2),
+   gid int
+
+   );
+
+
+alter table student add constraint fk_student_gid foreign key (gid) references grade(gid);    //设外键 
+
+
+
+
+
+
+
+---------------------------------------
+
+ 2-5 创建持久化类和映射文件并配置单向一对多关系 （注意： 这里是设置“单项” 的）
+
+
+标准的javabean：
+
+1、JavaBean必须是一个公开的类，也就是说JavaBean的类访问权限必须是public的。
+
+2、JavaBean必须是具有一个无参数的构造方法。如果在JavaBean中定义了自定义的有参构造方法，就必须添加一个无参数构造方法，否则将无法设置属性，如果没有定义自定义的有参构造方法，则可以利用编译器自动添加的无参构造方法。
+
+3、JavaBean一般将属性设置成私有的，通过使用getXXX()方法和setXXX()方法来进行属性的设置。
+
+
+
+
+
+创建持久化类和映射文件并配置单向一对多关系
+
+a.持久化类
+
+1.创建学生持久化类
+
+2.创建班级持久化类（在一方定义一个多方集合）
+
+b.配置映射文件
+
+
+//学生持久化类
+public class Students implements Serializable{
+
+  private int sid;
+ 
+  private String sname;
+
+  private String sex;
+
+  添加getter 和 setter 方法
+
+}
+
+
+
+实体化类文件夹一般叫entity,遵循javabean:实现implements Serializable接口
+public class Grade implements Serializable {
+　　private int gid;
+　　private String gname;
+　　private String gdesc;
+　　//一方持有多方的集合
+　　private Set<Student> students = new HashSet<Student>();//set 元素不可重复无顺序
+
+}
+
+//班级映射文件Grade.hbm.xml
+   <class name="com.entity.Grade" table="grade">
+      <id name="gid" column="gid" type="java.lang.Integer">
+      <generator class="increment"></generator>
+      </id>
+      <property name="gname" type="java.lang.String">
+      <column name="gname" not-null="true" length="20"></column>
+      </property>
+      <property name="gdesc" type="java.lang.String">
+      <column name="gdesc"></column>
+      </property>
+      <!-- 配置单向一对多关系 -->
+      <set name="一方实体类定义的多方的引用，即集合属性students" table="多方的表名Student">    ////set 元素不可重复无顺序
+        <key column="关联外键的列gid"></key>
+        <one-to-many class="多方实体类的全类名com.entity.Student"></one>
+      </set>
+   </class>
+
+
+
+自己运行错误：
+
+   1、一定要在班级中初始化private Set<Student> students = new HashSet<Student>();
+      不然报空指针异常。
+
+   2、在Navicat中查看数据是否已经添加，要点击数据库下面那个刷新按钮
+
+
+
+//学生映射文件Student.hbm.xml（同上略）（但因为是单向的，所以Student.hbm.xml中没设置“many-to-one”）
+
+//hibernate.cfg.xml中配置 加载映射文件
+    <!-- 指定映射文件 -->
+    <mapping resource="com/entity/Grade.hbm.xml"></mapping>
+    <mapping resource="com/entity/Student.hbm.xml"></mapping>
+
+
+
+----------------------------------------------
+
+ 2-6 测试--添加和查询学生信息 
+
+
+自己运行错误：
+
+   1、一定要在班级中初始化private Set<Student> students = new HashSet<Student>();
+
+      不然报空指针异常。hibernate中声明集合对象一般都需要初始化，因为要像其中添加数据。
+
+
+   2、在Navicat中查看数据是否已经添加，要点击数据库下面那个刷新按钮
+
+
+
+
+注意： 因为这里设置关联方向为单向，所以只能通过班级查学生，而不能通过学生知道班级
+
+
+        //添加学生信息
+	public static void add(){
+
+		Grade g=new Grade("java一班","java软件开发");
+		Student s1=new Student("李四", "男");
+		Student s2=new Student("小月","女");
+		
+                //如果希望在学生表中添加对应的班级编号，需要在班级对象中添加学生对象，建立关联关系
+		g.getStudents().add(s1);
+		g.getStudents().add(s2);
+		
+		Session s=HibernateUtil.getSession(); //拿到会话
+		Transaction t=s.beginTransaction();   //开启事务
+
+		s.save(g);               //将班级对象保存到班级表中
+		s.save(s1);              //将学生对象保存到学生表中
+		s.save(s2);              //将学生对象保存到学生表中
+
+		t.commit();                           //提交事务
+		HibernateUtil.closeSession(s);        //关闭会话 
+		
+	}
+
+
+
+
+	//通过班级获取学生信息         // 因为这里设置关联方向为单向，所以只能通过班级查学生，而不能通过学生知道班级
+
+        //建立关联关系后，可以方便的从一个对象导航 “g.getStudents();” 到另一个对象
+      
+        //注意关联的方向：这里设置关联方向为单向，所以只能通过班级查学生，而不能通过学生知道班级
+
+        //查询班级中包含的信息
+	public static void getStuByGrade(){
+
+		Session s=HibernateUtil.getSession();
+		Grade g=(Grade) s.get(Grade.class, 1);
+
+		System.out.println("班级："+g.getGname()+"班级信息："+g.getGdesc());
+		
+		Set<Student> students=g.getStudents();  //从这里就可以找到与某个班关联的学生集合，具体的语句,hibernate会去执行的
+
+		for (Student stu:students) {
+			System.out.println(stu.getSname()+" "+stu.getSex());
+		}
+	}
+
+
+
+
+
+ <many-to-one>常用属性:
+
+     name:表示属性名.
+
+     column(可选):外键的字段名.它也可以通过嵌套的 <column>元素指定.
+
+     class(可选):关联的类的名字.(即参照列的类名,即name属性所对应的类)
+
+     cascade(级联),(可选):指明哪些操作会从父对象级联到关联的对象.
+
+     unique(可选):使用DDL为外键字段生成一个唯一约束.此外,这也可以用作property-ref的目标属性.这使关联同时具
+
+
+
+
+
+-----------------------------
+
+ 2-7 测试--修改和删除学生信息 
+
+   修改学生所在的班级：java中数据关系的改变，在通过session提交事务后，数据库中也会产生同样的改变。
+
+
+//删除学生信息
+
+	public static void delete(){
+
+		//获取会话
+		Session session=HibernateUtil.getSession();
+	//	开启事务
+		Transaction tx=session.beginTransaction();
+		//获取学生信息2
+		Student stu=(Student) session.get(Student.class, 2);
+		//删除学生  如果修改，先创建班级信息g，在将获得的学生信息添加最后 保存session.save(g);
+		session.delete(stu);
+		//提交事务
+		tx.commit();
+		//关闭事物
+		HibernateUtil.closeSession(session);
+	}
+
+
+
+//修改学生信息         //将某个属于班级1的学生修改为属于班级2
+
+	public static void update(){
+
+		Grade g=new Grade("Java二班","Java软件开发二班");
+		
+		Session session=HibernateUtil.getSession();  //获取会话
+
+		Transaction tx=session.beginTransaction();   //开启事务
+
+		Student stu=(Student) session.get(Student.class, 1);
+
+		g.getStudents().add(stu);
+		session.save(g);
+
+		tx.commit();      //提交事务
+
+		HibernateUtil.closeSession(session); //关闭会话
+
+	}
+
+
+
+
+
+-----------------------
+
+ 2-8 set元素的常用属性 
+
+
+属性　     含义和作用　　　　　　        必须  默认值
+
+name       映射类属性的名称　　  　　     Y
+
+table      关联类的目标数据库表　　　　   N
+
+lazy       指定关联对象是否使用延迟加载   N    proxy
+
+inverse    表示双向关联中被动的一方       N    false
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------
+
+
+
+ 第3章 单向多对一关联 
+
+
+
+ 3-1 单向多对一简介
+
+      单向多对一关联：
+
+         1、多对一的关系和关系数据库中的外键参照关系最匹配，即在己方(多方)的表中的一个外键参照另一个表的主键；
+
+         2、通过在多方持有one方的引用实现，需要在“多”的一端使用<many-to-one>配置
+
+
+
+  ---------------------------
+
+ 3-2 单向多对一的配置 
+
+
+单向多对一的配置： 
+
+
+1.在多方持久类定义one方的引用
+
+        private Grade grade;并getter，setter
+
+
+2.在多方的映射文件Student.hbm.xml中添加
+
+<many-to-one name="指定对一方的引用，即一方引用所定义的属性grade" class="一方对应的持久化类，即关联实体类com.imooc.entity.Grade" cloumn="外键的列名gid" ></many-to-one>
+
+
+
+注意：因为在这里只需“多方”单向关联，所以在“一方”即班级方的配置文件Grade.hbm.xml 中不再设置<set>...</set>
+
+
+//班级映射文件Grade.hbm.xml
+   <class name="com.entity.Grade" table="grade">
+      <id name="gid" column="gid" type="java.lang.Integer">
+      <generator class="increment"></generator>
+      </id>
+      <property name="gname" type="java.lang.String">
+      <column name="gname" not-null="true" length="20"></column>
+      </property>
+      <property name="gdesc" type="java.lang.String">
+      <column name="gdesc"></column>
+      </property>
+
+   </class>
+
+
+
+
+ ----------------------------
+
+ 3-3 测试--添加学生信息 
+
+
+
+/*
+ * 单向多对一（学生--->班级）
+ */
+
+
+public class Test02 {
+
+	public static void main(String[] args) {
+		save();
+	}
+
+
+public static void save(){
+
+		Grade g=new Grade("Java一班", "Java软件开发一班");
+
+		Student s1=new Student("小米", "女");
+
+		Student s2=new Student("小明","男");
+
+		//创建多对一的配置  //设置关联关系
+		s1.setGrade(g);
+		s2.setGrade(g);
+		
+		Session session=HibernateUtil.getSession();
+		Transaction transaction=session.beginTransaction();
+
+		session.save(g);
+		session.save(s1);
+		session.save(s2);
+
+		transaction.commit();
+		HibernateUtil.closeSession(session);
+
+              }
+}
+
+
+
+
+--------------------------------
+
+
+
+ 3-4 双向多对一测试
+
+
+
+配置双向的关联关系：
+
+1、分别在持久化类中定义另一方的引用；
+
+        一方：private Set<Student>students=new HashSet<Student>();并setter、getter
+
+        多方：private Grade grade;并setter、getter;
+
+
+2、在一方映射文件配置一对多属性集合与在多方配置多对一关联关系
+
+        //在一方配置关联关系
+
+           <set name="一方实体类定义的多方的引用，即多方属性Students" table="多方的表名">
+
+              <key column="关联外键的列gid"></key>
+
+              <one-to-many class="多方实体类的全类名com.imooc.entity.Student" ></one>
+
+           </set>
+
+
+        //在多方配置关联关系
+
+              <many-to-one name="指定对应的属性的名称" class="对应实体类的全类名com.imooc.entity.Grade" column="指定外键的列名gid" >
+
+              </many-to-one>
+
+
+        //测试方法
+
+	public static void save(){
+
+		Grade g=new Grade("Java一班", "Java软件开发一班");
+		Student s1=new Student("小米", "女");
+		Student s2=new Student("小明","男");
+
+
+		//创建多对一的配置，同时创建一对多的配置   //注意：双向关联，双方都有维护权，xml会多执行一次维护双方关系的sql语句（多出两条update语句），即班级再次设置学生的gid。这样会影响性能。提高性能的方法要用到inverse属性。会出现问题，需要有一方放弃维护权
+		g.getStu().add(s1);
+		g.getStu().add(s2);
+		s1.setGrade(g);
+		s2.setGrade(g);         
+		
+		Session session=HibernateUtil.getSession();
+		Transaction transaction=session.beginTransaction();
+
+
+               //在这里有个小问题，就是没利用cascade进行级联操作，
+                 当利用cascade进行级联操作时，我们可以省略“session.save(s1);”和“session.save(s2);”，
+                 因为当我们运行“session.save(g);”时，它会进行级联操作，自动保存与该班级相关的学生对象。
+
+		session.save(g);
+		session.save(s1);
+		session.save(s2);
+
+
+		transaction.commit();
+		HibernateUtil.closeSession(session);
+				
+	}
+
+
+注意：
+
+双向一对多映射的建立：
+
+       以一对多，多对一的方式配置两个持久化类的hbm.xml,然后用代码相互添加对方的引用，就行了。
+
+       不过这样，一对多的hbm。xml会多执行一次维护双方关系的sql语句，即班级再次设置学生的gid。这样会影响性能。提高性能的方法要用到inverse属性。
+
+
+
+----------------------------------
+
+ 第4章 inverse和cascade属性 
+
+ 4-1 inverse属性的用法 
+
+
+对于inverse属性的说明;
+
+1、one方的hbm.xml文件的<set>节点的inverse属性指定了关联关系的控制方向，默认为“inverse="false"”，即由one方来维护；
+
+     set里面的inverse属性的默认值是false，表示不反转，由one方进行维护。这样对性能有影响。
+
+
+2、关联关系中，inverse="false"则one方为主动方，由主动方负责维护关联关系；
+
+     设置为true，由many方进行维护，one方就不再进行关联关系的维护，one方放弃维护权，可以提高性能。
+
+
+3、在一对多关联中，设置one方的inverse为true,这将有助于性能的改善。
+
+
+
+
+     <!-- 配置单向一对多关系,设置inverse为true,有多方进行关联关系的维护 -->
+
+      <set name="stu" table="stu" inverse="true">
+        <!-- 指定关联的外键列 -->
+        <key column="gid"></key>
+        <one-to-many class="com.entity.Student"/>
+      </set>
+
+
+
+
+
+
+--------------------------------------------
+
+ 4-2 cascade属性的用法
+
+
+
+
+
+
+cascade属性：
+
+       1、当设置了cascade属性不为none时，Hibernate会自动持久化所关联的对象；
+
+       2、cascade属性的设置会带来性能上的变动，需要谨慎设置；
+
+    ————————————————————————————
+
+       属性值                   含义和作用
+
+       all                      对所有操作进行级联操作
+
+       save-update              执行保存和更新操作时进行级联操作
+
+       delete                   执行删除时进行级联操作
+
+       none                     对所有操作不进行级联操作
+
+   ————————————————
+
+cascade属性：
+
+     可以在一方  的set属性中设置
+
+     也可以在多方<many-to-one> 属性中设置
+
+     默认为none值
+
+
+说明:举个栗子，见截图：
+
+       在向Grade添加Student后，保存Grade对象时，能不能不需要显示的保存Student对象，答案是可以的，可以使用级联操作：在Grade的映射文件中的<set>节点添加cascade属性不为none,为"save-update".
+
+
+
+
+例子：
+
+配置映射文件：
+
+例1：
+//grade映射文件
+      <!-- 配置单向一对多关系;设置inverse为true,有多方进行关联关系的维护; 当保存和更新时自动进行级联操作-->
+      <set name="stu" table="stu" inverse="true" cascade="save-update">
+        <!-- 指定关联的外键列 -->
+        <key column="gid"></key>
+        <one-to-many class="com.entity.Student"/>
+      </set>
+
+例2：
+//student映射文件
+<many-to-one name="grade" class="com.entity.Grade" column="gid" cascade="all"></many-to-one>
+
+
+
+
+---------------------------------
+
+
+
+ 4-3 测试---信息查询 
+
+
+
+
+/**
+ * 
+ * @author SEAN
+ * 实际上已经建立了双向一对多，也称为双向多对一
+ * 既可以方便地由学生查找找到对应的班级信息，也可以方便地由班级查找到其所包含的学生信息
+ */
+
+
+
+测试---信息查询
+
+        //通过学生查找班级       
+	public static void findGradeByStudent(){
+	
+		Session session=HibernateUtil.getSession();
+		Student s1=(Student)session.get(Student.class, 2);
+		System.out.println(s1.getSid()+","+s1.getSname()+","+s1.getSex());
+		
+		Grade g=s1.getGrade();
+		System.out.println(g.getGid()+","+g.getGname()+","+g.getGdesc());
+		HibernateUtil.closeSession(session);
+	}
+
+
+
+
+注意：
+
+   当我们建立了双向一对多，也称为双向多对一 的关联关系以后，我们既可以方便地由学生查找找到对应的班级信息，也可以方便地由班级查找到其所包含的学生信息
+
+
+
+
+---------------------------------------
+
+
+ 第5章 课程总结 
+
+ 5-1 课程总结 
+
+
+  实现单向一对多：
+
+          1）在one方的实体中添加保存many方的集合Set<Xxx>
+
+          2）在one方的配置文件中添加<one-to-many>配置
+
+
+
+  实现单向多对一：
+
+          1）在many方的实体中添加one方的引用
+
+          2）在many方的配置文件中添加<many-to-one>配置
+
+
+
+  常用属性：
+
+          ①cascade：设置级联关系
+
+              all:对所有操作进行级联操作
+
+              save-update:执行保存和更新操作时进行级联操作
+
+              delete:执行删除操作时进行级联操作
+
+              none:对所有操作不进行级联操作】
+
+
+
+          ②inverse：设置由哪一方维护关联关系
+
+              inverse="false"则one方为主动方，由主动方负责维护关联关系。
+
+              设置为true，由many方进行维护，one方就不再进行关联关系的维护，one方放弃维护权，可以提高性能。
+
+
+
+
+
+
+
+ 5-2 如何在MyEclipse中添加数据库连接
+
+MyEclipse 给工程添加hibernate支持
+
+          菜单Windws-->Show-->View-->Other,展开MyEclipse Datebase 选择DB Browser(数据库视图)
+
+          左侧空白右击，New-->DatebaseDriver 选择相应数据库 给连接命名，指定DB URl-->user /password-->
+
+          Driver JARs ：点击Add JARS 选择JAR包
+
+          可点击Test Driver
+
+          可勾选save password
+
+
+  ----------------------------
+
+
+
+ 5-3 实现为项目添加Hibernate支持 
+
+
+实现为项目添加Hibernate支持：
+
+      右击项目-->MyEclipse-->Add Hibernaet Capabilities-->选择hibernate版本（越高越好）-->...-->选择数据库连接-->..
+
+      它能生成XXX.cfg.xml 文件还能生成HibernateSessionFactory工具类简化我们的操作
+
+
+----------------------------------
+
+
+
+
+ 5-4 使用MyEclipse反向工程生成映射关系（通过数据库的表自动创建持久化类和映射文件文件，并且在xx.cfg.xml文件中自动加载映射文件xx.hbm.xml） 
+
+
+
+MyEclipse 添加hibernate支持
+
+工程-右击-MyEclipse->Add Hibernate Capabilities：
+
+       选择Hibernate版本(MyEclipse版本越高，支持的Hibernate版本也越高，尽量选择新版本)
+
+       根据需要选择相应的JAR包::(1)添加JAR包
+
+       next-->创建hibernate.cfg.xml（指定目录）　　:(2)添加核心配置文件
+
+       next-->选择数据库连接
+
+       next-->创建Hibernate工具类，用于获取session或者sessionFactory(Java package 新建)    :(3)添加工具类
+
+       finish
+
+
+     
+
+MyEclipse 反向工程：根据数据库中的表 自动创建持久化类和映射文件文件
+
+       1）创建包entity 用于保存持久化类
+
+       2）数据库视图 CTRL 选择复数表-右击-Hibernate Reverse Engineering(反向工程)
+
+       　　指定Java src folder目录
+
+       　　指定持久化类和映射文件保存位置,
+
+       　　勾选Create POJO<>DB Table mapping information创建映射文件
+
+       　　　　（勾选create a Hibernate mapping file (*.hbm.xml)for each datebase table）
+
+       　　　　  (勾选Update Hibernate configuration with mapping resource location)
+
+       　　勾选Java Date Object (POJO<> DB Table) ：创建实体类
+
+       　　　　　　注意：Create abstract class 不勾选（不需要）
+
+       　　NEXT ->Hibernate Mapping and Application Generation :
+
+       　　　　　　Id Generator:选择主键生成策略（例子中是increment）
+
+       　　NEXT->选择表 勾选：Include referenced tables(A->B),Include referenced tables(A<-B)
+
+       　　finish.切换回企业开发视图
+
+
+
+
+
+
+
+--------------------------------
+
+
+
+ 5-5 测试MyEclipse生成效果 
+
+
+属性type中，可以使用java数据类型，也可以用hibernate数据类型
+
+
+如:
+       属性type设置为java数据类型：
+                              <property name="address" column="ADDRESS" type="java.lang.String" /> 
+
+
+       属性type设置为hibernate数据类型：
+                              <property name="address" column="ADDRESS" type="string" /> 
+
+
+
+
+更多的java数据类型 和 hibernate数据类型 ，查看Hibernate文件夹中的截图
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      

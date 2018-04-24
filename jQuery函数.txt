@@ -1,0 +1,97 @@
+
+
+$(document).ready(function(){
+
+                                     // 开始写 jQuery 代码...
+
+                                   }); 
+
+----------------------------------------
+
+$(function(){
+
+                                     // 开始写 jQuery 代码...
+
+                                   });
+
+
+-------------------
+
+$("button").click(function(){ });
+
+$("p").hide();
+
+$("tr:odd").css("background-color","yellow");
+
+
+
+
+
+
+
+            常见 DOM 事件：
+
+                        鼠标事件	    键盘事件      	 表单事件	    文档/窗口事件
+
+                        click	            keypress	         submit	               load
+
+                        dblclick	    keydown	         change	               resize
+
+                        mouseenter	    keyup	         focus	               scroll
+
+                        mouseleave	                         blur	               unload
+
+
+
+
+常用的 jQuery 事件方法
+
+① $(document).ready()
+
+② click()
+
+③ dblclick()
+
+④ mouseenter()
+
+⑤ mouseleave()
+
+⑥ mousedown()
+
+⑦ mouseup()
+
+⑧ hover(函数1，函数2)
+
+⑨ focus()
+
+⑩blur()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

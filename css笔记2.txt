@@ -1,0 +1,1629 @@
+HTML 分四大部分
+        1.html结构（doctype，head，body）
+        2.div布局（布局原则，盒子模型，浮动布局）
+        3.css效果 （选择器，控制效果，引入方式，初始化）
+        4.html标签(无语义标签《div,span》，有语义标签)
+
+
+一、布局
+
+ （1）. 用div来占块布局
+        用css来控制
+   
+        “#”对应"id"
+        “.”对应“class”
+        div默认是垂直布局，  可以利用：浮动float：left, right
+   
+        clear:清除挡住自己的div
+               left:清左浮， right:清右浮  both:全清
+ 
+ （2）. 把整个网页都做成一个最大的div
+          即  <body>
+                 <div id="container">
+                       ...
+                  </div>
+              </body>  
+  
+ （3）.  盒子模型
+            外边距margin   边框border  内边距padding     内容 
+
+           1.外边距margin：   
+              margin-top,  margin-left  ,margin-bottom,  margin-right
+              margin: 10px,20px,30px,40px :  顺序： 上 右 下 左。
+    
+           2.边框border：三要素
+               宽（border-width），形状（border-style）（粗线，虚线等等）， 颜色（border-color）。
+            例：
+                  border:10px solid red;  默认四条边，可以单独设置一条边。         
+
+           3.内边距padding（设置规则与margin相似）
+        
+           4.内容
+                在div中，设置的宽，高，是实际写字部分的宽和高
+           
+           5.一个盒子实占空间的大小
+                 竖直方向： "height" + "padding-top" + "padding-bottom" + "border-top" + "border-bottom" + "margin-top" +  "margin-bottom " 
+                
+                 水平方向：  "width" + "padding-left" + "padding-right" + "border-left" + "border-right" + "margin-left" +  "margin-right "
+
+  
+
+   （4）.利用margin 实现元素水平居中
+
+              margin: 0 auto;
+
+         margin重叠现象   
+               上下相邻的普通元素（如非浮动元素），上下边距，并非简单的相加，而是取其中较大的边距值。
+
+   （5）.inline内联（行内元素）<span></span>      //内联=行内
+
+           区别：行内元素 和 块状元素 的区别
+ 
+   （6）.内联与块状的转化    
+
+            //内联主要针对文字，不能设置宽和高，内联上下两个元素之间是有空隙的，而块状上下之间，当margin为0px，上下是紧贴在一起的。
+
+           <span>
+             display:block   //即内联转化为块状
+           </span>
+
+           <div>
+             display:inline   //即块状转化为内联
+           </div>
+
+    (7).css控制段落文本   <p></p> 表示一段话
+         例：
+              #p1{
+           
+                background：gray;
+                text-indent： 20px;//这里表示 段落缩进，即每段话空20px.
+                text-align:  center //居中
+                text-decoration :underline //下划线   也可设置其他，如上划线等等
+                letter-space: 10px; //文字之间的距离      
+       }
+
+    (8).文字控制
+           #test1{
+                color:blue;
+                font-style:  italic      //字的形状： 如斜体
+                font-weight:  bold       //粗细
+                font-size:   20px        //大小
+                line-hight:  46px        //行高
+                font-family: "SimHei"    //字体 ，如宋体等
+                
+                也可以一起设置，如
+                font：italic bold 20px/46px "SimHei"
+
+            }
+
+    (9).字体控制精讲
+          
+         字体有两大类： 1、sans-serif（无衬线） 2、serif(有衬线)
+
+   （10）.背景图片（图片做背景，图片的大小是不变的）
+            body{
+         background-color:                 //背景颜色
+         background-image: url(small.jpg); //若单单设置这个，图片会铺满整个页面
+         background-repeat: repeat-x;      //  表示图片向水平方向铺满
+         background-repeat: repeat-y;      //  表示图片向垂直方向铺满
+         background-repeat: no-repeat;     //  表示图片不重复
+         background-attachment: fixed      //表示固定，  例如固定在左上角。无论如何拖动滚动条，都固定在左上角，不消失
+         background-position: center top   //表示背景图片在盒子中的位置，需设置两个值，即水平方向和垂直方向。
+         background-position: 0px -120px;  //位置也可以用坐标表示，左上角为（0，0）
+    }
+      基本语法：
+         background : background-color || background-image || background-repeat || background-attachment || background-position
+
+   （11）.大图片背景(即图片的大小 大于 div盒子的大小。)
+                
+   （12）.CSS选择器
+               id选择器， class选择器， 派生选择器            
+ 
+          div p {   }   //表示div盒子下的p标签
+
+   （13）. CSS优先级
+               
+             描叙的越精细，优先级越高
+ 
+   （14）.CSS引入方式
+
+           1. 写在头部文件中
+
+           2. 在外部写 .css 文件，再把它导入文件中
+                  <link rel="styleheet" href="../xx.css" />                
+
+           3.直接写在标签中，如： 
+               写在 div 中
+                 <div id="test1" style="color:white"> 好好学习 </div>
+
+           4. 可以用 @import 在 .css 文件中导入其他 .css文件
+
+   （15）.CSS初始化
+                相同的元素，如li,在不同的浏览器下，显示的效果稍有不同，
+          是因为浏览器对各元素的margin,border,font,size等略有不同，
+          如果杜绝这种情况，我们通过css强制让所有元素的属性值都一样，
+          这样，浏览器显示就一致了，减少了不兼容情况的发生，
+          这个过程，叫做CSS初始化。
+
+            css初始化代码，可以在网上找，如淘宝，腾讯，网易都会有自己的css初始化代码。
+
+          初始化时，一般会把元素都设置成块状。
+
+   （16）.HTML学习导图
+            
+
+二.有语义标签
+
+  （1）h 标签和 p 标签
+        
+       h标签： <h1>---<h6>  //一般用于标题
+       p标签：              //一般用于表示段落
+ 
+  （2）. img图片标签
+           <img src="" alt="" title="" /> // title:表示鼠标放上去，显示的文字。   alt：表示图片未加载完成前，显示的文字。
+
+  （3）.图片是内联还是块状？
+          
+           图片是特殊的内联元素，同时是内联替换元素，替换元素是能设置宽高的
+           上下图片默认是不能紧贴在一起的，但可以将图片转化为块状元素，则可以紧贴在一起。
+
+
+  （4）.有序列表和无序列表
+          
+          1.无序列表（默认实心圆）
+               ul li{
+                     list-style-type:xxx;//设置形状
+
+                 }
+
+              <ul>
+               <li>春</li>
+               <li>夏</li>
+               <li>秋</li>
+               <li>冬</li>
+              <ul/>
+
+          2.有序列表（默认是1，2，3，4）
+                ol li{
+                     list-style-type:xxx;//设置形状
+
+                 }
+
+              <ol>
+               <li>春</li>
+               <li>夏</li>
+               <li>秋</li>
+               <li>冬</li>
+              <ol/>
+
+         注意：一般我们都会把初始化为  list-style-type:none; 
+                    //设置为空。不显示列表前面的实心圆或1，2，3，4等。 为防止浏览器不兼容
+                    //一般都是利用 背景图片+padding，来完成li小图标效果的      
+
+
+  （5）.整齐的表格
+           table{
+            border-collapse: collapse ; //设置边框融不融合，这里表示不融合。
+            border-spacing: 20px       //边框之间的距离
+              }
+
+           td{
+            border:1px solid blue;
+            colspan :  //跨列
+            rowspan :  //跨行 
+            }
+ 
+         <table>
+           <tr>
+             <td><td/><td><td/>     
+           <tr/>
+           <tr>
+             <td><td/><td><td/>     
+           <tr/>
+        <table/>
+
+   (6).超链接标签
+
+             <a href="" target="_blank" title="鼠标放上去，显示文字"> xxx <a/>
+
+  （7）锚点 
+         //访问链接时，后面加“#+锚点名”
+            如：  XXX.html#p2     //它就会进入XXX网页，并跳到锚点p2.
+
+        <a href="xxx.html#p1">p1锚点<a/>
+        <a href="xxx.html#p2">p2锚点<a/>
+        <a href="xxx.html#p3">p3锚点<a/>
+          
+        <a name="p1"></a>     //设置锚点p1
+        <p> p1 </p> <br/><br/><br/><br/><br/><br/>
+
+        <a name="p2"></a>    //设置锚点p2
+        <p> p2 </p> <br/><br/><br/><br/><br/><br/>
+
+        <a name="p3"></a>    //设置锚点p3
+        <p> p3 </p> <br/><br/><br/><br/><br/><br/>
+
+
+    (8).CSS伪类   （主要是a标签）
+          css允许我们针对a标签的4种状态设置各自的css特性，叫做css伪类。
+
+           1.未访问前的颜色          a:link{ }
+           2.已访问的颜色            a:visited{ }
+           3.鼠标放上去的颜色        a:hover{ }
+           4.点击瞬间，未撒手的颜色  a:active{ }
+        
+       注意：
+            1.active一般不写
+            2.一定注意，设置是有顺序的： L V H A
+            3. a:link{ }可简写为 a{ }
+
+
+
+   （9）.字符实体
+
+        <body>
+           <div>
+             在html开发中，有一些字符，不适于直接写出，如 &gt(>),&It(<);
+             一般格式： &amp(&); + 实体名 + “;”
+             实体有很多，可以查手册
+           </div>
+        </body>
+
+
+
+
+
+
+
+
+
+三.首页布局实战  （记得先初始化）
+         
+                
+  （1）先布局
+          <div id="container">
+             <div id="header">
+                 <ul id="nav">
+                    <li>导航1</li>
+                    <li>导航2</li>
+                    <li>导航3</li>
+                 </ul>     
+             </div>
+             <div id="main">
+                 <div id="lside">
+                    <div class="subtitle"></div>
+                    <div class="four"></div>
+                    <div class="four"></div>
+                    <div class="four"></div>
+                    <div class="four"></div>
+                 </div>
+                   <div id="rside">
+                      <div  class="subtitle"></div>
+                      <ul id="art">
+                         <li>文章1</li>
+                         <li>文章2</li>
+                         <li>文章3</li>
+                      </ul>                       
+                   </div>
+             </div>
+             <div id="footer"></div>
+          </div>
+
+
+
+
+
+
+
+
+
+ （2）.开发之导航（在（1）的基础上）
+
+     注意： 首先，到网上找 初始化CSS 的 .css文件，再把它导入到网页中<link rel="stylesheet" href="./xx.css" />
+            <style>
+              #container{
+                   width:1002px;
+                  }
+
+              #header{
+                  height : 128px;                           //设置与背景图片同高即可
+                  backgroud: gray url(./image/top_bg.jpg);  //导航的背景图片   //gray表示灰色
+
+                  }
+
+              #nav li{
+   
+                     float:left        //列表本身是块状元素，是竖着排列，需要设置左浮，让它横着排列
+                     background: purple; //设置背景颜色  ，在这里是为了看得更清楚，之后可以删除
+                     width： 90px;     //是列表撑开
+                     margin-right:1px; //将每个li隔开，不紧凑在一起 
+                    
+                }
+
+              #nav a{    //设置导航中的文字
+
+                  font-size: 15px;
+                  font-famliy: "微软雅黑";
+                  color:gray;
+                  
+                  display: block;  //将a标签转化为块状，可以设置宽和高
+                  width: 90px;
+                  height:37px;
+                   
+                  text-align: center;  //设置文字居中
+
+               }
+
+              #nav a:hover{    //设置当鼠标放在导航中的文字上边时，显示的效果
+               
+                  color: white;  //设置当鼠标放在导航中的文字上边时，文字变成白色
+                  background: url(.images/nav.on.gif)  //设置当鼠标放在导航中的文字上边时，文字的背景颜色改变，
+                                                          这里用了 颜色图片
+
+            </style>
+
+
+
+
+          <div id="container">
+             <div id="header">
+                 <img src="./image/logo.jpg" alt="" id="logo" />    //在左上角设置网页的logo
+                 <ul id="nav">
+                    <li><a href="#">导航1</a></li>
+                    <li><a href="#">导航2</a></li>
+                    <li><a href="#">导航3</a></li>
+                 </ul>     
+             </div>
+             <div id="main">
+                 <div id="lside">
+                    <div class="subtitle"></div>>
+                    <div class="four"></div>
+                    <div class="four"></div>
+                    <div class="four"></div>
+                    <div class="four"></div>>
+                 </div>
+                   <div id="rside">
+                      <div  class="subtitle"></div>
+                      <ul id="art">
+                         <li>文章1</li>
+                         <li>文章2</li>
+                         <li>文章3</li>
+                      </ul>                       
+                   </div>
+             </div>
+             <div id="footer"></div>
+          </div>
+
+
+
+
+
+
+
+
+
+（3）.开发之main区域的开发(在（1）（2）的基础上修改)
+      
+     注意：当<style></style>中的内容变多时，可以新建 .css文件，再将 .css文件导进来，即可<link rel="stylesheet" href="./xx.css" />
+             特别注意： 记得修改图片等需要用到路径的地方。
+
+
+     注意： 首先，到网上找 初始化CSS 的 .css文件，再把它导入到网页中<link rel="stylsheet" href="./xx.css" />
+            <style>
+              
+              .clr{   //一般做网页，都会专门设置这个，用来清除浮动
+
+                 clear: both;
+                 width: 0px;
+                 height：0px;
+                }
+
+              #container{
+                   width:1002px
+                  }
+
+              #header{
+                  height : 128px;                          //设置与背景图片同高即可
+                  backgroud: gray url(./image/top_bg.jpg)  //导航的背景图片   //gray表示灰色
+
+                  }
+
+              #nav li{
+   
+                     float:left        //列表本身是块状元素，是竖着排列，需要设置左浮，让它横着排列
+                     background: purple; //设置背景颜色  ，在这里是为了看得更清楚，之后可以删除
+                     width： 90px;     //是列表撑开
+                     margin-right:1px; //将每个li隔开，不紧凑在一起 
+                    
+                }
+
+              #nav a{    //设置导航中的文字
+
+                  font-size: 15px;
+                  font-famliy: "微软雅黑";
+                  color:gray;
+                  
+                  display: block;  //将a标签转化为块状，可以设置宽和高
+                  width: 90px;
+                  height:37px;
+                   
+                  text-align: center;  //设置文字居中
+
+               }
+
+              #nav a:hover{    //设置当鼠标放在导航中的文字上边时，显示的效果
+               
+                  color: white;  //设置当鼠标放在导航中的文字上边时，文字变成白色
+                  background: url(.images/nav.on.gif)  //设置当鼠标放在导航中的文字上边时，文字的背景颜色改变，
+                                                          这里用了 颜色图片
+
+
+
+              }
+
+
+              #main{   
+                      注意 //当"子div"浮动时，当“子div”远大于“父div”时，“父div”的大小的不变的，是没有被“子div”撑大的,所以一般要设置“父div”的大小 刚好等于“子div”们的总和;
+                          或者是做一个专门清除浮动的div
+ 
+             }
+
+
+              #lside{   //左盒子
+      
+                   height: 483px;
+                   width:  694px;
+                   border: 1px solid gray; //边框
+            //       background: blue;       //这里加颜色，只是为了更容易区分左右两个盒子,当完成其他布局后，可以删除
+                   float: left;             //左浮动
+ 
+             }
+
+
+              .subtitle{     //设置左右盒子上方的div
+       
+                 height:37px;
+                 background: gray url(./images/index_main_top_bg.gif);  //利用图片做背景颜色
+ 
+             }
+                //注意，在这里，img标签、h1标签、a标签 都是块状，所以是竖着排列，需要设置浮动，让它横着排列
+
+              .subtitle img{   //在subtitle下写设置img,这种叫派生
+                 margin:5px 0 0 10px;  
+                 float:left;
+             }
+
+              .subtitle h1{
+                 font-size:16px;
+                  margin-left: 10px;
+                 font-family: "微软雅黑"，SimHei,sans-serif;  //SimHei表示黑体  sans-serif表示无衬线
+                                                              //这里写了三种字体，不常用的靠后写。
+                 float:left;
+             }
+
+              .subtitle a{
+                 font-size:12px;
+                 color:gray;
+                 float:right;
+             }
+   
+           
+              .four{    //lside盒子中的四个“four”div
+
+                 width:326px;         //宽高都需要自己慢慢调
+                 height:200px;
+                 background:#EEE;
+                 margin: 10px;
+                 float: left;
+               
+            }
+
+             //注意，在这里，img标签、ul标签 都是块状，所以是竖着排列，需要设置浮动，让它横着排列
+
+
+              .four img{   //派生
+ 
+                 margin-left: 10px;
+                 padding:6px;
+                 background:white;  //设置白背景，内边距颜色则变白                 
+                 float:left;
+             }
+
+              .four ul{
+                 margin-left: 10px;
+                 float:left;
+             }
+
+              .four li{
+    
+                 //设置为空。不显示列表前面的实心圆或1，2，3，4等。 为防止浏览器不兼容                
+                 //一般都是利用 背景图片+padding，来完成列表li前的小图标（小黑点）效果的 
+
+                 background: url(./images/index_main_top_bg.gif) no-repeat;  //这里的图片是一个小黑点。 
+                 padding-left: 10px; 
+
+                 height: 20px;
+             }
+
+              
+            .four a{
+           
+             color:gray;
+   
+           }
+
+           .four  a:visited{
+
+             color:gray;
+           }
+
+
+          .four h2{
+                   margin: 6px 0 6px 10px;
+                  font-size:16px;
+                  font-family: "微软雅黑"，SimHei,sans-serif;  //SimHei表示黑体  sans-serif表示无衬线
+                                                              //这里写了三种字体，不常用的靠后写。
+             }
+
+
+
+              #rside{  //右盒子
+
+                   height: 600px;
+                   width:  294px;
+                   background: green;   //这里加颜色，只是为了更容易区分左右两个盒子
+                   float: right         //右浮动
+             }
+
+
+              #footer{
+    
+                   height: 128px;
+                   background: black;
+
+             }
+
+            </style>
+
+
+
+
+          <div id="container">
+             <div id="header">
+                 <img src="./image/logo.jpg" alt="" id="logo" />    //在左上角设置网页的logo
+                 <ul id="nav">
+                    <li><a href="#">导航1</a></li>
+                    <li><a href="#">导航2</a></li>
+                    <li><a href="#">导航3</a></li>
+                 </ul>     
+             </div>
+             <div id="main">
+                 <div id="lside">
+                    <div class="subtitle">
+                        <img src="./image/circle.gif" alt="" />  //引入小图标      
+                        <h1>核心业务</h1>
+                        <a href="#">MORE &gt;&gt;</a>            //"&gt;" 表示“>”大于号
+                    </div>
+                    <div class="four">
+                        <h2>电子商务类网站建设</h2>
+                        <img src="./images/ecshop_service.jpg" alt="" />
+                        <ul>
+                          <li><a href="#">方便的订单管理1</a></li>
+                          <li><a href="#">方便的订单管理2</a></li>
+                          <li><a href="#">方便的订单管理3</a></li>
+                          <li><a href="#">方便的订单管理4</a></li>
+                          <li><a href="#">方便的订单管理5</a></li>
+                       </ul>   
+
+                    </div/>
+                    <div class="four">
+                        <h2>电子商务类网站建设</h2>
+                        <img src="./images/ecshop_service.jpg" alt="" />
+                        <ul>
+                          <li><a href="#">方便的订单管理1</a></li>
+                          <li><a href="#">方便的订单管理2</a></li>
+                          <li><a href="#">方便的订单管理3</a></li>
+                          <li><a href="#">方便的订单管理4</a></li>
+                          <li><a href="#">方便的订单管理5</a></li>
+                       </ul>   
+
+                    </div/>
+                    <div class="four">
+                        <h2>电子商务类网站建设</h2>
+                        <img src="./images/ecshop_service.jpg" alt="" />
+                        <ul>
+                          <li><a href="#">方便的订单管理1</a></li>
+                          <li><a href="#">方便的订单管理2</a></li>
+                          <li><a href="#">方便的订单管理3</a></li>
+                          <li><a href="#">方便的订单管理4</a></li>
+                          <li><a href="#">方便的订单管理5</a></li>
+                       </ul>   
+
+                    </div/>
+                    <div class="four">
+                        <h2>电子商务类网站建设</h2>
+                        <img src="./images/ecshop_service.jpg" alt="" />
+                        <ul>
+                          <li><a href="#">方便的订单管理1</a></li>
+                          <li><a href="#">方便的订单管理2</a></li>
+                          <li><a href="#">方便的订单管理3</a></li>
+                          <li><a href="#">方便的订单管理4</a></li>
+                          <li><a href="#">方便的订单管理5</a></li>
+                       </ul>   
+
+                    </div/> 
+                 </div>
+                 <div id="rside">
+                      <div  class="subtitle"></div>
+                      <ul id="art">
+                         <li><a href="#">文章1</a></li>
+                         <li><a href="#">文章2</a></li>
+                         <li><a href="#">文章3</a></li>
+                      </ul>                       
+                 </div>
+                 <div class="clr"></div>   //追加的div，专门用来清除浮动
+             </div>
+             <div id="footer"></div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+（4）.开发之main区域的 右半区 的开发(在前面的基础上修改)
+
+
+ 注意：当<style></style>中的内容变多时，可以新建 .css文件，再将 .css文件导进来，即可<link rel="stylesheet" href="./xx.css" />
+             特别注意： 记得修改图片等需要用到路径的地方。
+
+
+     注意： 首先，到网上找 初始化CSS 的 .css文件，再把它导入到网页中<link rel="stylsheet" href="./xx.css" />
+            <style>
+              
+              .clr{   //一般做网页，都会专门设置这个，用来清除浮动
+
+                 clear: both;
+                 width: 0px;
+                 height：0px;
+                }
+
+              #container{
+                   width:1002px
+                  }
+
+              #header{
+                  height : 128px;                          //设置与背景图片同高即可
+                  backgroud: gray url(./image/top_bg.jpg)  //导航的背景图片   //gray表示灰色
+
+                  }
+
+              #nav li{
+   
+                     float:left        //列表本身是块状元素，是竖着排列，需要设置左浮，让它横着排列
+                     background: purple; //设置背景颜色  ，在这里是为了看得更清楚，之后可以删除
+                     width： 90px;     //是列表撑开
+                     margin-right:1px; //将每个li隔开，不紧凑在一起 
+                    
+                }
+
+              #nav a{    //设置导航中的文字
+
+                  font-size: 15px;
+                  font-famliy: "微软雅黑";
+                  color:gray;
+                  
+                  display: block;  //将a标签转化为块状，可以设置宽和高
+                  width: 90px;
+                  height:37px;
+                   
+                  text-align: center;  //设置文字居中
+
+               }
+
+              #nav a:hover{    //设置当鼠标放在导航中的文字上边时，显示的效果
+               
+                  color: white;  //设置当鼠标放在导航中的文字上边时，文字变成白色
+                  background: url(.images/nav.on.gif)  //设置当鼠标放在导航中的文字上边时，文字的背景颜色改变，
+                                                          这里用了 颜色图片
+
+
+
+              }
+
+
+              #main{   
+                      注意 //当"子div"浮动时，当“子div”远大于“父div”时，“父div”的大小的不变的，是没有被“子div”撑大的,所以一般要设置“父div”的大小 刚好等于“子div”们的总和;
+                          或者是做一个专门清除浮动的div
+ 
+             }
+
+
+              #lside{   //左盒子
+      
+                   height: 483px;
+                   width:  694px;
+                   border: 1px solid gray; //边框
+            //       background: blue;       //这里加颜色，只是为了更容易区分左右两个盒子,当完成其他布局后，可以删除
+                   float: left;             //左浮动
+ 
+             }
+
+
+              .subtitle{     //设置左右盒子上方的div
+       
+                 height:37px;
+                 background: gray url(./images/index_main_top_bg.gif);  //利用图片做背景颜色
+ 
+             }
+                //注意，在这里，img标签、h1标签、a标签 都是块状，所以是竖着排列，需要设置浮动，让它横着排列
+
+              .subtitle img{   //在subtitle下写设置img,这种叫派生
+                 margin:5px 0 0 10px;  
+                 float:left;
+             }
+
+              .subtitle h1{
+                 font-size:16px;
+                  margin-left: 10px;
+                 font-family: "微软雅黑"，SimHei,sans-serif;  //SimHei表示黑体  sans-serif表示无衬线
+                                                              //这里写了三种字体，不常用的靠后写。
+                 float:left;
+             }
+
+              .subtitle a{
+                 font-size:12px;
+                 color:gray;
+                 float:right;
+             }
+   
+           
+              .four{    //lside盒子中的四个“four”div
+
+                 width:326px;         //宽高都需要自己慢慢调
+                 height:200px;
+                 background:#EEE;
+                 margin: 10px;
+                 float: left;
+               
+            }
+
+             //注意，在这里，img标签、ul标签 都是块状，所以是竖着排列，需要设置浮动，让它横着排列
+
+
+              .four img{   //派生
+ 
+                 margin-left: 10px;
+                 padding:6px;
+                 background:white;  //设置白背景，内边距颜色则变白                 
+                 float:left;
+             }
+
+              .four ul{
+                 margin-left: 10px;
+                 float:left;
+             }
+
+              .four li{
+    
+                 //设置为空。不显示列表前面的实心圆或1，2，3，4等。 为防止浏览器不兼容                
+                 //一般都是利用 背景图片+padding，来完成列表li前的小图标（小黑点）效果的 
+
+                 background: url(./images/index_main_top_bg.gif) no-repeat;  //这里的图片是一个小黑点。 
+                 padding-left: 10px; 
+
+                 height: 20px;
+             }
+
+              
+            .four a{
+           
+             color:gray;
+   
+           }
+
+           .four  a:visited{
+
+             color:gray;
+           }
+
+
+          .four h2{
+                   margin: 6px 0 6px 10px;
+                  font-size:16px;
+                  font-family: "微软雅黑"，SimHei,sans-serif;  //SimHei表示黑体  sans-serif表示无衬线
+                                                              //这里写了三种字体，不常用的靠后写。
+             }
+
+
+
+              #rside{  //右盒子
+
+     //             height: 600px;        //最后这里也可以去掉，让 浮动 将它撑起来即可。
+                   width:  294px;
+     //              background: green;   //这里加颜色，只是为了更容易区分左右两个盒子    //最后将背景色去掉
+                   float: right           //右浮动
+             }
+
+              #contact{
+
+                  height: 250px;
+                  background: #EEE;
+                  margin-top:1px;
+                  padding-top:10px;      
+
+                   }
+
+              #art {
+    
+                  background: #EEE;
+                  margin-top:1px;
+                  padding-top:10px;
+              
+            }
+
+              #art li{
+
+                 //设置为空。不显示列表前面的实心圆或1，2，3，4等。 为防止浏览器不兼容                
+                 //一般都是利用 背景图片+padding，来完成列表li前的小图标（小黑点或小三角形等等）效果的 
+
+         //        background: url(./images/article_head.gif) no-repeat;  //这里的图片是一个小三角形。 
+         //        padding-left: 10px; 
+
+         //        height: 29px;
+
+           }
+
+             #art a{
+                      //把上面的背景图片放到a标签中,同时要把a标签设置成块状。
+                 display: block;
+                 background: url(./images/article_head.gif) no-repeat;  //这里的图片是一个小三角形。 
+                 padding-left: 10px;
+            }
+
+             #art a:hover{  //设置当鼠标放上来时，换个背景
+                      
+                 background: url(./images/article_on_bg.gif)  
+
+            }
+
+              #footer{
+    
+                   height: 128px;
+                   background: black;
+
+             }
+
+            </style>
+
+
+
+
+          <div id="container">
+             <div id="header">
+                 <img src="./image/logo.jpg" alt="" id="logo" />    //在左上角设置网页的logo
+                 <ul id="nav">
+                    <li><a href="#">导航1</a></li>
+                    <li><a href="#">导航2</a></li>
+                    <li><a href="#">导航3</a></li>
+                 </ul>     
+             </div>
+             <div id="main">
+                 <div id="lside">
+                    <div class="subtitle">
+                        <img src="./image/circle.gif" alt="" />  //引入小图标      
+                        <h1>核心业务</h1>
+                        <a href="#">MORE &gt;&gt;</a>            //"&gt;" 表示“>”大于号
+                    </div>
+                    <div class="four">
+                        <h2>电子商务类网站建设</h2>
+                        <img src="./images/ecshop_service.jpg" alt="" />
+                        <ul>
+                          <li><a href="#">方便的订单管理1</a></li>
+                          <li><a href="#">方便的订单管理2</a></li>
+                          <li><a href="#">方便的订单管理3</a></li>
+                          <li><a href="#">方便的订单管理4</a></li>
+                          <li><a href="#">方便的订单管理5</a></li>
+                       </ul>   
+
+                    </div/>
+                    <div class="four">
+                        <h2>电子商务类网站建设</h2>
+                        <img src="./images/ecshop_service.jpg" alt="" />
+                        <ul>
+                          <li><a href="#">方便的订单管理1</a></li>
+                          <li><a href="#">方便的订单管理2</a></li>
+                          <li><a href="#">方便的订单管理3</a></li>
+                          <li><a href="#">方便的订单管理4</a></li>
+                          <li><a href="#">方便的订单管理5</a></li>
+                       </ul>   
+
+                    </div/>
+                    <div class="four">
+                        <h2>电子商务类网站建设</h2>
+                        <img src="./images/ecshop_service.jpg" alt="" />
+                        <ul>
+                          <li><a href="#">方便的订单管理1</a></li>
+                          <li><a href="#">方便的订单管理2</a></li>
+                          <li><a href="#">方便的订单管理3</a></li>
+                          <li><a href="#">方便的订单管理4</a></li>
+                          <li><a href="#">方便的订单管理5</a></li>
+                       </ul>   
+
+                    </div/>
+                    <div class="four">
+                        <h2>电子商务类网站建设</h2>
+                        <img src="./images/ecshop_service.jpg" alt="" />
+                        <ul>
+                          <li><a href="#">方便的订单管理1</a></li>
+                          <li><a href="#">方便的订单管理2</a></li>
+                          <li><a href="#">方便的订单管理3</a></li>
+                          <li><a href="#">方便的订单管理4</a></li>
+                          <li><a href="#">方便的订单管理5</a></li>
+                       </ul>   
+
+                    </div/> 
+                 </div>
+                 <div id="rside">
+                    <div class="subtitle">
+                        <img src="./image/circle.gif" alt="" />  //引入小图标      
+                        <h1>文章观点</h1>
+                        <a href="#">MORE &gt;&gt;</a>            //"&gt;" 表示“>”大于号
+                    </div>
+                    <ul id="art">
+                         <li><a href="#">文章1</a></li>
+                         <li><a href="#">文章2</a></li>
+                         <li><a href="#">文章3</a></li>
+                         <li><a href="#">文章4</a></li>
+                         <li><a href="#">文章5</a></li>
+                    </ul> 
+                    <div class="subtitle">
+                        <img src="./image/circle.gif" alt="" />  //引入小图标      
+                        <h1>联系我们</h1>
+                        <a href="#">MORE &gt;&gt;</a>            //"&gt;" 表示“>”大于号
+                    </div>
+                    <div id="contact">
+                    </div>                  //在这里，预留一个div                      
+                 </div>
+                 <div class="clr"></div>   //追加的div，专门用来清除浮动
+             </div>
+             <div id="footer"></div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+（4）.开发之footer区域的开发(在前面的基础上修改)
+
+
+ 注意：当<style></style>中的内容变多时，可以新建 .css文件，再将 .css文件导进来，即可<link rel="stylesheet" href="./xx.css" />
+             特别注意： 记得修改图片等需要用到路径的地方。
+
+
+     注意： 首先，到网上找 初始化CSS 的 .css文件，再把它导入到网页中<link rel="stylsheet" href="./xx.css" />
+            <style>
+              
+              .clr{   //一般做网页，都会专门设置这个，用来清除浮动
+
+                 clear: both;
+                 width: 0px;
+                 height：0px;
+                }
+
+              #container{
+                   width:1002px
+                  }
+
+              #header{
+                  height : 128px;                          //设置与背景图片同高即可
+                  backgroud: gray url(./image/top_bg.jpg)  //导航的背景图片   //gray表示灰色
+
+                  }
+
+              #nav li{
+   
+                     float:left        //列表本身是块状元素，是竖着排列，需要设置左浮，让它横着排列
+                     background: purple; //设置背景颜色  ，在这里是为了看得更清楚，之后可以删除
+                     width： 90px;     //是列表撑开
+                     margin-right:1px; //将每个li隔开，不紧凑在一起 
+                    
+                }
+
+              #nav a{    //设置导航中的文字
+
+                  font-size: 15px;
+                  font-famliy: "微软雅黑";
+                  color:gray;
+                  
+                  display: block;  //将a标签转化为块状，可以设置宽和高
+                  width: 90px;
+                  height:37px;
+                  line-height: 37px   //声明“行高”等于“高”，这样能实现文字 竖直方向居中                   
+
+                  text-align: center;  //设置文字居中
+
+               }
+
+              #nav a:hover{    //设置当鼠标放在导航中的文字上边时，显示的效果
+               
+                  color: white;  //设置当鼠标放在导航中的文字上边时，文字变成白色
+                  background: url(.images/nav.on.gif)  //设置当鼠标放在导航中的文字上边时，文字的背景颜色改变，
+                                                          这里用了 颜色图片
+
+
+
+              }
+
+              #banner{
+
+                   margin :10px 0;
+              }
+
+
+
+              #main{   
+                      注意 //当"子div"浮动时，当“子div”远大于“父div”时，“父div”的大小的不变的，是没有被“子div”撑大的,所以一般要设置“父div”的大小 刚好等于“子div”们的总和;
+                          或者是做一个专门清除浮动的div
+ 
+             }
+
+
+              #lside{   //左盒子
+      
+                   height: 483px;
+                   width:  694px;
+                   border: 1px solid gray; //边框
+            //       background: blue;       //这里加颜色，只是为了更容易区分左右两个盒子,当完成其他布局后，可以删除
+                   float: left;             //左浮动
+            
+                   border-top: none
+ 
+             }
+
+
+              .subtitle{     //设置左右盒子上方的div
+       
+                 height:37px;
+                 background: gray url(./images/index_main_top_bg.gif);  //利用图片做背景颜色
+ 
+             }
+                //注意，在这里，img标签、h1标签、a标签 都是块状，所以是竖着排列，需要设置浮动，让它横着排列
+
+              .subtitle img{   //在subtitle下写设置img,这种叫派生
+                 margin:5px 0 0 10px;  
+                 float:left;
+             }
+
+              .subtitle h1{
+                 font-size:16px;
+                  margin-left: 10px;
+                 font-family: "微软雅黑"，SimHei,sans-serif;  //SimHei表示黑体  sans-serif表示无衬线
+                                                              //这里写了三种字体，不常用的靠后写。
+                 float:left;
+             }
+
+              .subtitle a{
+                 font-size:12px;
+                 color:gray;
+                 float:right;
+             }
+   
+           
+              .four{    //lside盒子中的四个“four”div
+
+                 width:326px;         //宽高都需要自己慢慢调
+                 height:200px;
+                 background:#EEE;
+                 margin: 10px;
+                 float: left;
+               
+            }
+
+             //注意，在这里，img标签、ul标签 都是块状，所以是竖着排列，需要设置浮动，让它横着排列
+
+
+              .four img{   //派生
+ 
+                 margin-left: 10px;
+                 padding:6px;
+                 background:white;  //设置白背景，内边距颜色则变白                 
+                 float:left;
+             }
+
+              .four ul{
+                 margin-left: 10px;
+                 float:left;
+             }
+
+              .four li{
+    
+                 //设置为空。不显示列表前面的实心圆或1，2，3，4等。 为防止浏览器不兼容                
+                 //一般都是利用 背景图片+padding，来完成列表li前的小图标（小黑点）效果的 
+
+                 background: url(./images/index_main_top_bg.gif) no-repeat;  //这里的图片是一个小黑点。 
+                 padding-left: 10px; 
+
+                 height: 20px;
+             }
+
+              
+            .four a{
+           
+             color:gray;
+   
+           }
+
+           .four  a:visited{
+
+             color:gray;
+           }
+
+           .four a：hover{
+           
+             color: 改成其他颜色;
+   
+           }
+
+          .four h2{
+                   margin: 6px 0 6px 10px;
+                  font-size:16px;
+                  font-family: "微软雅黑"，SimHei,sans-serif;  //SimHei表示黑体  sans-serif表示无衬线
+                                                              //这里写了三种字体，不常用的靠后写。
+             }
+
+
+
+              #rside{  //右盒子
+
+     //             height: 600px;        //最后这里也可以去掉，让 浮动 将它撑起来即可。
+                   width:  294px;
+     //              background: green;   //这里加颜色，只是为了更容易区分左右两个盒子    //最后将背景色去掉
+                   float: right           //右浮动
+             }
+
+              #contact{
+
+                  height: 250px;
+                  background: #EEE;
+                  margin-top:1px;
+                  padding-top:10px;      
+
+                   }
+
+              #art {
+    
+                  background: #EEE;
+                  margin-top:1px;
+                  padding-top:10px;
+              
+            }
+
+              #art li{
+
+                 //设置为空。不显示列表前面的实心圆或1，2，3，4等。 为防止浏览器不兼容                
+                 //一般都是利用 背景图片+padding，来完成列表li前的小图标（小黑点或小三角形等等）效果的 
+
+         //        background: url(./images/article_head.gif) no-repeat;  //这里的图片是一个小三角形。 
+         //        padding-left: 10px; 
+
+         //        height: 29px;
+
+           }
+
+             #art a{
+                      //把上面的背景图片放到a标签中,同时要把a标签设置成块状。
+                 display: block;
+                 background: url(./images/article_head.gif) no-repeat;  //这里的图片是一个小三角形。 
+                 padding-left: 10px;
+            }
+
+             #art a:hover{  //设置当鼠标放上来时，换个背景
+                      
+                 background: url(./images/article_on_bg.gif)  
+
+            }
+
+              #footer{
+                 margin-top: 15px;    
+                   height: 120px;
+             //      background: gray;
+
+             }
+
+             #footer ul{
+
+                height: 40px;    //把其他元素挤在下面
+                background: #EEE; 
+              
+   
+             }
+
+             #footer li{
+
+                 margin-top: 15px;
+                 margin-right: 10px;
+                 float:left;
+             }
+
+
+             #footer address{
+
+                margin-top: 10px; 
+                font-size: 12px;
+                font-family:  "微软雅黑" sans-serif;
+
+
+             }
+
+            </style>
+
+
+
+
+          <div id="container">
+             <div id="header">
+                 <img src="./image/logo.jpg" alt="" id="logo" />    //在左上角设置网页的logo
+                 <ul id="nav">
+                    <li><a href="#">导航1</a></li>
+                    <li><a href="#">导航2</a></li>
+                    <li><a href="#">导航3</a></li>
+                 </ul>     
+             </div>
+
+             <img src="" alt="" id="banner" />    //在两个div"container" 和 "main" 之间插一张大图片
+
+             <div id="main">
+                 <div id="lside">
+                    <div class="subtitle">
+                        <img src="./image/circle.gif" alt="" />  //引入小图标      
+                        <h1>核心业务</h1>
+                        <a href="#">MORE &gt;&gt;</a>            //"&gt;" 表示“>”大于号
+                    </div>
+                    <div class="four">
+                        <h2>电子商务类网站建设</h2>
+                        <img src="./images/ecshop_service.jpg" alt="" />
+                        <ul>
+                          <li><a href="#">方便的订单管理1</a></li>
+                          <li><a href="#">方便的订单管理2</a></li>
+                          <li><a href="#">方便的订单管理3</a></li>
+                          <li><a href="#">方便的订单管理4</a></li>
+                          <li><a href="#">方便的订单管理5</a></li>
+                       </ul>   
+
+                    </div/>
+                    <div class="four">
+                        <h2>电子商务类网站建设</h2>
+                        <img src="./images/ecshop_service.jpg" alt="" />
+                        <ul>
+                          <li><a href="#">方便的订单管理1</a></li>
+                          <li><a href="#">方便的订单管理2</a></li>
+                          <li><a href="#">方便的订单管理3</a></li>
+                          <li><a href="#">方便的订单管理4</a></li>
+                          <li><a href="#">方便的订单管理5</a></li>
+                       </ul>   
+
+                    </div/>
+                    <div class="four">
+                        <h2>电子商务类网站建设</h2>
+                        <img src="./images/ecshop_service.jpg" alt="" />
+                        <ul>
+                          <li><a href="#">方便的订单管理1</a></li>
+                          <li><a href="#">方便的订单管理2</a></li>
+                          <li><a href="#">方便的订单管理3</a></li>
+                          <li><a href="#">方便的订单管理4</a></li>
+                          <li><a href="#">方便的订单管理5</a></li>
+                       </ul>   
+
+                    </div/>
+                    <div class="four">
+                        <h2>电子商务类网站建设</h2>
+                        <img src="./images/ecshop_service.jpg" alt="" />
+                        <ul>
+                          <li><a href="#">方便的订单管理1</a></li>
+                          <li><a href="#">方便的订单管理2</a></li>
+                          <li><a href="#">方便的订单管理3</a></li>
+                          <li><a href="#">方便的订单管理4</a></li>
+                          <li><a href="#">方便的订单管理5</a></li>
+                       </ul>   
+
+                    </div/> 
+                 </div>
+                 <div id="rside">
+                    <div class="subtitle">
+                        <img src="./image/circle.gif" alt="" />  //引入小图标      
+                        <h1>文章观点</h1>
+                        <a href="#">MORE &gt;&gt;</a>            //"&gt;" 表示“>”大于号
+                    </div>
+                    <ul id="art">
+                         <li><a href="#">文章1</a></li>
+                         <li><a href="#">文章2</a></li>
+                         <li><a href="#">文章3</a></li>
+                         <li><a href="#">文章4</a></li>
+                         <li><a href="#">文章5</a></li>
+                    </ul> 
+                    <div class="subtitle">
+                        <img src="./image/circle.gif" alt="" />  //引入小图标      
+                        <h1>联系我们</h1>
+                        <a href="#">MORE &gt;&gt;</a>            //"&gt;" 表示“>”大于号
+                    </div>
+                    <div id="contact">
+                    </div>                  //在这里，预留一个div                      
+                 </div>
+                 <div class="clr"></div>   //追加的div，专门用来清除浮动
+             </div>
+             <div id="footer">
+                    <ul id="">
+                         <li><a href="#">联系我们1</a></li>
+                         <li><a href="#">联系我们2</a></li>
+                         <li><a href="#">联系我们3</a></li>
+                         <li><a href="#">联系我们4</a></li>
+                         <li><a href="#">联系我们5</a></li>
+                    </ul> 
+                    <address>&copy; ?360.cn. All Rights Reserved. 京ICP证080047号 京公网安备11000002000006号 中国互联网举报中心,360举报电话：010-58541935 举报邮箱：360report@360.cn</address>
+                                                        //Copyright 不事宜直接写，在这里用 &copy;代替
+             </div>
+          </div>
+
+
+
+ (5)色彩颜色微调
+         把以上需要颜色的地方 按照原先的网页，改颜色。
+
+
+（6）利用行高完成文字居中
+        
+       1.将导航中的文字居中
+
+              #nav a{    //设置导航中的文字
+
+                  font-size: 15px;
+                  font-famliy: "微软雅黑";
+                  color:gray;
+                  
+                  display: block;  //将a标签转化为块状，可以设置宽和高
+                  width: 90px;
+                  height:37px;
+                  line-height: 37px ;  //声明“行高”等于“高”，这样能实现文字 竖直方向居中                   
+
+                  text-align: center;  //设置文字居中
+
+               }
+
+        //其他情况类似，可以回去修改
+
+  
+（7）IE bug及兼容测试
+       
+       1.一般字体大小要设定具体值，不使用默认。 防止浏览器不同，产生效果不同
+
+
+       2.CSS控制 之bug ：bug的几种常见原因：
+
+                     没有使用正确的doctype；          //解决办法： 正确声明doctype
+
+                     各浏览器对不同标签的初始值不同； //解决办法： CSS初始化
+ 
+                     自身书写不规范引起               //解决办法： 。。。。
+ 
+                     浏览器bug引起                    //解决办法： 正确声明doctype
+
+
+
+             特别注意：
+                       （1）在 IE浏览器 中的双倍margin值
+                                  即设置了 左浮，同时有设置了左margin值，这时margin值是定义的2倍。
+                                  即设置了 右浮，同时有设置了右margin值，这时margin值是定义的2倍。
+                                 
+                            //解决办法： 
+                                         添加代码： _display: inline;   如下：
+
+                                                .four ul{
+                                                  margin-left: 10px;
+                                                  float:left;
+                                                 }
+
+                       （2） 3像素margin bug
+                         
+                       （3）不认识 a:link {  }    //解决办法：一般写成   a{  }  即可   
+
+
+
+
+
+附录：
+
+（8）色彩的表示
+        
+       1. 颜色用数字来表示 
+       2. 颜色由3原色组成的，红red,绿green，蓝blue，  rgb
+       3. 3原色各在[0-255]之间变化
+     
+         综上： 本质上是组合3原色
+         1.用16进制组合【0-255】-->【00，FF】    如：#234567 <span style="color:#324567"> #234567 </span>
+         2.用10进制组合，如（34，45，56）；      如： <span style="color:rgb(34,45,56)"> rgb(34,45,56) </span>
+         3.html提供常用颜色的名称，  如：pink，orange. 如： <span style="color:orange"> orange </span>
+         4. #EEEEEE--->#EEE , 当6个字符一样时，可以简写为三个字符.
+
+
+
+
+
+
+(9).尺寸的表示
+  
+       1.用像素来表示 px;
+       2.用百分比 % 来表示，块状子元素要是不说宽度，默认占满父元素的宽度。
+       
+      
+       文字大小：
+        1.用 px 表示文字大小
+        2.用 em 表示文字大小， em 是相对大小，是指其父元素中的1个“M”的大小，简单理解为父元素的 font-size 就是1个 em 单位
+
+
+
+
+（10）.CSS画圆角
+
+         <style>
+
+              div{
+                    
+                 width:300px;
+                 height:300px;
+                 border: 1px solid blue;
+
+                 border-radius: 15px;  // 这里用来控制圆角，当值等于宽的一半时， 即成为一个圆 （这里，宽高一样大小） 
+  
+                             // border-radius-top,border-radius-left等  可以控制哪边有圆角
+             }
+ 
+         </style>     
+
+
+（11）. 相对定位 和 绝对定位      
+
+            相对定位： 指元素在其正常的位置，偏移某些像素
+
+            绝对定位:  指元素相对于父元素的 top, left, right, bottom 来定位
+
+           #test1{
+
+                 width:300px;
+                 height:300px;
+                 background: green;              
+
+                }
+
+ 
+           p{            //p 标签默认有一定值的margin，需初始化为0
+               
+               margin: 0px;
+               padding: 0px;
+
+           }            
+  
+           #p1{
+
+                 width:100px;
+                 height:100px;
+                 background: blue; 
+
+                 position : relative;  //设置相对定位
+                 top:20px;       //表示离自己原位置的上方之间的距离为20px；
+                 left:20px       //表示离自己原位置的左方之间的距离为20px；         
+
+                }
+
+
+           #p2{
+
+                 width:100px;
+                 height:100px;
+                 background:orange;              
+
+                }
+
+
+          #test2{
+
+                 width:300px;
+                 height:300px;
+                 background: pink;              
+
+                 position : relative;  //设置相对定位  添加position属性
+                }
+
+           #p3{
+
+                 width:100px;
+                 height:100px;
+                 background:black;
+   
+                 position : absolute;  //设置绝对定位
+                 top:20px;       //表示离父元素的上方之间的距离为20px；
+                 left:20px       //表示离父元素的左方之间的距离为20px；  
+
+                            注意： 
+                               （1） 用绝对定位时，父元素要求要有position属性才行，否则将依据父父，父的父，父的父，。。body,
+                                    哪个祖先有position属性，就相对哪个祖先，如果都没有，则依据相对于body                               
+                               （2）绝对定位不占据父元素的空间，像直升飞机一样，是飞起来的且两个有绝对定位的子元素可以相互遮盖住对方，类似于看谁飞得高，谁就可以遮住对方， 用 z-index ：100  ;   来设置谁飞得高
+
+                }
+
+
+
+
+
+（12）overflow 溢出处理
+
+
+           基本语法
+                 overflow : visible | auto | hidden | scroll
+
+        visible  :　 默认值。不剪切内容也不添加滚动条。假如显式声明此默认值，
+                     对象将以包含对象的 window 或 frame 的尺寸裁切。并且 clip 属性设置将失效 
+
+        auto     :　 在必需时对象内容才会被裁切或显示滚动条     //东西溢出时，才加滚动条 
+
+        hidden   :　 不显示超过对象尺寸的内容               
+
+        scroll   :　 总是显示滚动条                //不管东西溢不溢出，都加滚动条                      
+
+
+                    
+              .clr{   //一般做网页，都会专门设置这个，用来清除浮动
+
+                 clear: both;
+                 width: 0px;
+                 height：0px;
+                 overflow : hidden   //建议加上这个
+                } 
+
+
+（13）表单  （如用户登录，注册都要提交）  
+               
+        “input” 所拥有的类型type： "text"  "password"   "radio"单选按钮  "checkbox"多选按钮   "select"下拉框
+       
+ <form action="">
+
+    //设置单选按钮
+         性别：  男：<input type="radio" name="xingbie" value="男" />
+                 女：<input type="radio" name="xingbie" value="女" />  
+ 
+
+     //设置"checkbox"多选按钮
+             兴趣 ：   篮球：<input type="checkbox" name="xingqu" value="篮球" />  
+                       足球：<input type="checkbox" name="xingqu" value="足球" />
+                       台球：<input type="checkbox" name="xingqu" value="台球" />
+                       羽毛：<input type="checkbox" name="xingqu" value="羽毛球" />  
+
+   
+
+     //设置"select"下拉框
+         <select name="xueli">
+               <option value="大学">大学</option>
+               <option value="高中">高中</option>
+               <option value="初中">初中</option>
+               <option value="小学">小学</option>
+
+         </select>
+         
+</form>
+
+
+
+
+

@@ -1,0 +1,3330 @@
+HTML 分四大部分
+        1.html结构（doctype，head，body）
+        2.div布局（布局原则，盒子模型，浮动布局）
+        3.css效果 （选择器，控制效果，引入方式，初始化）
+        4.html标签(无语义标签《div,span》，有语义标签)
+
+
+一、布局
+
+ （1）. 用div来占块布局
+        用css来控制
+   
+        “#”对应"id"
+        “.”对应“class”
+        div默认是垂直布局，  可以利用：浮动float：left, right
+   
+        clear:清除挡住自己的div
+               left:清左浮， right:清右浮  both:全清
+ 
+ （2）. 把整个网页都做成一个最大的div
+          即  <body>
+                 <div id="container">
+                       ...
+                  </div>
+              </body>  
+  
+ （3）.  盒子模型
+            外边距margin   边框border  内边距padding     内容 
+
+           1.外边距margin：   
+              margin-top,  margin-left  ,margin-bottom,  margin-right
+              margin: 10px,20px,30px,40px :  顺序： 上 右 下 左。
+    
+           2.边框border：三要素
+               宽（border-width），形状（border-style）（粗线，虚线等等）， 颜色（border-color）。
+            例：
+                  border:10px solid red;  默认四条边，可以单独设置一条边。         
+
+           3.内边距padding（设置规则与margin相似）
+        
+           4.内容
+                在div中，设置的宽，高，是实际写字部分的宽和高
+           
+           5.一个盒子实占空间的大小
+                 竖直方向： "height" + "padding-top" + "padding-bottom" + "border-top" + "border-bottom" + "margin-top" +  "margin-bottom " 
+                
+                 水平方向：  "width" + "padding-left" + "padding-right" + "border-left" + "border-right" + "margin-left" +  "margin-right "
+
+  
+
+   （4）.利用margin 实现元素水平居中
+
+              margin: 0 auto;
+
+         margin重叠现象   
+               上下相邻的普通元素（如非浮动元素），上下边距，并非简单的相加，而是取其中较大的边距值。
+
+   （5）.inline内联（行内元素）<span></span>      //内联=行内
+
+           区别：行内元素 和 块状元素 的区别
+ 
+   （6）.内联与块状的转化    
+
+            //内联主要针对文字，不能设置宽和高，内联上下两个元素之间是有空隙的，而块状上下之间，当margin为0px，上下是紧贴在一起的。
+
+           <span>
+             display:block   //即内联转化为块状
+           </span>
+
+           <div>
+             display:inline   //即块状转化为内联
+           </div>
+
+    (7).css控制段落文本   <p></p> 表示一段话
+         例：
+              #p1{
+           
+                background：gray;
+                text-indent： 20px;//这里表示 段落缩进，即每段话前空20px.
+                text-align:  center //居中
+                text-decoration :underline //下划线   也可设置其他，如上划线等等
+                letter-space: 10px; //文字之间的距离      
+       }
+
+    (8).文字控制
+           #test1{
+                color:blue;
+                font-style:  italic      //字的形状： 如斜体
+                font-weight:  bold       //粗细
+                font-size:   20px        //大小
+                line-hight:  46px        //行高
+                font-family: "SimHei"    //字体 ，如宋体等
+                
+                也可以一起设置，如
+                font：italic bold 20px/46px "SimHei"
+
+            }
+
+    (9).字体控制精讲
+          
+         字体有两大类： 1、sans-serif（无衬线） 2、serif(有衬线)
+
+   （10）.背景图片（图片做背景，图片的大小是不变的）
+            body{
+         background-color:                 //背景颜色
+         background-image: url(small.jpg); //若单单设置这个，图片会铺满整个页面
+         background-repeat: repeat-x;      //  表示图片向水平方向铺满
+         background-repeat: repeat-y;      //  表示图片向垂直方向铺满
+         background-repeat: no-repeat;     //  表示图片不重复
+         background-attachment: fixed      //表示固定，  例如固定在左上角。无论如何拖动滚动条，都固定在左上角，不消失
+         background-position: center top   //表示背景图片在盒子中的位置，需设置两个值，即水平方向和垂直方向。
+         background-position: 0px -120px;  //位置也可以用坐标表示，左上角为（0，0）
+    }
+      基本语法：
+         background : background-color || background-image || background-repeat || background-attachment || background-position
+
+   （11）.大图片背景(即图片的大小 大于 div盒子的大小。)
+                
+   （12）.CSS选择器
+               id选择器， class选择器， 派生选择器            
+ 
+          div p {   }   //表示div盒子下的p标签
+
+   （13）.CSS优先级
+               
+             描叙的越精细，优先级越高
+ 
+   （14）.CSS引入方式
+
+           1. 写在头部文件中
+
+           2. 在外部写 .css 文件，再把它导入文件中
+                  <link rel="styleheet" href="../xx.css" />                
+
+           3.直接写在标签中，如： 
+               写在 div 中
+                 <div id="test1" style="color:white"> 好好学习 </div>
+
+           4. 可以用 @import 在 .css 文件中导入其他 .css文件
+
+   （15）.CSS初始化
+                相同的元素，如li,在不同的浏览器下，显示的效果稍有不同，
+          是因为浏览器对各元素的margin,border,font,size等略有不同，
+          如果杜绝这种情况，我们通过css强制让所有元素的属性值都一样，
+          这样，浏览器显示就一致了，减少了不兼容情况的发生，
+          这个过程，叫做CSS初始化。
+
+            css初始化代码，可以在网上找，如淘宝，腾讯，网易都会有自己的css初始化代码。
+
+          初始化时，一般会把元素都设置成块状。
+
+   （16）.HTML学习导图
+            
+
+二.有语义标签
+
+  （1）h 标签和 p 标签
+        
+       h标签： <h1>---<h6>  //一般用于标题
+       p标签：              //一般用于表示段落
+ 
+  （2）. img图片标签
+           <img src="" alt="" title="" /> // title:表示鼠标放上去，显示的文字。   alt：表示图片未加载完成前，显示的文字。
+
+  （3）.图片是内联还是块状？
+          
+           图片是特殊的内联元素，同时是内联替换元素，替换元素是能设置宽高的
+           上下图片默认是不能紧贴在一起的，但可以将图片转化为块状元素，则可以紧贴在一起。
+
+
+  （4）.有序列表和无序列表
+          
+          1.无序列表（默认实心圆）
+               ul li{
+                     list-style-type:xxx;//设置形状
+
+                 }
+
+              <ul>
+               <li>春</li>
+               <li>夏</li>
+               <li>秋</li>
+               <li>冬</li>
+              <ul/>
+
+          2.有序列表（默认是1，2，3，4）
+                ol li{
+                     list-style-type:xxx;//设置形状
+
+                 }
+
+              <ol>
+               <li>春</li>
+               <li>夏</li>
+               <li>秋</li>
+               <li>冬</li>
+              <ol/>
+
+         注意：一般我们都会把初始化为  list-style-type:none; 
+                    //设置为空。不显示列表前面的实心圆或1，2，3，4等。 为防止浏览器不兼容
+                    //一般都是利用 背景图片+padding，来完成li小图标效果的      
+
+
+  （5）.整齐的表格
+           table{
+            border-collapse: collapse ; //设置边框融不融合，这里表示不融合。
+            border-spacing: 20px       //边框之间的距离
+              }
+
+           td{
+            border:1px solid blue;
+            colspan :  //跨列
+            rowspan :  //跨行 
+            }
+ 
+         <table>
+           <tr>
+             <td><td/><td><td/>     
+           <tr/>
+           <tr>
+             <td><td/><td><td/>     
+           <tr/>
+        <table/>
+
+   (6).超链接标签
+
+             <a href="" target="_blank" title="鼠标放上去，显示文字"> xxx <a/>
+
+  （7）锚点 
+         //访问链接时，后面加“#+锚点名”
+            如：  XXX.html#p2     //它就会进入XXX网页，并跳到锚点p2.
+
+        <a href="xxx.html#p1">p1锚点<a/>
+        <a href="xxx.html#p2">p2锚点<a/>
+        <a href="xxx.html#p3">p3锚点<a/>
+          
+        <a name="p1"></a>     //设置锚点p1
+        <p> p1 </p> <br/><br/><br/><br/><br/><br/>
+
+        <a name="p2"></a>    //设置锚点p2
+        <p> p2 </p> <br/><br/><br/><br/><br/><br/>
+
+        <a name="p3"></a>    //设置锚点p3
+        <p> p3 </p> <br/><br/><br/><br/><br/><br/>
+
+
+    (8).CSS伪类   （主要是a标签）
+          css允许我们针对a标签的4种状态设置各自的css特性，叫做css伪类。
+
+           1.未访问前的颜色          a:link{ }
+           2.已访问的颜色            a:visited{ }
+           3.鼠标放上去的颜色        a:hover{ }
+           4.点击瞬间，未撒手的颜色  a:active{ }
+        
+       注意：
+            1.active一般不写
+            2.一定注意，设置是有顺序的： L V H A
+            3. a:link{ }可简写为 a{ }
+
+
+
+   （9）.字符实体
+
+        <body>
+           <div>
+             在html开发中，有一些字符，不适于直接写出，如 &gt(>),&It(<);
+             一般格式： &amp(&); + 实体名 + “;”
+             实体有很多，可以查手册
+           </div>
+        </body>
+
+
+
+
+
+
+
+
+
+三.首页布局实战  （记得先初始化）
+         
+                
+  （1）先布局
+          <div id="container">
+             <div id="header">
+                 <ul id="nav">
+                    <li>导航1</li>
+                    <li>导航2</li>
+                    <li>导航3</li>
+                 </ul>     
+             </div>
+             <div id="main">
+                 <div id="lside">
+                    <div class="subtitle"></div>
+                    <div class="four"></div>
+                    <div class="four"></div>
+                    <div class="four"></div>
+                    <div class="four"></div>
+                 </div>
+                   <div id="rside">
+                      <div  class="subtitle"></div>
+                      <ul id="art">
+                         <li>文章1</li>
+                         <li>文章2</li>
+                         <li>文章3</li>
+                      </ul>                       
+                   </div>
+             </div>
+             <div id="footer"></div>
+          </div>
+
+
+
+
+
+
+
+
+
+ （2）.开发之导航（在（1）的基础上）
+
+     注意： 首先，到网上找 初始化CSS 的 .css文件，再把它导入到网页中<link rel="stylesheet" href="./xx.css" />
+            <style>
+              #container{
+                   width:1002px;
+                  }
+
+              #header{
+                  height : 128px;                           //设置与背景图片同高即可
+                  backgroud: gray url(./image/top_bg.jpg);  //导航的背景图片   //gray表示灰色
+
+                  }
+
+              #nav li{
+   
+                     float:left        //列表本身是块状元素，是竖着排列，需要设置左浮，让它横着排列
+                     background: purple; //设置背景颜色  ，在这里是为了看得更清楚，之后可以删除
+                     width： 90px;     //是列表撑开
+                     margin-right:1px; //将每个li隔开，不紧凑在一起 
+                    
+                }
+
+              #nav a{    //设置导航中的文字
+
+                  font-size: 15px;
+                  font-famliy: "微软雅黑";
+                  color:gray;
+                  
+                  display: block;  //将a标签转化为块状，可以设置宽和高
+                  width: 90px;
+                  height:37px;
+                   
+                  text-align: center;  //设置文字居中
+
+               }
+
+              #nav a:hover{    //设置当鼠标放在导航中的文字上边时，显示的效果
+               
+                  color: white;  //设置当鼠标放在导航中的文字上边时，文字变成白色
+                  background: url(.images/nav.on.gif)  //设置当鼠标放在导航中的文字上边时，文字的背景颜色改变，
+                                                          这里用了 颜色图片
+
+            </style>
+
+
+
+
+          <div id="container">
+             <div id="header">
+                 <img src="./image/logo.jpg" alt="" id="logo" />    //在左上角设置网页的logo
+                 <ul id="nav">
+                    <li><a href="#">导航1</a></li>
+                    <li><a href="#">导航2</a></li>
+                    <li><a href="#">导航3</a></li>
+                 </ul>     
+             </div>
+             <div id="main">
+                 <div id="lside">
+                    <div class="subtitle"></div>>
+                    <div class="four"></div>
+                    <div class="four"></div>
+                    <div class="four"></div>
+                    <div class="four"></div>>
+                 </div>
+                   <div id="rside">
+                      <div  class="subtitle"></div>
+                      <ul id="art">
+                         <li>文章1</li>
+                         <li>文章2</li>
+                         <li>文章3</li>
+                      </ul>                       
+                   </div>
+             </div>
+             <div id="footer"></div>
+          </div>
+
+
+
+
+
+
+
+
+
+（3）.开发之main区域的开发(在（1）（2）的基础上修改)
+      
+     注意：当<style></style>中的内容变多时，可以新建 .css文件，再将 .css文件导进来，即可<link rel="stylesheet" href="./xx.css" />
+             特别注意： 记得修改图片等需要用到路径的地方。
+
+
+     注意： 首先，到网上找 初始化CSS 的 .css文件，再把它导入到网页中<link rel="stylsheet" href="./xx.css" />
+            <style>
+              
+              .clr{   //一般做网页，都会专门设置这个，用来清除浮动
+
+                 clear: both;
+                 width: 0px;
+                 height：0px;
+
+                }
+
+              #container{
+                   width:1002px
+                  }
+
+              #header{
+                  height : 128px;                          //设置与背景图片同高即可
+                  backgroud: gray url(./image/top_bg.jpg)  //导航的背景图片   //gray表示灰色
+
+                  }
+
+              #nav li{
+   
+                     float:left        //列表本身是块状元素，是竖着排列，需要设置左浮，让它横着排列
+                     background: purple; //设置背景颜色  ，在这里是为了看得更清楚，之后可以删除
+                     width： 90px;     //是列表撑开
+                     margin-right:1px; //将每个li隔开，不紧凑在一起 
+                    
+                }
+
+              #nav a{    //设置导航中的文字
+
+                  font-size: 15px;
+                  font-famliy: "微软雅黑";
+                  color:gray;
+                  
+                  display: block;  //将a标签转化为块状，可以设置宽和高
+                  width: 90px;
+                  height:37px;
+                   
+                  text-align: center;  //设置文字居中
+
+               }
+
+              #nav a:hover{    //设置当鼠标放在导航中的文字上边时，显示的效果
+               
+                  color: white;  //设置当鼠标放在导航中的文字上边时，文字变成白色
+                  background: url(.images/nav.on.gif)  //设置当鼠标放在导航中的文字上边时，文字的背景颜色改变，
+                                                          这里用了 颜色图片
+
+
+
+              }
+
+
+              #main{   
+                      注意 //当"子div"浮动时，当“子div”远大于“父div”时，“父div”的大小的不变的，是没有被“子div”撑大的,所以一般要设置“父div”的大小 刚好等于“子div”们的总和;
+                          或者是做一个专门清除浮动的div
+ 
+             }
+
+
+              #lside{   //左盒子
+      
+                   height: 483px;
+                   width:  694px;
+                   border: 1px solid gray; //边框
+            //     background: blue;       //这里加颜色，只是为了更容易区分左右两个盒子,当完成其他布局后，可以删除
+                   float: left;             //左浮动
+ 
+             }
+
+
+              .subtitle{     //设置左右盒子上方的div
+       
+                 height:37px;
+                 background: gray url(./images/index_main_top_bg.gif);  //利用图片做背景颜色
+ 
+             }
+                //注意，在这里，img标签、h1标签、a标签 都是块状，所以是竖着排列，需要设置浮动，让它横着排列
+
+              .subtitle img{   //在subtitle下写设置img,这种叫派生
+                 margin:5px 0 0 10px;  
+                 float:left;
+             }
+
+              .subtitle h1{
+                  font-size:16px;
+                  margin-left: 10px;
+                  font-family: "微软雅黑"，SimHei,sans-serif;  //SimHei表示黑体  sans-serif表示无衬线
+                                                              //这里写了三种字体，不常用的靠后写。
+                  float:left;
+             }
+
+              .subtitle a{
+                 font-size:12px;
+                 color:gray;
+                 float:right;
+             }
+   
+           
+              .four{    //lside盒子中的四个“four”div
+
+                 width:326px;         //宽高都需要自己慢慢调
+                 height:200px;
+                 background:#EEE;
+                 margin: 10px;
+                 float: left;
+               
+            }
+
+             //注意，在这里，img标签、ul标签 都是块状，所以是竖着排列，需要设置浮动，让它横着排列
+
+
+              .four img{   //派生
+ 
+                 margin-left: 10px;
+                 padding:6px;
+                 background:white;  //设置白背景，内边距颜色则变白                 
+                 float:left;
+             }
+
+              .four ul{
+                 margin-left: 10px;
+                 float:left;
+             }
+
+              .four li{
+    
+                 //设置为空。不显示列表前面的实心圆或1，2，3，4等。 为防止浏览器不兼容                
+                 //一般都是利用 背景图片+padding，来完成列表li前的小图标（小黑点）效果的 
+
+                 background: url(./images/index_main_top_bg.gif) no-repeat;  //这里的图片是一个小黑点。 
+                 padding-left: 10px; 
+
+                 height: 20px;
+             }
+
+              
+            .four a{
+           
+             color:gray;
+   
+           }
+
+           .four  a:visited{
+
+             color:gray;
+           }
+
+
+          .four h2{
+                   margin: 6px 0 6px 10px;
+                  font-size:16px;
+                  font-family: "微软雅黑"，SimHei,sans-serif;  //SimHei表示黑体  sans-serif表示无衬线
+                                                              //这里写了三种字体，不常用的靠后写。
+             }
+
+
+
+              #rside{  //右盒子
+
+                   height: 600px;
+                   width:  294px;
+                   background: green;   //这里加颜色，只是为了更容易区分左右两个盒子
+                   float: right         //右浮动
+             }
+
+
+              #footer{
+    
+                   height: 128px;
+                   background: black;
+
+             }
+
+            </style>
+
+
+
+
+          <div id="container">
+             <div id="header">
+                 <img src="./image/logo.jpg" alt="" id="logo" />    //在左上角设置网页的logo
+                 <ul id="nav">
+                    <li><a href="#">导航1</a></li>
+                    <li><a href="#">导航2</a></li>
+                    <li><a href="#">导航3</a></li>
+                 </ul>     
+             </div>
+             <div id="main">
+                 <div id="lside">
+                    <div class="subtitle">
+                        <img src="./image/circle.gif" alt="" />  //引入小图标      
+                        <h1>核心业务</h1>
+                        <a href="#">MORE &gt;&gt;</a>            //"&gt;" 表示“>”大于号
+                    </div>
+                    <div class="four">
+                        <h2>电子商务类网站建设</h2>
+                        <img src="./images/ecshop_service.jpg" alt="" />
+                        <ul>
+                          <li><a href="#">方便的订单管理1</a></li>
+                          <li><a href="#">方便的订单管理2</a></li>
+                          <li><a href="#">方便的订单管理3</a></li>
+                          <li><a href="#">方便的订单管理4</a></li>
+                          <li><a href="#">方便的订单管理5</a></li>
+                       </ul>   
+
+                    </div/>
+                    <div class="four">
+                        <h2>电子商务类网站建设</h2>
+                        <img src="./images/ecshop_service.jpg" alt="" />
+                        <ul>
+                          <li><a href="#">方便的订单管理1</a></li>
+                          <li><a href="#">方便的订单管理2</a></li>
+                          <li><a href="#">方便的订单管理3</a></li>
+                          <li><a href="#">方便的订单管理4</a></li>
+                          <li><a href="#">方便的订单管理5</a></li>
+                       </ul>   
+
+                    </div/>
+                    <div class="four">
+                        <h2>电子商务类网站建设</h2>
+                        <img src="./images/ecshop_service.jpg" alt="" />
+                        <ul>
+                          <li><a href="#">方便的订单管理1</a></li>
+                          <li><a href="#">方便的订单管理2</a></li>
+                          <li><a href="#">方便的订单管理3</a></li>
+                          <li><a href="#">方便的订单管理4</a></li>
+                          <li><a href="#">方便的订单管理5</a></li>
+                       </ul>   
+
+                    </div/>
+                    <div class="four">
+                        <h2>电子商务类网站建设</h2>
+                        <img src="./images/ecshop_service.jpg" alt="" />
+                        <ul>
+                          <li><a href="#">方便的订单管理1</a></li>
+                          <li><a href="#">方便的订单管理2</a></li>
+                          <li><a href="#">方便的订单管理3</a></li>
+                          <li><a href="#">方便的订单管理4</a></li>
+                          <li><a href="#">方便的订单管理5</a></li>
+                       </ul>   
+
+                    </div/> 
+                 </div>
+                 <div id="rside">
+                      <div  class="subtitle"></div>
+                      <ul id="art">
+                         <li><a href="#">文章1</a></li>
+                         <li><a href="#">文章2</a></li>
+                         <li><a href="#">文章3</a></li>
+                      </ul>                       
+                 </div>
+                 <div class="clr"></div>   //追加的div，专门用来清除浮动
+             </div>
+             <div id="footer"></div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+（4）.开发之main区域的 右半区 的开发(在前面的基础上修改)
+
+
+ 注意：当<style></style>中的内容变多时，可以新建 .css文件，再将 .css文件导进来，即可<link rel="stylesheet" href="./xx.css" />
+             特别注意： 记得修改图片等需要用到路径的地方。
+
+
+     注意： 首先，到网上找 初始化CSS 的 .css文件，再把它导入到网页中<link rel="stylsheet" href="./xx.css" />
+            <style>
+              
+              .clr{   //一般做网页，都会专门设置这个，用来清除浮动
+
+                 clear: both;
+                 width: 0px;
+                 height：0px;
+                }
+
+              #container{
+                   width:1002px
+                  }
+
+              #header{
+                  height : 128px;                          //设置与背景图片同高即可
+                  backgroud: gray url(./image/top_bg.jpg)  //导航的背景图片   //gray表示灰色
+
+                  }
+
+              #nav li{
+   
+                     float:left        //列表本身是块状元素，是竖着排列，需要设置左浮，让它横着排列
+                     background: purple; //设置背景颜色  ，在这里是为了看得更清楚，之后可以删除
+                     width： 90px;     //是列表撑开
+                     margin-right:1px; //将每个li隔开，不紧凑在一起 
+                    
+                }
+
+              #nav a{    //设置导航中的文字
+
+                  font-size: 15px;
+                  font-famliy: "微软雅黑";
+                  color:gray;
+                  
+                  display: block;  //将a标签转化为块状，可以设置宽和高
+                  width: 90px;
+                  height:37px;
+                   
+                  text-align: center;  //设置文字居中
+
+               }
+
+              #nav a:hover{    //设置当鼠标放在导航中的文字上边时，显示的效果
+               
+                  color: white;  //设置当鼠标放在导航中的文字上边时，文字变成白色
+                  background: url(.images/nav.on.gif)  //设置当鼠标放在导航中的文字上边时，文字的背景颜色改变，
+                                                          这里用了 颜色图片
+
+              }
+
+
+              #main{   
+                      注意 //当"子div"浮动时，当“子div”远大于“父div”时，“父div”的大小的不变的，是没有被“子div”撑大的,所以一般要设置“父div”的大小 刚好等于“子div”们的总和;
+                          或者是做一个专门清除浮动的div
+ 
+             }
+
+
+              #lside{   //左盒子
+      
+                   height: 483px;
+                   width:  694px;
+                   border: 1px solid gray; //边框
+            //       background: blue;       //这里加颜色，只是为了更容易区分左右两个盒子,当完成其他布局后，可以删除
+                   float: left;             //左浮动
+ 
+             }
+
+
+              .subtitle{     //设置左右盒子上方的div
+       
+                 height:37px;
+                 background: gray url(./images/index_main_top_bg.gif);  //利用图片做背景颜色
+ 
+             }
+                //注意，在这里，img标签、h1标签、a标签 都是块状，所以是竖着排列，需要设置浮动，让它横着排列
+
+              .subtitle img{   //在subtitle下写设置img,这种叫派生
+                 margin:5px 0 0 10px;  
+                 float:left;
+             }
+
+              .subtitle h1{
+                 font-size:16px;
+                  margin-left: 10px;
+                 font-family: "微软雅黑"，SimHei,sans-serif;  //SimHei表示黑体  sans-serif表示无衬线
+                                                              //这里写了三种字体，不常用的靠后写。
+                 float:left;
+             }
+
+              .subtitle a{
+                 font-size:12px;
+                 color:gray;
+                 float:right;
+             }
+   
+           
+              .four{    //lside盒子中的四个“four”div
+
+                 width:326px;         //宽高都需要自己慢慢调
+                 height:200px;
+                 background:#EEE;
+                 margin: 10px;
+                 float: left;
+               
+            }
+
+             //注意，在这里，img标签、ul标签 都是块状，所以是竖着排列，需要设置浮动，让它横着排列
+
+
+              .four img{   //派生
+ 
+                 margin-left: 10px;
+                 padding:6px;
+                 background:white;  //设置白背景，内边距颜色则变白                 
+                 float:left;
+             }
+
+              .four ul{
+                 margin-left: 10px;
+                 float:left;
+             }
+
+              .four li{
+    
+                 //设置为空。不显示列表前面的实心圆或1，2，3，4等。 为防止浏览器不兼容                
+                 //一般都是利用 背景图片+padding，来完成列表li前的小图标（小黑点）效果的 
+
+                 background: url(./images/index_main_top_bg.gif) no-repeat;  //这里的图片是一个小黑点。 
+                 padding-left: 10px; 
+
+                 height: 20px;
+             }
+
+              
+            .four a{
+           
+             color:gray;
+   
+           }
+
+           .four  a:visited{
+
+             color:gray;
+           }
+
+
+          .four h2{
+                  margin: 6px 0 6px 10px;
+                  font-size:16px;
+                  font-family: "微软雅黑"，SimHei,sans-serif;  //SimHei表示黑体  sans-serif表示无衬线
+                                                              //这里写了三种字体，不常用的靠后写。
+             }
+
+
+
+              #rside{  //右盒子
+
+     //             height: 600px;        //最后这里也可以去掉，让 浮动 将它撑起来即可。
+                   width:  294px;
+     //              background: green;   //这里加颜色，只是为了更容易区分左右两个盒子    //最后将背景色去掉
+                   float: right           //右浮动
+             }
+
+              #contact{
+
+                  height: 250px;
+                  background: #EEE;
+                  margin-top:1px;
+                  padding-top:10px;      
+
+                   }
+
+              #art {
+    
+                  background: #EEE;
+                  margin-top:1px;
+                  padding-top:10px;
+              
+            }
+
+              #art li{
+
+                 //设置为空。不显示列表前面的实心圆或1，2，3，4等。 为防止浏览器不兼容                
+                 //一般都是利用 背景图片+padding，来完成列表li前的小图标（小黑点或小三角形等等）效果的 
+
+         //        background: url(./images/article_head.gif) no-repeat;  //这里的图片是一个小三角形。 
+         //        padding-left: 10px; 
+
+         //        height: 29px;
+
+           }
+
+             #art a{
+
+                 //把上面的背景图片放到a标签中,同时要把a标签设置成块状。
+                 display: block;
+                 background: url(./images/article_head.gif) no-repeat;  //这里的图片是一个小三角形。 
+                 padding-left: 10px;
+            }
+
+             #art a:hover{  //设置当鼠标放上来时，换个背景
+                      
+                 background: url(./images/article_on_bg.gif)  
+
+            }
+
+              #footer{
+    
+                   height: 128px;
+                   background: black;
+
+             }
+
+            </style>
+
+
+
+
+          <div id="container">
+             <div id="header">
+                 <img src="./image/logo.jpg" alt="" id="logo" />    //在左上角设置网页的logo
+                 <ul id="nav">
+                    <li><a href="#">导航1</a></li>
+                    <li><a href="#">导航2</a></li>
+                    <li><a href="#">导航3</a></li>
+                 </ul>     
+             </div>
+             <div id="main">
+                 <div id="lside">
+                    <div class="subtitle">
+                        <img src="./image/circle.gif" alt="" />  //引入小图标      
+                        <h1>核心业务</h1>
+                        <a href="#">MORE &gt;&gt;</a>            //"&gt;" 表示“>”大于号
+                    </div>
+                    <div class="four">
+                        <h2>电子商务类网站建设</h2>
+                        <img src="./images/ecshop_service.jpg" alt="" />
+                        <ul>
+                          <li><a href="#">方便的订单管理1</a></li>
+                          <li><a href="#">方便的订单管理2</a></li>
+                          <li><a href="#">方便的订单管理3</a></li>
+                          <li><a href="#">方便的订单管理4</a></li>
+                          <li><a href="#">方便的订单管理5</a></li>
+                       </ul>   
+
+                    </div/>
+                    <div class="four">
+                        <h2>电子商务类网站建设</h2>
+                        <img src="./images/ecshop_service.jpg" alt="" />
+                        <ul>
+                          <li><a href="#">方便的订单管理1</a></li>
+                          <li><a href="#">方便的订单管理2</a></li>
+                          <li><a href="#">方便的订单管理3</a></li>
+                          <li><a href="#">方便的订单管理4</a></li>
+                          <li><a href="#">方便的订单管理5</a></li>
+                       </ul>   
+
+                    </div/>
+                    <div class="four">
+                        <h2>电子商务类网站建设</h2>
+                        <img src="./images/ecshop_service.jpg" alt="" />
+                        <ul>
+                          <li><a href="#">方便的订单管理1</a></li>
+                          <li><a href="#">方便的订单管理2</a></li>
+                          <li><a href="#">方便的订单管理3</a></li>
+                          <li><a href="#">方便的订单管理4</a></li>
+                          <li><a href="#">方便的订单管理5</a></li>
+                       </ul>   
+
+                    </div/>
+                    <div class="four">
+                        <h2>电子商务类网站建设</h2>
+                        <img src="./images/ecshop_service.jpg" alt="" />
+                        <ul>
+                          <li><a href="#">方便的订单管理1</a></li>
+                          <li><a href="#">方便的订单管理2</a></li>
+                          <li><a href="#">方便的订单管理3</a></li>
+                          <li><a href="#">方便的订单管理4</a></li>
+                          <li><a href="#">方便的订单管理5</a></li>
+                       </ul>   
+
+                    </div/> 
+                 </div>
+                 <div id="rside">
+                    <div class="subtitle">
+                        <img src="./image/circle.gif" alt="" />  //引入小图标      
+                        <h1>文章观点</h1>
+                        <a href="#">MORE &gt;&gt;</a>            //"&gt;" 表示“>”大于号
+                    </div>
+                    <ul id="art">
+                         <li><a href="#">文章1</a></li>
+                         <li><a href="#">文章2</a></li>
+                         <li><a href="#">文章3</a></li>
+                         <li><a href="#">文章4</a></li>
+                         <li><a href="#">文章5</a></li>
+                    </ul> 
+                    <div class="subtitle">
+                        <img src="./image/circle.gif" alt="" />  //引入小图标      
+                        <h1>联系我们</h1>
+                        <a href="#">MORE &gt;&gt;</a>            //"&gt;" 表示“>”大于号
+                    </div>
+                    <div id="contact">
+                    </div>                  //在这里，预留一个div                      
+                 </div>
+                 <div class="clr"></div>   //追加的div，专门用来清除浮动
+             </div>
+             <div id="footer"></div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+（4）.开发之footer区域的开发(在前面的基础上修改)
+
+
+ 注意：当<style></style>中的内容变多时，可以新建 .css文件，再将 .css文件导进来，即可<link rel="stylesheet" href="./xx.css" />
+             特别注意： 记得修改图片等需要用到路径的地方。
+
+
+     注意： 首先，到网上找 初始化CSS 的 .css文件，再把它导入到网页中<link rel="stylsheet" href="./xx.css" />
+            <style>
+              
+           .clr{   //一般做网页，都会专门设置这个，用来清除浮动
+
+                 clear: both;
+                 width: 0px;
+                 height：0px;
+                }
+
+              #container{
+                   width:1002px
+                  }
+
+              #header{
+                  height : 128px;                          //设置与背景图片同高即可
+                  backgroud: gray url(./image/top_bg.jpg)  //导航的背景图片   //gray表示灰色
+
+                  }
+
+              #nav li{
+   
+                     float:left        //列表本身是块状元素，是竖着排列，需要设置左浮，让它横着排列
+                     background: purple; //设置背景颜色  ，在这里是为了看得更清楚，之后可以删除
+                     width： 90px;     //是列表撑开
+                     margin-right:1px; //将每个li隔开，不紧凑在一起 
+                    
+                }
+
+              #nav a{    //设置导航中的文字
+
+                  font-size: 15px;
+                  font-famliy: "微软雅黑";
+                  color:gray;
+                  
+                  display: block;  //将a标签转化为块状，可以设置宽和高
+                  width: 90px;
+                  height:37px;
+                  line-height: 37px   //声明“行高”等于“高”，这样能实现文字 竖直方向居中                   
+
+                  text-align: center;  //设置文字居中
+
+               }
+
+              #nav a:hover{    //设置当鼠标放在导航中的文字上边时，显示的效果
+               
+                  color: white;  //设置当鼠标放在导航中的文字上边时，文字变成白色
+                  background: url(.images/nav.on.gif)  //设置当鼠标放在导航中的文字上边时，文字的背景颜色改变，
+                                                          这里用了 颜色图片
+
+
+
+              }
+
+              #banner{
+
+                   margin :10px 0;
+              }
+
+
+
+              #main{   
+                      注意 //当"子div"浮动时，当“子div”远大于“父div”时，“父div”的大小的不变的，是没有被“子div”撑大的,所以一般要设置“父div”的大小 刚好等于“子div”们的总和;
+                          或者是做一个专门清除浮动的div
+ 
+             }
+
+
+              #lside{   //左盒子
+      
+                   height: 483px;
+                   width:  694px;
+                   border: 1px solid gray; //边框
+            //     background: blue;       //这里加颜色，只是为了更容易区分左右两个盒子,当完成其他布局后，可以删除
+                   float: left;             //左浮动
+            
+                   border-top: none
+ 
+             }
+
+
+              .subtitle{     //设置左右盒子上方的div
+       
+                 height:37px;
+                 background: gray url(./images/index_main_top_bg.gif);  //利用图片做背景颜色
+ 
+             }
+                //注意，在这里，img标签、h1标签、a标签 都是块状，所以是竖着排列，需要设置浮动，让它横着排列
+
+              .subtitle img{   //在subtitle下写设置img,这种叫派生
+                 margin:5px 0 0 10px;  
+                 float:left;
+             }
+
+              .subtitle h1{
+                 font-size:16px;
+                  margin-left: 10px;
+                 font-family: "微软雅黑"，SimHei,sans-serif;  //SimHei表示黑体  sans-serif表示无衬线
+                                                              //这里写了三种字体，不常用的靠后写。
+                 float:left;
+             }
+
+              .subtitle a{
+                 font-size:12px;
+                 color:gray;
+                 float:right;
+             }
+   
+           
+              .four{    //lside盒子中的四个“four”div
+
+                 width:326px;         //宽高都需要自己慢慢调
+                 height:200px;
+                 background:#EEE;
+                 margin: 10px;
+                 float: left;
+               
+            }
+
+             //注意，在这里，img标签、ul标签 都是块状，所以是竖着排列，需要设置浮动，让它横着排列
+
+
+              .four img{   //派生
+ 
+                 margin-left: 10px;
+                 padding:6px;
+                 background:white;  //设置白背景，内边距颜色则变白                 
+                 float:left;
+             }
+
+              .four ul{
+                 margin-left: 10px;
+                 float:left;
+             }
+
+              .four li{
+    
+                 //设置为空。不显示列表前面的实心圆或1，2，3，4等。 为防止浏览器不兼容                
+                 //一般都是利用 背景图片+padding，来完成列表li前的小图标（小黑点）效果的 
+
+                 background: url(./images/index_main_top_bg.gif) no-repeat;  //这里的图片是一个小黑点。 
+                 padding-left: 10px; 
+
+                 height: 20px;
+             }
+
+              
+            .four a{
+           
+             color:gray;
+   
+           }
+
+           .four  a:visited{
+
+             color:gray;
+           }
+
+           .four a：hover{
+           
+             color: 改成其他颜色;
+   
+           }
+
+          .four h2{
+                   margin: 6px 0 6px 10px;
+                  font-size:16px;
+                  font-family: "微软雅黑"，SimHei,sans-serif;  //SimHei表示黑体  sans-serif表示无衬线
+                                                              //这里写了三种字体，不常用的靠后写。
+             }
+
+
+
+              #rside{  //右盒子
+
+     //             height: 600px;        //最后这里也可以去掉，让 浮动 将它撑起来即可。
+                   width:  294px;
+     //              background: green;   //这里加颜色，只是为了更容易区分左右两个盒子    //最后将背景色去掉
+                   float: right           //右浮动
+             }
+
+              #contact{
+
+                  height: 250px;
+                  background: #EEE;
+                  margin-top:1px;
+                  padding-top:10px;      
+
+                   }
+
+              #art {
+    
+                  background: #EEE;
+                  margin-top:1px;
+                  padding-top:10px;
+              
+            }
+
+              #art li{
+
+                 //设置为空。不显示列表前面的实心圆或1，2，3，4等。 为防止浏览器不兼容                
+                 //一般都是利用 背景图片+padding，来完成列表li前的小图标（小黑点或小三角形等等）效果的 
+
+         //        background: url(./images/article_head.gif) no-repeat;  //这里的图片是一个小三角形。 
+         //        padding-left: 10px; 
+
+         //        height: 29px;
+
+           }
+
+             #art a{
+                      //把上面的背景图片放到a标签中,同时要把a标签设置成块状。
+                 display: block;
+                 background: url(./images/article_head.gif) no-repeat;  //这里的图片是一个小三角形。 
+                 padding-left: 10px;
+            }
+
+             #art a:hover{  //设置当鼠标放上来时，换个背景
+                      
+                 background: url(./images/article_on_bg.gif)  
+
+            }
+
+              #footer{
+                 margin-top: 15px;    
+                   height: 120px;
+             //      background: gray;
+
+             }
+
+             #footer ul{
+
+                height: 40px;    //把其他元素挤在下面
+                background: #EEE; 
+              
+   
+             }
+
+             #footer li{
+
+                 margin-top: 15px;
+                 margin-right: 10px;
+                 float:left;
+             }
+
+
+             #footer address{
+
+                margin-top: 10px; 
+                font-size: 12px;
+                font-family:  "微软雅黑" sans-serif;
+
+
+             }
+
+            </style>
+
+
+
+
+          <div id="container">
+             <div id="header">
+                 <img src="./image/logo.jpg" alt="" id="logo" />    //在左上角设置网页的logo
+                 <ul id="nav">
+                    <li><a href="#">导航1</a></li>
+                    <li><a href="#">导航2</a></li>
+                    <li><a href="#">导航3</a></li>
+                 </ul>     
+             </div>
+
+             <img src="" alt="" id="banner" />    //在两个div"container" 和 "main" 之间插一张大图片
+
+             <div id="main">
+                 <div id="lside">
+                    <div class="subtitle">
+                        <img src="./image/circle.gif" alt="" />  //引入小图标      
+                        <h1>核心业务</h1>
+                        <a href="#">MORE &gt;&gt;</a>            //"&gt;" 表示“>”大于号
+                    </div>
+                    <div class="four">
+                        <h2>电子商务类网站建设</h2>
+                        <img src="./images/ecshop_service.jpg" alt="" />
+                        <ul>
+                          <li><a href="#">方便的订单管理1</a></li>
+                          <li><a href="#">方便的订单管理2</a></li>
+                          <li><a href="#">方便的订单管理3</a></li>
+                          <li><a href="#">方便的订单管理4</a></li>
+                          <li><a href="#">方便的订单管理5</a></li>
+                       </ul>   
+
+                    </div/>
+                    <div class="four">
+                        <h2>电子商务类网站建设</h2>
+                        <img src="./images/ecshop_service.jpg" alt="" />
+                        <ul>
+                          <li><a href="#">方便的订单管理1</a></li>
+                          <li><a href="#">方便的订单管理2</a></li>
+                          <li><a href="#">方便的订单管理3</a></li>
+                          <li><a href="#">方便的订单管理4</a></li>
+                          <li><a href="#">方便的订单管理5</a></li>
+                       </ul>   
+
+                    </div/>
+                    <div class="four">
+                        <h2>电子商务类网站建设</h2>
+                        <img src="./images/ecshop_service.jpg" alt="" />
+                        <ul>
+                          <li><a href="#">方便的订单管理1</a></li>
+                          <li><a href="#">方便的订单管理2</a></li>
+                          <li><a href="#">方便的订单管理3</a></li>
+                          <li><a href="#">方便的订单管理4</a></li>
+                          <li><a href="#">方便的订单管理5</a></li>
+                       </ul>   
+
+                    </div/>
+                    <div class="four">
+                        <h2>电子商务类网站建设</h2>
+                        <img src="./images/ecshop_service.jpg" alt="" />
+                        <ul>
+                          <li><a href="#">方便的订单管理1</a></li>
+                          <li><a href="#">方便的订单管理2</a></li>
+                          <li><a href="#">方便的订单管理3</a></li>
+                          <li><a href="#">方便的订单管理4</a></li>
+                          <li><a href="#">方便的订单管理5</a></li>
+                       </ul>   
+
+                    </div/> 
+                 </div>
+                 <div id="rside">
+                    <div class="subtitle">
+                        <img src="./image/circle.gif" alt="" />  //引入小图标      
+                        <h1>文章观点</h1>
+                        <a href="#">MORE &gt;&gt;</a>            //"&gt;" 表示“>”大于号
+                    </div>
+                    <ul id="art">
+                         <li><a href="#">文章1</a></li>
+                         <li><a href="#">文章2</a></li>
+                         <li><a href="#">文章3</a></li>
+                         <li><a href="#">文章4</a></li>
+                         <li><a href="#">文章5</a></li>
+                    </ul> 
+                    <div class="subtitle">
+                        <img src="./image/circle.gif" alt="" />  //引入小图标      
+                        <h1>联系我们</h1>
+                        <a href="#">MORE &gt;&gt;</a>            //"&gt;" 表示“>”大于号
+                    </div>
+                    <div id="contact">
+                    </div>                  //在这里，预留一个div                      
+                 </div>
+                 <div class="clr"></div>   //追加的div，专门用来清除浮动
+             </div>
+             <div id="footer">
+                    <ul id="">
+                         <li><a href="#">联系我们1</a></li>
+                         <li><a href="#">联系我们2</a></li>
+                         <li><a href="#">联系我们3</a></li>
+                         <li><a href="#">联系我们4</a></li>
+                         <li><a href="#">联系我们5</a></li>
+                    </ul> 
+                    <address>&copy; ?360.cn. All Rights Reserved. 京ICP证080047号 京公网安备11000002000006号 中国互联网举报中心,360举报电话：010-58541935 举报邮箱：360report@360.cn</address>
+                                                        //Copyright 不事宜直接写，在这里用 &copy;代替
+             </div>
+          </div>
+
+
+
+ (5)色彩颜色微调
+         把以上需要颜色的地方 按照原先的网页，改颜色。
+
+
+（6）利用行高完成文字居中
+        
+       1.将导航中的文字居中
+
+              #nav a{    //设置导航中的文字
+
+                  font-size: 15px;
+                  font-famliy: "微软雅黑";
+                  color:gray;
+                  
+                  display: block;  //将a标签转化为块状，可以设置宽和高
+                  width: 90px;
+                  height:37px;
+                  line-height: 37px ;  //声明“行高”等于“高”，这样能实现文字 竖直方向居中                   
+
+                  text-align: center;  //设置文字居中
+
+               }
+
+        //其他情况类似，可以回去修改
+
+  
+（7）IE bug及兼容测试
+       
+       1.一般字体大小要设定具体值，不使用默认。 防止浏览器不同，产生效果不同
+
+
+       2.CSS控制 之bug ：bug的几种常见原因：
+
+                     没有使用正确的doctype；          //解决办法： 正确声明doctype
+
+                     各浏览器对不同标签的初始值不同； //解决办法： CSS初始化
+ 
+                     自身书写不规范引起               //解决办法： 。。。。
+ 
+                     浏览器bug引起                    //解决办法： 正确声明doctype
+
+
+
+             特别注意：
+                       （1）在 IE浏览器 中的双倍margin值
+                                  即设置了 左浮，同时有设置了左margin值，这时margin值是定义的2倍。
+                                  即设置了 右浮，同时有设置了右margin值，这时margin值是定义的2倍。
+                                 
+                            //解决办法： 
+                                         添加代码： _display: inline;   如下：
+
+                                                .four ul{
+                                                  margin-left: 10px;
+                                                  float:left;
+                                                  _display: inline;
+                                                 }
+
+                       （2） 3像素margin bug
+                         
+                       （3）不认识 a:link {  }    //解决办法：一般写成   a{  }  即可   
+
+
+
+
+
+附录：
+
+（8）色彩的表示
+        
+       1. 颜色用数字来表示 
+       2. 颜色由3原色组成的，红red,绿green，蓝blue，  rgb
+       3. 3原色各在[0-255]之间变化
+     
+         综上： 本质上是组合3原色
+         1.用16进制组合【0-255】-->【00，FF】    如：#234567 <span style="color:#324567"> #234567 </span>
+         2.用10进制组合，如（34，45，56）；      如： <span style="color:rgb(34,45,56)"> rgb(34,45,56) </span>
+         3.html提供常用颜色的名称，  如：pink，orange. 如： <span style="color:orange"> orange </span>
+         4. #EEEEEE--->#EEE , 当6个字符一样时，可以简写为三个字符.
+
+
+
+
+
+
+(9).尺寸的表示
+  
+       1.用像素来表示 px;
+       2.用百分比 % 来表示，块状子元素要是不说宽度，默认占满父元素的宽度。
+       
+      
+       文字大小：
+        1.用 px 表示文字大小
+        2.用 em 表示文字大小， em 是相对大小，是指其父元素中的1个“M”的大小，简单理解为父元素的 font-size 就是1个 em 单位
+
+
+
+
+（10）.CSS画圆角
+
+         <style>
+
+              div{
+                    
+                 width:300px;
+                 height:300px;
+                 border: 1px solid blue;
+
+                 border-radius: 15px;  // 这里用来控制圆角，当值等于宽的一半时， 即成为一个圆 （这里，宽高一样大小） 
+  
+                             // border-radius-top,border-radius-left等  可以控制哪边有圆角
+             }
+ 
+         </style>     
+
+
+（11）. 相对定位 和 绝对定位      
+
+            相对定位： 指元素在其正常的位置，偏移某些像素
+
+            绝对定位:  指元素相对于父元素的 top, left, right, bottom 来定位
+
+           #test1{
+
+                 width:300px;
+                 height:300px;
+                 background: green;              
+
+                }
+
+ 
+           p{            //p 标签默认有一定值的margin，需初始化为0
+               
+               margin: 0px;
+               padding: 0px;
+
+           }            
+  
+           #p1{
+
+                 width:100px;
+                 height:100px;
+                 background: blue; 
+
+                 position : relative;  //设置相对定位
+                 top:20px;       //表示离自己原位置的上方之间的距离为20px；
+                 left:20px       //表示离自己原位置的左方之间的距离为20px；         
+
+                }
+
+
+           #p2{
+
+                 width:100px;
+                 height:100px;
+                 background:orange;              
+
+                }
+
+
+          #test2{
+
+                 width:300px;
+                 height:300px;
+                 background: pink;              
+
+                 position : relative;  //设置相对定位  添加position属性
+                }
+
+           #p3{
+
+                 width:100px;
+                 height:100px;
+                 background:black;
+   
+                 position : absolute;  //设置绝对定位
+                 top:20px;       //表示离父元素的上方之间的距离为20px；
+                 left:20px       //表示离父元素的左方之间的距离为20px；  
+
+                            注意： 
+                               （1） 用绝对定位时，父元素要求要有position属性才行，否则将依据父父，父的父，父的父，。。body,
+                                    哪个祖先有position属性，就相对哪个祖先，如果都没有，则依据相对于body                               
+                               （2）绝对定位不占据父元素的空间，像直升飞机一样，是飞起来的且两个有绝对定位的子元素可以相互遮盖住对方，类似于看谁飞得高，谁就可以遮住对方， 用 z-index ：100  ;   来设置谁飞得高
+
+                }
+
+
+                            相对位置：
+                                      （1）相对位置 会占据父元素的空间
+                                      （2）当子元素需要用绝对位置时，一般给父元素设置相对位置
+
+
+（12）overflow 溢出处理
+
+
+           基本语法
+                 overflow : visible | auto | hidden | scroll
+
+        visible  :　 默认值。不剪切内容也不添加滚动条。假如显式声明此默认值，
+                     对象将以包含对象的 window 或 frame 的尺寸裁切。并且 clip 属性设置将失效 
+
+        auto     :　 在必需时对象内容才会被裁切或显示滚动条     //东西溢出时，才加滚动条 
+
+        hidden   :　 不显示超过对象尺寸的内容               
+
+        scroll   :　 总是显示滚动条                //不管东西溢不溢出，都加滚动条                      
+
+
+                    
+              .clr{   //一般做网页，都会专门设置这个，用来清除浮动
+
+                 clear: both;
+                 width: 0px;
+                 height：0px;
+                 overflow : hidden   //建议加上这个
+                } 
+
+
+（13）表单  （如用户登录，注册都要提交）  
+               
+        “input” 所拥有的类型type： "text"  "password"   "radio"单选按钮  "checkbox"多选按钮   "select"下拉框  
+                                     "textarea"文本框      上传头像    隐藏域   提交按钮
+       
+ <form action="">
+
+    //设置单选按钮
+         性别：  男：<input type="radio" name="xingbie" value="男" />
+                 女：<input type="radio" name="xingbie" value="女" />  
+ 
+
+     //设置"checkbox"多选按钮
+             兴趣 ：   篮球：<input type="checkbox" name="xingqu" value="篮球" />  
+                       足球：<input type="checkbox" name="xingqu" value="足球" />
+                       台球：<input type="checkbox" name="xingqu" value="台球" />
+                       羽毛：<input type="checkbox" name="xingqu" value="羽毛球" />  
+
+   
+
+     //设置"select"下拉框
+         <select name="xueli">
+               <option value="大学">大学</option>
+               <option value="高中">高中</option>
+               <option value="初中">初中</option>
+               <option value="小学">小学</option>
+
+         </select>
+
+
+     //"textarea"文本框
+
+          <textarea name="intro"></textarea>    //个人简介
+
+
+     //上传头像：
+
+        <input type="file" name="pic" /> 
+
+
+     //隐藏域
+         
+                <input type="hidden" name="IP" value="192.168.1.100" />  
+
+    //提交按钮
+
+                <input type="submit" value="提交" /> 
+                  
+</form>
+
+
+
+
+
+（14）框架集 
+
+         框架集，即一个网页中套其它网页
+ 
+    //若想用框架集，需改成下面这个。      
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd"> 
+
+  1. 网页中，将<body></body> 删除, 
+ 
+  2.
+       （1）、
+         <frameset rows="200px,*">    //  rows="200px,*"  表示将网页横切拆成两个，一个高为200px，一个高为*px
+
+              <frame src="16-text-html"></frame>                                                  
+              <frame src="01-buju-html"></frame> 
+          
+         </frameset>                 
+
+
+         <frameset cols="30%,*">    //  cols="200px,*"  表示将网页竖切拆成两个，一个宽为 30% ，一个宽为 100%-30% 
+
+              <frame src="16-text-html"></frame>                                                  
+              <frame src="01-buju-html"></frame> 
+          
+         </frameset>    
+
+
+       （2）、
+
+
+         <frameset rows="200px,*">               //  rows="200px,*"  表示将网页横切拆成两个，一个高为200px，一个高为*px
+
+              <frame src="16-text-html"></frame>
+                                                   
+              <frameset cols="200px,*">           // cols="200px,*"  表示将网页竖切拆成两个，一个宽为 200px ，一个宽为*px
+                 <frame src="16-text-html"></frame>                                                  
+                 <frame src="01-buju-html" name="you"></frame>   //需要给frame 取个名字，其它网页a标签才能调到这块来显示
+
+               </frameset>
+          
+         </frameset>  
+
+
+
+
+ 例如：
+         在40-left.html中有 a 标签 如下：
+                 
+              <a href="./40-right.html" target="you" >链接 </a>  //链接到40-right.html，并且在名为“you”的frame 中显示40-right.html网页的内容
+
+ 14:17 2017/3/2832·
+
+
+
+
+
+ （15）、这样在Internet Explorer中我们就轻松实现了Div的居中对齐。因此要在所有的浏览器中显示居中的效果，我们就可以这样写我们的代码：
+
+　　body { text-align:center; } 
+
+　　#wrap { text-align:left; 
+
+　          　margin:0 auto; 
+
+　       　} 
+
+
+
+
+
+
+ （16）、CSS3:nth-child()伪类选择器，Table表格奇偶数行定义样式：http://blog.csdn.net/wangjia200913/article/details/49615325
+
+     
+       采用csss的这个方法，获得奇数行，让后设置其属性，这样避免使用expression这个容易出错的方法*/ 
+
+           table tbody tr:nth-child(odd){ 
+
+                         background-color: #DEDEDE 
+            } 
+
+
+    奇偶匹配
+
+          :nth-child(odd) 与 :nth-child(even)
+
+    分别匹配序号为奇数与偶数的元素。奇数(odd)与(2n+1)结果一样；偶数(even)与(2n+0)及(2n)结果一样。
+
+    作者观点：表格奇偶数行定义样式就可以写成
+
+            .table > tr:nth-child(even) > td {background-color: #ccc;}  （偶数行）
+
+            .table > tr:nth-child(odd) > td {background-color: #ccc;}  （奇数行）
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+  CSS3笔记
+
+  一、CSS3 简介
+
+      对CSS3已完全向后兼容，所以你就不必改变现有的设计。浏览器将永远支持CSS2。
+
+     1、CSS3 模块
+
+        CSS3被拆分为"模块"。旧规范已拆分成小块，还增加了新的。
+
+
+      一些最重要CSS3模块如下：
+
+                              选择器
+
+                              盒模型
+
+                              背景和边框
+
+                              文字特效
+
+                              2D/3D转换
+
+                              动画
+
+                              多列布局
+
+                              用户界面
+
+    2、CSS3 建议
+
+        W3C的CSS3规范仍在开发。
+
+        但是，许多新的CSS3属性已在现代浏览器使用。
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+ 二、CSS3 边框
+
+      1、CSS3 边框
+
+         用 CSS3，你可以创建圆角边框，添加阴影框，并作为边界的形象而不使用设计程序，如 Photoshop。
+
+      在本章中，您将了解以下的边框属性：
+
+                                  border-radius
+
+                                  box-shadow
+
+                                  border-image
+
+
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+      2、CSS3 圆角 border-radius
+
+          在 CSS2 中添加圆角棘手。我们不得不在每个角落使用不同的图像。
+
+          在 CSS3 中，很容易创建圆角。
+
+          在 CSS3 中 border-radius 属性被用于创建圆角：
+
+ 
+实例：
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>菜鸟教程(runoob.com)</title> 
+<style> 
+div
+{
+	border:2px solid #a1a1a1;
+	padding:10px 40px; 
+	background:#dddddd;
+	width:300px;
+	border-radius:25px;
+}
+</style>
+</head>
+<body>
+
+<div>border-radius 属性允许您为元素添加圆角边框！ </div>
+
+</body>
+</html>
+
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    3、CSS3 盒阴影 box-shadow
+
+          CSS3 中的 box-shadow 属性被用来添加阴影:
+
+                      <style> 
+                         div
+                           {
+	                      width:300px;
+	                      height:100px;
+	                      background-color:yellow;
+	                      box-shadow: 30px 20px 5px blue; //前两个参数是阴影的坐标，第三个参数是阴影的模糊程度，第四个参数是阴影的颜色
+                            }
+                      </style>
+
+   
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    4、CSS3 边界图片 border-image
+
+         有了 CSS3 的 border-image 属性，你可以使用图像创建一个边框：
+
+         border-image 属性允许你指定一个图片作为边框！ 用于创建上文边框的原始图像：
+
+                 在 div 中使用图片创建边框
+                 div
+                 {
+                   border-image:url(border.png) 30 30 round;
+                   -webkit-border-image:url(border.png) 30 30 round; /* Safari 5 and older */
+                   -o-border-image:url(border.png) 30 30 round; /* Opera */
+                 }
+
+         在 div 中使用图片创建边框:
+
+实例：
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>菜鸟教程(runoob.com)</title> 
+<style> 
+div
+{
+	border:15px solid transparent;
+	width:250px;
+	padding:10px 20px;
+}
+
+#round
+{
+	-webkit-border-image:url(border.png) 30 30 round; /* Safari 5 and older */
+	-o-border-image:url(border.png) 30 30 round; /* Opera */
+	border-image:url(border.png) 30 30 round;
+}
+
+#stretch
+{
+	-webkit-border-image:url(border.png) 30 30 stretch; /* Safari 5 and older */
+	-o-border-image:url(border.png) 30 30 stretch; /* Opera */
+	border-image:url(border.png) 30 30 stretch;
+}
+</style>
+</head>
+<body>
+
+<p><b>注意: </b> Internet Explorer 不支持 border-image 属性。</p>
+<p> border-image 属性用于设置图片的边框。</p>
+
+<div id="round">这里，图像平铺（重复）来填充该区域。</div>
+<br>
+<div id="stretch">这里，图像被拉伸以填充该区域。</div>
+
+<p>这是我们使用的图片素材：</p>
+<img src="/images/border.png" />
+
+</body>
+</html>
+
+
+
+      CSS3 border-image 属性： 
+
+           注意： Internet Explorer 浏览器不支持 border-image 属性。
+
+           指定作为div元素周围边框的图像：
+
+           #borderimg { 
+                         -webkit-border-image: url(border.png) 30 round; /* Safari 3.1-5 */
+
+                         -o-border-image: url(border.png) 30 round; /* Opera 11-12.1 */
+
+                         border-image: url(border.png) 30 round;
+                      }
+
+
+          语法：
+
+                border-image: source slice width outset repeat|initial|inherit;
+
+
+
+          值	                          描述
+
+          border-image-source	          用于指定要用于绘制边框的图像的位置
+
+          border-image-slice	          图像边界向内偏移
+
+          border-image-width	          图像边界的宽度
+
+          border-image-outset	          用于指定在边框外部绘制 border-image-area 的量
+
+          border-image-repeat	          用于设置图像边界是否应重复（repeat）、拉伸（stretch）或铺满（round）。
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+  三、CSS3 圆角
+
+      
+      使用 CSS3 border-radius 属性，你可以给任何元素制作 "圆角"。
+
+        1、CSS3 border-radius 属性
+
+        以下为三个实例：
+
+             1. 指定背景颜色的元素圆角
+ 
+             2. 指定边框的元素圆角
+
+             3. 指定背景图片的元素圆角
+
+
+        2、CSS3 border-radius - 指定每个圆角
+
+
+            如果你在 border-radius 属性中只指定一个值，那么将生成 4 个 圆角。
+
+
+            但是，如果你要在四个角上一一指定，可以使用以下规则：
+
+                        四个值: 第一个值为左上角，第二个值为右上角，第三个值为右下角，第四个值为左下角。
+
+                        三个值: 第一个值为左上角, 第二个值为右上角和左下角，第三个值为右下角
+
+                        两个值: 第一个值为左上角与右下角，第二个值为右上角与左下角
+
+                        一个值： 四个圆角值相同
+
+              以下为三个实例:
+
+                  1. 四个值 - border-radius: 15px 50px 30px 5px:
+
+                  2. 三个值 - border-radius: 15px 50px 30px:
+
+                  3. 两个值 - border-radius: 15px 50px:
+
+
+               您还可以创建椭圆边角:
+
+                          椭圆边框 - border-radius: 50px/15px:
+
+                          椭圆边框 - border-radius: 15px/50px:
+
+                          椭圆边框 - border-radius: 50%
+
+
+     3、CSS3 圆角属性
+
+
+         属性	                      描述
+
+         border-radius	              所有四个边角 border-*-*-radius 属性的缩写
+
+         border-top-left-radius	      定义了左上角的弧度
+
+         border-top-right-radius      定义了右上角的弧度
+
+         border-bottom-right-radius   定义了右下角的弧度
+
+         border-bottom-left-radius    定义了左下角的弧度
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+  四、CSS3 背景
+
+        CSS3中包含几个新的背景属性，提供更大背景元素控制。
+
+        在本章您将了解以下背景属性：
+
+                                    background-image
+
+                                    background-size
+
+                                    background-origin
+
+                                    background-clip
+
+        您还将学习如何使用多重背景图像。
+
+
+        1、CSS3 background-image属性
+
+            CSS3中可以通过background-image属性添加背景图片。
+
+            可以同时添加多个背景图片，不同的背景图像和图像用逗号隔开，所有的图片中显示在最顶端的为第一张。
+
+            实例
+            #example1 { 
+
+                background-image: url(img_flwr.gif), url(paper.gif); 
+                background-position: right bottom, left top; 
+                background-repeat: no-repeat, repeat; 
+            }
+
+
+            可以给不同的图片设置多个不同的属性：
+
+            实例
+            #example1 {
+                background: url(img_flwr.gif) right bottom no-repeat, url(paper.gif) left top repeat;
+            }
+
+   
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+       2、CSS3 background-size 属性
+
+           background-size指定背景图像的大小。CSS3以前，背景图像大小由图像的实际大小决定。
+
+           CSS3中可以指定背景图片，让我们重新在不同的环境中指定背景图片的大小。您可以指定像素或百分比大小。
+
+           你指定的大小是相对于父元素的宽度和高度的百分比的大小。
+
+              实例 1 ： 指定像素大小
+
+                        重置背景图像：
+
+                        div
+                        {
+                            background:url(img_flwr.gif);
+                            background-size:80px 60px;
+                            background-repeat:no-repeat;
+                        }
+
+             实例 2 ： 指定百分比
+
+                      伸展背景图像完全填充内容区域：
+
+                      div
+                      {                      
+                          background:url(img_flwr.gif);
+                          background-size:100% 100%;
+                          background-repeat:no-repeat;
+                      }
+
+
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+      3、CSS3的background-Origin属性
+
+          background-Origin属性指定了背景图像的位置区域。
+
+                content-box, 
+
+                padding-box, 
+
+                border-box
+    
+              区域内可以放置背景图像。
+
+          实例
+          在 content-box 中定位背景图片：
+
+                div
+                {
+                    background:url(img_flwr.gif);
+                    background-repeat:no-repeat;
+                    background-size:100% 100%;
+                    background-origin:content-box;
+                }
+
+
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+      4、CSS3 多个背景图像
+
+           CSS3 允许你在元素
+
+           那个添加多个背景图像。
+
+           实例
+           在 body 元素中设置两个背景图像：
+         
+                 body
+                 { 
+                     background-image:url(img_flwr.gif),url(img_tree.gif);
+                 }
+
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+      5、CSS3 background-clip属性（个人感觉和background-Origin属性类似，参数值一样 content-box, padding-box,和 border-box）
+
+          CSS3中background-clip背景剪裁属性是从指定位置开始绘制。
+
+          实例
+
+          #example1 { 
+              border: 10px dotted black; 
+              padding: 35px; 
+              background: yellow; 
+              background-clip: content-box; 
+          }
+
+
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+      6、新的背景属性
+
+          顺序	                描述	                   CSS
+
+          background-clip	规定背景的绘制区域。	   3
+
+          background-origin	规定背景图片的定位区域。   3
+
+          background-size	规定背景图片的尺寸。	   3
+
+
+
+      注意：
+
+          1.多重背景，也就是CSS2里background的属性外加origin、clip和size组成的新background的多次叠加，缩写时为用逗号隔开的每组值；
+
+
+          2.语法缩写如下：
+          
+              background ： [background-color] | [background-image] | [background-position][/background-size] | [background-repeat] | [background-attachment] | [background-clip] | [background-origin],...
+
+ 
+          3.注意
+
+             用逗号隔开每组 background 的缩写值；
+
+             如果有 size 值，需要紧跟 position 并且用 "/" 隔开；
+
+             如果有多个背景图片，而其他属性只有一个（例如 background-repeat 只有一个），表明所有背景图片应用该属性值。
+             
+             background-color 只能设置一个。
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+  五、CSS3 渐变（Gradients）
+
+         CSS3 渐变（gradients）可以让你在两个或多个指定的颜色之间显示平稳的过渡。
+ 
+          以前，你必须使用图像来实现这些效果。但是，通过使用 CSS3 渐变（gradients），你可以减少下载的事件和宽带的使用。
+
+          此外，渐变效果的元素在放大时看起来效果更好，因为渐变（gradient）是由浏览器生成的。
+
+
+         CSS3 定义了两种类型的渐变（gradients）：
+
+              线性渐变（Linear Gradients）- 向下/向上/向左/向右/对角方向
+
+              径向渐变（Radial Gradients）- 由它们的中心定义
+
+
+        1、CSS3 线性渐变
+
+              为了创建一个线性渐变，你必须至少定义两种颜色结点。颜色结点即你想要呈现平稳过渡的颜色。同时，你也可以设置一个起点和一个方向（或一个角度）。
+
+              语法：background: linear-gradient(direction, color-stop1, color-stop2, ...);
+
+
+          ①、线性渐变 - 从上到下（默认情况下）
+
+          下面的实例演示了从顶部开始的线性渐变。起点是红色，慢慢过渡到蓝色：
+
+                  实例
+
+                  从上到下的线性渐变：
+                         #grad {
+                               background: -webkit-linear-gradient(red, blue); /* Safari 5.1 - 6.0 */
+                               background: -o-linear-gradient(red, blue); /* Opera 11.1 - 12.0 */
+                               background: -moz-linear-gradient(red, blue); /* Firefox 3.6 - 15 */
+                               background: linear-gradient(red, blue); /* 标准的语法 */
+                           }
+
+          ②、线性渐变 - 从左到右 to right
+
+            下面的实例演示了从左边开始的线性渐变。起点是红色，慢慢过渡到蓝色：
+
+             实例
+             从左到右的线性渐变：
+             #grad {
+               background: -webkit-linear-gradient(left, red , blue); /* Safari 5.1 - 6.0 */
+               background: -o-linear-gradient(right, red, blue); /* Opera 11.1 - 12.0 */
+               background: -moz-linear-gradient(right, red, blue); /* Firefox 3.6 - 15 */
+               background: linear-gradient(to right, red , blue); /* 标准的语法 */
+             }
+
+
+          ③、线性渐变 - 对角  to bottom right
+
+              你可以通过指定水平和垂直的起始位置来制作一个对角渐变。
+
+              下面的实例演示了从左上角开始（到右下角）的线性渐变。起点是红色，慢慢过渡到蓝色：
+
+              从左上角到右下角的线性渐变：
+              #grad {
+                background: -webkit-linear-gradient(left top, red , blue); /* Safari 5.1 - 6.0 */
+                background: -o-linear-gradient(bottom right, red, blue); /* Opera 11.1 - 12.0 */
+                background: -moz-linear-gradient(bottom right, red, blue); /* Firefox 3.6 - 15 */
+                background: linear-gradient(to bottom right, red , blue); /* 标准的语法 */
+              }
+
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+      2、使用角度
+
+          如果你想要在渐变的方向上做更多的控制，你可以定义一个角度，而不用预定义方向（to bottom、to top、to right、to left、to bottom right，等等）。
+
+
+          语法：background: linear-gradient(angle, color-stop1, color-stop2);
+
+                  角度是指水平线和渐变线之间的角度，逆时针方向计算。换句话说，0deg 将创建一个从下到上的渐变，90deg 将创建一个从左到右的渐变。
+
+          但是，请注意很多浏览器(Chrome,Safari,fiefox等)的使用了旧的标准，即 0deg 将创建一个从左到右的渐变，90deg 将创建一个从下到上的渐变。
+
+          换算公式 90 - x = y 其中 x 为标准角度，y为非标准角度。
+
+          下面的实例演示了如何在线性渐变上使用角度：
+
+                                 实例
+
+                                 带有指定的角度的线性渐变：
+
+                                 #grad {
+                                   background: -webkit-linear-gradient(180deg, red, blue); /* Safari 5.1 - 6.0 */
+                                   background: -o-linear-gradient(180deg, red, blue); /* Opera 11.1 - 12.0 */
+                                   background: -moz-linear-gradient(180deg, red, blue); /* Firefox 3.6 - 15 */
+                                   background: linear-gradient(180deg, red, blue); /* 标准的语法 */
+                                 }
+
+
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+     3、使用多个颜色结点
+
+         下面的实例演示了如何设置多个颜色结点：
+
+                实例
+
+                带有多个颜色结点的从上到下的线性渐变：
+
+                     #grad {
+                       background: -webkit-linear-gradient(red, green, blue); /* Safari 5.1 - 6.0 */
+                       background: -o-linear-gradient(red, green, blue); /* Opera 11.1 - 12.0 */
+                       background: -moz-linear-gradient(red, green, blue); /* Firefox 3.6 - 15 */
+                       background: li
+                       }
+
+实例：
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>菜鸟教程(runoob.com)</title> 
+<style>
+#grad1 {  //3 个颜色结点（均匀分布）
+    height: 200px;
+    background: -webkit-linear-gradient(red, green, blue); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(red, green, blue); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(red, green, blue); /* Firefox 3.6 - 15 */
+    background: linear-gradient(red, green, blue); /* 标准的语法（必须放在最后） */
+}
+
+#grad2 {  //7 个颜色结点（均匀分布）
+    height: 200px;
+    background: -webkit-linear-gradient(red, orange, yellow, green, blue, indigo, violet); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(red, orange, yellow, green, blue, indigo, violet); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(red, orange, yellow, green, blue, indigo, violet); /* Firefox 3.6 - 15 */
+    background: linear-gradient(red, orange, yellow, green, blue, indigo紫蓝, violet紫罗兰色); /* 标准的语法（必须放在最后） */
+}
+
+#grad3 {  //3 个颜色结点（不均匀分布）
+    height: 200px;
+    background: -webkit-linear-gradient(red 10%, green 85%, blue 90%); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(red 10%, green 85%, blue 90%); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(red 10%, green 85%, blue 90%); /* Firefox 3.6 - 15 */
+    background: linear-gradient(red 10%, green 85%, blue 90%); /* 标准的语法（必须放在最后） */
+}
+</style>
+</head>
+<body>
+
+<h3>3 个颜色结点（均匀分布）</h3>
+<div id="grad1"></div>
+
+<h3>7 个颜色结点（均匀分布）</h3>
+<div id="grad2"></div>
+
+<h3>3 个颜色结点（不均匀分布）</h3>
+<div id="grad3"></div>
+
+<p><strong>注意：</strong> 当未指定百分比时，颜色结点不会自动均匀分布。</p>
+<p><strong>注意：</strong> Internet Explorer 9 及之前的版本不支持渐变。</p>
+
+</body>
+</html>
+
+
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  
+     4、使用透明度（transparent）
+
+         CSS3 渐变也支持透明度（transparent），可用于创建减弱变淡的效果。
+
+         为了添加透明度，我们使用 rgba() 函数来定义颜色结点。
+
+
+         rgba() 函数中的最后一个参数可以是从 0 到 1 的值，它定义了颜色的透明度：0 表示完全透明，1 表示完全不透明。
+
+         前三个参数组合指定一种颜色
+
+         实例
+           从左到右的线性渐变，带有透明度：
+           #grad {
+             background: -webkit-linear-gradient(left,rgba(255,0,0,0),rgba(255,0,0,1)); /* Safari 5.1 - 6 */
+             background: -o-linear-gradient(right,rgba(255,0,0,0),rgba(255,0,0,1)); /* Opera 11.1 - 12*/
+             background: -moz-linear-gradient(right,rgba(255,0,0,0),rgba(255,0,0,1)); /* Firefox 3.6 - 15*/
+             background: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1)); /* 标准的语法 */
+           }
+
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    5、重复的线性渐变 repeating-linear-gradient() 
+
+         repeating-linear-gradient() 函数用于重复线性渐变：
+
+            实例
+            一个重复的线性渐变：
+                  #grad {
+                    /* Safari 5.1 - 6.0 */
+                    background: -webkit-repeating-linear-gradient(red, yellow 10%, green 20%);
+                    /* Opera 11.1 - 12.0 */
+                    background: -o-repeating-linear-gradient(red, yellow 10%, green 20%);
+                    /* Firefox 3.6 - 15 */
+                    background: -moz-repeating-linear-gradient(red, yellow 10%, green 20%);
+                    /* 标准的语法 */
+                    background: repeating-linear-gradient(red, yellow 10%, green 20%);
+                  }
+
+
+
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    6、CSS3 径向渐变
+
+          径向渐变由它的中心定义。
+
+          为了创建一个径向渐变，你也必须至少定义两种颜色结点。颜色结点即你想要呈现平稳过渡的颜色。同时，你也可以指定渐变的中心、形状（圆形或椭圆形）、大小。
+
+          默认情况下，渐变的中心是 center（表示在中心点），渐变的形状是 ellipse（表示椭圆形），渐变的大小是 farthest-corner（表示到最远的角落）。
+
+
+         语法： background: radial-gradient(center, shape size, start-color, ..., last-color);
+
+
+         ①、径向渐变 - 颜色结点均匀分布（默认情况下）
+
+                      实例
+
+                      颜色结点均匀分布的径向渐变： 从中心点向外部渐变
+
+                      #grad {
+                        background: -webkit-radial-gradient(red, green, blue); /* Safari 5.1 - 6.0 */
+                        background: -o-radial-gradient(red, green, blue); /* Opera 11.6 - 12.0 */
+                        background: -moz-radial-gradient(red, green, blue); /* Firefox 3.6 - 15 */
+                        background: radial-gradient(red, green, blue); /* 标准的语法 */
+                      }
+
+        ②、径向渐变 - 颜色结点不均匀分布
+
+                 实例
+
+                 颜色结点不均匀分布的径向渐变：
+                 #grad {
+                   background: -webkit-radial-gradient(red 5%, green 15%, blue 60%); /* Safari 5.1 - 6.0 */
+                   background: -o-radial-gradient(red 5%, green 15%, blue 60%); /* Opera 11.6 - 12.0 */
+                   background: -moz-radial-gradient(red 5%, green 15%, blue 60%); /* Firefox 3.6 - 15 */
+                   background: radial-gradient(red 5%, green 15%, blue 60%); /* 标准的语法 */
+                 }
+
+
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    7、设置形状
+
+         shape 参数定义了形状。它可以是值 circle 或 ellipse。其中，circle 表示圆形，ellipse 表示椭圆形。默认值是 ellipse。
+
+         实例
+
+         形状为圆形的径向渐变：
+
+               #grad {
+                    background: -webkit-radial-gradient(circle, red, yellow, green); /* Safari 5.1 - 6.0 */
+                    background: -o-radial-gradient(circle, red, yellow, green); /* Opera 11.6 - 12.0 */
+                    background: -moz-radial-gradient(circle, red, yellow, green); /* Firefox 3.6 - 15 */
+                    background: radial-gradient(circle, red, yellow, green); /* 标准的语法 */
+                   }
+
+
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+     8、不同尺寸大小关键字的使用
+
+          size 参数定义了渐变的大小。它可以是以下四个值：
+
+                              closest-side
+
+                              farthest-side
+
+                              closest-corner
+
+                              farthest-corner
+
+实例
+带有不同尺寸大小关键字的径向渐变：
+#grad1 {
+  /* Safari 5.1 - 6.0 */
+  background: -webkit-radial-gradient(60% 55%, closest-side,blue,green,yellow,black); 
+  /* Opera 11.6 - 12.0 */
+  background: -o-radial-gradient(60% 55%, closest-side,blue,green,yellow,black);
+  /* Firefox 3.6 - 15 */
+  background: -moz-radial-gradient(60% 55%, closest-side,blue,green,yellow,black);
+  /* 标准的语法 */
+  background: radial-gradient(60% 55%, closest-side,blue,green,yellow,black);
+}
+ 
+#grad2 {
+  /* Safari 5.1 - 6.0 */
+  background: -webkit-radial-gradient(60% 55%, farthest-side,blue,green,yellow,black);
+  /* Opera 11.6 - 12.0 */ 
+  background: -o-radial-gradient(60% 55%, farthest-side,blue,green,yellow,black);
+  /* Firefox 3.6 - 15 */
+  background: -moz-radial-gradient(60% 55%, farthest-side,blue,green,yellow,black);
+  /* 标准的语法 */
+  background: radial-gradient(60% 55%, farthest-side,blue,green,yellow,black);
+}
+
+
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+      9、重复的径向渐变
+
+           repeating-radial-gradient() 函数用于重复径向渐变：
+
+           实例
+
+          一个重复的径向渐变：
+                     
+                 #grad {
+                   /* Safari 5.1 - 6.0 */
+                   background: -webkit-repeating-radial-gradient(red, yellow 10%, green 15%);
+                   /* Opera 11.6 - 12.0 */
+                   background: -o-repeating-radial-gradient(red, yellow 10%, green 15%);
+                   /* Firefox 3.6 - 15 */
+                   background: -moz-repeating-radial-gradient(red, yellow 10%, green 15%);
+                   /* 标准的语法 */
+                   background: repeating-radial-gradient(red, yellow 10%, green 15%);
+                 }
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+   六、CSS3 文本效果
+
+        CSS3中包含几个新的文本特征。
+
+        在本章中您将了解以下文本属性：
+
+                                text-shadow
+
+                                box-shadow
+
+                                text-overflow
+
+                                word-wrap
+
+                                word-break
+
+
+      1、CSS3 的文本阴影 text-shadow
+
+          CSS3 中，text-shadow属性适用于文本阴影。
+
+          您指定了水平阴影，垂直阴影，模糊的距离，以及阴影的颜色：
+
+          给标题添加阴影:
+              h1
+              {
+                  text-shadow: 5px 5px 5px #FF0000;
+               }
+
+
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+      2、CSS3 box-shadow属性
+
+          CSS3 中 CSS3 box-shadow 属性适用于盒子阴影
+
+           实例
+             div {
+                   box-shadow: 10px 10px 5px #888888;
+                  }
+
+
+     3、接下来给阴影添加颜色
+
+         实例
+         div {
+               box-shadow: 10px 10px grey;
+              }
+
+
+     4、接下来给阴影添加一个模糊效果
+
+         实例
+         div {
+               box-shadow: 10px 10px 5px grey;
+             }
+
+
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+     5、你也可以在 ::before 和 ::after 两个伪元素中添加阴影效果
+
+         注意：
+              使用伪元素是相对容易的，:before将会在内容之前“添加”一个元素而:after将会在内容后“添加”一个元素。在它们之中添加内容我们可以使用content属性。
+
+实例：http://www.runoob.com/try/try.php?filename=trycss3_box-shadow6
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>菜鸟教程(runoob.com)</title> 
+<style>
+#boxshadow {
+    position: relative;
+    -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
+    -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+    padding: 10px;
+    background: white;
+}
+
+/* Make the image fit the box */
+#boxshadow img {
+    width: 100%;
+    border: 1px solid #8a4419;
+    border-style: inset;
+}
+
+#boxshadow::before {    //这里换成::after是一样的效果，这里主要是制作一个元素和元素的阴影，并且使用绝对定位令元素被其他元素遮住，只留阴影部分
+
+    content: '';
+    position: absolute;
+    z-index: -1; /* hide shadow behind image */
+    -webkit-box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+    width: 70%;
+    left: 15%; /* one half of the remaining 30% */
+    height: 100px;
+    bottom: -15px;
+}
+</style>
+</head>
+<body>
+
+<div id="boxshadow">
+  <img src="rock600x400.jpg" alt="Norway" width="600" height="400">
+</div>
+
+</body>
+</html>
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    6、阴影的一个使用特例是卡片效果 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 同时设置两个阴影
+
+      div.card {
+                 width: 250px;
+                 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                 text-align: center;
+                }
+
+①、文字卡片
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>菜鸟教程(runoob.com)</title> 
+<style>
+div.card {
+  width: 250px;
+  box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+}
+
+div.header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    font-size: 40px;
+}
+
+div.container {
+    padding: 10px;
+}
+</style>
+</head>
+<body>
+
+<h2>卡片</h2>
+
+<p>box-shadow 属性用来可以创建纸质样式卡片:</p>
+
+<div class="card">
+  <div class="header">
+    <h1>1</h1>
+  </div>
+
+  <div class="container">
+    <p>January 1, 2016</p>
+  </div>
+</div>
+
+</body>
+</html>
+
+
+
+②、图片卡片
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>菜鸟教程(runoob.com)</title> 
+<style>
+div.polaroid {
+  width: 250px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+}
+
+div.container {
+  padding: 10px;
+}
+</style>
+</head>
+<body>
+
+<h2> 卡片</h2>
+
+<p>box-shadow属性可以用来创建纸质样式卡片:</p>
+
+<div class="polaroid">
+  <img src="rock600x400.jpg" alt="Norway" style="width:100%">
+  <div class="container">
+    <p>Hardanger, Norway</p>
+  </div>
+</div>
+
+</body>
+</html>
+
+
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   7、CSS3 Text Overflow属性 
+
+         CSS3文本溢出属性指定应向用户如何显示溢出内容
+
+
+实例：http://www.runoob.com/try/try.php?filename=trycss3_text-overflow
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>菜鸟教程(runoob.com)</title> 
+<style> 
+div.test
+{
+	white-space:nowrap; 
+	width:12em; 
+	overflow:hidden; 
+	border:1px solid #000000;
+}
+</style>
+</head>
+<body>
+
+<p>以下 div 容器内的文本无法完全显示，可以看到它被裁剪了。</p>
+<p>div 使用 &quot;text-overflow:ellipsis&quot;:</p>
+
+<div class="test" style="text-overflow:ellipsis;">This is some long text that will not fit in the box</div>
+<p>div 使用 &quot;text-overflow:clip&quot;:</p>
+<div class="test" style="text-overflow:clip;">This is some long text that will not fit in the box</div>
+<p>div 使用自定义字符串 &quot;text-overflow: &gt;&gt;&quot;(只在 Firefox 浏览器下有效):</p>
+<div class="test" style="text-overflow:'>>';">This is some long text that will not fit in the box</div>
+</body>
+</html>
+
+
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   8、CSS3的换行 word-wrap:break-word;
+
+       如果某个单词太长，不适合在一个区域内，它扩展到外面：
+
+       CSS3中，自动换行属性允许您强制文本换行 - 即使这意味着分裂它中间的一个字：
+
+       CSS代码如下：
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>菜鸟教程(runoob.com)</title>
+<style> 
+p.test
+{
+	width:11em; 
+	border:1px solid #000000;
+	word-wrap:break-word;    //强制分裂某个单词，进行换行
+}
+</style>
+</head>
+<body>
+
+<p class="test"> This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword. The long word will break and wrap to the next line.</p>
+
+</body>
+</html>
+
+
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  9、CSS3 单词拆分换行
+
+       word-break:keep-all; --》换行时，保持单词，不分离单词
+
+       word-break:break-all;--》换行时，不保持单词，分离单词
+
+         注意： word-break 属性不兼容 Opera.
+ 
+实例：
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>菜鸟教程(runoob.com)</title>
+<style> 
+p.test1
+{
+	width:9em; 
+	border:1px solid #000000;
+	word-break:keep-all;
+}
+
+p.test2
+{
+	width:9em; 
+	border:1px solid #000000;
+	word-break:break-all;
+}
+</style>
+</head>
+<body>
+
+<p class="test1"> This paragraph contains some text. This line will-break-at-hyphenates.</p>
+<p class="test2"> This paragraph contains some text: The lines will break at any character.</p>
+
+<p><b>注意:</b>  word-break 属性不兼容 Opera.</p>
+
+</body>
+</html>
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  10、新文本属性
+
+       属性	                描述	                                                CSS
+
+       hanging-punctuation	规定标点字符是否位于线框之外。	                         3
+
+       punctuation-trim	        规定是否对标点字符进行修剪。	                         3
+
+       text-align-last	        设置如何对齐最后一行或紧挨着强制换行符之前的行。	 3
+
+       text-emphasis	        向元素的文本应用重点标记以及重点标记的前景色。	         3
+
+       text-justify	        规定当 text-align 设置为 "justify" 时所使用的对齐方法。  3
+
+       text-outline	        规定文本的轮廓。	                                 3
+
+       text-overflow	        规定当文本溢出包含元素时发生的事情。	                 3
+
+       text-shadow	        向文本添加阴影。	                                 3
+
+       text-wrap	        规定文本的换行规则。	                                 3
+
+       word-break	        规定非中日韩文本的换行规则。	                         3
+
+       word-wrap	        允许对长的不可分割的单词进行分割并换行到下一行。	 3
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+   七、CSS3 字体
+
+        CSS3 @font-face 规则
+
+        以前CSS3的版本，网页设计师不得不使用用户计算机上已经安装的字体。
+
+        使用CSS3，网页设计师可以使用他/她喜欢的任何字体。
+
+        当你发现您要使用的字体文件时，只需简单的将字体文件包含在网站中，它会自动下载给需要的用户。
+
+        您所选择的字体在新的CSS3版本有关于@font-face规则描述。
+
+        您"自己的"的字体是在 CSS3 @font-face 规则中定义的。
+
+
+     1、使用您需要的字体
+
+         在新的 @font-face 规则中，您必须首先定义字体的名称（比如 myFirstFont），然后指向该字体文件。
+
+         提示：URL请使用小写字母的字体，大写字母在IE中会产生意外的结果
+
+         如需为 HTML 元素使用字体，请通过 font-family 属性来引用字体的名称 (myFirstFont)：
+
+            实例
+            <style> 
+            @font-face
+            {
+                font-family: myFirstFont;
+                src: url(sansation_light.woff);
+            }
+ 
+            div
+            {
+                font-family:myFirstFont;
+            }
+            </style>
+
+
+     2、使用粗体文本
+
+         您必须添加另一个包含粗体文字的@font-face规则：
+
+            实例
+            @font-face
+            { 
+                font-family: myFirstFont;
+                src: url(sansation_bold.woff);
+                font-weight:bold;
+            }
+
+         该文件"Sansation_Bold.ttf"是另一种字体文件，包含Sansation字体的粗体字。
+
+         浏览器使用这一文本的字体系列"myFirstFont"时应该呈现为粗体。
+
+         这样你就可以有许多相同的字体@font-face的规则。
+
+
+    3、CSS3 字体描述
+
+        下表列出了所有的字体描述和里面的@font-face规则定义：
+
+
+        描述符	                               值	                        描述
+
+        font-family	                       name	                        必需。规定字体的名称。
+
+        src	                               URL	                        必需。定义字体文件的 URL。
+
+        font-stretch	                       normal                           可选。定义如何拉伸字体。默认是 "normal"。
+
+                                               condensed
+
+                                               ultra-condensed
+
+                                               extra-condensed
+
+                                               semi-condensed
+
+                                               expanded
+
+                                               semi-expanded
+
+                                               extra-expanded
+
+                                               ultra-expanded
+
+                                               
+       font-style	                       normal                         可选。定义字体的样式。默认是 "normal"。
+
+                                               italic
+
+                                               oblique
+
+
+       font-weight	                       normal                         可选。定义字体的粗细。默认是 "normal"。
+
+                                               bold
+ 
+                                               100
+                                               ...
+                                               900
+
+       unicode-range	                       unicode-range	               可选。定义字体支持的 UNICODE 字符范围。默认是 "U+0-10FFFF"。
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+   八、CSS3 2D 转换
+
+
+       1、 CSS3 转换
+
+           CSS3转换，我们可以移动，比例化，反过来，旋转，和拉伸元素。
+
+
+        它是如何工作？
+
+               变换的效果，让某个元素改变形状，大小和位置。
+
+               您可以转换您使用2D或3D元素。
+
+
+       2、2D 转换
+
+            在本章您将了解2D变换方法：
+
+                                   translate()
+
+                                   rotate()
+
+                                   scale()
+
+                                   skew()
+
+                                   matrix()
+
+
+            在下一章中您将了解3D转换。
+            实例
+                    div
+                    {
+                    transform: rotate(30deg);
+                    -ms-transform: rotate(30deg); /* IE 9 */
+                    -webkit-transform: rotate(30deg); /* Safari and Chrome */
+                    }
+
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+     3、translate() 方法
+
+         translate()方法，根据左(X轴)和顶部(Y轴)位置给定的参数，从当前元素位置移动。
+
+
+实例：translate值（50px，100px）是从左边元素移动50个像素，并从顶部移动100像素。
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>菜鸟教程(runoob.com)</title> 
+<style> 
+div
+{
+	width:100px;
+	height:75px;
+	background-color:red;
+	border:1px solid black;
+}
+div#div2
+{
+	transform:translate(50px,100px);
+	-ms-transform:translate(50px,100px); /* IE 9 */
+	-webkit-transform:translate(50px,100px); /* Safari and Chrome */
+}
+</style>
+</head>
+<body>
+
+<div>Hello. This is a DIV element.</div>
+
+<div id="div2">Hello. This is a DIV element.</div>
+
+</body>
+</html>
+
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+     4、rotate() 方法
+
+         rotate()方法，在一个给定度数顺时针旋转的元素。负值是允许的，这样是元素逆时针旋转。
+
+实例：rotate值（30deg）元素顺时针旋转30度。
+
+<!DOCTYPE html>
+<html>	
+<head>
+<meta charset="utf-8"> 
+<title>菜鸟教程(runoob.com)</title> 
+<style> 
+div
+{
+	width:100px;
+	height:75px;
+	background-color:red;
+	border:1px solid black;
+}
+div#div2
+{
+	transform:rotate(30deg);
+	-ms-transform:rotate(30deg); /* IE 9 */
+	-webkit-transform:rotate(30deg); /* Safari and Chrome */
+}
+</style>
+</head>
+<body>
+
+<div>你好。这是一个 DIV 元素。</div>
+
+<div id="div2">你好。这是一个 DIV 元素。</div>
+
+</body>
+</html>
+
+
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    5、scale() 方法
+
+        scale()方法，该元素增加或减少的大小，取决于宽度（X轴）和高度（Y轴）的参数：
+
+
+实例：scale（2,3）转变宽度为原来的大小的2倍，和其原始大小3倍的高度。
+
+div 元素的宽度是原始大小的两倍，高度是原始大小的三倍。
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>菜鸟教程(runoob.com)</title> 
+<style>
+div {
+    margin: 150px;
+    width: 200px;
+    height: 100px;
+    background-color: yellow;
+    border: 1px solid black;
+    border: 1px solid black;
+    -ms-transform: scale(2,3); /* IE 9 */
+    -webkit-transform: scale(2,3); /* Safari */
+    transform: scale(2,3); /* 标准语法 */
+}
+</style>
+</head>
+<body>
+
+<p>scale() 方法用于增加或缩小元素的大小。</p>
+
+<div>
+div 元素的宽度是原始大小的两倍，高度是原始大小的三倍。
+</div>
+
+</body>
+</html
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  6、skew() 方法
+
+       语法：transform:skew(<angle> [,<angle>]);
+
+       包含两个参数值，分别表示X轴和Y轴倾斜的角度，如果第二个参数为空，则默认为0，参数为负表示向相反方向倾斜。
+
+               skewX(<angle>);表示只在X轴(水平方向)倾斜。
+
+               skewY(<angle>);表示只在Y轴(垂直方向)倾斜。
+
+
+实例：skew(30deg,20deg) 元素在X轴和Y轴上倾斜20度30度。
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>菜鸟教程(runoob.com)</title> 
+<style> 
+div
+{
+	width:100px;
+	height:75px;
+	background-color:red;
+	border:1px solid black;
+}
+div#div2
+{
+	transform:skew(30deg,20deg);
+	-ms-transform:skew(30deg,20deg); /* IE 9 */
+	-webkit-transform:skew(30deg,20deg); /* Safari and Chrome */
+}
+</style>
+</head>
+<body>
+
+<div>Hello. This is a DIV element.</div>
+
+<div id="div2">Hello. This is a DIV element.</div>
+
+</body>
+</html>
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  7、matrix() 方法
+
+       matrix()方法和2D变换方法合并成一个。
+
+       matrix 方法有六个参数，包含旋转，缩放，移动（平移）和倾斜功能。
+
+       实例
+
+       利用matrix()方法旋转div元素30°
+       
+         div
+         {
+         transform:matrix(0.866,0.5,-0.5,0.866,0,0);
+         -ms-transform:matrix(0.866,0.5,-0.5,0.866,0,0); /* IE 9 */
+         -webkit-transform:matrix(0.866,0.5,-0.5,0.866,0,0); /* Safari and Chrome */
+         }
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  8、新转换属性
+
+      以下列出了所有的转换属性:
+ 
+       Property	                描述	                  CSS
+
+       transform	        适用于2D或3D转换的元素	  3 
+
+       transform-origin	        允许您更改转化元素位置	  3
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  9、2D 转换方法
+
+            函数	                   描述
+
+            matrix(n,n,n,n,n,n)	           定义 2D 转换，使用六个值的矩阵。
+
+            translate(x,y)	           定义 2D 转换，沿着 X 和 Y 轴移动元素。
+
+            translateX(n)	           定义 2D 转换，沿着 X 轴移动元素。
+
+            translateY(n)	           定义 2D 转换，沿着 Y 轴移动元素。
+
+            scale(x,y)	                   定义 2D 缩放转换，改变元素的宽度和高度。
+
+            scaleX(n)	                   定义 2D 缩放转换，改变元素的宽度。
+
+            scaleY(n)	                   定义 2D 缩放转换，改变元素的高度。
+
+            rotate(angle)	           定义 2D 旋转，在参数中规定角度。
+
+            skew(x-angle,y-angle)	   定义 2D 倾斜转换，沿着 X 和 Y 轴。
+
+            skewX(angle)	           定义 2D 倾斜转换，沿着 X 轴。
+
+            skewY(angle)	           定义 2D 倾斜转换，沿着 Y 轴。
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+   九、CSS3 3D 转换
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

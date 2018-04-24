@@ -1,0 +1,2995 @@
+1. js 的简介
+    
+      js的组成：
+                javascript组成言的语法和基本对象
+                DOM： 文档对象模型，描述处理网页内容的方法和接口
+                BOM：浏览器对象模型，描述与浏览器进行交互的方法和接口
+
+      js的特点：
+               跨平台的web脚本语言
+               向html页面添加交互行为
+               可与服务器进行通信
+
+      js所在位置：
+                  行间， 内嵌，外联
+
+      document.getElementById('btn').onclick=function(){
+
+                     alert(1);
+             }
+
+
+
+
+
+
+
+4.简单例子
+
+      document.getElementById("id").onclick=function{}
+    
+        实例1：点击后，让按扭的背景色变成黄色
+              <input type="button" id="btn" value="按钮">
+
+       分析：1.拿到按钮
+                document.getElementById("btn").
+
+             2.给按钮添加点击事件
+                按钮.onclick=function(){} 
+
+       实现：点击后要做的事情放里面:让按扭的背景色变成黄色-修改按钮的属性
+ 
+      修改属性：修改谁：元素.  
+          元素.style.样式=值
+    
+    代码实现：
+     <script>
+          document.getElementById(btn).onclick=function{
+
+                  document.getElementById(btn).sytle.background="red";
+          }
+     </script>
+
+      实例2：单击改变按钮，改变DIV的宽度和高度
+ 
+                 功能实现：拿到要改的元素
+
+           修改宽度与高度：div.style.width=值
+
+                           document.getElementById(box).style.width='200px';
+
+
+
+
+
+
+
+
+5.window.onload
+
+    (1)、script执行顺序 :
+
+               页面中的代码在一般情况下会按从上到下，从左往右的顺序执行,当 js 代码需要获取页面中的元素的时候，如果 script 在元素前，需要加 window.onload
+
+   （2）、什么时候用到window.onload?
+ 
+               当JS代码需要获取页面中的元素，如果script放在元素前面，那就需要加这个函数，即全部加载完，执行function的代码。如果script放在元素后面，就不要加了。                
+
+        <!-- 
+             避免代码操作元素时，元素尚未加载
+         -->
+         <script>
+            window.onload=function(){
+                  ...
+                }
+         </script>
+
+
+
+
+
+
+
+
+
+
+
+
+6.变量
+       
+      变量
+          可变的量（值）
+
+      变量的好处
+         1、可以复用代码
+         2、可以精简代码
+
+      声明变量方式：
+              var 变量名=值
+
+       console.log(变量名)
+              在控制台中输入变量名中值
+
+
+
+
+7.变量命名规则
+
+      变量全名规则：
+ 
+                   1、允许是字幕，数字，下划线（_），美元符（$）任意组合而成 
+                   2、不允许数字开头
+                   3、不允许使用关键字和保留字
+                                    关键字：当前语法中正在使用的单词
+                                    保留字：将来可能在语法中使用的单词
+
+
+8.变量示例
+          。。。
+
+9.初识javascript函数
+
+         函数的作用
+                复用代码， 不同于变量，它是复用多行代码
+
+         函数的定义
+                function 函数名（）{
+
+                       这里是要复用的代码
+ 
+              }
+
+         函数调用
+             函数名（）
+
+         匿名函数
+            没有名字的函数，匿名函数不能直接声明，需要被赋值
+
+         匿名函数怎么用
+             当匿名函数是以被赋值的形式所出现，并且它是被事件调用
+                 
+
+           window.onload = function （）{
+                      alert（1）;
+                }
+
+
+10.函数示例
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	    <style>
+	    	#box{
+	    		
+	    		width :100px;
+	    		height: 100px;
+	    		background: #f00;
+	    	}
+	    	
+	    	
+	    </style>
+	    <script type="text/javascript">
+	    	/*
+	    	  需求：点击任何一个按钮，改变div的宽度，高度，margin，padding，背景色等属性
+	    	  
+	    	 分析： 
+	    	      1.获取元素（两个按钮，box）
+	    	      2.给两个按钮添加点击事件
+	    	                       在事件里面修改box的属性
+	    	 * */
+	    	
+	    	window.onload()=function(){
+	    		
+	    		var btn1 = document.getElementById("btn1");
+	    		var btn2 = document.getElementById("btn2");
+	    		var box = document.getElementById("box");
+	    		
+	    		//给每个按钮添加点击事件
+	    		 btn1.onclick = function(){
+	    		 	  //点击后，修改box的属性
+//	    		 	     box.style.width= '200px';
+//	    		 	     box.style.height='200px';
+//	    		 	     box.style.margin = '10px';
+//	    		 	     box.style.padding='20px';
+//	    		 	     box.style.background="green";
+                         setStyle()
+	    		 };
+	    		 
+	            //给按钮2添加相同的点击事件
+	    		 btn2.onclick = function(){
+	    		 	  //点击后，修改box的属性
+//	    		 	     box.style.width= '200px';
+//	    		 	     box.style.height='200px';
+//	    		 	     box.style.margin = '10px';
+//	    		 	     box.style.padding='20px';
+//	    		 	     box.style.background="green";
+                         setStyle();
+	    		 };
+	    		 
+	    		 function setStyle(){
+	    		 	
+	     		 	     box.style.width= '200px';
+	    		 	     box.style.height='200px';
+	    		 	     box.style.margin = '10px';
+	    		 	     box.style.padding='20px';
+	    		 	     box.style.background="green"
+	    		 	
+	    		 };
+
+	    	}
+	    	
+	    </script>
+	</head>
+	<body>
+	     <input type="button" id = "btn1" value="按钮1" />
+	     <input type="button" id = "btn2" value="按钮2" />
+	     <div id="box"></div>
+	</body>
+</html>
+
+
+
+
+
+
+
+11.属性操作
+
+            "."  操作：只能调用符合命名规则的属性
+             
+           "[ ]" 操作：可以调用所有属性(即符合命名规则的属性和不符合命名规则的属性)，也可以使用变量
+
+                     单一属性，不符合命名规则的属性(属性中包含"-"，比如"font-size")，不能使用.操作，因为js不能识别"-"。
+                  
+                     可以使用["属性值"] ；也可以去掉"-"，随后的字母大写 ("font-size" == fontSize)
+
+
+                      <script>
+                           console.log(btn.style["font-size"]);  //调用不符合命名规则的属性
+                           console.log(btn.style.fontSize);
+                           
+                           console.log(btn.id);
+                           console.log(btn["id"]);              //调用符合命名规则的属性
+                      </script>
+
+
+
+
+
+
+
+
+
+12.常见属性
+
+           常用属性
+
+                   class 可以使用className获取类名 
+
+                   interHTML 以字符串方式获取到一个标签对里的所有内容；可赋值字串，将被解释为html 
+
+                   href 连接的地址（取出的是绝对地址）
+
+                   src 文件的地址（取出的是绝对地址）
+
+
+           value
+                表单的值
+                value只在<input />中存在。
+
+
+           获取value值：
+                    window.onload=function(){
+                              var btn=documentById('btn');
+                                   console.log(btn.value);
+                         }
+
+
+           className:
+                   注意：class是js中的一个保留字。它是不允许我们用的。
+                   在获取class的时候，不能用class，要用className。
+                   console.log(kaivon.className);
+
+
+
+
+13.javascript常用属性
+
+
+                   interHTML 以字符串方式获取到一个标签对里的所有内容；可赋值字串，将被解释为html 
+
+                   href 连接的地址（取出的是绝对地址）
+
+                   src 文件的地址（取出的是绝对地址）
+
+
+         (1)、innerHTML
+                    获取到的是一个标签对里面的所有内容。
+ 
+                    如果标签对当中有其他的标签，那一样会拿的到。
+
+                    在给innerHTML设置值得时候，如果这个值里面有html标签，那放到网页当中，会把它解析成一个真正的html标签。
+
+                      <script>
+
+        	window.onload()=function(){
+	    		
+	    		var btn1 = document.getElementById("btn");
+	    		var box = document.getElementById("box");
+	    		
+
+	    		 btn.onclick = function(){
+
+                               console.log(box.innerHTML); //在这里，控制台输出内容为“<p>标题</p>这里是一段文字”
+                            //设置
+                               box.innerHTML="<span>kaivon</span>";
+                         
+	    		 };
+                         
+                      }
+                      </script>
+
+
+            	<body>
+                     <input type="button" id = "btn" value="按钮" />
+                     <div id="box"><p>标题</p>这里是一段文字</div>
+	        </body>
+
+
+
+
+
+         (2)、href 和 src
+
+                   href 连接的地址（取出的是绝对地址）
+
+                   src 文件（图片）的地址（取出的是绝对地址）
+
+                   href和src取到的是绝对地址，不是属性里的值。
+
+                   切记：不要拿herf与src取到的值去做判断。
+
+
+
+
+
+
+
+14.属性操作例子
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	    <style>
+	    	#box{
+	    		
+	    		width :100px;
+	    		height: 100px;
+	    		background: #f00;
+	    	}
+	    	
+	    	
+	    </style>
+	    <script >
+	    	/**
+	    	 *需求：点击按钮获取输入框里的属性名称与属性值，对div进行设置
+	    	 * 
+	    	 * 分析：
+	    	 *   1.获取输入框，按钮，box
+	    	 *   2.给按钮添加点击事件
+	         *   3.获取到输入框里的内容
+	         *   4.改变box的样式
+	         * 
+	    	 * */
+	    	
+	    window.onload = function(){
+	    	
+	    		var text1 = document.getElementById("text1");
+	    		var text2 = document.getElementById("text2");
+	    		var btn = document.getElementById("btn2");	    		
+	    		var box = document.getElementById("box");
+	    		
+	    		btn.onclick = function(){
+	    			
+	    			var name= text1.value();   //若这里输入“width”
+	    			var val = text2.value();   //这里输入“300px”
+	    			
+	    			
+	    			/**
+	    			 * js中，
+	    			 *      “.”点操作属性的时候，后面只能跟真正的属性名称，不能跟变量名，
+	    			 *      "[]"中括号操作属性是时候呀，里面就可以放属性名称与变量名，
+	    			 *      如果放的是属性名，那要加引号，如果放的是变量名，那不需要加引号
+	    			 * 
+	    			 */
+	    			
+	    			box.style[name] = val;    //则这里是设置修改div的宽width为300px;
+	    			
+	    		}
+	    		
+
+
+	    }	
+	    	
+	    </script>
+	</head>
+	<body>
+	     <input type="text" id = "text1" value="" />
+	     <input type="text" id = "text2" value="" />	     
+	     <input type="button" id = "btn" value="按钮" />
+	     <div id="box"></div>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+15.javascript字符串
+
+             字符串 
+                   字符串是js数据类型中的一种
+                   用一对单引号或者双引号包含起来的由0个或者多个字符组成的串
+		          
+	    字符串拼接
+
+		“+”号
+		       1.数学中的加法运算
+		       2.字符串连接
+		            字符串拼接  当加号任意一边有一个是字符串，那他就是字符串连接的意思。
+
+
+
+
+
+
+16.if语句
+
+
+          页面代码执行顺序：
+                 一般情况下，页面中的代码会按从上到下，从左往右的顺序执行；
+
+          if "如果"
+              当代码有不同的情况需要去处理，这个时候要用if
+
+              if（判断条件）{
+                      当判断条件成立的时候，会执行这里的代码
+                  }
+
+
+               if（1<2）{
+                          alert('成立')
+                    }
+                         当1<2这个条件成立，这里的代码才会执行。
+
+               if（1<0）{
+                          alert（‘不成立’）；
+                    }
+                         1<0不成立，所以代码不执行。
+
+          alert(1<2);  ture  真
+          alert(1<0); false  假
+
+                  布尔值: 字符串是一种数据
+                     
+                   if的判断条件为被转化成一个布尔值
+
+                   if的条件会被转化成布尔值，如果布尔值为ture真，{}里的代码就会被执行，如果布尔值为false假，{}里的代码就不会被执行。                  
+
+
+
+
+
+17.if else 语句
+
+          if  如果   当页面中只有一支特殊情况要去处理
+          else  否则   当页面中有两种特殊情况要去处理
+
+            if （条件判断）{
+               
+                 条件成立   执行
+            }
+             else {
+   
+               条件不成立   代码执行
+            }
+
+         例子：
+
+             if（1<2）{
+  
+                alert('成立')；
+            }
+             else{
+    
+               alert（‘不成立’）；
+            }
+
+             条件不成立执行else里的代码，成立执行if里的代码。
+
+
+
+
+
+
+
+
+18.else if 语句
+
+  
+        if  只有一种特殊情况要去处理
+        else   否则    有两种特殊情况处理
+        else  if   否则如果     有多种特殊情况要去处理
+
+      语法
+          if（判断条件）{
+   
+           条件成立  执行
+         }
+
+          else  if（判断条件1）{
+   
+               当判断条件1成立的时候，执行这里的代码
+         }
+
+          else  if（判断条件2）{
+        
+               当判断条件2成立，执行这里的代码。
+        }
+          else{
+        
+               当以上条件都不成立的时候，执行这里的代码。
+        }
+
+       例子：
+            var  n=10;
+           
+            if (n<10){
+   
+              alert('n小于10')；
+           }
+
+            else if（n=10）{
+ 
+              alert('n=10');
+           }
+           
+            else{
+ 
+              alert('n>10')
+           }
+
+    
+      =赋值           
+      一个非0数字在转布尔值的结果是ture
+      ==对比     
+
+         但一个条件满足判断的时候，代码只会走满足条件的{}里的内容。 其他都不会走。
+         else  if  可以叠加使用
+
+
+
+
+
+
+
+
+
+
+
+
+19.流程控制例子1
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	    <style>
+	    	#box{
+	    		
+	    		width :100px;
+	    		height: 100px;
+	    		border: 1px solid #f00;
+	    	
+	    	}
+	    	
+	    	
+	    </style>
+	    <script>
+	    	/**
+	    	 * 需求：
+	    	 *   点击的时候，让box在显示与隐藏之间切换
+	    	 * 
+	    	 * 分析：
+	    	 *   1.拿到按钮，box
+	    	 *   2.给按钮添加点击事件
+	    	 *        根据box的display属性
+	    	 *        如果box是显示的，那让它隐藏
+	    	 *        如果box是隐藏的，那让它显示
+	    	 * 
+	    	 * 注意：
+	    	 *      元素.style.样式属性操作的是html行间样式，写在<style></style>中的样式是读取不到的。
+                         所以，当第一次点击按钮时  box.style.display=='block'  的判断为false
+	    	 */
+	    	
+	    	window.onload = function(){
+	    		
+	    		var btn = document.getElementById("btn");
+	    		var box = document.getElementById("box");
+	    		
+	    		btn.onclick = function(){
+	    			
+	    			if(box.style.display=='block'){
+	    				
+	    				//这个条件成立，说明现在box是显示的，让它隐藏
+	    				box.style.display='none';
+	    			
+	    			}else{
+	    				//这个条件成立，说明现在box是隐藏的，让它显示
+	    			     box.style.display='block';	
+	    			}
+	    			
+	    		}
+	    		
+	    		
+	    		
+	    	}
+	    </script>
+	</head>
+	<body>
+		
+	     <input type="button" id = "btn" value="按钮" />
+	     <div id="box"></div>
+		
+	</body>
+</html>
+
+
+
+
+
+
+
+20.流程控制例子2（改进19中的例子）
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	    <style>
+	    	#box{
+	    		
+	    		width :100px;
+	    		height: 100px;
+	    		border: 1px solid #f00;
+	    	
+	    	}
+	    	
+	    	
+	    </style>
+	    <script>
+	    	/**
+	    	 * 需求：
+	    	 *   点击的时候，让box在显示与隐藏之间切换
+	    	 * 
+	    	 * 分析：
+	    	 *   1.拿到按钮，box
+	    	 *   2.给按钮添加点击事件
+	    	 *        根据box的display属性
+	    	 *        如果box是显示的，那让它隐藏
+	    	 *        如果box是隐藏的，那让它显示
+	    	 * 
+	    	 * 注意：
+	    	 *      元素.style.样式属性操作的是html行间样式，写在<style></style>中的样式是读取不到的。
+	    	 */
+	    	
+	    	window.onload = function(){
+	    		
+	    		var btn = document.getElementById("btn");
+	    		var box = document.getElementById("box");
+	    		
+	    		var on = "block";
+	    		
+	    		btn.onclick = function(){
+	    			
+	    			if(on=='none'){
+	    				
+	    				
+	    				box.style.display='block';
+	    				on = "block";
+	    			
+	    			}else{
+	    				
+	    			     box.style.display='none';	
+	    			     on = "none";
+	    			}
+	    			
+	    		}
+	    		
+	    		
+	    		
+	    	}
+	    </script>
+	</head>
+	<body>
+		
+	     <input type="button" id = "btn" value="按钮" />
+	     <div id="box"></div>
+		
+	</body>
+</html>
+
+
+
+
+
+
+21.论坛简易留言板
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style >
+			
+			#box{
+				
+				width: 200px;
+				height: 200px;
+				border: 1px solid #f00;
+				
+			}
+		</style>
+		<script >
+			/**
+			 * 需求
+			 *    点击按钮，把输入框里的内容显示到box里
+			 * 
+			 * 分析
+			 *   1、获取到按钮，文本框，box
+			 *   2、给按钮添加点击事件
+			 *        1、获取用户输入的内容（text的value）
+			 *        2、把获取到的内容显示到box里面。
+			 * 
+			 */
+			window.onload = function(){
+				
+				var text1 = document.getElementById("text1");
+				var btn = document.getElementById("btn");
+				var box = document.getElementById("box");
+				
+				btn.onclick = function(){
+					
+					var val = text1.value; //用户输入的内容
+					var newText = '<p>' + val + '</p>';
+					console.log(val);
+					//innerHTML
+					
+					//字符串拼接
+				    //'<p>' + val + '</p>'
+				    
+				    //原来的内容         box.innerHTML
+				    //新输入的内容  '<p>' + val + '</p>'
+				   box.innerHTML = box.innerHTML + newText;
+					
+				};
+			};
+		</script>
+	</head>
+	<body>
+		<input type="text" id="text1" value="" />
+		<input type="button" id="btn" value="提交" />
+		<div id="box"></div>
+		
+	</body>
+</html>
+
+
+
+
+
+
+
+22.动态图片切换
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			img{
+				
+				display: block;
+			}
+		</style>
+		<script type="text/javascript">
+			/**
+			 * 需求：
+			 *   点击下一张按钮，让图片切换成下一张图
+			 *   点击上一张按钮，让图片切换成上一张图
+			 * 
+			 * 分析：
+			 *   1、获取到下一张按钮，图片
+			 *   2、给按钮添加点击事件
+			 *             1、用属性操作的方法去修改图片的src
+			 *             2、把数字存到一个变量里，点击下一张，就让这个变量加1，用字符串拼接的方法去修改图片的
+			 *                 src属性
+			 * 
+			 */
+			window.onload = function(){
+				
+				var next = document.getElementById("next");
+				var prev = document.getElementById("prev");
+				var pic = document.getElementById("pic");
+				
+				var n = 1;
+				
+				//下一张的点击按钮
+				next.onclick = function(){
+					
+					n++;
+					
+					if(n>4){
+						n=4;
+					};
+				    pic.src = 'img/' + n + '.jpg';
+				};
+				
+				//上一张的点击按钮
+				prev.onclick = function(){
+					
+					n--;
+					
+					if(n<1){
+						n=1;
+					};
+				    pic.src = 'img/' + n + '.jpg';
+				};				
+				
+			};
+		</script>
+	</head>
+	<body>
+		<input type="button" id="prev" value="上一张" />
+		<input type="button" id="next" value="下一张" />
+		<img src="img/1.jpg" id="pic" alt=""  />
+		
+	</body>
+</html>
+
+
+
+
+
+
+
+
+23.javascript初识数组
+
+			 * 
+			 * 数组
+			 *     数据的组合
+			 * 
+			 * 语法
+			 *    []
+			 *    每个数据之间是用逗号隔开的，最后一个数据是没有逗号的
+			 *     var color=['red','green','blue','white','black'];
+			 *   每个数据都会有对应一个下标（序号）
+			 *             下标值是从0开始的
+			 *   数据会有一个length属性，代表数组中数据的个数
+			 * 
+			 */
+			
+			var color=['red','green','blue','white','black'];
+			console.dir(color);  //console.dir 用来在控制台输出类似数组这类型的值的集合
+
+
+
+
+
+24.图片切换数组版
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			img{
+				
+				display: block;
+			}
+		</style>
+		<script type="text/javascript">
+			/**
+			 * 需求：
+			 *   点击下一张按钮，让图片切换成下一张图
+			 *   点击上一张按钮，让图片切换成上一张图
+			 * 
+			 * 分析：
+			 *   1、获取到下一张按钮，图片
+			 *   2、给按钮添加点击事件
+			 *             1、用属性操作的方法去修改图片的src
+			 *             2、把数字存到一个变量里，点击下一张，就让这个变量加1，用字符串拼接的方法去修改图片的
+			 *                 src属性
+			 * 
+			 * 数组
+			 *     数据的组合
+			 * 
+			 * 语法
+			 *    []
+			 *    每个数据之间是用逗号隔开的，最后一个数据是没有逗号的
+			 *     var color=['red','green','blue','white','black'];
+			 *   每个数据都会有对应一个下标（序号）
+			 *             下标值是从0开始的
+			 *   数据会有一个length属性，代表数组中数据的个数
+			 * 
+			 */
+			
+//			var color=['red','green','blue','white','black'];
+//			console.dir(color);  //console.dir 用来在控制台输出类似数组这类型的值的集合
+			
+			window.onload = function(){
+				
+				var next = document.getElementById("next");
+				var prev = document.getElementById("prev");
+				var pic = document.getElementById("pic");
+				
+				var n = 0;
+				
+				//把每个图片的名字存到一个数组中
+				var imgArr = ['asd','qwe','zxc','rty'];
+				
+				//下一张的点击按钮
+				next.onclick = function(){
+					
+					n++;
+					
+					if(n>imgArr.length-1){
+						n=imgArr.length-1;
+					};
+				    pic.src = 'img2/' + imgArr[n] + '.jpg';
+				};
+				
+				//上一张的点击按钮
+				prev.onclick = function(){
+					
+					n--;
+					
+					if(n<0){
+						n=0;
+					};
+				    pic.src = 'img2/' + imgArr[n] + '.jpg';
+				};				
+				
+			};
+		</script>
+	</head>
+	<body>
+		<input type="button" id="prev" value="上一张" />
+		<input type="button" id="next" value="下一张" />
+		<img src="img2/asd.jpg" id="pic" alt=""  />
+		
+	</body>
+</html>
+
+
+
+
+
+
+
+25. getElementsByTagName 
+
+        getElementById          //通过id名称去获取一个元素，它只有一个主语，document(整个文档)
+ 
+        getElementsByTagName    //通过标签名称去获取一组元素，它获取到的是一组元素  
+
+        getElementsByClassName   //通过class去获取到一组元素
+
+        querySelector           //通过CSS选择器去获取一个元素
+
+        querySelectorAll        //通过css选择器获取到一组元素
+
+        
+        
+        (1)、 document.getElementBYId（ID名称）
+       
+                  通过ID名称去获取一个元素，它只有一个主语，document(整个文档)
+
+        (2)、getElementsByTagName（标签名称）
+         
+                  通过标签名称去获取一组元素，它获取到的是一组元素
+       
+        (3)、 主语（限制范围）：
+                    document    从整个文档中去获取一组元素
+                    父级             从父级下面获取一级元素
+
+       
+        (4)、 获取到的是一个集合，类数组
+       
+            类数组：类似数组但是数组中的一些方法，它没有
+                    它只具备数组中的length属性，以及每个数据都会有一个自己对应的下标
+      
+     
+        (5)、怎么取它一个元素
+                     用下标的方法获取其中一个元素
+
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			/**
+			 * document.getElementsById 
+			 *       通过id名称去获取一个元素，它只有一个主语，document(整个文档)
+			 * 
+			 * getElementsByTagName（标签名称）
+                                 通过标签名称去获取一组元素，它获取到的是一组元素
+                                                       
+                           主语（限制范围）：
+                                            document    从整个文档中去获取一组元素
+                                                父级    从父级下面获取一级元素
+                                                              
+                           获取到的是一个集合，类数组
+                                       类数组：类似数组但是数组中的一些方法，它没有
+                                               它只具备数组中的length属性，以及每个数据都会有一个自己对应的下标          
+                                                                                
+                           怎么取它一个元素
+                                    用下标的方法获取其中一个元素                                                                  
+			 * 
+			 * 
+			 */
+			
+			window.onload = function(){
+				
+				var lis1 = document.getElementsByTagName('li');  //从整个文档通过li标签名称去获取一组元素
+				console.dir(lis1);  //打印的是一个集合
+				
+				lis[2].style.background = 'red';
+				
+				var color = document.getElementById('color');  //父级
+				var lis2 = color.getElementsByTagName('li');   //从父级’color‘通过li标签名称去获取一组元素
+				console.dir(lis2)
+			}
+		</script>
+	</head>
+	<body>
+		<ul id="color">
+			<li>red</li>
+			<li>green</li>
+			<li>blue</li>
+			<li>yellow</li>
+			<li>pink</li>
+		</ul>
+		<ul>
+			<li>red</li>
+			<li>green</li>
+			<li>blue</li>
+			<li>yellow</li>
+			<li>pink</li>
+		</ul>
+	</body>
+</html>
+
+
+
+
+
+
+
+26. getElementsByClassName 
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			/**
+			 *getElementsByClassName(class名称)
+			 *      通过class去获取到一组元素
+			 *      获取到的是一个集合，类数组
+			 * 
+			 * 主语：
+			 *       document    从整个文档中去获取class元素 
+			 *          父级             从父级下面获取class元素
+			 * 
+			 */
+			
+			window.onload = function(){
+				
+			var greens = document.getElementsByClassName('green');//从整个文档通过class名称去获取一组元素
+			console.dir(greens);
+				
+			var color = document.getElementById('color');  //父级
+			var green1 = color.getElementsByClassName('green');   //从父级’color‘通过class名称去获取一组元素
+			console.dir(green1)				
+		
+			}
+		</script>
+	</head>
+	<body>
+		<ul id="color">
+			<li>red</li>
+			<li class="green">green</li>
+			<li>blue</li>
+			<li>yellow</li>
+			<li>pink</li>
+		</ul>
+		<ul>
+			<li>red</li>
+			<li class="green">green</li>
+			<li>blue</li>
+			<li>yellow</li>
+			<li>pink</li>
+		</ul>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+27.querySelector
+
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+		/*   #color>li:first-child{
+				background:#FF0000;
+			}
+			
+			#color>li:nth-child(4){
+				
+				background: yellow;
+			}*/
+		</style>
+		<script type="text/javascript">
+		  /**
+		   * querySelector（css选择器）
+		   *      1、通过CSS选择器去获取一个元素
+		   *      2、获取到的只有一个元素，如果说有重复的，那他只取第一个
+		   * 
+		   *   主语
+		   *        document      从整个文档去获取元素
+		   *            父级                从父级里去获取元素  
+		   * 
+		   */
+		  
+		  window.onload = function(){
+		  	
+		  	var red = document.querySelector("#color>li:first-child");
+		  	red.style.background = 'red';
+		  	
+		  	var ul = document.querySelector(".color2");
+		  	ul.style.background = "yellow"  //整个ul 背景色变为黄色。
+		  	
+		  }
+		</script>
+	</head>
+	<body>
+		<ul id="color">
+			<li>red</li>
+			<li class="green">green</li>
+			<li>blue</li>
+			<li>yellow</li>
+			<li>pink</li>
+		</ul>
+		<ul class="color2">
+			<li>red</li>
+			<li class="green">green</li>
+			<li>blue</li>
+			<li>yellow</li>
+			<li>pink</li>
+		</ul>		
+		
+	</body>
+</html>
+
+
+
+
+
+
+
+28.querySelectorAll
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+		/*   #color>li:first-child{
+				background:#FF0000;
+			}
+			
+			#color>li:nth-child(4){
+				
+				background: yellow;
+			}*/
+		</style>
+		<script type="text/javascript">
+		  /**
+		   * querySelector（css选择器）
+		   *      1、通过CSS选择器去获取一个元素
+		   *      2、获取到的只有一个元素，如果说有重复的，那他只取第一个
+		   * 
+		   *   主语
+		   *        document      从整个文档去获取元素
+		   *            父级                从父级里去获取元素  
+		   * 
+		   * 
+		   * 
+		   * querySelectorAll
+		   *          通过css选择器获取到一组元素
+		   *          获取到的也是一个集合，类数组
+		   * 
+		   *  主语
+		   *       document      从整个文档去获取元素
+		   *           父级                从父级里去获取元素 
+		   */
+		  
+		  window.onload = function(){
+		  	
+//		  	var red = document.querySelector("#color>li:first-child");
+//		  	red.style.background = 'red';
+//		  	
+//		  	var ul = document.querySelector(".color2");
+//		  	ul.style.background = "yellow"  //整个ul 背景色变为黄色。
+
+            var lis = document.querySelectorAll('li');//也可以从整个文档通过li标签名称去获取一组元素         
+            console.dir(lis);
+            
+            var color = document.querySelector("color");
+            var lis1 = color.getElementsByTagName('li'); //也可以从父级’color‘通过li标签名称去获取一组元素
+		  	
+	    var lis2 = document.querySelectorAll("#color li");//效果同上
+		  	
+		  	    console.dir(lis1);
+		  	    console.dir(lis2);
+		  	    
+		  	  
+		  	var lis3 = document.querySelectorAll("#color ul li");
+		  	console.dir(lis3);
+		  	lis3[lis3.length-1].style.background = "gold";  //取最后一个元素，并且修改其背景色
+		  	
+		  	
+		  	var greens = document.querySelectorAll('.green'); //取得是一组数据
+		  	console.dir(greens);
+		  	greens[0].style.background = "green";
+		  	
+		  	var uls = document.querySelectorAll('ul'); //取出的是三个元素
+		  	console.dir(uls);
+		  	uls[2].style.background = 'blue';
+		  }
+		</script>
+	</head>
+	<body>
+		<ul id="color">
+			<li>red</li>
+			<li class="green">green</li>
+			<li>blue</li>
+			<li>yellow</li>
+			<li>pink</li>
+			<li>
+				<ul>
+					<li>pink</li>
+					<li>white</li>
+					<li>black</li>
+					<li>gold</li>
+				</ul>			
+			</li>
+		</ul>
+		<ul class="color2">
+			<li>red</li>
+			<li class="green">green</li>
+			<li>blue</li>
+			<li>yellow</li>
+			<li>pink</li>
+		</ul>		
+		
+	</body>
+</html>
+
+
+
+
+
+
+
+29.批量改变dom元素背景色
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			/**
+			 * 需求：
+			 *   改变所有的li的背景色，让它变成红色
+			 * 
+			 * 
+			 */
+			window.onload = function(){
+				
+				
+				//获取到所有的li,   两种方法
+				 var lis1 = document.getElementsByTagName('li;')
+				 var lis2 = document.querySelectorAll('li');
+				 
+				//改变所有的li的背景色全部变为红色
+				lis1[0].style.background='red';
+				lis1[1].style.background='red';
+				lis1[2].style.background='red';
+				lis1[3].style.background='red';
+				lis1[4].style.background='red';
+				
+			}
+			
+		</script>
+	</head>
+	<body>
+		<ul>
+			<li>red</li>
+			<li>green</li>
+			<li>blue</li>
+			<li>yellow</li>
+			<li>pink</li>
+		</ul>
+	</body>
+</html>
+
+
+
+
+
+30.for循环-1  31.for循环-2
+
+			 * for循环
+			 *       根据一定的条件，重复执行一行或多行代码。
+			 * 
+			 * 语法：
+			 *   for（条件初始化;条件判断;条件变化）{  
+			 *   
+			 *        当条件成立的时候（true）重复执行这里的代码
+			 *  };
+			 * 
+			 * 步骤：
+			 *   1、条件初始化（声明了一个变量，给这个变量一个初始值）var i=0;
+			 *   2、条件判断（把变量的值限定了一个范围）i<10;
+			 *   3、走大括号中的代码（当条件判断成立的时候，走大括号里的代码）console.log('kaivon')
+			 *   4、条件变化（循环一次让变量的值加上1）i++;
+			 * 
+			 * 注意：
+			 *     从第二次循环开始，它就不走第一步了，不断地走第二步、第三步、第四步
+			 * 
+			 * 结束：
+			 *    当判断条件不成立时。就结束循环
+			 *    循环什么时候结束由判断条件来决定，一定要给一个成立的条件（能够不成立的时候），否则就是一个死循环
+			 *  
+			 * 循环什么时候用：
+			 *    当需要操作一组元素做同一件事情
+			 * 
+			 * 当I的值为9时，是最后一次循环，但是需要把循环走完，第四步要走完，走完后i++了，
+			 * 变成10，所以在循环外面，i的值为10.
+
+
+
+
+
+32.for循环嵌套
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+		  /**
+		   * 
+		   *for嵌套
+		   * 
+		   * 如果有嵌套的循环，那里面的变量一定不要与外面的变量相同，否则会把外面的变量给覆盖了。
+		   * 
+		   */
+		  for(var i=0;i<3;i++){
+		  	
+		  	for(var j=0;j<3;j++){
+		  		
+		  		console.log(i);   //0 0 0 1 1 1 2 2 2
+		  	}
+		  	
+		  }
+		  
+		  // 如果有嵌套的循环，那里面的变量一定不要与外面的变量相同，否则会把外面的变量给覆盖了。
+		  for(var i=0;i<3;i++){
+		  	
+		  	for(var i=0;i<3;i++){
+		  		
+		  		console.log(i);   //0 1 2
+		  	}
+		  	
+		  }
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
+
+
+
+
+
+
+
+33.for示例
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			/**
+			 * 需求：
+			 *   改变所有的li的背景色，让它变成红色
+			 * 
+			 * for循环
+			 *       根据一定的条件，重复执行一行或多行代码。
+			 * 
+			 * 语法：
+			 *   for（条件初始化;条件判断;条件变化）{  
+			 *   
+			 *        当条件成立的时候（true）重复执行这里的代码
+			 *  };
+			 * 
+			 * 步骤：
+			 *   1、条件初始化（声明了一个变量，给这个变量一个初始值）var i=0;
+			 *   2、条件判断（把变量的值限定了一个范围）i<10;
+			 *   3、走大括号中的代码（当条件判断成立的时候，走大括号里的代码）console.log('kaivon')
+			 *   4、条件变化（循环一次让变量的值加上1）i++;
+			 * 
+			 * 注意：
+			 *     从第二次循环开始，它就不走第一步了，不断地走第二步、第三步、第四步
+			 * 
+			 * 结束：
+			 *    当判断条件不成立时。就结束循环
+			 *    循环什么时候结束由判断条件来决定，一定要给一个成立的条件（能够不成立的时候），否则就是一个死循环
+			 *  
+			 * 循环什么时候用：
+			 *    当需要操作一组元素做同一件事情
+			 * 
+			 * 当I的值为9时，是最后一次循环，但是需要把循环走完，第四步要走完，走完后i++了，
+			 * 变成10，所以在循环外面，i的值为10.
+			 * 
+			 * 
+			 */
+			
+			window.onload = function(){
+				
+				
+				//获取到所有的li,   两种方法
+				 var lis1 = document.getElementsByTagName('li;')
+				 var lis2 = document.querySelectorAll('li');
+				 
+				//改变所有的li的背景色全部变为红色
+                  for(var i=0;i<lis1.length;i++){
+                  	
+                  	lis1[i].style.background='red';
+                  }
+				
+			}
+			
+		</script>
+	</head>
+	<body>
+		<ul>
+			<li>red</li>
+			<li>green</li>
+			<li>blue</li>
+			<li>yellow</li>
+			<li>pink</li>
+		</ul>
+	</body>
+</html>
+
+
+
+
+
+34.动态点击修改当前dom元素背景色
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			/**
+			 * 需求：
+			 *    点击某个li，让点击的那个li背景色变为红色
+			 * 			 * 
+			 * 循环的速度非常快的，我们手动点击的时候，for已经循环完毕了，那这个时候 i的值是5
+			 * 循环里添加的点击事件，点击事件里的i的值是循环结束后的那个值，而不是对应的循环的值
+			 */
+			
+			window.onload = function(){
+				
+				
+				//获取到所有的li,   两种方法
+				 var lis1 = document.getElementsByTagName('li;')
+				 var lis2 = document.querySelectorAll('li');
+				 
+				//给每一个li都添加点击事件
+                  for(var i=0;i<lis1.length;i++){
+                  	
+                  	//lis1[i] 表示每一个li
+                  	
+                  	lis1[i].onclick = function(){  //在事件中，获取不到i的值
+                  		
+                  	  lis1[i].style.background='red'; //报错
+                  		
+                  	}
+                  	
+                  }
+				
+			}
+			
+		</script>
+	</head>
+	<body>
+		<ul>
+			<li>red</li>
+			<li>green</li>
+			<li>blue</li>
+			<li>yellow</li>
+			<li>pink</li>
+		</ul>
+	</body>
+</html>
+
+
+
+
+
+
+35.this(修改上面的例子)
+
+		  /*
+		   * this 
+		   *   指的是当前对象
+		   *   关键词，不能当作变量名
+		   *   this指的是当前对象，只能读，不能写，它的值只能用，不能修改
+		   * 
+		   * 
+		   * 1、在函数外用
+		   *        this是指向window的
+		   *        alert(this==window);//弹出true
+		   * 
+		   * 
+		   * 2、在函数内使用
+		   *      1、函数是直接被调用的   this 指向 window
+		   *       function  fn(){
+		   *  
+		   *             //这个this在函数里面
+		   *               alert(this);
+		   *       }              
+		   *        fn(); //window   fn() 相等于 window.fn();    即this==window
+		   * 
+		   * 
+		   *     2、被事件(onclick)所调用，并且是以赋值的形式出现，
+		   *           this 指向的是，谁调用了函数，那this就指向谁
+		   *          
+		   *           document.onclick=fn; //this 指向 document
+		   * 
+		   *            var btn = document.getElementById('btn');
+		   *             btn.onclick=fn;  //this 指向  input(即button)
+		   * 
+		   */
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			/**
+			 * 需求：
+			 *    点击某个li，让点击的那个li背景色变为红色
+			 * 			 * 
+			 * 循环的速度非常快的，我们手动点击的时候，for已经循环完毕了，那这个时候 i的值是5
+			 * 循环里添加的点击事件，点击事件里的i的值是循环结束后的那个值，而不是对应的循环的值
+			 */
+			
+			window.onload = function(){
+				
+				
+				//获取到所有的li,   两种方法
+				 var lis1 = document.getElementsByTagName('li;')
+				 var lis2 = document.querySelectorAll('li');
+				 
+				//给每一个li都添加点击事件
+                  for(var i=0;i<lis1.length;i++){
+                  	
+                  	//lis1[i] 表示每一个li
+                  	
+                  	lis1[i].onclick = function(){
+                  		
+                  	 // lis1[i].style.background='red'; //报错
+                  	    
+                  	 //在循环的时候，给每个元素都添加点击事件，想要在点击事件里找到点击的那个对象，
+                  	 //  不能用i的值作为下标去取，要用this, 
+                  	 //     this指的就是点击的那个对象
+
+                  	    this.style.background='red';    
+                  		
+                  	}
+                  	
+                  }
+				
+			}
+			
+		</script>
+	</head>
+	<body>
+		<ul>
+			<li>red</li>
+			<li>green</li>
+			<li>blue</li>
+			<li>yellow</li>
+			<li>pink</li>
+		</ul>
+	</body>
+
+
+36.自定义属性
+
+	<body>
+	<input type="button" id="btn" value="按钮" style="width:50px; height: 50px; background:#FF0000;"   />
+	
+	
+	
+		<script type="text/javascript">
+         /*
+          * 属性
+          *   元素身上所具有的一些特征
+          * 
+          * 1、系统自带的属性
+          *          type , id , style, value , src
+          * 
+          * 2、自己添加的属性
+          *        自定义属性，系统当中是没有的，我们自己添加的
+          *        系统自带的属性，满足不了我们的需求，给一个自己添加的属性          * 
+          */
+         
+         btn.kaivon = '名字';  //这就是自定义属性
+         
+         console.log(btn.kaivon);  //输出 '名字'
+         console.log(btn['kaivon']);
+         
+		</script>
+	</body>
+
+
+
+
+
+37.JavaScript选项卡-1  38.JavaScript选项卡-2
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{
+				
+				width: 200px;
+				height: 200px;
+				border: 1px solid #FF0000;
+				display: none;
+			}
+		</style>
+		<script type="text/javascript">
+		 /*
+		  * 需求：
+		  *      点击按钮显示对应的div，让其它的按钮背景色去掉，让其它的div都隐藏
+		  * 
+		  * 关键点：
+		  *      如何找到上一个点击的input
+		  * 
+		  * 分析：
+		  *  1、获取到所有的按钮以及div
+		  *  
+		  *  2、给每一个按钮添加点击事件
+		  *     1、把上一个点击的按钮背景色去掉
+		  *     2、把上一个点击的按钮对应的div，将它隐藏
+		  *     3、给当前点击的按钮添加一个背景色
+		  *     4、让当前点击的按钮对应的div，让它显示
+		  */
+		 
+		   window.onload = function(){
+		   	
+		   	var inputs = document.querySelectorAll('input');
+		   	var divs = document.querySelectorAll('div');
+		   	var last = inputs[0];  //这个变量存的是上一次点击的对象，在一上来默认为第0个。
+		   	
+		    //每一个按钮都对应一个div，它们的下标值都是相同的
+		    /*
+		     * 如果取到一个下标值，通过下标值就能找到对应的按钮与div
+		     */
+		    console.dir(inputs);
+		    console.dir(divs);
+		    
+		    //给每个按钮添加事件
+		   	for(var i=0;i<inputs.length;i++){
+		   		
+		   		//i 的值   0 ，1，2
+		   		inputs[i].index = i; //给每个按钮添加一个自定义属性，存的是它们对应的索引值
+		   		/*
+		   		 * input[0].index = 0;
+		   		 * input[1].index = 1;
+		   		 * input[2].index = 2;
+		   		 */
+		   		
+		   		
+		   		inputs[i].onclick = function(){
+		   			
+		   			//把上一次点击对象的背景色去掉
+		   			last.style.background="";
+		   			
+		   			//把上一个对应的div，让它隐藏
+		   			//如果在这里能找到点击按钮的下标值就能找到它对应的div
+		   			
+		   			//点击的那个对象是this
+		   			//点击的那个对象的索引值是this.index
+		   			
+		   			//把上一个对应的div，将它隐藏
+		   			divs[last.index].style.display="none";
+		   			
+		   			//给当前点击的按钮添加背景色
+		   			this.style.background = "yellow";
+		   			
+		   			//让当前点击的按钮对应的div，让它显示
+		   			divs[this.index].style.display = "block";
+		   			
+		   			//把上一次点击对象更新成当前点击的对象
+		   			last = this;
+		   			
+		   		}
+		   		
+		   	}
+		   	
+		   	
+		   	
+		   }
+		</script>
+	</head>
+	<body>
+		<input type="button" id="" value="选项1" style="background: yellow;" />
+		<input type="button" id="" value="选项2" />
+		<input type="button" id="" value="选项3" />
+		<div style="display: block;">内容1</div>
+		<div>内容2</div>
+		<div>内容3</div>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+39.JavaScript选项卡-3（效果相同，方法不一样）
+
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{
+				
+				width: 200px;
+				height: 200px;
+				border: 1px solid #FF0000;
+				display: none;
+			}
+		</style>
+		<script type="text/javascript">
+		 /*
+		  * 需求：
+		  *      点击按钮显示对应的div，让其它的按钮背景色去掉，让其它的div都隐藏
+		  * 
+		  * 
+		  * 分析：
+		  *  1、获取到所有的按钮以及div
+		  *  
+		  *  2、给每一个按钮添加点击事件
+		  *     1、把所有按钮的背景色全部清空
+		  *     2、把所有按钮对应的div，将它们隐藏
+		  *     3、给当前点击的按钮添加一个背景色
+		  *     4、让当前点击的按钮对应的div，让它显示
+		  */
+		 window.onload = function(){
+		 	
+		 	var inputs = document.querySelectorAll("input");
+		 	var divs = document.querySelectorAll("div");
+		 	
+		 	for(var i=0; i<inputs.length;i++){
+		 		
+		 		inputs[i].index = i;   //当需要用到下标值时，就给它自定义一个可以找下标值的属性
+		 		
+		 		inputs[i].onclick = function(){  //在事件中，不能直接通过i获得下标值，需要自定义属性
+		 			
+		 			//点击的时候一下来要把所有的样式清空，再让所有div隐藏
+		 			for(var i=0;i<inputs.length;i++){
+		 				
+		 			inputs[i].style.background = "";
+		 			divs[i].style.display = "none";		 				
+		 				
+		 			}
+		 			
+		 			//给当前的按钮加背景色，让对应的div显示
+		 			this.style.background='yellow';
+		 			divs[this.index].style.display = 'block';
+		 		}
+		 		
+		 	}
+		 		
+		 }
+
+		</script>
+	</head>
+	<body>
+		<input type="button" id="" value="选项1" style="background: yellow;" />
+		<input type="button" id="" value="选项2" />
+		<input type="button" id="" value="选项3" />
+		<div style="display: block;">内容1</div>
+		<div>内容2</div>
+		<div>内容3</div>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+一、初探JavaScript
+      
+       JavaScript 就是修改样式
+
+    1、编写js的流程 
+          
+         (1)、布局：      HTML+CSS
+         (2)、属性：      确定要修改哪些属性     
+         (3)、事件：      确定用户做哪些操作（产品设计）
+         (4)、编写js:     在事件中，用js来修改页面元素的样式
+
+
+    2、例子： div的 onmouseover 和 onmouseout
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>js2</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+	<style type="text/css">
+		#div1 {
+			width: 200px;
+			height: 200px;
+			background: red;
+		}
+	</style>
+	<script type="text/javascript">
+		function toGreen() {
+			document.getElementById("div1").style.width="300px";
+			document.getElementById("div1").style.height="300px";
+			document.getElementById("div1").style.background="green";
+		}
+		function toRed() {
+			document.getElementById("div1").style.width="200px";
+			document.getElementById("div1").style.height="200px";
+			document.getElementById("div1").style.background="red";
+		}
+	</script>
+  </head>
+  
+  <body>
+    <div id="div1" onmouseover="toGreen()" onmouseout="toRed()"></div>
+  </body>
+</html>
+
+
+
+
+    3、网页换肤
+?	土豆网“开灯、关灯”效果
+?	任何标签都可以加ID，包括link
+?	任何标签的任何属性，也都可以修改
+?	HTML里怎么写，JS里就怎么写
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>js4.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <link id="link" rel="stylesheet" type="text/css" href="./css/js4css1.css">
+    
+    <script type="text/javascript">
+    	function skin1() {
+    		var oL = document.getElementById("link");
+    		oL.href = "./css/js4css1.css";
+    	}
+    	function skin2() {
+    		var oL = document.getElementById("link");
+    		oL.href = "./css/js4css2.css";
+    	}
+    </script>
+
+  </head>
+  
+  <body>
+  	<input type="button" value="皮肤1" onclick="skin1()">
+  	<input type="button" value="皮肤2" onclick="skin2()">
+  </body>
+</html
+
+
+   
+
+   4、扩展
+
+?	（1）、为a链接添加JS
+?	            <a href=“javascript:;”></a
+
+        （2）、document.getelmentbyid是兼容性，声明ID
+
+        （3）、鼠标移入 onmouseover
+               鼠标移出 onmouseout
+
+        （4）、任何标签都可以加ID
+               任何标签的属性都可以修改
+               HTML里面怎么写，JS里面就怎么写（className例外
+
+
+
+二、
+
+//1.style加样式		行间
+//2.style取样式		行间
+
+
+
+    1.  style与className
+
+             元素.style.属性=xxx 是修改行间样式；
+             之后再修改className不会有效果
+
+
+    2. 提取事件
+             为元素添加事件
+                    事件和其他属性一样，可以用JS添加
+                    indow.onload的意义
+                    行为(js)、样式(css)、结构(html)三者分离
+
+
+    3.获取一组元素
+           getElementsByTagName
+                数组的使用
+                里面的   
+
+
+    4.循环
+
+
+if(条件)
+{
+	语句
+}
+
+while(条件)
+{
+	语句
+}
+
+while(饿)
+{
+	吃
+}
+
+------------------------------------------------------------------------------------------------------------
+
+for循环
+
+for(初始化;条件;自增)
+{
+	语句
+}
+
+
+true/false	布尔值
+
+------------------------------------------------------------------------------------------------------------
+
+this：当前发生事件的元素
+
+------------------------------------------------------------------------------------------------------------
+innerHTML
+
+inner HTML
+
+
+
+     5.例子: 
+         全选——checked属性
+         反选——for循环配合if判断
+         不选
+
+
+     6.选项卡
+         按钮的实现
+              添加事件
+                  this的使用
+         先清空所有按钮，再选中当前按钮
+
+
+
+     7.JS简易日历
+
+            程序实现思路
+                类似选项卡，只是下面只有一个div
+                nnerHTML的使用
+
+            数组的使用
+                定义：arr=[1,2,3]
+                使用：arr[0]
+
+            字符串连接
+                作用：连接两个字符串
+                问题：连接中的优先级
+
+
+
+
+
+
+
+三、javascript基础
+
+  1、JavaScript组成
+
+       ECMAScript：解释器、翻译
+       DOM：Document Object Model
+       BOM：Browser Object Model
+            各组成部分的兼容性，兼容性问题由来
+
+ECMAScript：翻译	核心	解释器
+
+0 1
+
+DOM	Document Object Model		HTML		document
+	操作HTML的能力
+
+BOM	Browser Object Model		浏览器		window
+
+
+ECMA		几乎没有兼容性问题
+DOM		有一些操作不兼容
+BOM		没有兼容问题（完全不兼容）
+
+
+
+   2、变量类型
+
+    （1）、类型：typeof运算符
+   
+          用法、返回值
+          常见类型：number、string、boolean、undefined、object、function
+
+      一个变量应该只存放一种类型的数据
+
+
+<script>
+var a=12;
+//alert(typeof a);	//number
+
+a='asdfasd';
+//alert(typeof a);	//string
+
+a=true;
+//alert(typeof a);	//boolean
+
+a=function ()
+{
+	alert('abca');
+};
+//alert(typeof a);	//function
+
+a=document;
+//alert(typeof a);	//object
+
+var b;
+alert(typeof b);	//undefined
+
+//1.真的没定义
+//2.虽然定义，没有给东西
+</script>
+
+
+    （2）、数据类型转换
+
+            例子：计算两个文本框的和
+           
+           1、 显式类型转换(强制类型转换)
+                    parseInt()、 parseFloat()
+                    NaN的意义和检测
+
+var a='12';
+alert(parseInt(a)+1);   //13
+
+
+var a='12px34';
+alert(parseInt(a));     //12
+
+
+var a='abc';
+alert(parseInt(a));    //NaN
+                       //NaN	Not a Number	非数字
+
+
+
+12+NaN=NaN            //NaN
+
+
+
+
+<script>
+var a=parseInt('abc');
+var b=parseInt('def');
+
+alert(a==b);            //false
+
+                       //NaN和NaN不相等
+</script>
+
+
+
+
+<script>
+window.onload=function ()
+{
+	var oTxt1=document.getElementById('txt1');
+	var oTxt2=document.getElementById('txt2');
+	var oBtn=document.getElementById('btn1');
+	
+	oBtn.onclick=function ()
+	{
+		var n1=parseInt(oTxt1.value);
+		var n2=parseInt(oTxt2.value);
+		
+		if(isNaN(n1))                                // isNaN(n1)   判断字符串是否是NaN
+		{
+			alert('您输入的第一个数字有误');
+		}
+		else if(isNaN(n2))
+		{
+			alert('您输入的第二个数字有误');
+		}
+		else
+		{
+			alert(n1+n2);
+		}
+	};
+};
+</script>
+
+
+
+
+
+<script>
+var a='3.5';
+
+//alert(parseInt(a));   //  3
+//alert(parseFloat(a)); //  3.5
+
+alert(parseFloat(a));
+</script>
+
+
+
+
+
+
+           2、 隐式类型转换
+                    ==、
+                    减法
+
+（1）、例子
+<script>
+var a=5;
+var b='5';
+
+alert(a==b);	//true		先转换类型，然后比较
+//alert(a===b);	//false		不转换类型，直接比
+</script>
+
+
+
+（2）、
+
+<script>
+var a='12';
+var b='5';
+
+alert(a+b);		//  125     1.字符串连接     2.数字相加
+alert(a-b);		//   7      1.数字相减
+</script>
+
+
+
+    （3）、变量作用域和闭包
+
+              变量作用域（作用范围）
+                      局部变量、全局变量
+
+
+              什么是闭包？
+                     子函数可以使用父函数中的局部变量
+                     之前一直在使用闭包
+                     网上对于闭包的定义
+
+
+
+局部变量例子：
+
+<script>
+//子函数可以使用父函数的局部变量
+
+function aaa()		//父函数
+{
+	var a=12;
+	
+	function bbb()	//子函数
+	{
+		alert(a);
+	}
+	
+	bbb();
+}
+
+aaa();
+</script>
+
+
+
+
+全局变量例子：
+
+<script>
+var a;		//全局变量：在任何地方都能用
+
+function aaa()
+{
+	a=12;
+}
+
+function bbb()
+{
+	alert(a);
+}
+
+aaa();
+bbb();
+</script>
+
+
+
+
+     （4）、命名规范(1)
+
+              命名规范及必要性
+                  可读性——能看懂
+                  规范性——符合规则
+
+              匈牙利命名法
+                  类型前缀
+                  首字母大写
+
+
+
+     （5）、运算符
+
+           算术：+ 加、- 减、* 乘、/ 除、% 取模
+                                                实例：隔行变色、秒转时间
+
+           赋值：=、+=、-=、*=、/=、%=
+
+           关系：<、>、<=、>=、==、===、!=、!==
+
+           逻辑：&& 与、|| 或、! 否
+                                    实例：全选与反选
+
+           运算符优先级：括号
+
+
+隔行变色：
+
+<script>
+window.onload=function ()
+{
+	var aLi=document.getElementsByTagName('li');
+	
+	for(var i=0;i<aLi.length;i++)
+	{
+		//i 0 1 2 3 4 5 6....
+		if(i%2==0)
+		{
+			//0 2 4 6 8 10
+			aLi[i].style.background='#CCC';
+		}
+		else
+		{
+			//1 3 5 7 9
+			aLi[i].style.background='';
+		}
+	}
+};
+</script> 
+
+
+
+
+秒转时间（类似可以做 倒计时）
+
+<script>
+var s=1345;
+
+alert(parseInt(s/60)+'分'+s%60+'秒');
+</script>
+
+
+
+
+
+
+      （6）、程序流程控制
+
+                 判断：if、switch、?:
+
+                 循环：while、for
+
+                 跳出：break、continue
+
+                 什么是真、什么是假：
+
+                                  真：true、非零数字、非空字符串、非空对象
+
+                                  假：false、数字零、空字符串、空对象、undefined
+
+
+if()
+{
+}
+else
+{
+}
+
+if(条件1)
+{
+	语句1
+}
+else if(条件2)
+{
+	语句2
+}
+else
+{
+	语句n
+}
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+if(条件)
+{
+	语句
+}
+
+switch(变量)
+{
+	case 值1:
+		语句1
+		break;
+	case 值2:
+		语句2
+		break;
+	......
+	default:
+		语句n
+}
+
+-----------------------------------------------------------------------------------------------------------------------
+
+三目运算符
+三元
+
+if(条件)
+{
+	语句1
+}
+else
+{
+	语句2
+}
+
+条件?语句1:语句2
+
+-----------------------------------------------------------------------------------------------------------------------
+
+break		中断：//中断整个循环
+continue	继续  //中断本次循环，继续下一次循环
+
+-----------------------------------------------------------------------------------------------------------------------
+
+循环
+
+数组：for 0 - len
+json：for in
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+switch例子：
+
+<script>
+var name='abc';
+var sex='';
+
+switch(sex)
+{
+	case '男':
+		alert(name+'先生，你好');
+		break;
+	case '女':
+		alert(name+'女士，你好');
+		break;
+	default:
+		alert(name+'你好');
+}
+</script>
+
+-----------------------------------------------------------------------------------------------------------------------
+
+三目运算符例子：
+
+<script>
+var a=14;
+
+/*if(a%2==0)
+{
+	alert('双数');
+}
+else
+{
+	alert('单数');
+}*/
+
+a%2==0?alert('双数'):alert('单数');
+</script>
+
+---------------------------------------------------------------------------------------------------------------------------
+
+
+（7）、Json
+
+        什么是Json
+        Json和数组
+        Json和for in
+
+例子1：
+
+<script>
+/*var a=12;
+var b=5;
+var c='abc';
+*/
+var json={a: 12, b: 5, c: 'abc'};
+
+json.b++;
+
+alert(json.b);
+</script>
+
+
+例子2：
+
+<script>
+var json={a: 12, b: 5, c: 7};
+var arr=[12, 5, 7];
+
+/*
+alert(json['a']);
+alert(arr[0]);            //区别：下标不同
+*/
+
+//alert(json.length);     //json没有length
+//alert(arr.length);
+
+//循环
+/*
+for(var i=0;i<arr.length;i++)
+{
+	alert('第'+i+'个东西：'+arr[i]);
+}*/
+
+/*
+for(var i in arr)
+{
+	alert('第'+i+'个东西：'+arr[i]);
+}
+*/
+
+for(var i in json)
+{
+	alert('第'+i+'个东西：'+json[i]);
+}
+</script>
+
+
+
+
+
+
+
+
+四、深入JavaScript
+
+  1、函数返回值
+
+           什么是函数返回值
+                 函数的执行结果
+                 可以没有return
+
+           一个函数应该只返回一种类型的值
+
+<script>
+function show(a, b)
+{
+	//return;
+}
+
+alert(show(3, 5));
+</script>
+
+
+
+  2、函数传参
+
+       可变参（不定参）：arguments   	可变参	不定参
+         
+               参数的个数可变，参数数组
+   ---------------------------------------------------------
+
+       例子1：求和
+                   求所有参数的和
+
+<script>
+function sum()
+{
+	//alert(arguments.length);
+	//alert(arguments[0]);
+	//arguments
+	
+	var result=0;
+	
+	for(var i=0;i<arguments.length;i++)
+	{
+		result+=arguments[i];
+	}
+	
+	return result;
+}
+
+alert(sum(12, 6, 8, 6, 8));
+</script>
+
+-------------------------------------------------------------------------------------------
+
+       例子2：CSS函数
+                      判断arguments.length
+                      给参数取名，增强可读性
+
+       取非行间样式(不能用来设置)：
+                                  obj.currentStyle[attr]
+                                  getComputedStyle(obj, false)[attr]
+
+
+
+      css(oDiv, 'width')	        获取样式
+      css(oDiv, 'width', '200px')	设置样式
+ 
+例子1：      ----------------------------------------------------
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+function css()
+{
+	if(arguments.length==2)	//获取
+	{
+		return arguments[0].style[arguments[1]];     //获取样式
+	}
+	else
+	{
+		arguments[0].style[arguments[1]]=arguments[2];  //设置样式
+	}
+}
+
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	
+	//alert(css(oDiv, 'width'));
+	
+	css(oDiv, 'background', 'green');
+};
+</script>
+</head>
+
+<body>
+<div id="div1" style="width:200px; height:200px; background:red;">
+</div>
+</body>
+</html>
+
+
+例子2：      ----------------------------------------------------
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+function css(obj, name, value)
+{
+	if(arguments.length==2)	//获取
+	{
+		return obj.style[name];
+	}
+	else
+	{
+		obj.style[name]=value;
+	}
+}
+
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	
+	alert(css(oDiv, 'width'));
+	
+	//css(oDiv, 'background', 'green');
+};
+</script>
+</head>
+
+<body>
+<div id="div1" style="width:200px; height:200px; background:red;">
+</div>
+</body>
+</html>
+
+ ---------------------------------------------------------------------------
+
+取非行间样式(不能用来设置)：
+                        obj.currentStyle[attr]
+                        getComputedStyle(obj, false)[attr]     //第二个参数随便填，’false‘
+
+
+取非行间样式
+    例子1：      ----------------------------------------------------
+
+<style>
+#div1 {width:200px; height:200px; background:red;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	
+	//alert(oDiv.style.width);
+	//IE         ，不兼容火狐等浏览器            
+	//alert(oDiv.currentStyle.width);
+	
+	//Chrome、FF    , 不兼容IE7及以下
+	alert(getComputedStyle(oDiv, false).width);
+};
+</script>
+</head>
+
+<body>
+<div id="div1">
+</div>
+</body>
+
+
+
+    例子2： 用if 处理不兼容     ----------------------------------------------------
+
+
+<script>
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	
+	//alert(oDiv.style.width);
+	//IE
+	//alert(oDiv.currentStyle.width);
+	
+	//Chrome、FF
+	//alert(getComputedStyle(oDiv, false).width);
+	
+	//alert(oDiv.currentStyle);
+	
+	if(oDiv.currentStyle)
+	{
+		//IE
+		alert(oDiv.currentStyle.width);
+	}
+	else
+	{
+		//FF
+		alert(getComputedStyle(oDiv, false).width);
+	}
+};
+</script>
+
+
+
+
+     例子3：创建一个常用的函数   ----------------------------------------------------
+
+
+<style>
+#div1 {width:200px; height:200px; background:red;}
+</style>
+<script>
+function getStyle(obj, name)
+{
+	if(obj.currentStyle)
+	{
+		return obj.currentStyle[name];
+	}
+	else
+	{
+		return getComputedStyle(obj, false)[name];
+	}
+}
+
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+		
+	alert(getStyle(oDiv, 'width'));
+};
+</script>
+
+
+    例子4：   ----------------------------------------------------
+
+    复合样式：background、border
+    单一样式：width、height、position
+
+
+<style>
+#div1 {width:200px; height:200px; background:red;}
+</style>
+<script>
+function getStyle(obj, name)
+{
+	if(obj.currentStyle)
+	{
+		return obj.currentStyle[name];
+	}
+	else
+	{
+		return getComputedStyle(obj, false)[name];
+	}
+}
+
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+		
+	//alert(getStyle(oDiv, 'background'));  //为空	
+	alert(getStyle(oDiv, 'backgroundColor'));
+};
+</script>
+
+
+
+
+
+   3.数组基础
+
+       数组的使用
+                 定义
+                       var arr=[12, 5, 8, 9];
+           
+                       var arr=new Array(12, 5, 8, 9);
+
+                       没有任何差别，[]的性能略高，因为代码短
+
+
+      数组的属性
+               length
+
+                   既可以获取，又可以设置
+
+                   例子：快速清空数组   数组.length=0;
+
+     数组使用原则：数组中应该只存一种类型的变量
+ 
+
+     添加、删除元素（处理头部和尾部)
+           
+          数组的方法:
+                      添加
+                            push(元素)，从尾部添加
+                            unshift(元素)，从头部添加
+              
+                      删除
+                            pop()，从尾部弹出
+                            shift()，从头部弹出
+         ------------------------------------------------------
+    
+     插入、删除splice
+
+
+           <script>
+                var arr=[1,2,3,4,5,6];
+
+              //删除：splice(起点, 长度)
+              //arr.splice(2, 3);
+
+              //插入：splice(起点, 长度, 元素...);
+              //arr.splice(2, 0, 'a', 'b', 'c');
+
+
+              //先删除，再插入，即替换
+               arr.splice(2, 2, 'a', 'b');
+
+              alert(arr);
+          </script>
+      
+       -----------------------------------------------------------
+     
+     转换类（连接数组）
+
+          concat(数组2) ：连接两个数组
+
+                var a=[1,2,3];
+                var b=[4,5,6];
+
+                //alert(a.concat(b));
+                  alert(b.concat(a));
+
+
+          join(分隔符)   ：用分隔符，组合数组元素，生成字符串          
+                           字符串split
+
+
+     ------------------------------------------------------------
+
+     排序
+            sort([比较函数])，排序一个数组
+                              排序一个字符串数组
+                              排序一个数字数组
+
+
+
+    例子： 排序一个数字数组  ----------------------------------------------------
+
+
+    复合样式：background、border
+
+<script>
+var arr=[12, 8, 99, 19, 112];
+
+arr.sort(function (n1, n2){
+	return n1-n2;
+	/*if(n1<n2)
+	{
+		return -1;
+	}
+	else if(n1>n2)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}*/
+});
+
+alert(arr);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+

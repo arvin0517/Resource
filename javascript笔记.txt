@@ -1,0 +1,11140 @@
+一、初探JavaScript
+      
+       JavaScript 就是修改样式
+
+    1、编写js的流程 
+          
+         (1)、布局：      HTML+CSS
+         (2)、属性：      确定要修改哪些属性     
+         (3)、事件：      确定用户做哪些操作（产品设计）
+         (4)、编写js:     在事件中，用js来修改页面元素的样式
+
+
+    2、例子： div的 onmouseover 和 onmouseout
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>js2</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+     
+	<style type="text/css">
+		#div1 {
+			width: 200px;
+			height: 200px;
+			background: red;
+		}
+	</style>
+	<script type="text/javascript">
+		function toGreen() {
+			document.getElementById("div1").style.width="300px";
+			document.getElementById("div1").style.height="300px";
+			document.getElementById("div1").style.background="green";
+		}
+		function toRed() {
+			document.getElementById("div1").style.width="200px";
+			document.getElementById("div1").style.height="200px";
+			document.getElementById("div1").style.background="red";
+		}
+	</script>
+  </head>
+  
+  <body>
+    <div id="div1" onmouseover="toGreen()" onmouseout="toRed()"></div>
+  </body>
+</html>
+
+
+
+
+    3、网页换肤
+?	土豆网“开灯、关灯”效果
+?	任何标签都可以加ID，包括link
+?	任何标签的任何属性，也都可以修改
+?	HTML里怎么写，JS里就怎么写
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>js4.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <link id="link" rel="stylesheet" type="text/css" href="./css/js4css1.css">
+    
+    <script type="text/javascript">
+    	function skin1() {
+    		var oL = document.getElementById("link");
+    		oL.href = "./css/js4css1.css";
+    	}
+    	function skin2() {
+    		var oL = document.getElementById("link");
+    		oL.href = "./css/js4css2.css";
+    	}
+    </script>
+
+  </head>
+  
+  <body>
+  	<input type="button" value="皮肤1" onclick="skin1()">
+  	<input type="button" value="皮肤2" onclick="skin2()">
+  </body>
+</html
+
+
+   
+
+   4、扩展
+
+?	（1）、为a链接添加JS
+?	            <a href=“javascript:;”></a
+
+        （2）、document.getelmentbyid是兼容性，声明ID
+
+        （3）、鼠标移入 onmouseover
+               鼠标移出 onmouseout
+
+        （4）、任何标签都可以加ID
+               任何标签的属性都可以修改
+               HTML里面怎么写，JS里面就怎么写（className例外
+
+
+
+二、
+
+//1.style加样式		行间
+//2.style取样式		行间
+
+    1.  style与className
+
+             元素.style.属性=xxx 是修改行间样式；
+             之后再修改className不会有效果
+
+
+    2. 提取事件
+             为元素添加事件
+                    事件和其他属性一样，可以用JS添加
+                    window.onload的意义
+                    行为(js)、样式(css)、结构(html)三者分离
+
+
+    3.获取一组元素
+           getElementsByTagName
+                数组的使用
+                里面的   
+
+
+    4.循环
+
+
+if(条件)
+{
+	语句
+}
+
+while(条件)
+{
+	语句
+}
+
+while(饿)
+{
+	吃
+}
+
+------------------------------------------------------------------------------------------------------------
+
+for循环
+
+for(初始化;条件;自增)
+{
+	语句
+}
+
+
+true/false	布尔值
+
+------------------------------------------------------------------------------------------------------------
+
+this：当前发生事件的元素
+
+------------------------------------------------------------------------------------------------------------
+innerHTML
+
+inner HTML
+
+
+
+     5.例子: 
+         全选——checked属性
+         反选——for循环配合if判断
+         不选
+
+
+     6.选项卡
+         按钮的实现
+              添加事件
+                  this的使用
+         先清空所有按钮，再选中当前按钮
+
+
+
+     7.JS简易日历
+
+            程序实现思路
+                类似选项卡，只是下面只有一个div
+                innerHTML的使用
+
+            数组的使用
+                定义：arr=[1,2,3]
+                使用：arr[0]
+
+            字符串连接
+                作用：连接两个字符串
+                问题：连接中的优先级
+
+
+
+
+
+
+
+三、javascript基础
+
+  1、JavaScript组成
+
+       ECMAScript：解释器、翻译
+       DOM：Document Object Model
+       BOM：Browser Object Model
+            各组成部分的兼容性，兼容性问题由来
+
+ECMAScript：翻译	核心	解释器
+
+0 1
+
+DOM	Document Object Model		HTML		document
+	操作HTML的能力
+
+BOM	Browser Object Model		浏览器		window
+
+
+ECMA		几乎没有兼容性问题
+DOM		有一些操作不兼容
+BOM		没有兼容问题（完全不兼容）
+
+
+
+   2、变量类型
+
+    （1）、类型：typeof运算符
+   
+          用法、返回值
+          常见类型：number、string、boolean、undefined、object、function
+
+      一个变量应该只存放一种类型的数据
+
+
+<script>
+var a=12;
+//alert(typeof a);	//number
+
+a='asdfasd';
+//alert(typeof a);	//string
+
+a=true;
+//alert(typeof a);	//boolean
+
+a=function ()
+{
+	alert('abca');
+};
+//alert(typeof a);	//function
+
+a=document;
+//alert(typeof a);	//object
+
+var b;
+alert(typeof b);	//undefined
+
+//1.真的没定义
+//2.虽然定义，没有给东西
+</script>
+
+
+    （2）、数据类型转换
+
+            例子：计算两个文本框的和
+           
+           1、 显式类型转换(强制类型转换)
+                    parseInt()、 parseFloat()
+                    NaN的意义和检测
+
+var a='12';
+alert(parseInt(a)+1);   //13
+
+
+var a='12px34';
+alert(parseInt(a));     //12
+
+
+var a='abc';
+alert(parseInt(a));    //NaN
+                       //NaN	Not a Number	非数字
+
+
+
+12+NaN=NaN            //NaN
+
+
+
+
+<script>
+var a=parseInt('abc');
+var b=parseInt('def');
+
+alert(a==b);            //false
+
+                       //NaN和NaN不相等
+</script>
+
+
+
+
+<script>
+window.onload=function ()
+{
+	var oTxt1=document.getElementById('txt1');
+	var oTxt2=document.getElementById('txt2');
+	var oBtn=document.getElementById('btn1');
+	
+	oBtn.onclick=function ()
+	{
+		var n1=parseInt(oTxt1.value);
+		var n2=parseInt(oTxt2.value);
+		
+		if(isNaN(n1))                                // isNaN(n1)   判断字符串是否是NaN
+		{
+			alert('您输入的第一个数字有误');
+		}
+		else if(isNaN(n2))
+		{
+			alert('您输入的第二个数字有误');
+		}
+		else
+		{
+			alert(n1+n2);
+		}
+	};
+};
+</script>
+
+
+
+
+
+<script>
+var a='3.5';
+
+//alert(parseInt(a));   //  3
+//alert(parseFloat(a)); //  3.5
+
+alert(parseFloat(a));
+</script>
+
+
+
+
+
+
+           2、 隐式类型转换
+                    ==
+                    减法
+
+（1）、例子
+<script>
+var a=5;
+var b='5';
+
+alert(a==b);	//true		先转换类型，然后比较
+//alert(a===b);	//false		不转换类型，直接比
+</script>
+
+
+
+（2）、
+
+<script>
+var a='12';
+var b='5';
+
+alert(a+b);		//  125     1.字符串连接     2.数字相加
+alert(a-b);		//   7      1.数字相减
+</script>
+
+
+
+（3）、变量作用域和闭包
+
+              变量作用域（作用范围）
+                      局部变量、全局变量
+
+
+              什么是闭包？
+                     子函数可以使用父函数中的局部变量
+                     之前一直在使用闭包
+                     网上对于闭包的定义
+
+
+
+局部变量例子：
+
+<script>
+//子函数可以使用父函数的局部变量
+
+function aaa()		//父函数
+{
+	var a=12;
+	
+	function bbb()	//子函数
+	{
+		alert(a);
+	}
+	
+	bbb();
+}
+
+aaa();
+</script>
+
+
+
+
+全局变量例子：
+
+<script>
+var a;		//全局变量：在任何地方都能用
+
+function aaa()
+{
+	a=12;
+}
+
+function bbb()
+{
+	alert(a);
+}
+
+aaa();
+bbb();
+</script>
+
+
+
+
+     （4）、命名规范(1)
+
+              命名规范及必要性
+                  可读性——能看懂
+                  规范性——符合规则
+
+              匈牙利命名法
+                  类型前缀
+                  首字母大写
+
+
+
+     （5）、运算符
+
+           算术：+ 加、- 减、* 乘、/ 除、% 取模
+                                                实例：隔行变色、秒转时间
+
+           赋值：=、+=、-=、*=、/=、%=
+
+           关系：<、>、<=、>=、==、===、!=、!==
+
+           逻辑：&& 与、|| 或、! 否
+                                    实例：全选与反选
+
+           运算符优先级：括号
+
+
+隔行变色：
+
+<script>
+window.onload=function ()
+{
+	var aLi=document.getElementsByTagName('li');
+	
+	for(var i=0;i<aLi.length;i++)
+	{
+		//i 0 1 2 3 4 5 6....
+		if(i%2==0)
+		{
+			//0 2 4 6 8 10
+			aLi[i].style.background='#CCC';
+		}
+		else
+		{
+			//1 3 5 7 9
+			aLi[i].style.background='';
+		}
+	}
+};
+</script> 
+
+
+
+
+秒转时间（类似可以做 倒计时）
+
+<script>
+var s=1345;
+
+alert(parseInt(s/60)+'分'+s%60+'秒');
+</script>
+
+
+
+
+
+
+      （6）、程序流程控制
+
+                 判断：if、switch、?:
+
+                 循环：while、for
+
+                 跳出：break、continue
+
+                 什么是真、什么是假：
+
+                                  真：true、非零数字、非空字符串、非空对象
+
+                                  假：false、数字零、空字符串、空对象、undefined
+
+
+if()
+{
+}
+else
+{
+}
+
+if(条件1)
+{
+	语句1
+}
+else if(条件2)
+{
+	语句2
+}
+else
+{
+	语句n
+}
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+if(条件)
+{
+	语句
+}
+
+switch(变量)
+{
+	case 值1:
+		语句1
+		break;
+	case 值2:
+		语句2
+		break;
+	......
+	default:
+		语句n
+}
+
+-----------------------------------------------------------------------------------------------------------------------
+
+三目运算符
+三元
+
+if(条件)
+{
+	语句1
+}
+else
+{
+	语句2
+}
+
+条件?语句1:语句2
+
+-----------------------------------------------------------------------------------------------------------------------
+
+break		中断：//中断整个循环
+continue	继续  //中断本次循环，继续下一次循环
+
+-----------------------------------------------------------------------------------------------------------------------
+
+循环
+
+数组：for 0 - len
+json：for in
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+switch例子：
+
+<script>
+var name='abc';
+var sex='';
+
+switch(sex)
+{
+	case '男':
+		alert(name+'先生，你好');
+		break;
+	case '女':
+		alert(name+'女士，你好');
+		break;
+	default:
+		alert(name+'你好');
+}
+</script>
+
+-----------------------------------------------------------------------------------------------------------------------
+
+三目运算符例子：
+
+<script>
+var a=14;
+
+/*if(a%2==0)
+{
+	alert('双数');
+}
+else
+{
+	alert('单数');
+}*/
+
+a%2==0?alert('双数'):alert('单数');
+</script>
+
+---------------------------------------------------------------------------------------------------------------------------
+
+
+（7）、Json
+
+        什么是Json
+        Json和数组
+        Json和for in
+
+例子1：
+
+<script>
+/*var a=12;
+var b=5;
+var c='abc';
+*/
+var json={a: 12, b: 5, c: 'abc'};
+
+json.b++;
+
+alert(json.b);
+</script>
+
+
+例子2：
+
+<script>
+var json={a: 12, b: 5, c: 7};
+var arr=[12, 5, 7];
+
+/*
+alert(json['a']);
+alert(arr[0]);            //区别：下标不同
+*/
+
+//alert(json.length);     //json没有length
+//alert(arr.length);
+
+//循环
+/*
+for(var i=0;i<arr.length;i++)
+{
+	alert('第'+i+'个东西：'+arr[i]);
+}*/
+
+/*
+for(var i in arr)
+{
+	alert('第'+i+'个东西：'+arr[i]);
+}
+*/
+
+for(var i in json)
+{
+	alert('第'+i+'个东西：'+json[i]);
+}
+</script>
+
+
+
+
+
+
+
+
+四、深入JavaScript
+
+  1、函数返回值
+
+           什么是函数返回值
+                 函数的执行结果
+                 可以没有return
+
+           一个函数应该只返回一种类型的值
+
+<script>
+function show(a, b)
+{
+	//return;
+}
+
+alert(show(3, 5));
+</script>
+
+
+
+  2、函数传参
+
+       可变参（不定参）：arguments   	可变参	不定参
+         
+               参数的个数可变，参数数组
+   ---------------------------------------------------------
+
+       例子1：求和
+                   求所有参数的和
+
+<script>
+function sum()
+{
+	//alert(arguments.length);
+	//alert(arguments[0]);
+	//arguments
+	
+	var result=0;
+	
+	for(var i=0;i<arguments.length;i++)
+	{
+		result+=arguments[i];
+	}
+	
+	return result;
+}
+
+alert(sum(12, 6, 8, 6, 8));
+</script>
+
+-------------------------------------------------------------------------------------------
+
+       例子2：CSS函数
+                      判断arguments.length
+                      给参数取名，增强可读性
+
+       取非行间样式(不能用来设置)：
+                                  obj.currentStyle[attr]
+                                  getComputedStyle(obj, false)[attr]
+
+
+
+      css(oDiv, 'width')	        获取样式
+      css(oDiv, 'width', '200px')	设置样式
+ 
+例子1：      ----------------------------------------------------
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+function css()
+{
+	if(arguments.length==2)	//获取
+	{
+		return arguments[0].style[arguments[1]];     //获取样式
+	}
+	else
+	{
+		arguments[0].style[arguments[1]]=arguments[2];  //设置样式
+	}
+}
+
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	
+	//alert(css(oDiv, 'width'));
+	
+	css(oDiv, 'background', 'green');
+};
+</script>
+</head>
+
+<body>
+<div id="div1" style="width:200px; height:200px; background:red;">
+</div>
+</body>
+</html>
+
+
+例子2：      ----------------------------------------------------
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+function css(obj, name, value)
+{
+	if(arguments.length==2)	//获取
+	{
+		return obj.style[name];
+	}
+	else
+	{
+		obj.style[name]=value;
+	}
+}
+
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	
+	alert(css(oDiv, 'width'));
+	
+	//css(oDiv, 'background', 'green');
+};
+</script>
+</head>
+
+<body>
+<div id="div1" style="width:200px; height:200px; background:red;">
+</div>
+</body>
+</html>
+
+ ---------------------------------------------------------------------------
+
+取非行间样式(不能用来设置)：
+                        obj.currentStyle[attr]
+                        getComputedStyle(obj, false)[attr]     //第二个参数随便填，’false‘
+
+
+取非行间样式
+    例子1：      ----------------------------------------------------
+
+<style>
+#div1 {width:200px; height:200px; background:red;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	
+	//alert(oDiv.style.width);
+	//IE         ，不兼容火狐等浏览器            
+	//alert(oDiv.currentStyle.width);
+	
+	//Chrome、FF    , 不兼容IE7及以下
+	alert(getComputedStyle(oDiv, false).width);
+};
+</script>
+</head>
+
+<body>
+<div id="div1">
+</div>
+</body>
+
+
+
+    例子2： 用if 处理不兼容     ----------------------------------------------------
+
+
+<script>
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	
+	//alert(oDiv.style.width);
+	//IE
+	//alert(oDiv.currentStyle.width);
+	
+	//Chrome、FF
+	//alert(getComputedStyle(oDiv, false).width);
+	
+	//alert(oDiv.currentStyle);
+	
+	if(oDiv.currentStyle)
+	{
+		//IE
+		alert(oDiv.currentStyle.width);
+	}
+	else
+	{
+		//FF
+		alert(getComputedStyle(oDiv, false).width);
+	}
+};
+</script>
+
+
+
+
+     例子3：创建一个常用的函数   ----------------------------------------------------
+
+
+<style>
+#div1 {width:200px; height:200px; background:red;}
+</style>
+<script>
+function getStyle(obj, name)
+{
+	if(obj.currentStyle)
+	{
+		return obj.currentStyle[name];
+	}
+	else
+	{
+		return getComputedStyle(obj, false)[name];
+	}
+}
+
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+		
+	alert(getStyle(oDiv, 'width'));
+};
+</script>
+
+
+    例子4：   ----------------------------------------------------
+
+    复合样式：background、border
+    单一样式：width、height、position
+
+
+<style>
+#div1 {width:200px; height:200px; background:red;}
+</style>
+<script>
+function getStyle(obj, name)
+{
+	if(obj.currentStyle)
+	{
+		return obj.currentStyle[name];
+	}
+	else
+	{
+		return getComputedStyle(obj, false)[name];
+	}
+}
+
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+		
+	//alert(getStyle(oDiv, 'background'));  //为空	
+	alert(getStyle(oDiv, 'backgroundColor'));
+};
+</script>
+
+
+
+
+
+   3.数组基础
+
+       数组的使用
+                 定义
+                       var arr=[12, 5, 8, 9];
+           
+                       var arr=new Array(12, 5, 8, 9);
+
+                       没有任何差别，[]的性能略高，因为代码短
+
+
+      数组的属性
+               length
+
+                   既可以获取，又可以设置
+
+                   例子：快速清空数组   数组.length=0;
+
+     数组使用原则：数组中应该只存一种类型的变量
+ 
+
+     添加、删除元素（处理头部和尾部)
+           
+          数组的方法:
+                      添加
+                            push(元素)，从尾部添加
+                            unshift(元素)，从头部添加
+              
+                      删除
+                            pop()，从尾部弹出
+                            shift()，从头部弹出
+         ------------------------------------------------------
+    
+     插入、删除splice
+
+
+           <script>
+                var arr=[1,2,3,4,5,6];
+
+              //删除：splice(起点, 长度)
+              //arr.splice(2, 3);
+
+              //插入：splice(起点, 长度, 元素...);
+              //arr.splice(2, 0, 'a', 'b', 'c');
+
+
+              //先删除，再插入，即替换
+               arr.splice(2, 2, 'a', 'b');
+
+              alert(arr);
+          </script>
+      
+       -----------------------------------------------------------
+     
+     转换类（连接数组）
+
+          concat(数组2) ：连接两个数组
+
+                var a=[1,2,3];
+                var b=[4,5,6];
+
+                //alert(a.concat(b));
+                  alert(b.concat(a));
+
+
+          join(分隔符)   ：用分隔符，组合数组元素，生成字符串     //将数组转成字符串     
+                           字符串split
+
+
+     ------------------------------------------------------------
+
+     排序
+            sort([比较函数])，排序一个数组
+                              排序一个字符串数组
+                              排序一个数字数组
+
+
+
+    例子： 排序一个数字数组  ----------------------------------------------------
+
+
+    复合样式：background、border
+
+<script>
+var arr=[12, 8, 99, 19, 112];
+
+arr.sort(function (n1, n2){
+	return n1-n2;
+	/*if(n1<n2)
+	{
+		return -1;
+	}
+	else if(n1>n2)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}*/
+});
+
+alert(arr);
+</script>
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+四、定时器的使用
+
+
+    1、定时器的作用
+
+           开启定时器
+
+                    setInterval	  间隔型
+                    setTimeout	  延时型
+                    两种定时器的区别
+
+
+           停止定时器
+
+                   clearInterval  //需要指定关闭哪个定时器，否则会关闭全部
+                     
+                   clearTimeout
+
+
+      --------setInterval-------------
+<script>            
+function show()
+{
+	alert('a');
+}
+
+setInterval(show, 1000);        //无限执行
+</script>      
+
+ 
+
+ 
+
+
+   -----------setTimeout-----------------
+<script>
+function show()
+{
+	alert('a');
+}
+
+setTimeout(show, 1000);        //执行一次
+</script>
+
+ 
+
+
+
+
+  ------------定时的开启和关闭------------------  
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oBtn1=document.getElementById('btn1');
+	var oBtn2=document.getElementById('btn2');
+	var timer=null;
+	
+	oBtn1.onclick=function ()
+	{
+		timer=setInterval(function (){
+			alert('a');
+		}, 1000);
+	};
+	
+	oBtn2.onclick=function ()
+	{
+		clearInterval(timer);
+	};
+};
+</script>
+</head>
+
+<body>
+<input id="btn1" type="button" value="开启" />
+<input id="btn2" type="button" value="关闭" />
+</body>
+</html>
+
+
+--------------------------------------------------
+
+        
+
+
+
+
+    2、数码时钟
+           效果思路：
+                    获取系统时间
+                                Date对象
+                                getHours、getMinutes、getSeconds
+
+
+                    显示系统时间
+                               字符串连接
+                               空位补零
+
+                    设置图片路径
+                               charAt方法     ////本来是str[i],但兼容性不高，改成str.charAt(i)，兼容性高
+
+
+
+    -------------数码时钟--------------------------
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+function toDou(n)
+{
+	if(n<10)
+	{
+		return '0'+n;
+	}
+	else
+	{
+		return ''+n;
+	}
+}
+
+window.onload=function ()
+{
+	var aImg=document.getElementsByTagName('img');
+	
+	function tick(){
+		var oDate=new Date();
+		
+		var str=toDou(oDate.getHours())+toDou(oDate.getMinutes())+toDou(oDate.getSeconds());
+		
+		for(var i=0;i<aImg.length;i++)
+		{
+			aImg[i].src='img/'+str.charAt(i)+'.png';   //本来是str[i],但兼容性不高，改成str.charAt(i)，兼容性高
+		}
+	}
+	setInterval(tick, 1000);
+	tick();
+};
+</script>
+</head>
+
+<body style="background:black; color: white; font-size:50px;">
+<img src="img/0.png" />
+<img src="img/0.png" />
+:
+<img src="img/0.png" />
+<img src="img/0.png" />
+:
+<img src="img/0.png" />
+<img src="img/0.png" />
+</body>
+</html>
+
+
+    ------------------------------------------------------------------
+    
+
+   3、Date对象其他方法
+
+            年     getFullYear()
+
+            月     getMonth()
+  
+            日     getDate()
+
+            星期   getDay()
+
+      ----------------例子---------------
+<script>
+var oDate=new Date();
+
+//alert(oDate.getFullYear());
+//alert(oDate.getMonth()+1);      //getMonth()得到的值的 0--11
+//alert(oDate.getDate());
+alert(oDate.getDay());            //0 代表周日
+</script>
+
+---------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+   4、延时提示框
+
+         效果演示
+
+             原来的方法
+                       移入显示，移出隐藏
+
+             移出延时隐藏
+                       移入下面的Div后，还是隐藏了
+
+             简化代码
+                       合并两个相同的mouseover和mouseout
+
+
+
+
+
+     ---------延时提示框（未改进前）--------------     
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+div {float:left; margin:10px;}
+#div1 {width:50px; height:50px; background:red;}
+#div2 {width:250px; height:180px; background:#CCC; display:none;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oDiv1=document.getElementById('div1');
+	var oDiv2=document.getElementById('div2');
+	var timer=null;
+	
+	oDiv1.onmouseover=function ()
+	{
+		clearTimeout(timer);
+		oDiv2.style.display='block';
+	};
+	oDiv1.onmouseout=function ()
+	{
+		timer=setTimeout(function (){
+			oDiv2.style.display='none';
+		}, 500);
+	};
+	
+	oDiv2.onmouseover=function ()
+	{
+		clearTimeout(timer);
+	};
+	oDiv2.onmouseout=function ()
+	{
+		timer=setTimeout(function (){
+			oDiv2.style.display='none';
+		}, 500);
+	};
+};
+</script>
+</head>
+
+<body>
+<div id="div1"></div>
+<div id="div2"></div>
+</body>
+</html>
+
+
+
+    ---------------延时提示框（改进后）：合并两个相同的mouseover和mouseout----------------------
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+div {float:left; margin:10px;}
+#div1 {width:50px; height:50px; background:red;}
+#div2 {width:250px; height:180px; background:#CCC; display:none;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oDiv1=document.getElementById('div1');
+	var oDiv2=document.getElementById('div2');
+	var timer=null;
+	
+	oDiv2.onmouseover=oDiv1.onmouseover=function ()
+	{
+		clearTimeout(timer);
+		oDiv2.style.display='block';
+	};
+	oDiv2.onmouseout=oDiv1.onmouseout=function ()
+	{
+		timer=setTimeout(function (){
+			oDiv2.style.display='none';
+		}, 500);
+	};
+};
+</script>
+</head>
+
+<body>
+<div id="div1"></div>
+<div id="div2"></div>
+</body>
+</html>
+
+------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+   5、无缝滚动——基础
+
+            效果演示：
+
+                   物体运动基础
+                               让Div移动起来 
+                               offsetLeft的作用          //offsetLeft：获取左边距
+                               用定时器让物体连续移动
+
+
+
+
+            效果原理：
+
+                  让ul一直向左移动
+             
+              复制li
+                     innerHTML和+=
+                     修改ul的width
+
+              滚动过界后，重设位置
+                                   判断过界
+
+
+
+
+            无缝滚动——扩展：
+
+                改变滚动方向
+                             修改speed
+                             修改判断条件
+
+                鼠标移入暂停
+                             移入关闭定时器
+                             移出重新开启定时器
+
+        -----------------div向左移动----------------------------
+
+<style>
+#div1 {width:200px; height:200px; background:red; position:absolute; left:0; top:50px;}
+</style>
+<script>
+setInterval(function (){
+	var oDiv=document.getElementById('div1');
+	
+	oDiv.style.left=oDiv.offsetLeft+10+'px';
+}, 30);
+</script>
+</head>
+
+<body>
+<div id="div1">
+</div>
+</body>
+
+
+
+
+
+
+
+
+     -------------------无缝滚动2（向左滚）--------------------------
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+* {margin:0; padding:0;}
+#div1 {width:712px; height:108px; margin:100px auto; position:relative; background:red; overflow:hidden;}
+#div1 ul {position:absolute; left:0; top:0;}
+#div1 ul li {float:left; width:178px; height:108px; list-style:none;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	var oUl=oDiv.getElementsByTagName('ul')[0];
+	var aLi=oUl.getElementsByTagName('li');
+	
+	oUl.innerHTML=oUl.innerHTML+oUl.innerHTML;
+	oUl.style.width=aLi[0].offsetWidth*aLi.length+'px';
+	
+	setInterval(function (){
+		if(oUl.offsetLeft<-oUl.offsetWidth/2)
+		{
+			oUl.style.left='0';
+		}
+		oUl.style.left=oUl.offsetLeft-2+'px';
+	}, 30);
+};
+</script>
+</head>
+
+<body>
+<div id="div1">
+    <ul>
+    	<li><img src="img2/1.jpg" /></li>
+    	<li><img src="img2/2.jpg" /></li>
+    	<li><img src="img2/3.jpg" /></li>
+    	<li><img src="img2/4.jpg" /></li>
+    </ul>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+        ----------------无缝滚动3（向右滚）--------------------
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+* {margin:0; padding:0;}
+#div1 {width:712px; height:108px; margin:100px auto; position:relative; background:red; overflow:hidden;}
+#div1 ul {position:absolute; left:0; top:0;}
+#div1 ul li {float:left; width:178px; height:108px; list-style:none;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	var oUl=oDiv.getElementsByTagName('ul')[0];
+	var aLi=oUl.getElementsByTagName('li');
+	
+	oUl.innerHTML=oUl.innerHTML+oUl.innerHTML;
+	oUl.style.width=aLi[0].offsetWidth*aLi.length+'px';
+	
+	setInterval(function (){
+		if(oUl.offsetLeft<-oUl.offsetWidth/2)
+		{
+			oUl.style.left='0';
+		}
+		if(oUl.offsetLeft>0)
+		{
+			oUl.style.left=-oUl.offsetWidth/2+'px';
+		}
+		oUl.style.left=oUl.offsetLeft+2+'px';
+	}, 30);
+};
+</script>
+</head>
+
+<body>
+<div id="div1">
+    <ul>
+    	<li><img src="img2/1.jpg" /></li>
+    	<li><img src="img2/2.jpg" /></li>
+    	<li><img src="img2/3.jpg" /></li>
+    	<li><img src="img2/4.jpg" /></li>
+    </ul>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ------------------无缝滚动4（当鼠标移进去时暂停，移出来时滚动）----------------------
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+* {margin:0; padding:0;}
+#div1 {width:712px; height:108px; margin:100px auto; position:relative; background:red; overflow:hidden;}
+#div1 ul {position:absolute; left:0; top:0;}
+#div1 ul li {float:left; width:178px; height:108px; list-style:none;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	var oUl=oDiv.getElementsByTagName('ul')[0];
+	var aLi=oUl.getElementsByTagName('li');
+	
+	oUl.innerHTML=oUl.innerHTML+oUl.innerHTML;
+	oUl.style.width=aLi[0].offsetWidth*aLi.length+'px';
+	
+	function move(){
+		if(oUl.offsetLeft<-oUl.offsetWidth/2)
+		{
+			oUl.style.left='0';
+		}
+		if(oUl.offsetLeft>0)
+		{
+			oUl.style.left=-oUl.offsetWidth/2+'px';
+		}
+		oUl.style.left=oUl.offsetLeft+2+'px';
+	}
+	var timer=setInterval(move, 30);
+	
+	oDiv.onmouseover=function ()
+	{
+		clearInterval(timer);
+	};
+	
+	oDiv.onmouseout=function ()
+	{
+		timer=setInterval(move, 30);
+	};
+};
+</script>
+</head>
+
+<body>
+<div id="div1">
+    <ul>
+    	<li><img src="img2/1.jpg" /></li>
+    	<li><img src="img2/2.jpg" /></li>
+    	<li><img src="img2/3.jpg" /></li>
+    	<li><img src="img2/4.jpg" /></li>
+    </ul>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+       ------------------无缝滚动5（用按钮使它向左或向右滚）----------------------
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+* {margin:0; padding:0;}
+#div1 {width:712px; height:108px; margin:100px auto; position:relative; background:red; overflow:hidden;}
+#div1 ul {position:absolute; left:0; top:0;}
+#div1 ul li {float:left; width:178px; height:108px; list-style:none;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	var oUl=oDiv.getElementsByTagName('ul')[0];
+	var aLi=oUl.getElementsByTagName('li');
+	
+	var speed=-2;
+	
+	//oUl.innerHTML=oUl.innerHTML+oUl.innerHTML;
+	oUl.innerHTML+=oUl.innerHTML;
+	oUl.style.width=aLi[0].offsetWidth*aLi.length+'px';
+	
+	function move(){
+		if(oUl.offsetLeft<-oUl.offsetWidth/2)
+		{
+			oUl.style.left='0';
+		}
+		if(oUl.offsetLeft>0)
+		{
+			oUl.style.left=-oUl.offsetWidth/2+'px';
+		}
+		oUl.style.left=oUl.offsetLeft+speed+'px';
+	}
+	var timer=setInterval(move, 30);
+	
+	oDiv.onmouseover=function ()
+	{
+		clearInterval(timer);
+	};
+	
+	oDiv.onmouseout=function ()
+	{
+		timer=setInterval(move, 30);
+	};
+	
+	document.getElementsByTagName('a')[0].onclick=function ()
+	{
+		speed=-2;
+	};
+	document.getElementsByTagName('a')[1].onclick=function ()
+	{
+		speed=2;
+	};
+};
+</script>
+</head>
+
+<body>
+<a href="javascript:;">向左走</a>
+<a href="javascript:;">向右走</a>
+<div id="div1">
+    <ul>
+    	<li><img src="img2/1.jpg" /></li>
+    	<li><img src="img2/2.jpg" /></li>
+    	<li><img src="img2/3.jpg" /></li>
+    	<li><img src="img2/4.jpg" /></li>
+    </ul>
+</div>
+</body>
+</html>
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+五、DOM基础
+
+
+    标签    CSS
+    元素    JS
+    节点    DOM
+ 
+
+    DOM基础-1
+
+            什么是DOM浏览器
+            支持情况
+
+
+
+
+      节点信息
+
+      每个节点都拥有包含着关于节点某些信息的属性。这些属性是：
+
+                      nodeName（节点名称） 
+
+                      nodeValue（节点值） 
+
+                      nodeType（节点类型） 
+
+                      nodeType
+
+                      nodeType 属性可返回节点的类型。
+
+          最重要的节点类型是：
+ 
+
+                      元素类型                     节点类型
+
+                 元素(ELEMENT_NODE)                    1   
+
+                 属性(ATTRIBUTE_NODE)                  2
+
+                  文本(TEXT_NODE)                      3
+
+                 注释(COMMENT_NODE)                    8
+
+                文档(DOCUMENT_NODE)                    9
+
+
+
+       DOM节点（1）：
+
+           childNodes	   // 在高级浏览器和 IE9以上 会获取元素节点和文本节点，在IE6-8只获得元素节点
+               
+           nodeType     //节点类型 ----》  “1”元素节点，“3”文本节点
+
+                   获取子节点          //子节点只算第一层，孙子层不算
+                           children   //只获取元素节点
+
+
+           parentNode    //父节点
+                      例子：点击链接，隐藏整个li
+
+
+
+           offsetParent  //获取可以使它设置绝对定位的父节点
+                        例子：获取元素在页面上的实际位置
+
+
+
+       -------------------------
+     
+   DOM基础 - 2
+
+          DOM节点(2)
+
+             首尾子节点
+                        有兼容性问题
+                        firstChild、firstElementChild     //第一个子节点
+                        lastChild 、lastElementChild      //最后一个子节点
+
+             兄弟节点
+                        有兼容性问题
+                        nextSibling、nextElementSibling
+                        previousSibling、previousElementSibling
+
+     
+     ------------------------------
+     
+  操纵元素属性
+               
+        元素属性操作
+                     第一种：oDiv.style.display=“block”;
+
+                     第二种：oDiv.style[“display”]=“block”;
+
+                     第三种：Dom方式
+
+
+        DOM方式操作元素属性
+
+                     获取：getAttribute(名称)
+
+                     设置：setAttribute(名称, 值)
+
+                     删除：removeAttribute(名称)
+
+
+     ---------------
+        
+   DOM元素灵活查找
+
+              用className选择元素
+
+                   如何用className选择元素：
+
+                                           选出所有元素
+         
+                                           通过className条件筛选
+
+                   封装成函数
+
+
+
+
+
+
+      ---------------------例子1  childNodes----会获取元素节点和文本节点--------------------------
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oUl=document.getElementById('ul1');
+	
+	//IE6-8
+	//alert(oUl.childNodes.length);              //oUl.childNodes 获得的是存节点的数组
+	for(var i=0;i<oUl.childNodes.length;i++)
+	{                                            // oUl.childNodes[i].nodeType 等于 3 时，表示是文本节点
+		//nodeType==3	->	文本节点     // oUl.childNodes[i].nodeType 等于 1 时，表示是元素节点
+		//nodeType==1	->	元素节点
+		//alert(oUl.childNodes[i].nodeType);
+		
+		if(oUl.childNodes[i].nodeType==1)
+		{
+			oUl.childNodes[i].style.background='red';
+		}
+	}
+};
+</script>
+</head>
+
+<body>
+<ul id="ul1">
+	<li></li>
+	<li></li>
+</ul>
+
+aaaa
+bbbb
+
+fafafsdfasd	文本节点
+<span>qwerqwre 元素节点</span>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+   --------------------例子2 children ---只获取元素节点---------------------------
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oUl=document.getElementById('ul1');
+	
+	alert(oUl.children.length);
+	/*for(var i=0;i<oUl.children.length;i++)
+	{
+		oUl.children[i].style.background='red';
+	}*/
+};
+</script>
+</head>
+
+<body>
+<ul id="ul1">
+	<li></li>
+	<li></li>
+</ul>
+
+aaaa
+bbbb
+
+fafafsdfasd	文本节点
+<span>qwerqwre 元素节点</span>
+
+</body>
+</html>
+
+
+      -----------------例子3-parentNode父节点应用.html------------------------------------
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var aA=document.getElementsByTagName('a');
+	
+	for(var i=0;i<aA.length;i++)
+	{
+		aA[i].onclick=function ()
+		{
+			this.parentNode.style.display='none';   //this.parentNode 获取父节点
+		};
+	}
+};
+</script>
+</head>
+
+<body>
+<ul id="ul1">
+	<li>dfasdf <a href="javascript:;">隐藏</a></li>
+	<li>45346 <a href="javascript:;">隐藏</a></li>
+	<li>fghfgcvn <a href="javascript:;">隐藏</a></li>
+	<li>vcbxcvbc <a href="javascript:;">隐藏</a></li>
+	<li>757465867 <a href="javascript:;">隐藏</a></li>
+</ul>
+</body>
+</html>
+
+
+
+    -------------------例子4--firstChild-----firstElementChild--------------首子节点---------------
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oUl=document.getElementById('ul1');
+	
+	//IE6-8
+	//oUl.firstChild.style.background='red';              //firstChild  只适用  IE6-8
+	
+	//高级浏览器
+	//oUl.firstElementChild.style.background='red';        //firstElementChild  只适用高级浏览器   不适用IE6-8
+	
+	if(oUl.firstElementChild)                              //处理兼容性问题
+	{
+		oUl.firstElementChild.style.background='red';
+	}
+	else
+	{
+		oUl.firstChild.style.background='red';
+	}
+};
+</script>
+</head>
+
+<body>
+<ul id="ul1">
+	<li>1</li>
+	<li>2</li>
+	<li>3</li>
+</ul>
+</body>
+</html>
+
+
+
+
+     --------------例子5--元素属性操作-----------------------------
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oTxt=document.getElementById('txt1');
+	var oBtn=document.getElementById('btn1');
+	
+	oBtn.onclick=function ()
+	{
+		//oTxt.value='asdfasd';
+		//oTxt['value']='xczcvb';
+		
+		oTxt.setAttribute('value', 'erwertwert');
+	};
+};
+</script>
+</head>
+
+<body>
+<input id="txt1" type="text" />
+<input id="btn1" type="button" value="按钮" />
+</body>
+</html>
+
+
+
+
+
+
+  -----------------例子6---getByClass----------------------------
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+function getByClass(oParent, sClass)
+{
+	var aResult=[];
+	var aEle=oParent.getElementsByTagName('*');
+	
+	for(var i=0;i<aEle.length;i++)
+	{
+		if(aEle[i].className==sClass)
+		{
+			aResult.push(aEle[i]);
+		}
+	}
+	
+	return aResult;
+}
+
+window.onload=function ()
+{
+	var oUl=document.getElementById('ul1');
+	var aBox=getByClass(oUl, 'box');
+	
+	for(var i=0;i<aBox.length;i++)
+	{
+		aBox[i].style.background='red';
+	}
+};
+</script>
+</head>
+
+<body>
+<ul id="ul1">
+	<li class="box"></li>
+	<li class="box"></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li class="box"></li>
+	<li></li>
+</ul>
+</body>
+</html>
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+六、DOM操作应用
+
+
+    创建、插入和删除元素
+
+          创建DOM元素：
+
+                   createElement(标签名)	创建一个节点 
+                   
+                   appendChild(节点)		追加一个节点
+
+                   例子：为ul插入li
+
+
+          插入元素：
+               
+                   insertBefore(节点, 原有节点)	在已有元素前插入
+
+                    例子：倒序插入li
+
+
+          删除DOM元素：
+
+                   removeChild(节点)		删除一个节点
+
+                   例子：删除li
+
+
+   
+    文档碎片
+
+         文档碎片：
+
+                  文档碎片可以提高DOM操作性能(理论上)      //一般只在低版本提高性能
+
+                  文档碎片原理
+
+                  document.createDocumentFragment()
+ 
+
+          -------------------------------------------
+
+
+    -----------例子1-----先createElement----- 再appendChild-------------------
+
+
+window.onload=function ()
+{
+	var oBtn=document.getElementById('btn1');
+	var oUl=document.getElementById('ul1');
+	var oTxt=document.getElementById('txt1');
+	
+	oBtn.onclick=function ()
+	{
+		var oLi=document.createElement('li');
+		
+		oLi.innerHTML=oTxt.value;
+		
+		//父级.appendChild(子节点);
+		oUl.appendChild(oLi);
+	};
+};
+</script>
+</head>
+
+<body>
+<input id="txt1" type="text"/>
+<input id="btn1" type="button" value="创建li"/>
+<ul id="ul1">
+</ul>
+</body>
+</html>
+
+
+
+
+
+
+
+
+   
+       -----------例子2-----先createElement--------设置插入位置insertBefore(节点, 原有节点)-------------
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oBtn=document.getElementById('btn1');
+	var oUl=document.getElementById('ul1');
+	var oTxt=document.getElementById('txt1');
+	
+	oBtn.onclick=function ()
+	{
+		var oLi=document.createElement('li');
+		var aLi=oUl.getElementsByTagName('li');
+		
+		oLi.innerHTML=oTxt.value;
+		
+		//父级.appendChild(子节点);
+		//oUl.appendChild(oLi);
+		if(aLi.length>0)
+		{
+			oUl.insertBefore(oLi, aLi[0]);   //如果没有if语句，单单只有这行代码，IE会报错
+		}
+		else
+		{
+			oUl.appendChild(oLi);
+		}
+	};
+};
+</script>
+</head>
+
+<body>
+<input id="txt1" type="text"/>
+<input id="btn1" type="button" value="创建li"/>
+<ul id="ul1">
+</ul>
+</body>
+</html>
+
+
+
+
+
+
+
+   -----------例子3-----删除元素removeChild-------------------
+
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var aA=document.getElementsByTagName('a');
+	var oUl=document.getElementById('ul1');
+	
+	for(var i=0;i<aA.length;i++)
+	{
+		aA[i].onclick=function ()
+		{
+			oUl.removeChild(this.parentNode);       //这里注意
+		};
+	}
+};
+</script>
+</head>
+
+<body>
+<ul id="ul1">
+	<li>asfasd <a href="javascript:;">删除</a></li>
+	<li>5645 <a href="javascript:;">删除</a></li>
+	<li>ghdfjgj <a href="javascript:;">删除</a></li>
+	<li>mvbnmvnb <a href="javascript:;">删除</a></li>
+</ul>
+</body>
+</html>
+
+
+
+
+
+   -----------例子4-----文档碎片 createDocumentFragment ---------------------------
+
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oUl=document.getElementById('ul1');
+	var oFrag=document.createDocumentFragment();
+	
+	for(var i=0;i<10000;i++)
+	{
+		var oLi=document.createElement('li');
+		
+		oFrag.appendChild(oLi);
+	}
+	
+	oUl.appendChild(oFrag);
+};
+</script>
+</head>
+
+<body>
+<ul id="ul1">
+</ul>
+</body>
+</html>
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+七、DOM操作应用高级
+
+    1、表格应用 - 1
+
+            获取：
+                  tBodies（取出的是数组）、tHead（取出的是元素）、tFoot（取出的是元素）、rows、cells 
+
+
+            隔行变色：
+                      鼠标移入高亮
+
+            添加、删除一行：
+                            DOM方法的使用
+
+
+
+
+   2、表格应用 - 2
+
+          搜索：
+                版本1：基础版本——字符串比较
+
+                版本2：忽略大小写——大小写转换
+ 
+                版本3：模糊搜索——search的使用
+
+                版本4：多关键词——split
+
+                       高亮显示、筛选
+
+                var str='abcdef';
+
+                alert(str.search('g'));	//找到并且返回字符串出现的位置，如果没找到-1
+
+
+
+          排序：
+                移动Li
+
+                元素排序：转换——排序——插入
+
+
+
+   ------------------例子1 取出表中的某个值-------tBodies（取出的是数组）------rows、cells ---------------------------
+
+
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oTab=document.getElementById('tab1');
+	
+	//alert(oTab.getElementsByTagName('tbody')[0].getElementsByTagName('tr')[1].getElementsByTagName('td')[1].innerHTML);
+	alert(oTab.tBodies[0].rows[1].cells[1].innerHTML);
+};
+</script>
+</head>
+
+<body>
+<table id="tab1" border="1" width="500">
+	<thead>
+    	<td>ID</td>
+    	<td>姓名</td>
+    	<td>年龄</td>
+    </thead>
+    <tbody>
+    	<tr>
+        	<td>1</td>
+        	<td>Blue</td>
+        	<td>27</td>
+        </tr>
+    	<tr>
+        	<td>2</td>
+        	<td>张三</td>
+        	<td>23</td>
+        </tr>
+    	<tr>
+        	<td>3</td>
+        	<td>李四</td>
+        	<td>28</td>
+        </tr>
+    	<tr>
+        	<td>4</td>
+        	<td>王五</td>
+        	<td>25</td>
+        </tr>
+    	<tr>
+        	<td>5</td>
+        	<td>张伟</td>
+        	<td>24</td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+-----------------例2  隔行变色----------且鼠标移入高亮--------------------------------------
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oTab=document.getElementById('tab1');
+	var oldColor='';
+	
+	for(var i=0;i<oTab.tBodies[0].rows.length;i++)
+	{
+		oTab.tBodies[0].rows[i].onmouseover=function ()
+		{
+			oldColor=this.style.background;
+			this.style.background='green';
+		};
+		oTab.tBodies[0].rows[i].onmouseout=function ()
+		{
+			this.style.background=oldColor;
+		};
+		
+		if(i%2)
+		{
+			oTab.tBodies[0].rows[i].style.background='';
+		}
+		else
+		{
+			oTab.tBodies[0].rows[i].style.background='#CCC';
+		}
+	}
+};
+</script>
+</head>
+
+<body>
+<table id="tab1" border="1" width="500">
+	<thead>
+    	<td>ID</td>
+    	<td>姓名</td>
+    	<td>年龄</td>
+    </thead>
+    <tbody>
+    	<tr>
+        	<td>1</td>
+        	<td>Blue</td>
+        	<td>27</td>
+        </tr>
+    	<tr>
+        	<td>2</td>
+        	<td>张三</td>
+        	<td>23</td>
+        </tr>
+    	<tr>
+        	<td>3</td>
+        	<td>李四</td>
+        	<td>28</td>
+        </tr>
+    	<tr>
+        	<td>4</td>
+        	<td>王五</td>
+        	<td>25</td>
+        </tr>
+    	<tr>
+        	<td>5</td>
+        	<td>张伟</td>
+        	<td>24</td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>
+
+
+
+
+-----------------例3  ------表格添加html------------------------
+
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oTab=document.getElementById('tab1');
+	
+	var oBtn=document.getElementById('btn1');
+	var oName=document.getElementById('name');
+	var oAge=document.getElementById('age');
+	
+	oBtn.onclick= function()
+	{
+		var oTr=document.createElement('tr');
+		
+		var oTd=document.createElement('td');
+		oTd.innerHTML=oTab.tBodies[0].rows.length+1;	//?  用行数来设置ID，会出现漏洞 ，会出现id相同的问题
+		oTr.appendChild(oTd);
+		
+		var oTd=document.createElement('td');
+		oTd.innerHTML=oName.value;
+		oTr.appendChild(oTd);
+		
+		var oTd=document.createElement('td');
+		oTd.innerHTML=oAge.value
+		oTr.appendChild(oTd);
+		
+		oTab.tBodies[0].appendChild(oTr);
+	};
+};
+</script>
+</head>
+
+<body>
+姓名：<input id="name" type="text" />
+年龄：<input id="age" type="text" />
+<input id="btn1" type="button" value="添加" />
+<table id="tab1" border="1" width="500">
+	<thead>
+    	<td>ID</td>
+    	<td>姓名</td>
+    	<td>年龄</td>
+    </thead>
+    <tbody>
+    	<tr>
+        	<td>1</td>
+        	<td>Blue</td>
+        	<td>27</td>
+        </tr>
+    	<tr>
+        	<td>2</td>
+        	<td>张三</td>
+        	<td>23</td>
+        </tr>
+    	<tr>
+        	<td>3</td>
+        	<td>李四</td>
+        	<td>28</td>
+        </tr>
+    	<tr>
+        	<td>4</td>
+        	<td>王五</td>
+        	<td>25</td>
+        </tr>
+    	<tr>
+        	<td>5</td>
+        	<td>张伟</td>
+        	<td>24</td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>
+
+
+
+
+
+-----------------例4  ------表格添加、删除.html------------------------
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oTab=document.getElementById('tab1');
+	
+	var oBtn=document.getElementById('btn1');
+	var oName=document.getElementById('name');
+	var oAge=document.getElementById('age');
+	var id=oTab.tBodies[0].rows.length+1;
+	
+	oBtn.onclick=function ()
+	{
+		var oTr=document.createElement('tr');
+		
+		var oTd=document.createElement('td');
+		oTd.innerHTML=id++;	                //
+		oTr.appendChild(oTd);
+		
+		var oTd=document.createElement('td');
+		oTd.innerHTML=oName.value;
+		oTr.appendChild(oTd);
+		
+		var oTd=document.createElement('td');
+		oTd.innerHTML=oAge.value;
+		oTr.appendChild(oTd);
+		
+		var oTd=document.createElement('td');
+		oTd.innerHTML='<a href="javascript:;">删除</a>';
+		oTr.appendChild(oTd);
+		
+		oTd.getElementsByTagName('a')[0].onclick=function ()
+		{
+			oTab.tBodies[0].removeChild(this.parentNode.parentNode);
+		};
+		
+		oTab.tBodies[0].appendChild(oTr);
+	};
+};
+</script>
+</head>
+
+<body>
+姓名：<input id="name" type="text" />
+年龄：<input id="age" type="text" />
+<input id="btn1" type="button" value="添加" />
+<table id="tab1" border="1" width="500">
+	<thead>
+    	<td>ID</td>
+    	<td>姓名</td>
+    	<td>年龄</td>
+        <td>操作</td>
+    </thead>
+    <tbody>
+    	<tr>
+        	<td>1</td>
+        	<td>Blue</td>
+        	<td>27</td>
+        	<td></td>
+        </tr>
+    	<tr>
+        	<td>2</td>
+        	<td>张三</td>
+        	<td>23</td>
+        	<td></td>
+        </tr>
+    	<tr>
+        	<td>3</td>
+        	<td>李四</td>
+        	<td>28</td>
+        	<td></td>
+        </tr>
+    	<tr>
+        	<td>4</td>
+        	<td>王五</td>
+        	<td>25</td>
+        	<td></td>
+        </tr>
+    	<tr>
+        	<td>5</td>
+        	<td>张伟</td>
+        	<td>24</td>
+        	<td></td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>
+
+
+
+
+
+
+
+-----------------例5  ------表格搜索.html-----  搜索到时，行背景色改变----忽略大小写---------------
+
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oTab=document.getElementById('tab1');
+	var oTxt=document.getElementById('name');
+	var oBtn=document.getElementById('btn1');
+	
+	oBtn.onclick=function ()
+	{
+		for(var i=0;i<oTab.tBodies[0].rows.length;i++)
+		{
+			var sTab=oTab.tBodies[0].rows[i].cells[1].innerHTML;
+			var sTxt=oTxt.value;
+			if(sTab.toLowerCase()==sTxt.toLowerCase())                            //全部字母改为小写
+			{
+				oTab.tBodies[0].rows[i].style.background='yellow';
+			}
+			else
+			{
+				oTab.tBodies[0].rows[i].style.background='';
+			}
+		}
+	};
+};
+</script>
+</head>
+
+<body>
+姓名：<input id="name" type="text" />
+<input id="btn1" type="button" value="搜索" />
+<table id="tab1" border="1" width="500">
+	<thead>
+    	<td>ID</td>
+    	<td>姓名</td>
+    	<td>年龄</td>
+        <td>操作</td>
+    </thead>
+    <tbody>
+    	<tr>
+        	<td>1</td>
+        	<td>Blue</td>
+        	<td>27</td>
+        	<td></td>
+        </tr>
+    	<tr>
+        	<td>2</td>
+        	<td>张三</td>
+        	<td>23</td>
+        	<td></td>
+        </tr>
+    	<tr>
+        	<td>3</td>
+        	<td>李四</td>
+        	<td>28</td>
+        	<td></td>
+        </tr>
+    	<tr>
+        	<td>4</td>
+        	<td>王五</td>
+        	<td>25</td>
+        	<td></td>
+        </tr>
+    	<tr>
+        	<td>5</td>
+        	<td>张伟</td>
+        	<td>24</td>
+        	<td></td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>
+
+
+
+
+
+-----------------例6  ------表格搜索.html-----  搜索到时，行背景色改变----忽略大小写---------------
+
+var str='abcdef';
+
+alert(str.search('g'));	//找到并且返回字符串出现的位置，如果没找到-1
+
+            ------------------------------------------------------------------------------
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oTab=document.getElementById('tab1');
+	var oTxt=document.getElementById('name');
+	var oBtn=document.getElementById('btn1');
+	
+	oBtn.onclick=function ()
+	{
+		for(var i=0;i<oTab.tBodies[0].rows.length;i++)
+		{
+			var sTab=oTab.tBodies[0].rows[i].cells[1].innerHTML.toLowerCase();
+			var sTxt=oTxt.value.toLowerCase();
+			if(sTab.search(sTxt)!=-1)
+			{
+				oTab.tBodies[0].rows[i].style.background='yellow';
+			}
+			else
+			{
+				oTab.tBodies[0].rows[i].style.background='';
+			}
+		}
+	};
+};
+</script>
+</head>
+
+<body>
+姓名：<input id="name" type="text" />
+<input id="btn1" type="button" value="搜索" />
+<table id="tab1" border="1" width="500">
+	<thead>
+    	<td>ID</td>
+    	<td>姓名</td>
+    	<td>年龄</td>
+        <td>操作</td>
+    </thead>
+    <tbody>
+    	<tr>
+        	<td>1</td>
+        	<td>Blue</td>
+        	<td>27</td>
+        	<td></td>
+        </tr>
+    	<tr>
+        	<td>2</td>
+        	<td>张三</td>
+        	<td>23</td>
+        	<td></td>
+        </tr>
+    	<tr>
+        	<td>3</td>
+        	<td>李四</td>
+        	<td>28</td>
+        	<td></td>
+        </tr>
+    	<tr>
+        	<td>4</td>
+        	<td>王五</td>
+        	<td>25</td>
+        	<td></td>
+        </tr>
+    	<tr>
+        	<td>5</td>
+        	<td>张伟</td>
+        	<td>24</td>
+        	<td></td>
+        </tr>
+    	<tr>
+        	<td>6</td>
+        	<td>王四</td>
+        	<td>24</td>
+        	<td></td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>
+
+
+
+
+
+
+
+--------例7  ------表格搜索.html-----  搜索到时，行背景色改变----忽略大小写-----多关键字split------将不符合的行隐藏------
+
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oTab=document.getElementById('tab1');
+	var oTxt=document.getElementById('name');
+	var oBtn=document.getElementById('btn1');
+	
+	oBtn.onclick=function ()
+	{
+		for(var i=0;i<oTab.tBodies[0].rows.length;i++)
+		{
+			var sTab=oTab.tBodies[0].rows[i].cells[1].innerHTML.toLowerCase();
+			var sTxt=oTxt.value.toLowerCase();
+			
+			var arr=sTxt.split(' ');
+			
+			oTab.tBodies[0].rows[i].style.display='none';
+			
+			for(var j=0;j<arr.length;j++)
+			{
+				if(sTab.search(arr[j])!=-1)
+				{
+					oTab.tBodies[0].rows[i].style.display='block';
+				}
+			}
+		}
+	};
+};
+</script>
+</head>
+
+<body>
+姓名：<input id="name" type="text" />
+<input id="btn1" type="button" value="搜索" />
+<table id="tab1" border="1" width="500">
+	<thead>
+    	<td>ID</td>
+    	<td>姓名</td>
+    	<td>年龄</td>
+        <td>操作</td>
+    </thead>
+    <tbody>
+    	<tr>
+        	<td>1</td>
+        	<td>Blue</td>
+        	<td>27</td>
+        	<td></td>
+        </tr>
+    	<tr>
+        	<td>2</td>
+        	<td>张三</td>
+        	<td>23</td>
+        	<td></td>
+        </tr>
+    	<tr>
+        	<td>3</td>
+        	<td>李四</td>
+        	<td>28</td>
+        	<td></td>
+        </tr>
+    	<tr>
+        	<td>4</td>
+        	<td>王五</td>
+        	<td>25</td>
+        	<td></td>
+        </tr>
+    	<tr>
+        	<td>5</td>
+        	<td>张伟</td>
+        	<td>24</td>
+        	<td></td>
+        </tr>
+    	<tr>
+        	<td>6</td>
+        	<td>王四</td>
+        	<td>24</td>
+        	<td></td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+   --------例8--li排序-----------利用appendChild-------------------------------------------------------------
+
+     appendChild（元素） ：是将元素从原来的父节点中删除，再把它添加到新的父节点中   
+
+            -------------------------------------------
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#ul1 {background:green;}
+#ul2 {background:yellow;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oUl1=document.getElementById('ul1');
+	var oBtn=document.getElementById('btn1');
+	
+	oBtn.onclick=function ()
+	{
+		var aLi=oUl1.getElementsByTagName('li');  
+		
+		//aLi.sort();     //aLi 实际上不是一个数组，只是类似于数组，是个元素集合，所以没有sort方法
+		var arr=[];            //但可以将它转换成数组
+		 
+		for(var i=0;i<aLi.length;i++)
+		{
+			arr[i]=aLi[i];        //将aLi 的元素存到一个数组arr
+		}
+		
+		arr.sort(function (li1, li2){
+
+			var n1=parseInt(li1.innerHTML);
+			var n2=parseInt(li2.innerHTML);
+			
+			return n1-n2;
+		});                             //arr数组排序
+		
+		//alert(arr[0].innerHTML);
+		for(var i=0;i<arr.length;i++)
+		{
+			alert('该把'+arr[i].innerHTML+'插入到最后');
+			oUl1.appendChild(arr[i]);                  //再将数组内的元素重新appendChild到aLi中
+		}
+	};
+};
+</script>
+</head>
+
+<body>
+<input id="btn1" type="button" value="排序" />
+<ul id="ul1">
+	<li>34</li>
+	<li>25</li>
+	<li>9</li>
+	<li>88</li>
+	<li>54</li>
+</ul>
+</body>
+</html>
+
+
+
+
+
+   --------例9--表格排序-----------利用appendChild--------排序-----------------------------------------------------
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oTab=document.getElementById('tab1');
+	var oBtn=document.getElementById('btn1');
+	
+	oBtn.onclick=function ()
+	{
+		var arr=[];
+		
+		for(var i=0;i<oTab.tBodies[0].rows.length;i++)
+		{
+			arr[i]=oTab.tBodies[0].rows[i];
+		}
+		
+		arr.sort(function (tr1, tr2){
+			var n1=parseInt(tr1.cells[0].innerHTML);
+			var n2=parseInt(tr2.cells[0].innerHTML);
+			
+			return n1-n2;
+		});
+		
+		for(var i=0;i<arr.length;i++)
+		{
+			oTab.tBodies[0].appendChild(arr[i]);
+		}
+	};
+};
+</script>
+</head>
+
+<body>
+<input id="btn1" type="button" value="排序" />
+<table id="tab1" border="1" width="500">
+	<thead>
+    	<td>ID</td>
+    	<td>姓名</td>
+    	<td>年龄</td>
+        <td>操作</td>
+    </thead>
+    <tbody>
+    	<tr>
+        	<td>2</td>
+        	<td>张三</td>
+        	<td>23</td>
+        	<td></td>
+        </tr>
+    	<tr>
+        	<td>6</td>
+        	<td>王四</td>
+        	<td>24</td>
+        	<td></td>
+        </tr>
+    	<tr>
+        	<td>1</td>
+        	<td>Blue</td>
+        	<td>27</td>
+        	<td></td>
+        </tr>
+    	<tr>
+        	<td>5</td>
+        	<td>张伟</td>
+        	<td>24</td>
+        	<td></td>
+        </tr>
+    	<tr>
+        	<td>3</td>
+        	<td>李四</td>
+        	<td>28</td>
+        	<td></td>
+        </tr>
+    	<tr>
+        	<td>4</td>
+        	<td>王五</td>
+        	<td>25</td>
+        	<td></td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+ ----------------------------------------------------------------------------------------------------------
+
+   
+    3、表单应用 - 1
+
+         表单基础知识：
+
+              什么是表单？
+                          向服务器提交数据，比如：用户注册
+
+              action		提交到哪里
+
+
+        表单事件：
+                 onsubmit	点击提交时发生
+
+                 onreset	点击重置时发生
+
+
+
+
+   4、表单应用 - 2
+
+         表单内容验证：
+
+             阻止用户输入非法字符		阻止事件
+
+             输入时、失去焦点时验证		onkeyup、onblur
+
+             提交时检查				onsubmit
+
+             *后台数据检查
+
+
+
+
+     -----------------例子------ onsubmit -------- onreset --------------------------------------------
+
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oForm=document.getElementById('form1');
+	
+	oForm.onsubmit=function ()
+	{
+		alert('aaa');
+	};
+	oForm.onreset=function ()
+	{
+		alert('bbbbbb');
+	};
+};
+</script>
+</head>
+
+<body>
+<form id="form1" action="http://www.zhinengshe.com/">
+	用户名：<input type="text" name="user" /><br>
+	密码：<input type="password" name="pass" />
+    <input type="submit" />
+    <input type="reset" />
+</form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+八、JS运动基础
+
+       1、运动基础
+
+             运动基础：
+                      让Div运动起来
+
+                      速度——物体运动的快慢
+
+                      运动中的Bug：
+                                    不会停止 
+
+                                    速度取某些值会无法停止 
+                                     
+                                    到达位置后再点击还会运动 
+                                     
+                                    重复点击速度加快  
+                                     
+                               
+             匀速运动：
+                      速度不变
+
+
+
+
+       2、运动框架及应用
+
+             运动框架：
+                       在开始运动时，关闭已有定时器
+
+                       把运动和停止隔开(if/else)      
+
+
+
+             运动框架实例：
+                           例子1：“分享到”侧边栏
+
+                                    通过目标点，计算速度值
+
+                           例子2：淡入淡出的图片
+                                             
+                                    用变量存储透明度
+
+
+                              设置透明度（两种设置方法）：
+
+                                          filter:alpha(opacity:30);  //针对IE ，范围： 0--100
+
+                                          opacity:0.3;               //针对火狐， 范围： 0--1
+
+
+       3、缓冲运动
+
+             逐渐变慢，最后停止
+           
+             距离越远速度越大：
+                              速度由距离决定
+ 
+                              即 距离大，速度大，距离小，速度小
+             
+                              速度=(目标值-当前值)/缩放系数
+
+
+
+             alert(Math.ceil(-9.8));     // -9  //向上取整
+             alert(Math.floor(4.9999));  // 4   //向下取整
+             alert(Math.abs(-6));        //6    //取绝对值
+
+             例子：缓冲菜单
+
+                  Bug：速度取整
+
+                  跟随页面滚动的缓冲侧边栏
+
+                          潜在问题：目标值不是整数时
+
+
+
+       4、匀速运动的停止条件
+
+             运动终止条件
+
+                   匀速运动：距离足够近
+
+                   缓冲运动：两点重合
+
+
+
+
+
+
+
+
+
+
+
+      -----------------例1------运动基础---------------------------------------------------------------------
+
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width:200px; height:200px; background:red; position:absolute; top:50px; left:0px;}
+</style>
+<script>
+var timer=null;
+
+function startMove()
+{
+	var oDiv=document.getElementById('div1');
+	
+	clearInterval(timer);             //清除之前的定时器，否则当点击5次按钮时，开启5个定时器同时工作
+	timer=setInterval(function (){
+		var speed=1;
+		
+		if(oDiv.offsetLeft>=300)
+		{
+			clearInterval(timer);
+		}
+		else                     //消除当offsetLeft>=300后，点击按钮，定时器还会再运行一次
+		{
+			oDiv.style.left=oDiv.offsetLeft+speed+'px';
+		}
+	}, 30);
+}
+</script>
+</head>
+
+<body>
+<input id="btn1" type="button" value="开始运动" onclick="startMove()" />
+<div id="div1">
+</div>
+</body>
+</html>
+
+
+
+
+
+   -------------------例2-----分享到”侧边栏（未优化）---------------------------------------
+
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width:150px; height:200px; background:green; position:absolute; left:-150px;}
+#div1 span {position:absolute; width:20px; height:60px; line-height:20px; background:blue; right:-20px; top:70px;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	
+	oDiv.onmouseover=function ()
+	{
+		startMove();
+	};
+	oDiv.onmouseout=function ()
+	{
+		startMove2();
+	};
+};
+
+var timer=null;
+
+function startMove()
+{
+	var oDiv=document.getElementById('div1');
+	
+	clearInterval(timer);
+	timer=setInterval(function (){
+		if(oDiv.offsetLeft==0)
+		{
+			clearInterval(timer);
+		}
+		else
+		{
+			oDiv.style.left=oDiv.offsetLeft+10+'px';
+		}
+	}, 30);
+}
+
+function startMove2()
+{
+	var oDiv=document.getElementById('div1');
+	
+	clearInterval(timer);
+	timer=setInterval(function (){
+		if(oDiv.offsetLeft==-150)
+		{
+			clearInterval(timer);
+		}
+		else
+		{
+			oDiv.style.left=oDiv.offsetLeft-10+'px';
+		}
+	}, 30);
+}
+</script>
+</head>
+
+<body>
+<div id="div1">
+	<span>分享到</span>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+  
+   -------------------例3---------分享到”侧边栏（未优化）-----------------------------------
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width:150px; height:200px; background:green; position:absolute; left:-150px;}
+#div1 span {position:absolute; width:20px; height:60px; line-height:20px; background:blue; right:-20px; top:70px;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	
+	oDiv.onmouseover=function ()
+	{
+		startMove(0);
+	};
+	oDiv.onmouseout=function ()
+	{
+		startMove(-150);
+	};
+};
+
+var timer=null;
+
+function startMove(iTarget)
+{
+	var oDiv=document.getElementById('div1');
+	
+	clearInterval(timer);
+	timer=setInterval(function (){
+		var speed=0;
+		
+		if(oDiv.offsetLeft>iTarget)
+		{
+			speed=-10;
+		}
+		else
+		{
+			speed=10;
+		}
+		
+		if(oDiv.offsetLeft==iTarget)
+		{
+			clearInterval(timer);
+		}
+		else
+		{
+			oDiv.style.left=oDiv.offsetLeft+speed+'px';
+		}
+	}, 30);
+}
+</script>
+</head>
+
+<body>
+<div id="div1">
+	<span>分享到</span>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+   -------------------例4----淡入淡出的图片-----------------------------------------------------------
+
+
+
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width:200px; height:200px; background:red; filter:alpha(opacity:30); opacity:0.3;}
+
+                                  
+</style>
+<script>
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	
+	oDiv.onmouseover=function ()
+	{
+		startMove(100);
+	};
+	oDiv.onmouseout=function ()
+	{
+		startMove(30);
+	};
+};
+
+var alpha=30;
+var timer=null;
+
+function startMove(iTarget)
+{
+	var oDiv=document.getElementById('div1');
+	
+	clearInterval(timer);
+	timer=setInterval(function (){
+		var speed=0;
+		
+		if(alpha<iTarget)
+		{
+			speed=10;
+		}
+		else
+		{
+			speed=-10;
+		}
+		
+		if(alpha==iTarget)
+		{
+			clearInterval(timer);
+		}
+		else
+		{
+			alpha+=speed;
+			
+			oDiv.style.filter='alpha(opacity:'+alpha+')';
+			oDiv.style.opacity=alpha/100;
+		}
+	}, 30);
+}
+</script>
+</head>
+
+<body>
+<div id="div1"></div>
+</body>
+</html>
+
+
+
+
+
+       ----------------------例5-缓冲运动---------向左向右都可以-------------------------------------
+
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width:100px; height:100px; background:red; position:absolute; left:600px; top:50px;}
+#div2 {width:1px; height:300px; position:absolute; left:300px; top:0; background:black;}
+</style>
+<script>
+function startMove()
+{
+	var oDiv=document.getElementById('div1');
+	setInterval(function (){
+		var speed=(300-oDiv.offsetLeft)/10;
+		//speed=Math.floor(speed);
+		speed=speed>0?Math.ceil(speed):Math.floor(speed);
+		
+		oDiv.style.left=oDiv.offsetLeft+speed+'px';
+		
+		document.title=oDiv.offsetLeft+','+speed;
+	}, 30);
+}
+</script>
+</head>
+
+<body>
+<input type="button" value="开始运动" onclick="startMove()" />
+<div id="div1"></div>
+<div id="div2"></div>
+</body>
+</html>
+
+
+    ------------------------------------------------------------------------------------------------------
+
+
+     为窗口添加滚动条事件其实非常的简单，
+    
+               window.onscroll=function(){};
+  
+     注意在获取滚动条距离的时候
+ 
+     谷歌不识别document.documentElement.scrollTop，必须要加上document.body.scrollTop；即
+ 
+     var scrolltop=document.documentElement.scrollTop||document.body.scrollTop;
+  
+     这样才能兼容各个浏览器！
+
+
+    //scrollTop 滚动条距离上方的距离
+    //ocument.documentElement.clientHeight  可视区域的高
+
+     ---------例6-右侧悬浮框1-----缺点：拉动滚动条时div会抖-----（但用现在的浏览器不会抖）----------------------------
+
+
+     ---------例7-右侧悬浮框2----优化，使拉动滚动条时不会抖， 且有移动速度--------------------------------------
+
+
+     ---------例8-右侧悬浮框3----优化，使拉动滚动条时不会抖， 且有移动速度------静止时不会上下抖动----------------------
+ 
+
+   
+     -----例6---匀速运动停止.html----Math.abs(iTarget-oDiv.offsetLeft)<=7------取绝对值，是它运动到某个范围就让它停下来--
+ 
+
+window.onscroll=function ()
+{
+	var oDiv=document.getElementById('div1');
+	var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+	
+	//oDiv.style.top=document.documentElement.clientHeight-oDiv.offsetHeight+scrollTop+'px';
+	startMove(document.documentElement.clientHeight-oDiv.offsetHeight+scrollTop);
+	oDiv.onclick = function(){
+		
+//		if(document.documentElement.scrollTop){
+//			
+//			document.documentElement.scrollTop=0;
+//		}else{
+//			
+//			document.body.scrollTop=0;
+//		}
+                document.documentElement.scrollTop=0;
+                document.body.scrollTop=0;
+		
+	}
+};
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+九、JS运动应用
+
+      多物体运动
+
+      任意值运动
+
+      1、多物体运动框架
+
+           （1）多个物体同时运动：
+
+                 例子：多个Div，鼠标移入变宽
+
+                         单定时器，存在问题
+ 
+                         每个Div一个定时器（给每个div加一个定时器自定义属性aDiv[i].timer=null;）
+
+
+           （2）多物体运动框架（在单物体运动框架上改进）   
+                   
+                  startMove(obj, iTarget)------》
+
+                    再次优化 任意值运动框架  startMove(obj, attr, iTarget) ：适用于改变宽，变宽，字体大小等等，但改不了透明度，可以再优化
+
+                 定时器作为物体的属性
+
+                 参数的传递：物体、目标值
+
+                      例子：多个Div淡入淡出
+
+                            所有东西都不能公用
+
+                            属性与运动对象绑定：速度、其他属性值（如透明度等）
+
+
+
+         
+      2、任意值运动框架
+
+
+         （1）offset属性的Bug  ：  div.offsetWidth = div.style.width + border的宽 + padding的宽 +margin的宽
+
+                      注意：offset 获取的不止是行间样式。  在<style></style>中也能获取到
+
+                 有边框的Div变宽
+
+                 用currentStyle代替offset
+
+
+                 因为offset有bug,所以一般不再用它，而是创建getStyle函数代替，如下：
+
+
+     						function getStyle(obj, name)
+						{
+							if(obj.currentStyle)
+							{
+								return obj.currentStyle[name];
+							}
+							else
+							{
+								return getComputedStyle(obj, false)[name];
+							}
+						}
+
+         （2）原有运动框架的问题
+
+                 只能让某个值运动起来
+
+                 如果想让其他值运动起来，要修改程序
+
+
+         （3）扩展的运动框架
+
+                 运动属性作为参数
+
+                 封装opacity
+
+                 小数的问题
+
+
+
+       3、仿Flash图片展示 - 1
+
+             （1）效果思路
+
+                   两边的按钮——淡入淡出
+
+                   大图下拉——层级、高度变化
+
+                   下方的li——多物体淡入淡出
+
+                   下方的Ul——位置计算
+
+             （2）左右按钮
+
+                   淡入淡出
+
+                   鼠标移到按钮上，按钮会消失
+
+                   层级问题
+
+                   按钮和遮罩上都得加上事件
+
+
+
+       4、仿Flash图片展示 - 2
+
+
+            （1）下方Li效果
+
+                   点击切换大图——选项卡
+
+                   Li淡入淡出——移入移出
+
+                   Ul移动——位置计算
+
+            （2）大图片切换
+                   
+                   图片层级——zIndex一直加1
+
+                   图片下拉效果(运动框架)
+
+                   可以改为淡入淡出
+
+            （3）加入自动播放
+
+                   和选项卡一样
+
+
+
+
+  
+    ----------例1-多个div变宽.html---------共用一个定时器，会有bug-----------------------------------------------------
+
+
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+div {width:100px; height:50px; background:red; margin:10px;}
+</style>
+<script>
+window.onload=function ()
+{
+	var aDiv=document.getElementsByTagName('div');
+	
+	for(var i=0;i<aDiv.length;i++)
+	{
+		aDiv[i].onmouseover=function ()
+		{
+			startMove(this, 400);
+		};
+		
+		aDiv[i].onmouseout=function ()
+		{
+			startMove(this, 100);
+		};
+	}
+};
+
+var timer=null;
+
+function startMove(obj, iTarget)
+{
+	clearInterval(timer);
+	timer=setInterval(function (){
+		var speed=(iTarget-obj.offsetWidth)/6;
+		speed=speed>0?Math.ceil(speed):Math.floor(speed);
+		
+		if(obj.offsetWidth==iTarget)
+		{
+			clearInterval(timer);
+		}
+		else
+		{
+			obj.style.width=obj.offsetWidth+speed+'px';
+		}
+	}, 30);
+}
+</script>
+</head>
+
+<body>
+<div></div>
+<div></div>
+<div></div>
+</body>
+</html>
+
+
+
+
+
+
+    --------例2-多个div变宽.html------改进：每个div给一个定时器-----给每个div加一个定时器自定义属性aDiv[i].timer=null;---
+
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+div {width:100px; height:50px; background:red; margin:10px; border:10px solid black;}
+</style>
+<script>
+window.onload=function ()
+{
+	var aDiv=document.getElementsByTagName('div');
+	
+	for(var i=0;i<aDiv.length;i++)
+	{
+		aDiv[i].timer=null;
+		
+		aDiv[i].onmouseover=function ()
+		{
+			startMove(this, 400);
+		};
+		
+		aDiv[i].onmouseout=function ()
+		{
+			startMove(this, 100);
+		};
+	}
+};
+
+//var timer=null;
+
+function startMove(obj, iTarget)
+{
+	clearInterval(obj.timer);
+	obj.timer=setInterval(function (){
+		var speed=(iTarget-obj.offsetWidth)/6;
+		speed=speed>0?Math.ceil(speed):Math.floor(speed);
+		
+		if(obj.offsetWidth==iTarget)
+		{
+			clearInterval(obj.timer);
+		}
+		else
+		{
+			obj.style.width=obj.offsetWidth+speed+'px';
+		}
+	}, 30);
+}
+</script>
+</head>
+
+<body>
+<div></div>
+<div></div>
+<div></div>
+</body>
+</html>
+
+
+
+
+
+
+    --------------------例2----------多个div淡入淡出.html-----在多物体运动框架中，什么东西都不要共用-------------------------
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+div {width:200px; height:200px; margin:20px; float:left; background:red; filter:alpha(opacity:30); opacity:0.3;}
+</style>
+<script>
+window.onload=function ()
+{
+	var aDiv=document.getElementsByTagName('div');
+	
+	for(var i=0;i<aDiv.length;i++)
+	{
+		aDiv[i].alpha=30;
+		
+		aDiv[i].onmouseover=function ()
+		{
+			startMove(this, 100);
+		};
+		aDiv[i].onmouseout=function ()
+		{
+			startMove(this, 30);
+		};
+	}
+};
+
+//var alpha=30;
+
+function startMove(obj, iTarget)                                //多物体运动框架
+{
+	clearInterval(obj.timer);
+	obj.timer=setInterval(function (){
+		var speed=(iTarget-obj.alpha)/6;
+		speed=speed>0?Math.ceil(speed):Math.floor(speed);
+		
+		if(obj.alpha==iTarget)
+		{
+			clearInterval(obj.timer);
+		}
+		else
+		{
+			obj.alpha+=speed;
+			
+			obj.style.filter='alpha(opacity:'+obj.alpha+')';
+			obj.style.opacity=obj.alpha/100;
+		}
+	}, 30);
+}
+</script>
+</head>
+
+<body>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+</body>
+</html>
+
+
+
+
+    -------------------------------------------------------------
+
+              offset属性的Bug  ：  div.offsetWidth = div.style.width + border的宽 + padding的宽 + margin的宽
+
+              因为offset有bug,所以一般不再用它，而是创建getStyle函数代替，如下：
+
+
+     						function getStyle(obj, name)
+						{
+							if(obj.currentStyle)
+							{
+								return obj.currentStyle[name];
+							}
+							else
+							{
+								return getComputedStyle(obj, false)[name];
+							}
+						}
+                                                                  //记得将return的值转为整型
+
+      -------------例3----变宽和变高.html-----没去掉offwet前--------------------------------------------
+
+
+		<!DOCTYPE HTML>
+		<html>
+		<head>
+		<meta charset="utf-8">
+		<title>无标题文档</title>
+		<style>
+		div{width:200px; height:200px; margin:20px; float:left; background:yellow;}
+		</style>
+		<script>
+		window.onload=function ()
+		{
+			var oDiv1=document.getElementById('div1');
+			
+			oDiv1.onmouseover=function ()
+			{
+				startMove(this, 400);
+			};
+			oDiv1.onmouseout=function ()
+			{
+				startMove(this, 200);
+			};
+			
+			var oDiv2=document.getElementById('div2');
+			
+			oDiv2.onmouseover=function ()
+			{
+				startMove2(this, 400);
+			};
+			oDiv2.onmouseout=function ()
+			{
+				startMove2(this, 200);
+			};
+		};
+		
+		function startMove(obj, iTarget)
+		{
+			clearInterval(obj.timer);
+			obj.timer=setInterval(function (){
+				var speed=(iTarget-obj.offsetHeight)/6;
+				speed=speed>0?Math.ceil(speed):Math.floor(speed);
+				
+				if(obj.offsetHeight==iTarget)
+				{
+					clearInterval(obj.timer);
+				}
+				else
+				{
+					obj.style.height=obj.offsetHeight+speed+'px';
+				}
+			}, 30);
+		}
+		
+		function startMove2(obj, iTarget)
+		{
+			clearInterval(obj.timer);
+			obj.timer=setInterval(function (){
+				var speed=(iTarget-obj.offsetWidth)/6;
+				speed=speed>0?Math.ceil(speed):Math.floor(speed);
+				
+				if(obj.offsetWidth==iTarget)
+				{
+					clearInterval(obj.timer);
+				}
+				else
+				{
+					obj.style.width=obj.offsetWidth+speed+'px';
+				}        
+			}, 30);
+		}
+		</script>
+		</head>
+		
+		<body>
+		<div id="div1">变高</div>
+		<div id="div2">变宽</div>
+		</body>
+		</html>
+
+
+
+
+      -------------例4----变宽和变高.html-----去掉offwet------且减少代码重复----------任意值运动框架-------------------
+
+                                                                         缺点：改不了透明度
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+div {width:200px; height:200px; margin:20px; float:left; background:yellow; border:10px solid black; font-size:14px;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oDiv1=document.getElementById('div1');
+	
+	oDiv1.onmouseover=function ()
+	{
+		startMove(this, 'height', 400);
+	};
+	oDiv1.onmouseout=function ()
+	{
+		startMove(this, 'height', 200);
+	};
+	
+	var oDiv2=document.getElementById('div2');
+	
+	oDiv2.onmouseover=function ()
+	{
+		startMove(this, 'width', 400);
+	};
+	oDiv2.onmouseout=function ()
+	{
+		startMove(this, 'width', 200);
+	};
+	
+	var oDiv3=document.getElementById('div3');
+	
+	oDiv3.onmouseover=function ()
+	{
+		startMove(this, 'fontSize', 50);
+	};
+	oDiv3.onmouseout=function ()
+	{
+		startMove(this, 'fontSize', 14);
+	};
+	
+	var oDiv4=document.getElementById('div4');
+	
+	oDiv4.onmouseover=function ()
+	{
+		startMove(this, 'borderWidth', 100);
+	};
+	oDiv4.onmouseout=function ()
+	{
+		startMove(this, 'borderWidth', 10);
+	};
+};
+
+function getStyle(obj, name)
+{
+	if(obj.currentStyle)
+	{
+		return obj.currentStyle[name];
+	}
+	else
+	{
+		return getComputedStyle(obj, false)[name];
+	}
+}
+
+function startMove(obj, attr, iTarget)                           //再次优化的多物体运动框架
+{
+	clearInterval(obj.timer);
+	obj.timer=setInterval(function (){
+		var cur=parseInt(getStyle(obj, attr));                   //记得转为整型
+		
+		var speed=(iTarget-cur)/6;
+		speed=speed>0?Math.ceil(speed):Math.floor(speed);
+		
+		if(cur==iTarget)
+		{
+			clearInterval(obj.timer);
+		}
+		else
+		{
+			obj.style[attr]=cur+speed+'px';
+		}
+	}, 30);
+}
+</script>
+</head>
+
+<body>
+<div id="div1">变高</div>
+<div id="div2">变宽</div>
+<div id="div3">safasfasd</div>
+<div id="div4"></div>
+</body>
+</html>
+
+
+
+
+      -------------例5-------任意值运动框架（优化）--可以改透明度---------并且修复bug ------------------------
+
+         
+         bug:  0.07*100 = 7.00000000000001 （在IE7）  
+
+         修复bug:      Math.round() --->取整，但类似于四舍五入
+
+                       例： Math.round(parseFloat(getStyle(obj, attr))*100);
+
+
+      -----------------------------------------------------------------
+
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+div {width:200px; height:200px; margin:20px; float:left; background:yellow; border:10px solid black; filter:alpha(opacity:30); opacity:0.3;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oDiv1=document.getElementById('div1');
+	
+	oDiv1.onmouseover=function ()
+	{
+		startMove(this, 'opacity', 100);
+	};
+	oDiv1.onmouseout=function ()
+	{
+		startMove(this, 'opacity', 30);
+	};
+};
+
+function getStyle(obj, name)
+{
+	if(obj.currentStyle)
+	{
+		return obj.currentStyle[name];
+	}
+	else
+	{
+		return getComputedStyle(obj, false)[name];
+	}
+}
+
+function startMove(obj, attr, iTarget)
+{
+	clearInterval(obj.timer);
+	obj.timer=setInterval(function (){
+		var cur=0;
+		
+		if(attr=='opacity')
+		{
+			cur=Math.round(parseFloat(getStyle(obj, attr))*100);
+		}
+		else
+		{
+			cur=parseInt(getStyle(obj, attr));
+		}
+		
+		var speed=(iTarget-cur)/6;
+		speed=speed>0?Math.ceil(speed):Math.floor(speed);
+		
+		if(cur==iTarget)
+		{
+			clearInterval(obj.timer);
+		}
+		else
+		{
+			if(attr=='opacity')
+			{
+				obj.style.filter='alpha(opacity:'+(cur+speed)+')';
+				obj.style.opacity=(cur+speed)/100;
+				
+				document.getElementById('txt1').value=obj.style.opacity;
+			}
+			else
+			{
+				obj.style[attr]=cur+speed+'px';
+			}
+		}
+	}, 30);
+}
+</script>
+</head>
+
+<body>
+<div id="div1"></div>
+<input type="text" id="txt1" />
+</body>
+</html>
+
+
+
+
+
+           ----------------例6---仿Flash图片展示 - 1--------------------------------
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+十、链式运动框架
+
+
+     1、回调函数    
+
+            运动停止时，执行函数
+            
+            运动停止时，开始下一次运动
+
+            例子：土豆网右下角菜单
+
+
+
+     2、完美运动框架
+
+
+          （1）多个值同时变化
+
+                   setStyle同时设置多个属性：
+
+                        参数传递
+
+                             Json的使用
+
+                             for in遍历属性
+
+                   运用到运动框架：
+
+                        检测运动停止
+
+                                标志变量
+            
+                        例子：伸缩同时淡入淡出的菜单
+
+
+
+
+     3、运动框架总结
+
+
+          运动框架演变过程
+
+                startMove(iTarget)			运动框架
+
+                startMove(obj, iTarget)			多物体
+
+                startMove(obj, attr, iTarget)		任意值
+
+                startMove(obj, attr, iTarget, fn)	链式运动
+
+                startMove(obj, json)			多值运动
+
+                startMove(obj, json, fn)		完美运动框架
+
+
+
+     4、运动框架应用
+
+          运动框架应用
+                
+                      例子：幻灯片
+
+          例子：新浪微博
+
+                      链式运动
+
+
+
+
+  
+       ----------例1  运动框架.html------修改startMove(obj, attr, iTarget, fnEnd)-------------
+
+function startMove(obj, attr, iTarget, fnEnd)     //链式运动框架
+{
+	clearInterval(obj.timer);
+	obj.timer=setInterval(function (){
+		var cur=0;
+		
+		if(attr=='opacity')
+		{
+			cur=Math.round(parseFloat(getStyle(obj, attr))*100);
+		}
+		else
+		{
+			cur=parseInt(getStyle(obj, attr));
+		}
+		
+		var speed=(iTarget-cur)/6;
+		speed=speed>0?Math.ceil(speed):Math.floor(speed);
+		
+		if(cur==iTarget)
+		{
+			clearInterval(obj.timer);
+			
+			if(fnEnd)fnEnd();                //运动停止时，执行函数   运动停止时，开始下一次运动
+		}
+		else
+		{
+			if(attr=='opacity')
+			{
+				obj.style.filter='alpha(opacity:'+(cur+speed)+')';
+				obj.style.opacity=(cur+speed)/100;
+			}
+			else
+			{
+				obj.style[attr]=cur+speed+'px';
+			}
+		}
+	}, 30);
+}
+
+                   ----------例子---------div先变长，再变宽，再增加透明度-----------------------------------------
+
+            运动停止时，执行函数
+            
+            运动停止时，开始下一次运动
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width:100px; height:100px; background:red; filter:alpha(opacity:30); opacity:0.3;}
+</style>
+<script src="move.js"></script>
+<script>
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	
+	oDiv.onmouseover=function ()
+	{
+		startMove(oDiv, 'width', 300, function (){
+			startMove(oDiv, 'height', 300, function (){
+				startMove(oDiv, 'opacity', 100);
+			});
+		});
+	};
+	
+	oDiv.onmouseout=function ()
+	{
+		startMove(oDiv, 'opacity', 30, function (){
+			startMove(oDiv, 'height', 100, function (){
+				startMove(oDiv, 'width', 100);
+			});
+		});
+	};
+};
+</script>
+</head>
+
+<body>
+<div id="div1"></div>
+</body>
+</html>
+
+
+   
+    
+ 
+
+         ------例2 土豆网右下角菜单----链式运动-----------------------------------------
+
+  
+            链式运动小问题：  不能同时让两个属性运动，即不能同时变宽和变长
+   --------------------------------------------------------------------------------------------------------
+
+
+
+     2、完美运动框架
+
+
+          （1）多个值同时变化
+
+                   setStyle同时设置多个属性：
+
+                        参数传递
+
+                             Json的使用
+
+                             for in遍历属性
+
+                   运用到运动框架：
+
+                        检测运动停止
+
+                                标志变量
+            
+                        例子：伸缩同时淡入淡出的菜单
+
+
+
+
+ 完美运动框架：  可以应对所有基本的运动  
+
+function startMove(obj, json, fnEnd)
+{
+	clearInterval(obj.timer);
+	obj.timer=setInterval(function (){
+		var bStop=true;		//假设：所有值都已经到了
+		
+		for(var attr in json)
+		{
+			var cur=0;
+			
+			if(attr=='opacity')
+			{
+				cur=Math.round(parseFloat(getStyle(obj, attr))*100);
+			}
+			else
+			{
+				cur=parseInt(getStyle(obj, attr));
+			}
+			
+			var speed=(json[attr]-cur)/6;
+			speed=speed>0?Math.ceil(speed):Math.floor(speed);
+			
+			if(cur!=json[attr])  //如果有某个值没到达目标，设bStop为false。
+				bStop=false;
+			
+			if(attr=='opacity')
+			{
+				obj.style.filter='alpha(opacity:'+(cur+speed)+')';
+				obj.style.opacity=(cur+speed)/100;
+			}
+			else
+			{
+				obj.style[attr]=cur+speed+'px';
+			}
+		}
+		
+		if(bStop)   //当所有值都到了，关闭定时器
+		{
+			clearInterval(obj.timer);
+						
+			if(fnEnd)fnEnd();
+		}
+	}, 30);
+}
+
+    -----例2---------------------------------------------------------
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width:100px; height:100px; background:red; filter:alpha(opacity:30); opacity:0.3;}
+</style>
+<script src="move2.js"></script>
+<script>
+window.onload=function ()
+{
+	var oBtn=document.getElementById('btn1');
+	var oDiv=document.getElementById('div1');
+	
+	oBtn.onclick=function ()
+	{
+		startMove(oDiv, {width: 101, height: 300, opacity: 100}, function (){
+			alert('a');
+		});
+	};
+};
+</script>
+</head>
+
+<body>
+<input id="btn1" type="button" value="运动" />
+<div id="div1"></div>
+</body>
+</html>
+
+
+
+
+
+      -----------  例子：幻灯片------------上下滑动--------------------------------------------------
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>淘宝幻灯片上下滑动效果 —— www.zhinengshe.com —— 智能课堂</title>
+<link href="css.css" rel="stylesheet" type="text/css" />
+<script src="../move2.js"></script>
+<script>
+window.onload=function ()
+{
+	var oDiv=document.getElementById('play');
+	var aBtn=oDiv.getElementsByTagName('ol')[0].getElementsByTagName('li');
+	var oUl=oDiv.getElementsByTagName('ul')[0];
+	
+	var now=0;
+	
+	for(var i=0;i<aBtn.length;i++)
+	{
+		aBtn[i].index=i;
+		aBtn[i].onclick=function ()
+		{
+			now=this.index;
+			
+			tab();
+		};
+	}
+	
+	function tab()
+	{
+		for(var i=0;i<aBtn.length;i++)
+		{
+			aBtn[i].className='';
+		}
+		aBtn[now].className='active';
+		startMove(oUl, {top: -150*now});
+	}
+	
+	function next()
+	{
+		now++;
+		if(now==aBtn.length)
+		{
+			now=0;
+		}
+		
+		tab();
+	}
+	
+	var timer=setInterval(next, 2000);
+	
+	oDiv.onmouseover=function ()
+	{
+		clearInterval(timer);
+	};
+	
+	oDiv.onmouseout=function ()
+	{
+		timer=setInterval(next, 2000);
+	};
+};
+</script>
+</head>
+
+<body>
+
+<div class="play" id="play">
+    <ol>
+    	<li class="active">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ol>
+	<ul>
+		<li><a href="http://www.zhinengshe.com/"><img src="images/1.jpg" alt="广告一" /></a></li>
+		<li><a href="http://www.zhinengshe.com/"><img src="images/2.jpg" alt="广告二" /></a></li>
+		<li><a href="http://www.zhinengshe.com/"><img src="images/3.jpg" alt="广告三" /></a></li>
+		<li><a href="http://www.zhinengshe.com/"><img src="images/4.jpg" alt="广告四" /></a></li>
+		<li><a href="http://www.zhinengshe.com/"><img src="images/5.jpg" alt="广告五" /></a></li>
+	</ul>
+</div>
+</body>
+</html>
+
+
+
+
+   -------------------新浪微博--------------------------------------------------
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+十一、JS事件基础
+
+
+ 1、event对象和事件冒泡
+     
+    （1）什么是event对象
+
+           用来获取事件的详细信息：鼠标位置、键盘按键
+
+           例子：获取鼠标位置：clientX
+                       
+                       document的本质：document.childNodes[0].tagName
+
+
+    （2）获取event对象(兼容性写法)
+
+               var oEvent=ev||event;
+
+   
+    （3）事件流
+
+           事件冒泡
+
+            取消冒泡：oEvent.cancelBubble=true
+
+            例子：仿select控件
+
+            DOM事件流
+
+
+
+ 2、鼠标事件
+
+
+     （1）鼠标位置
+
+             可视区位置：clientX、clientY
+
+                例子1：跟随鼠标的Div
+
+                   消除滚动条的影响
+
+                       滚动条的意义——可视区与页面顶部的距离
+
+  
+     （2）获取鼠标在页面的绝对位置
+
+              封装函数
+
+              例子2：一串跟随鼠标的Div
+
+
+
+ 3、键盘事件
+
+
+     （1）keyCode
+
+               获取用户按下键盘的哪个按键
+
+               例子：键盘控制Div移动
+
+
+     （2）其他属性
+
+               ctrlKey、shiftKey、altKey
+
+               例子：提交留言
+
+               回车 提交
+
+               ctrl+回车 提交
+
+
+
+
+    ----例1  --给整个页面添加点击事件---------利用document.onclick------------------------------------
+
+   
+   //document 代表整个页面, 包括页面中所有代码。  若是给body添加点击事件，会没反应，因为body没有撑起来，即没有大小   
+
+<script>
+window.onload=function ()
+{
+	document.onclick=function ()
+	{
+		alert('a');
+	};
+};
+</script>
+  
+
+
+
+
+    --例2-- 点击坐标-----------------------------------------------------------
+  
+   //获取鼠标位置：clientX  clientY
+   
+   //获取event对象(兼容性写法)：
+
+                   var oEvent=ev||event;
+
+<script>
+window.onload=function ()
+{
+	document.onclick=function (ev)
+	{
+		//IE
+		//alert(event.clientX+','+event.clientY);
+		
+		//FF
+		//alert(ev.clientX+','+ev.clientY);
+		
+		var oEvent=ev||event;
+		
+		alert(oEvent.clientX+','+oEvent.clientY);
+	};
+};
+</script>
+
+
+
+
+
+
+   --例3------事件冒泡-----点击事件会一层一层地向上向父级传递，知道传给document-------------------------------
+
+
+
+<!DOCTYPE HTML>
+<html onclick="alert('html');">
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+div {padding:100px;}
+</style>
+</head>
+
+<body onclick="alert('body');">
+<div style="background:#CCC;" onclick="alert(this.style.background);">
+	<div style="background:green;" onclick="alert(this.style.background);">
+    	<div style="background:red;" onclick="alert(this.style.background);">
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+
+
+   --例4--仿select下拉框.html-------演示事件冒泡带来的问题，并且取消冒泡------------------------------------------
+
+           事件冒泡
+
+            取消冒泡：oEvent.cancelBubble=true
+
+            例子：仿select控件
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width:400px; height:300px; background:#CCC; display:none;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oBtn=document.getElementById('btn1');
+	var oDiv=document.getElementById('div1');
+	
+	oBtn.onclick=function (ev)
+	{
+		var oEvent=ev||event;
+		
+		oDiv.style.display='block';
+		//alert('按钮被点击了');
+		
+		oEvent.cancelBubble=true;    //取消冒泡
+	};
+	
+	document.onclick=function ()
+	{
+		oDiv.style.display='none';
+		//alert('document被点击了');
+	};
+};
+</script>
+</head>
+
+<body>
+<input id="btn1" type="button" value="显示" />
+<div id="div1">
+</div>
+</body>
+</html>
+
+
+
+
+  ---例5-   鼠标坐标3.html------跟随鼠标的Div--------------------------------------------------
+
+         onmousemove  //鼠标移动事件
+
+       例子1：跟随鼠标的Div
+
+         消除滚动条的影响
+
+            滚动条的意义——可视区与页面顶部的距离
+
+         获取鼠标在页面的绝对位置
+   
+            封装函数
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width:200px; height:200px; background:red; position:absolute;}
+</style>
+<script>
+function getPos(ev)           //把获取鼠标坐标封装
+{
+	var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+	var scrollLeft=document.documentElement.scrollLeft||document.body.scrollLeft;
+	
+	return {x: ev.clientX+scrollLeft, y: ev.clientY+scrollTop};    //ev.clientX 和 ev.clientY 获取到的是可视区域的坐标
+}
+
+document.onmousemove=function (ev)
+{
+	var oEvent=ev||event;
+	var oDiv=document.getElementById('div1');
+	var pos=getPos(oEvent);
+	
+	oDiv.style.left=pos.x+'px';
+	oDiv.style.top=pos.y+'px';
+};
+</script>
+</head>
+
+<body style="height:2000px;">
+<div id="div1"></div>
+</body>
+</html>
+
+
+
+   --例6---- 一串跟着鼠标的Div.html ---------------------------------------
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+div {width:10px; height:10px; background:red; position:absolute;}
+</style>
+<script>
+function getPos(ev)
+{
+	var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+	var scrollLeft=document.documentElement.scrollLeft||document.body.scrollLeft;
+	
+	return {x: ev.clientX+scrollLeft, y: ev.clientY+scrollTop};
+}
+
+document.onmousemove=function (ev)
+{
+	var aDiv=document.getElementsByTagName('div');
+	var oEvent=ev||event;
+	
+	var pos=getPos(oEvent);
+	
+	for(var i=aDiv.length-1;i>0;i--)
+	{
+		aDiv[i].style.left=aDiv[i-1].offsetLeft+'px';
+		aDiv[i].style.top=aDiv[i-1].offsetTop+'px';
+	}
+	
+	aDiv[0].style.left=pos.x+'px';
+	aDiv[0].style.top=pos.y+'px';
+};
+</script>
+</head>
+
+<body>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+</body>
+</html>
+
+
+
+   ----------------------------------------------------
+
+
+
+
+
+ 3、键盘事件
+
+
+     （1）keyCode
+
+               获取用户按下键盘的哪个按键
+
+               例子：键盘控制Div移动
+
+
+     （2）其他属性
+
+               ctrlKey、shiftKey、altKey
+
+               例子：提交留言
+
+               回车 提交
+
+               ctrl+回车 提交
+
+
+
+
+
+
+
+     ----例7 ----keyCode------------
+  
+     每个按键都有自己的keyCode
+
+     document.onkeydown   // 键盘按键按下 发生的事件
+
+     document.onkeyup   // 键盘按键松开 发生的事件
+
+<script>
+document.onkeydown=function (ev)
+{
+	var oEvent=ev||event;
+	
+	alert(oEvent.keyCode);
+};
+</script>
+
+
+
+
+
+    ---例8----键盘控制移动.html-------------------------------
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width:100px; height:100px; background:#CCC; position:absolute;}
+</style>
+<script>
+document.onkeydown=function (ev)
+{
+	var oEvent=ev||event;
+	var oDiv=document.getElementById('div1');
+	
+	if(oEvent.keyCode==37)    //左键 对应的keyCode 为37
+	{
+		oDiv.style.left=oDiv.offsetLeft-10+'px';
+	}
+	else if(oEvent.keyCode==39)   //右键 对应的keyCode 为39
+	{
+		
+		oDiv.style.left=oDiv.offsetLeft+10+'px';
+	}
+};
+</script>
+</head>
+
+<body>
+<div id="div1"></div>
+</body>
+</html>
+
+
+   --例9-- 提交留言2.html-----------回车键提交留言-------------------------
+
+
+<script>
+window.onload=function ()
+{
+	var oTxt1=document.getElementById('txt1');
+	var oTxt2=document.getElementById('txt2');
+	
+	oTxt1.onkeydown=function (ev)  //是给文本框oTxt1加上onkeydown事件，因为当点击回车键时，当时选中的是文本框oTxt1
+	{
+		var oEvent=ev||event;
+		
+		if(oEvent.keyCode==13)     //回车键 对应的keyCode 为13
+		{
+			oTxt2.value+=oTxt1.value+'\n';
+			oTxt1.value='';
+		}
+	};
+};
+</script>
+
+
+
+   --例10-- 提交留言3.html-----------回车键+Ctrl 提交留言-------------------------
+
+
+、
+               ctrlKey、shiftKey、altKey     //确认ctrl键、shift键、alt键 是否被按下
+
+               例子：提交留言
+
+               回车 提交
+
+               ctrl+回车 提交
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oTxt1=document.getElementById('txt1');
+	var oTxt2=document.getElementById('txt2');
+	
+	oTxt1.onkeydown=function (ev)  //是给文本框oTxt1加上onkeydown事件，因为当点击回车键时，当时选中的是文本框oTxt1
+	{
+		var oEvent=ev||event;
+		
+		if(oEvent.keyCode==13 && oEvent.ctrlKey)  //回车键 对应的keyCode 为13  同时oEvent.ctrlKey确认ctrl键是否被按下
+		{
+			oTxt2.value+=oTxt1.value+'\n';
+			oTxt1.value='';
+		}
+	};
+};
+</script>
+</head>
+
+<body>
+<input id="txt1" type="text" /><br>
+<textarea id="txt2" rows="10" cols="40"></textarea>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+十二、JS事件中级
+
+
+  1、默认行为
+
+
+      （1）默认行为
+
+             什么是默认行为   ---》浏览器自身所带的东西，例如右键菜单栏
+
+
+      （2）阻止默认行为
+
+            普通写法：return false;
+
+                例子1.	屏蔽右键菜单
+
+            弹出自定义右键菜单
+
+                例子2.	只能输入数字的输入框
+
+           keydown、keyup事件的区别
+
+
+
+  2、拖拽
+
+
+     （1）简易拖拽
+
+            拖拽原理
+
+            距离不变
+
+            三个事件
+
+     
+     （2）靠谱拖拽
+
+            原有拖拽的问题
+
+            直接给document加事件
+
+
+
+
+
+
+    --例1-----默认行为.html-----屏蔽右键菜单-------------------------------------
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+document.oncontextmenu=function ()       //document.oncontextmenu 点击右键菜单栏事件
+{
+	return false;	//阻止默认事件   // 阻止弹出右键菜单栏
+};
+</script>
+</head>
+
+<body>
+</body>
+</html>
+
+
+
+
+   --例2----右键菜单.html-------弹出自定义右键菜单------------------------------
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+* {margin:0; padding:0; list-style:none;}
+#div1 {position:absolute; width:80px; background:#CCC; border:1px solid black; display:none;}
+</style>
+<script>
+document.oncontextmenu=function (ev)
+{
+	var oEvent=ev||event;
+	var oDiv=document.getElementById('div1');
+	
+	oDiv.style.display='block';
+	oDiv.style.left=oEvent.clientX+'px';
+	oDiv.style.top=oEvent.clientY+'px';
+	
+	return false;      //阻止系统自带的右键菜单栏弹出
+};
+
+document.onclick=function ()
+{
+	var oDiv=document.getElementById('div1');
+	
+	oDiv.style.display='none';
+};
+</script>
+</head>
+
+<body>
+<div id="div1">
+	<ul>
+    	<li>aaa</li>
+    	<li>bbb</li>
+    	<li>ccc</li>
+    	<li>ddd</li>
+    </ul>
+</div>
+</body>
+</html>
+
+
+
+ ---例3--------------只能输入数字的文本框3.html---------------------------------
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oTxt=document.getElementById('txt1');
+	
+	oTxt.onkeydown=function (ev)
+	{
+		var oEvent=ev||event;
+		
+		//alert(oEvent.keyCode);
+		
+		//0-  对应的keyCode	  48
+		//9-  对应的keyCode   57
+		//退格-  对应的keyCode   8
+		
+		//如果 用户按的 不是退格 并且 也不是数字
+		
+		if(oEvent.keyCode!=8 && (oEvent.keyCode<48 || oEvent.keyCode>57))
+		{
+			return false;    //用键盘在文本框输入 也是默认行为，可以用return false阻止默认行为
+		}
+	};
+};
+</script>
+</head>
+
+<body>
+<input type="text" id="txt1" />
+</body>
+</html>
+
+
+
+  ------------------
+  
+  onclick  
+  
+  oncontextmenu
+
+  onkeydown
+
+  onkeyup  
+
+  ctrlKey、shiftKey、altKey
+
+  onmouseover  鼠标移入
+
+  onmouseout   鼠标移出
+
+  onmousemove  鼠标移动
+
+  onmousedown  鼠标按下
+
+  onmouseup    鼠标松开
+
+  
+  2、拖拽
+
+
+     （1）简易拖拽
+
+            拖拽原理
+
+              距离不变
+
+              三个事件（onmousedown，onmousemove，onmouseup ）
+
+     
+     （2）靠谱拖拽
+
+            原有拖拽的问题
+
+            直接给document加事件
+
+
+  --例4----拖拽.html-----------------------------------
+
+ 
+   小问题： 当鼠标移动速度太快，脱离div区域，div就不会跟着走了
+
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width:200px; height:200px; background:red; position:absolute;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	
+	var disX=0;
+	var disY=0;
+	
+	oDiv.onmousedown=function (ev)
+	{
+		var oEvent=ev||event;
+		
+                 
+               //鼠标和div之间的距离，固定不变
+		disX=oEvent.clientX-oDiv.offsetLeft;
+		disY=oEvent.clientY-oDiv.offsetTop;
+		
+		oDiv.onmousemove=function (ev)
+		{
+			var oEvent=ev||event;
+			
+			oDiv.style.left=oEvent.clientX-disX+'px';
+			oDiv.style.top=oEvent.clientY-disY+'px';
+		};
+		
+		oDiv.onmouseup=function ()
+		{
+			oDiv.onmousemove=null;
+			oDiv.onmouseup=null;
+		};
+	};
+};
+</script>
+</head>
+
+<body>
+<div id="div1"></div>
+</body>
+</html>
+
+
+
+
+ --例5----拖拽2.html-----------------------------------
+
+
+  解决问题:  （1）当鼠标移动速度太快，脱离div区域，div就不会跟着走了
+             （2）解决火狐浏览器中拖动空div 出现两个div 的问题
+
+   将鼠标事件改为在整个页面给有效，   即 oDiv.onmousemove 和 oDiv.onmouseup 改为  document.onmousemove  和 document.onmouseup
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width:200px; height:200px; background:red; position:absolute;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	
+	var disX=0;
+	var disY=0;
+	
+	oDiv.onmousedown=function (ev)
+	{
+		var oEvent=ev||event;
+		
+		disX=oEvent.clientX-oDiv.offsetLeft;
+		disY=oEvent.clientY-oDiv.offsetTop;
+		
+		document.onmousemove=function (ev)
+		{
+			var oEvent=ev||event;
+			
+			oDiv.style.left=oEvent.clientX-disX+'px';
+			oDiv.style.top=oEvent.clientY-disY+'px';
+		};
+		
+		document.onmouseup=function ()
+		{
+			document.onmousemove=null;
+			document.onmouseup=null;
+		};
+		
+		return false;     //阻止默认事件  解决火狐拖动空div 出现两个div 的问题
+	};
+};
+</script>
+</head>
+
+<body>
+<div id="div1"></div>
+</body>
+</html>
+
+
+
+ --例6----拖拽4.html-----------------------------------
+
+  解决问题： 防止div拖出整个页面
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width:200px; height:200px; background:red; position:absolute;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	
+	var disX=0;
+	var disY=0;
+	
+	oDiv.onmousedown=function (ev)
+	{
+		var oEvent=ev||event;
+		
+		disX=oEvent.clientX-oDiv.offsetLeft;
+		disY=oEvent.clientY-oDiv.offsetTop;
+		
+		document.onmousemove=function (ev)
+		{
+			var oEvent=ev||event;
+			var l=oEvent.clientX-disX;
+			var t=oEvent.clientY-disY;
+			
+			if(l<0)
+			{
+				l=0;
+			}                         //document.documentElement.clientWidth  可视区的宽
+			else if(l>document.documentElement.clientWidth-oDiv.offsetWidth)
+			{
+				l=document.documentElement.clientWidth-oDiv.offsetWidth;
+			}
+			
+			if(t<0)
+			{
+				t=0;
+			}
+			else if(t>document.documentElement.clientHeight-oDiv.offsetHeight)
+			{
+				t=document.documentElement.clientHeight-oDiv.offsetHeight;
+			}
+			
+			oDiv.style.left=l+'px';
+			oDiv.style.top=t+'px';
+		};
+		
+		document.onmouseup=function ()
+		{
+			document.onmousemove=null;
+			document.onmouseup=null;
+		};
+		
+		return false;     //阻止默认事件  解决火狐拖动空div 出现两个div 的问题
+	};
+};
+</script>
+</head>
+
+<body>
+<div id="div1"></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+十三、JS事件高级应用
+
+
+
+    1、事件绑定
+
+          IE方式：
+
+             attachEvent(事件名称, 函数)，绑定事件处理函数
+
+             detachEvent(事件名称, 函数)，解除绑定
+
+          DOM方式：
+
+             addEventListener(事件名称,函数, 捕获)
+
+             removeEventListener(事件名称, 函数, 捕获)
+
+
+          何时使用事件绑定
+             
+          绑定事件和this
+
+          绑定匿名函数，会无法删除
+
+
+
+
+
+    2、高级拖拽 - 1
+
+        
+         （1）复习拖拽原理
+
+                距离不变
+
+                三个事件：down、move、up
+      
+         （2）限制范围
+
+                对位置进行判断
+
+                    例子1：不能拖出窗口的Div
+
+                    例子2：不能拖出指定对象的Div
+
+                磁性吸附
+
+
+     3、高级拖拽 - 2
+
+         （1）图片拖拽
+
+                 阻止默认事件
+
+         （2）文字选中
+
+                 阻止默认事件
+
+                 IE下拖动有问题
+                                事件捕获
+
+         （3）与DOM配合
+
+                带框的拖拽
+
+                保留原有位置的拖拽
+
+
+     4、自定义滚动条
+
+
+          （1）拖拽
+
+                只有横向拖拽
+
+                限制范围——范围的大小
+
+                计算比例——当前值/最大值
+
+          （2）控制其他对象
+
+                例子1：控制物体的大小
+
+                例子2：控制物体的透明度
+
+                例子3：控制文字滚动
+
+
+  
+
+     ----------------------------------------------
+
+
+    1、事件绑定
+
+          IE方式：
+
+             attachEvent(事件名称, 函数)，绑定事件处理函数
+
+             detachEvent(事件名称, 函数)，解除绑定
+
+          DOM方式：
+
+             addEventListener(事件名称,函数, 捕获)
+
+             removeEventListener(事件名称, 函数, 捕获)
+
+
+          何时使用事件绑定
+             
+          绑定事件和this
+
+          绑定匿名函数，会无法删除
+
+
+     ----例1---绑定2.html----------------------------------
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oBtn=document.getElementById('btn1');
+	
+	if(oBtn.attachEvent)                                //解决兼容问题
+	{
+		oBtn.attachEvent('onclick', function ()
+		{
+			alert('a');
+		});
+		oBtn.attachEvent('onclick', function ()
+		{
+			alert('b');
+		});
+	}
+	else
+	{
+		oBtn.addEventListener('click', function ()
+		{
+			alert('a');
+		}, false);
+		oBtn.addEventListener('click', function ()
+		{
+			alert('b');
+		}, false);
+	}
+	//attachEvent(事件名， 函数)
+	//IE
+	/*
+	oBtn.attachEvent('onclick', function ()
+	{
+		alert('a');
+	});
+	oBtn.attachEvent('onclick', function ()
+	{
+		alert('b');
+	});
+	*/
+	
+	//FF
+	//addEventListener(事件名, 函数, false)
+	/*oBtn.addEventListener('click', function ()
+	{
+		alert('a');
+	}, false);
+	oBtn.addEventListener('click', function ()
+	{
+		alert('b');
+	}, false);*/
+	
+	/*
+	oBtn.onclick=function ()
+	{
+		alert('a');
+	};
+	
+	oBtn.onclick=function ()
+	{
+		alert('b');
+	};*/
+};
+</script>
+</head>
+
+<body>
+<input id="btn1" type="button" value="按钮" />
+</body>
+</html>
+
+
+
+     ----例2---绑定3.html----------将处理事件绑定兼容 封装成函数------------------------
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+function myAddEvent(obj, ev, fn)   //将处理事件绑定兼容 封装成函数
+{
+	if(obj.attachEvent)
+	{
+		obj.attachEvent('on'+ev, fn);
+	}
+	else
+	{
+		obj.addEventListener(ev, fn, false);
+	}
+}
+
+window.onload=function ()
+{
+	var oBtn=document.getElementById('btn1');
+	
+	myAddEvent(oBtn, 'click', function (){
+		alert('a');
+	});
+	
+	myAddEvent(oBtn, 'click', function (){
+		alert('b');
+	});
+};
+</script>
+</head>
+
+<body>
+<input id="btn1" type="button" value="按钮" />
+</body>
+</html>
+
+
+
+
+
+
+  ---------------------------------------------------------------
+
+
+    2、高级拖拽 - 1
+
+        
+         （1）复习拖拽原理
+
+                距离不变
+
+                三个事件：down、move、up
+      
+         （2）限制范围
+
+                对位置进行判断
+
+                    例子1：不能拖出窗口的Div
+
+                    例子2：不能拖出指定对象的Div
+
+                磁性吸附
+
+
+
+
+   --例3---拖拽4.html-------不能拖出父div--------------------------------
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width:100px; height:100px; background:red; position:absolute;}
+#div2 {width:400px; height:300px; background:#CCC; position:relative;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	var oDiv2=document.getElementById('div2');
+	
+	var disX=0;
+	var disY=0;
+	
+	oDiv.onmousedown=function (ev)
+	{
+		var oEvent=ev||event;
+		
+		disX=oEvent.clientX-oDiv.offsetLeft;
+		disY=oEvent.clientY-oDiv.offsetTop;
+		
+		document.onmousemove=function (ev)
+		{
+			var oEvent=ev||event;
+			var l=oEvent.clientX-disX;
+			var t=oEvent.clientY-disY;
+			
+			if(l<0)
+			{
+				l=0;
+			}
+			else if(l>oDiv2.offsetWidth-oDiv.offsetWidth)
+			{
+				l=oDiv2.offsetWidth-oDiv.offsetWidth;
+			}
+			
+			if(t<0)
+			{
+				t=0;
+			}
+			else if(t>oDiv2.offsetHeight-oDiv.offsetHeight)
+			{
+				t=oDiv2.offsetHeight-oDiv.offsetHeight;
+			}
+			
+			oDiv.style.left=l+'px';
+			oDiv.style.top=t+'px';
+		};
+		
+		document.onmouseup=function ()
+		{
+			document.onmousemove=null;
+			document.onmouseup=null;
+		};
+		
+		return false;
+	};
+};
+</script>
+</head>
+
+<body>
+<div id="div2">
+	<div id="div1"></div>
+</div>
+</body>
+</html>
+
+
+
+
+  --例5-----拖拽——吸附.html---------------------------------------------
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width:100px; height:100px; background:red; position:absolute;}
+#div2 {width:700px; height:500px; background:#CCC; position:relative;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	var oDiv2=document.getElementById('div2');
+	
+	var disX=0;
+	var disY=0;
+	
+	oDiv.onmousedown=function (ev)
+	{
+		var oEvent=ev||event;
+		
+		disX=oEvent.clientX-oDiv.offsetLeft;
+		disY=oEvent.clientY-oDiv.offsetTop;
+		
+		document.onmousemove=function (ev)
+		{
+			var oEvent=ev||event;
+			var l=oEvent.clientX-disX;
+			var t=oEvent.clientY-disY;
+			
+			if(l<50)                      //吸附的关键
+			{
+				l=0;
+			}
+			else if(l>oDiv2.offsetWidth-oDiv.offsetWidth)
+			{
+				l=oDiv2.offsetWidth-oDiv.offsetWidth;
+			}
+			
+			if(t<50)                     //吸附的关键
+			{
+				t=0;
+			}
+			else if(t>oDiv2.offsetHeight-oDiv.offsetHeight)
+			{
+				t=oDiv2.offsetHeight-oDiv.offsetHeight;
+			}
+			
+			oDiv.style.left=l+'px';
+			oDiv.style.top=t+'px';
+		};
+		
+		document.onmouseup=function ()
+		{
+			document.onmousemove=null;
+			document.onmouseup=null;
+		};
+		
+		return false;
+	};
+};
+</script>
+</head>
+
+<body>
+<div id="div2">
+	<div id="div1"></div>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+   --例6-----拖拽.html-------------------------------------
+
+   问题：  当拖动div时，移动到body中的文字上面，文字会被选中
+
+        解决：  （1）添加return false;	    //只能解决 chrome、ff、IE9中， 不能解决在IE6-8 中
+        
+                          所以用到事件捕获
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width:100px; height:100px; background:red; position:absolute;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	
+	var disX=0;
+	var disY=0;
+	
+	oDiv.onmousedown=function (ev)
+	{
+		var oEvent=ev||event;
+		
+		disX=oEvent.clientX-oDiv.offsetLeft;
+		disY=oEvent.clientY-oDiv.offsetTop;
+		
+		document.onmousemove=function (ev)
+		{
+			var oEvent=ev||event;
+			var l=oEvent.clientX-disX;
+			var t=oEvent.clientY-disY;
+			
+			oDiv.style.left=l+'px';
+			oDiv.style.top=t+'px';
+		};
+		
+		document.onmouseup=function ()
+		{
+			document.onmousemove=null;
+			document.onmouseup=null;
+		};
+		
+		return false;	//chrome、ff、IE9
+	};
+};
+</script>
+</head>
+
+<body>
+asdfasdfsdf<br>
+dfasfasdfasd
+<div id="div1">asdfasdfsdf<br>
+dfasfasdfasd</div>
+asdfasdfsdf<br>
+dfasfasdfasd
+</body>
+</html>
+
+
+
+
+  ---例7--事件捕获.html-----------------------------
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oBtn=document.getElementById('btn1');
+	
+	oBtn.onclick=function ()
+	{
+		alert('a');
+	};
+	
+	oBtn.setCapture();      //setCapture() 将整个页面的点击事件聚集到 oBtn 上
+
+};                                      注意：setCapture() 只能在 IE 中使用
+</script>                      
+</head>
+
+<body>
+<input id="btn1" type="button" value="按钮" />
+</body>
+</html>
+
+
+  
+   ----例8----拖拽2.html------------------------------------------------
+
+
+解决问题:  
+  
+  （1）当鼠标移动速度太快，脱离div区域，div就不会跟着走了，同时解决当拖动div时，移动到body中的文字上面，文字会被选中
+
+       解决问题（1）时，在不同的浏览器中，有不同的解决方案
+
+         1、在 IE 中 
+                    
+                  利用oDiv.setCapture(); oDiv.releaseCapture();   //捕获，释放捕获
+                  oDiv.onmousemove  oDiv.onmouseup不变 
+             
+         2、在 chrome、ff、IE9 浏览器中
+  
+             将鼠标事件改为在整个页面给有效，   即 oDiv.onmousemove 和 oDiv.onmouseup 改为  document.onmousemove  和 document.onmouseup
+
+
+  （2）解决火狐浏览器中拖动空div 出现两个div 的问题
+
+            添加 return false;
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width:100px; height:100px; background:red; position:absolute;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	
+	var disX=0;
+	var disY=0;
+	
+	oDiv.onmousedown=function (ev)
+	{
+		var oEvent=ev||event;
+		
+		disX=oEvent.clientX-oDiv.offsetLeft;
+		disY=oEvent.clientY-oDiv.offsetTop;
+		
+		if(oDiv.setCapture)
+		{
+			//IE
+			oDiv.onmousemove=function (ev)
+			{
+				var oEvent=ev||event;
+				var l=oEvent.clientX-disX;
+				var t=oEvent.clientY-disY;
+				
+				oDiv.style.left=l+'px';
+				oDiv.style.top=t+'px';
+			};
+			
+			oDiv.onmouseup=function ()
+			{
+				oDiv.onmousemove=null;
+				oDiv.onmouseup=null;
+				
+				oDiv.releaseCapture();
+			};
+			
+			oDiv.setCapture();
+		}
+		else
+		{
+			//Chrome、FF
+			document.onmousemove=function (ev)
+			{
+				var oEvent=ev||event;
+				var l=oEvent.clientX-disX;
+				var t=oEvent.clientY-disY;
+				
+				oDiv.style.left=l+'px';
+				oDiv.style.top=t+'px';
+			};
+			
+			document.onmouseup=function ()
+			{
+				document.onmousemove=null;
+				document.onmouseup=null;
+			};
+		}
+		
+		return false;	//chrome、ff、IE9
+	};
+};
+</script>
+</head>
+
+<body>
+asdfasdfsdf<br>
+dfasfasdfasd
+<div id="div1">asdfasdfsdf<br>
+dfasfasdfasd</div>
+asdfasdfsdf<br>
+dfasfasdfasd
+</body>
+</html>
+
+
+-----例8------拖拽3.html----------优化减少拖拽2.html中的代码------------------------------------
+
+   合并 onmousemove  和  onmouseup    将这两个事件所调用的函数 分别创建两个函数 mouseMove  和 mouseUp
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width:100px; height:100px; background:red; position:absolute;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	
+	var disX=0;
+	var disY=0;
+	
+	oDiv.onmousedown=function (ev)
+	{
+		var oEvent=ev||event;
+		
+		disX=oEvent.clientX-oDiv.offsetLeft;
+		disY=oEvent.clientY-oDiv.offsetTop;
+		
+		if(oDiv.setCapture)
+		{
+			//IE
+			oDiv.onmousemove=mouseMove;
+			oDiv.onmouseup=mouseUp;
+			
+			oDiv.setCapture();
+		}
+		else
+		{
+			//Chrome、FF
+			document.onmousemove=mouseMove;
+			document.onmouseup=mouseUp;
+		}
+		
+		function mouseMove(ev)
+		{
+			var oEvent=ev||event;
+			var l=oEvent.clientX-disX;
+			var t=oEvent.clientY-disY;
+			
+			oDiv.style.left=l+'px';
+			oDiv.style.top=t+'px';
+		}
+		
+		function mouseUp()
+		{
+			this.onmousemove=null;
+			this.onmouseup=null;
+			
+			if(oDiv.releaseCapture)
+			{
+				oDiv.releaseCapture();
+			}
+		}
+		
+		return false;	//chrome、ff、IE9
+	};
+};
+</script>
+</head>
+
+<body>
+asdfasdfsdf<br>
+dfasfasdfasd
+<div id="div1">asdfasdfsdf<br>
+dfasfasdfasd</div>
+asdfasdfsdf<br>
+dfasfasdfasd
+</body>
+</html>
+
+
+
+
+   ---例9---  拖拽——带框.html   -----------------------------
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width:100px; height:100px; background:yellow; position:absolute;}
+.box {border:1px dashed black; position:absolute;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	
+	var disX=0;
+	var disY=0;
+	
+	oDiv.onmousedown=function (ev)
+	{
+		var oEvent=ev||event;
+		
+		disX=oEvent.clientX-oDiv.offsetLeft;
+		disY=oEvent.clientY-oDiv.offsetTop;
+		
+		var oBox=document.createElement('div');
+		
+		oBox.className='box';
+		oBox.style.width=oDiv.offsetWidth-2+'px';
+		oBox.style.height=oDiv.offsetHeight-2+'px';
+		
+		oBox.style.left=oDiv.offsetLeft+'px';
+		oBox.style.top=oDiv.offsetTop+'px';
+		
+		document.body.appendChild(oBox);
+		
+		document.onmousemove=function (ev)
+		{
+			var oEvent=ev||event;
+			var l=oEvent.clientX-disX;
+			var t=oEvent.clientY-disY;
+			
+			oBox.style.left=l+'px';
+			oBox.style.top=t+'px';
+		};
+		
+		document.onmouseup=function ()
+		{
+			document.onmousemove=null;
+			document.onmouseup=null;
+			
+			oDiv.style.left=oBox.offsetLeft+'px';
+			oDiv.style.top=oBox.offsetTop+'px';
+			
+			document.body.removeChild(oBox);
+		};
+		
+		return false;	//chrome、ff、IE9
+	};
+};
+</script>
+</head>
+
+<body>
+<div id="div1"></div>
+</body>
+</html>
+
+
+
+
+
+   ---例10------自定义滚动条3.html-------------------------------------
+
+     4、自定义滚动条
+
+
+          （1）拖拽
+
+                只有横向拖拽
+
+                限制范围——范围的大小
+
+                计算比例——当前值/最大值
+
+          （2）控制其他对象
+
+                例子1：控制物体的大小
+
+                例子2：控制物体的透明度
+
+                例子3：控制文字滚动
+
+
+
+  -----控制物体的透明度-------------------------------------------------------------------
+  
+      //通过滚动条来改变div2的透明度，类似可以改变div2的大小（控制物体的大小）
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#parent {width:600px; height:20px; background:#CCC; position:relative; margin:10px auto;}
+#div1 {width:20px; height:20px; background:red; position:absolute; left:0; top:0;}
+#div2 {width:300px; height:300px; background:green; filter:alpha(opacity:0); opacity:0;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	var oDiv2=document.getElementById('div2');
+	var oParent=document.getElementById('parent');
+	
+	var disX=0;
+	
+	oDiv.onmousedown=function (ev)
+	{
+		var oEvent=ev||event;
+		
+		disX=oEvent.clientX-oDiv.offsetLeft;
+				
+		document.onmousemove=function (ev)
+		{
+			var oEvent=ev||event;
+			var l=oEvent.clientX-disX;
+			
+			if(l<0)
+			{
+				l=0;
+			}
+			else if(l>oParent.offsetWidth-oDiv.offsetWidth)
+			{
+				l=oParent.offsetWidth-oDiv.offsetWidth;
+			}
+			
+			oDiv.style.left=l+'px';
+			
+			var scale=l/(oParent.offsetWidth-oDiv.offsetWidth);     //滑动滚动条的比例
+			document.title=scale;
+			
+			oDiv2.style.filter='alpha(opacity:'+scale*100+')';      //通过滑动滚动条的比例 来改变div2的透明度
+			oDiv2.style.opacity=scale;
+		};
+		
+		document.onmouseup=function ()
+		{
+			document.onmousemove=null;
+			document.onmouseup=null;
+		};
+		
+		return false;	//chrome、ff、IE9
+	};
+};
+</script>
+</head>
+
+<body>
+<div id="parent">
+	<div id="div1"></div>
+</div>
+<div id="div2"></div>
+</body>
+</html>
+
+
+
+
+
+
+   ---例11------自定义滚动条4.html---------控制文字滚动（可以查看源码）----------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+十四、AJAX基础
+
+
+   1、Ajax基础 - 1
+
+      （1） 什么是服务器？
+
+                  网页浏览过程分析
+
+                  如何配置自己的服务器程序（AMP）（看Ajax基础的视频）
+
+
+
+      （2）什么是Ajax？
+
+               无刷新数据读取
+
+               用户注册、在线聊天室
+
+               异步、同步
+  
+
+
+   2、Ajax基础 - 2
+
+
+      （1）使用Ajax
+
+             基础：请求并显示静态TXT文件
+
+                           字符集编码
+
+                           缓存、阻止缓存
+
+
+      （2）动态数据：请求JS（或json）文件
+
+               eval的使用
+
+               DOM创建元素
+
+
+      （3）局部刷新：请求并显示部分网页文件
+
+
+
+  3、Ajax原理
+
+
+      （1）HTTP请求方法
+
+               GET——用于获取数据（如：浏览帖子）
+
+               POST——用于上传数据（如：用户注册）
+
+               GET、POST的区别
+
+                    get是在url里传数据：安全性、容量
+
+                    -缓存
+
+
+
+
+   --------------------------------------------------
+
+
+   1、Ajax基础 - 1
+
+      （1） 什么是服务器？
+
+                  网页浏览过程分析
+
+                  如何配置自己的服务器程序（AMP） （看Ajax基础的视频）
+
+
+      （2）什么是Ajax？
+
+               无刷新数据读取
+
+               用户注册、在线聊天室
+
+               异步、同步
+
+
+   2、Ajax基础 - 2
+
+
+      （1）使用Ajax
+
+             基础：请求并显示静态TXT文件
+
+                           字符集编码   utf-8   GB2312    
+
+                           缓存、阻止缓存
+                               
+                                  缓存问题： 当txt文件内容改变后，ajax读取到的还是原来的内容，没有改变，所以需要阻止缓存
+
+
+      （2）动态数据：请求JS（或json）文件
+
+               eval的使用
+
+               DOM创建元素
+
+
+      （3）局部刷新：请求并显示部分网页文件
+
+
+
+  --  ajax.js  -----------------------------------------
+
+
+function ajax(url, fnSucc, fnFaild)     //当读取文件成功时，调用fnSucc， 读取失败时，调用fnFaild
+{
+	//1.创建Ajax对象
+	if(window.XMLHttpRequest)
+	{
+		var oAjax=new XMLHttpRequest();
+	}
+	else
+	{
+		var oAjax=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	//2.连接服务器（打开和服务器的连接）
+	oAjax.open('GET', url, true);
+	
+	
+	//3.发送
+	oAjax.send();
+	
+	//4.接收
+	oAjax.onreadystatechange=function ()
+	{
+		if(oAjax.readyState==4)
+		{
+			if(oAjax.status==200)
+			{
+				//alert('成功了：'+oAjax.responseText);
+				fnSucc(oAjax.responseText);
+			}
+			else
+			{
+				//alert('失败了');
+				if(fnFaild)
+				{
+					fnFaild();
+				}
+			}
+		}
+	};
+}
+
+
+
+
+ --例1-----read_txt.html------------请求并显示静态TXT文件-----------------------------------
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script src="ajax.js"></script>
+<script>
+window.onload=function ()
+{
+	var oBtn=document.getElementById('btn1');
+	
+	oBtn.onclick=function()
+	{
+		ajax('aaa.txt', function (str){    // str 就是aaa.txt 文件的内容 
+			alert(str);
+		}, function (){
+			alert('失败');
+		});
+	};
+};
+</script>
+</head>
+
+<body>
+<input id="btn1" type="button" value="读取" />
+</body>
+</html>
+
+
+
+
+
+--例2-----read_txt2.html--------------请求并显示静态TXT文件-----阻止缓存，解决缓存问题-------------------------------------------
+
+      缓存问题： 当txt文件内容改变后，ajax读取到的还是原来的内容，没有改变，所以需要阻止缓存
+   
+       解决缓存：   在aaa.txt 添加一个没有用的t,就可以阻止缓存问题
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script src="ajax.js"></script>
+<script>
+window.onload=function ()
+{
+	var oBtn=document.getElementById('btn1');
+	
+	oBtn.onclick=function ()
+	{
+		ajax('aaa.txt?t='+new Date().getTime(), function (str){   //在aaa.txt 添加一个没有用的t,就可以阻止缓存问题
+			alert(str);                                //new Date().getTime()  读取当前时间并转为毫秒数，即每个值都不一样的
+		}, function (){
+			alert('失败');
+		});
+	};
+};
+</script>
+</head>
+
+<body>
+<input id="btn1" type="button" value="读取" />
+</body>
+</html>
+
+
+
+ --例3----read_arr.html-----------从文件中读取数组----------------------------------------
+
+       （2）动态数据：请求JS（或json）文件
+
+               eval的使用
+
+               DOM创建元素    
+
+
+
+   注意：  从文件中读取到的都是string类型， 用 var arr=eval(str); 将string类型转为数组类型
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script src="ajax.js"></script>
+<script>
+window.onload=function ()
+{
+	var oBtn=document.getElementById('btn1');
+	
+	oBtn.onclick=function ()
+	{
+		ajax('arr.txt?t='+new Date().getTime(), function (str){
+
+			var arr=eval(str);                           //将string类型转为数组类型
+			alert(arr[3]);
+		}, function (){
+			alert('失败');
+		});
+	};
+};
+</script>
+</head>
+
+<body>
+<input id="btn1" type="button" value="读取" />
+</body>
+</html>
+
+
+
+
+
+
+ --例4----read_arr2.html------------读取文件中的json--------------------------------
+
+  arr2.txt内容：[{a: 5, b: 7}, {a: 8, b: 12}]
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script src="ajax.js"></script>
+<script>
+window.onload=function ()
+{
+	var oBtn=document.getElementById('btn1');
+	
+	oBtn.onclick=function ()
+	{
+		ajax('arr2.txt?t='+new Date().getTime(), function (str){
+
+			var arr=eval(str);    //将string类型转为数组类型
+ 
+			alert(arr[0].a);     //读取第一个json中的a存的数据
+
+		}, function (){
+			alert('失败');
+		});
+	};
+};
+</script>
+</head>
+
+<body>
+<input id="btn1" type="button" value="读取" />
+</body>
+</html>
+
+
+
+
+
+----例5------read_and_create.html-------------------------------
+
+
+   data.txt文件中的内容：
+
+         [{user: 'blue', pass: '123456'},{user: '张三', pass: '654321'},{user: '李四', pass: '789456'},{user: '王五', pass: '7777'}]
+
+
+   ------用ajax将以上内容读取到页面中。-------
+   
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script src="ajax.js"></script>
+<script>
+window.onload=function ()
+{
+	var oBtn=document.getElementById('btn1');
+	var oUl=document.getElementById('ul1');
+	
+	oBtn.onclick=function ()
+	{
+		ajax('data.txt?t='+new Date().getTime(), function (str){
+
+			var arr=eval(str);
+			
+			for(var i=0;i<arr.length;i++)
+			{
+				var oLi=document.createElement('li');
+				
+				oLi.innerHTML='用户名：<strong>'+arr[i].user+'</strong>密码：<span>'+arr[i].pass+'</span>';
+				
+				oUl.appendChild(oLi);
+			}
+		}, function (){
+			alert('失败');
+		});
+	};
+};
+</script>
+</head>
+
+<body>
+<input id="btn1" type="button" value="读取" />
+<ul id="ul1">
+</ul>
+</body>
+</html>
+
+
+
+--------------------------------------------------
+
+  3、Ajax原理
+
+
+      （1）HTTP请求方法
+
+               GET——用于获取数据（如：浏览帖子）
+
+               POST——用于上传数据（如：用户注册）
+
+               GET、POST的区别
+
+                    get是在url里传数据：安全性、容量
+
+                    -缓存
+
+
+  
+
+         get方式：放入url
+                            格式：名字=值&名字=值....
+
+         
+         get： 通过网址
+ 
+                  容量小
+                  
+                  安全性差
+
+                  有缓存
+ 
+                  用于获取数据
+
+
+
+         post： 不通过网址
+
+                  容量大（2G）
+
+                  安全性好一点
+
+                  没有缓存
+                
+                  用于上传数据
+
+
+
+    ----例6---form.html--------区别 GET 和 POST---------------------
+
+         get： 通过网址
+ 
+                  容量小
+                  
+                  安全性差
+
+                  有缓存
+ 
+                  用于获取数据
+
+
+
+         post： 不通过网址
+
+                  容量大（2G）
+
+                  安全性好一点
+
+                  没有缓存
+                
+                  用于上传数据
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<form action="http://www.zhinengshe.com/" method="post">
+	用户名:<input type="text" name="username" /><br>
+    密码：<input  type="password" name="password" /><br>
+    <input type="submit" />
+</form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+十五、AJAX中级
+ 
+
+  1、编写Ajax - 1
+
+      （1）创建Ajax对象
+
+                ActiveXObject("Microsoft.XMLHTTP")
+
+                XMLHttpRequest()
+
+
+      （2）连接服务器
+
+               open(方法, 文件名, 异步传输)
+
+                       同步和异步
+
+          
+               同步：    多件事一起     --------------》   事情一件一件来
+                                         在ajax中相反
+               异步：    一件一件来     --------------》   多个事情可以一起做
+
+
+      （3）发送请求
+
+               send()
+
+  
+     
+    ajax编写步骤：
+       
+                   1、创建Ajax对象
+
+                   2、连接服务器
+
+                   3、发送请求
+
+                   4、接收返回值
+
+
+   
+
+  2、编写Ajax - 2
+
+
+（1）请求状态监控
+
+       onreadystatechange事件
+
+           readyState属性：请求状态
+
+               0    （未初始化）还没有调用open()方法
+
+               1    （载入）已调用send()方法，正在发送请求
+
+               2    （载入完成）send()方法完成，已收到全部响应内容
+
+               3    （解析）正在解析响应内容
+
+               4    （完成）响应内容解析完成，可以在客户端调用了
+
+
+           status属性：请求结果
+
+           responseText
+
+
+
+  3、Ajax数据
+
+
+（1）数据类型
+
+         什么叫数据类型——英语、中文
+
+
+（2）XML、Json
+
+         字符集
+
+         所有文件字符集相同
+
+
+
+---------------------------------------------
+
+  1、编写Ajax - 1
+
+      （1）创建Ajax对象
+
+                ActiveXObject("Microsoft.XMLHTTP")
+
+                XMLHttpRequest()
+
+
+      （2）连接服务器
+
+               open(方法, 文件名, 异步传输)
+
+                       同步和异步
+
+
+      （3）发送请求
+
+               send()
+
+
+
+    ----------------------------
+
+
+
+
+
+   ---例1  变量和属性2.html---------------------------------------
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+//用没有定义的变量——报错        即alert(a);          会报错
+//用没有定义的属性——undefined   即alert(window.a);   报undefined
+
+alert(window.a);
+
+</script>
+</head>
+
+<body>
+</body>
+</html>
+
+
+
+
+
+   ---例2  my_ajax2.html---------创建Ajax对象---------------------
+
+
+    ajax编写步骤：
+       
+                   1、创建Ajax对象
+
+                   2、连接服务器
+
+                   3、发送请求
+
+                   4、接收返回值
+
+
+               同步：    多件事一起     --------------》   事情一件一件来
+                                         在ajax中相反
+               异步：    一件一件来     --------------》   多个事情可以一起做
+
+    ajax 一般是异步
+
+
+       onreadystatechange事件
+
+           readyState属性：请求状态
+
+               0    （未初始化）还没有调用open()方法
+
+               1    （载入）已调用send()方法，正在发送请求
+
+               2    （载入完成）send()方法完成，已收到全部响应内容
+
+               3    （解析）正在解析响应内容
+
+               4    （完成）响应内容解析完成，可以在客户端调用了
+
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oBtn=document.getElementById('btn1');
+	
+	oBtn.onclick=function ()
+	{
+		//1.创建Ajax对象           //处理兼容问题
+		if(window.XMLHttpRequest)  //这里若单写成XMLHttpRequest会报错，若window.XMLHttpRequest不会报错，而是得到所要的undifind
+		{
+			 //非IE6
+		     //var oAjax=new XMLHttpRequest();
+			var oAjax=new XMLHttpRequest();
+		}
+		else
+		{
+			 //IE6
+			var oAjax=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		
+		//2.连接服务器
+		//open(方法, 文件名, 异步传输)
+		oAjax.open('GET', 'a.txt', true);
+		                  //这里可以将 'a.txt'  写成 'a.txt?t='+new Date().getTime()  处理缓存问题
+		//3.发送请求
+		oAjax.send();
+		
+		//4.接收返回
+		oAjax.onreadystatechange=function ()
+		{
+			//oAjax.readyState	//浏览器和服务器，进行到哪一步了
+			if(oAjax.readyState==4)	// '4' 代表 读取完成，不代表成功
+			{
+				if(oAjax.status==200)	//'200'代表 成功
+				{
+					alert('成功：'+oAjax.responseText); //oAjax.responseText ：文件的内容
+				}
+				else
+				{
+					alert('失败:'+oAjax.status);   //oAjax.status==404  代表失败
+				}
+			}
+		};
+	};
+};
+</script>
+</head>
+
+<body>
+<input id="btn1" type="button" value="读取" />
+</body>
+</html>
+
+
+
+
+
+---例2----new_ajax.js-------将例1中创建ajax的例子修改并封装成函数，放在 new_ajax.js 中---------------------------------------------
+
+
+function ajax(url, fnSucc, fnFaild)
+{
+	//1.创建Ajax对象
+	if(window.XMLHttpRequest)
+	{
+		var oAjax=new XMLHttpRequest();
+	}
+	else
+	{
+		var oAjax=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	//2.连接服务器
+	//open(方法, 文件名, 异步传输)
+	oAjax.open('GET', url, true);       //url参数
+	
+	//3.发送请求
+	oAjax.send();
+	
+	//4.接收返回
+	oAjax.onreadystatechange=function ()
+	{
+		//oAjax.readyState	//浏览器和服务器，进行到哪一步了
+		if(oAjax.readyState==4)	//读取完成
+		{
+			if(oAjax.status==200)	//成功
+			{
+				fnSucc(oAjax.responseText);   //调用fnSucc（str）函数
+			}
+			else
+			{
+				if(fnFaild)                   //当失败 且 存在fnFaild（）函数时，调用fnFaild
+				{
+					fnFaild(oAjax.status);
+				}
+				//alert('失败:'+oAjax.status);
+			}
+		}
+	};
+}
+
+
+
+
+----例3---------my_ajax3.html----------------------------------------------------
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script src="new_ajax.js"></script>
+<script>
+window.onload=function ()
+{
+	var oBtn=document.getElementById('btn1');
+	
+	oBtn.onclick=function ()
+	{
+		ajax('a.txt', function (str){
+			alert(str);
+		});
+	};
+};
+</script>
+</head>
+
+<body>
+<input id="btn1" type="button" value="读取" />
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+十六、JS面向对象基础
+
+
+
+
+  1、什么是面向对象
+
+          对象：黑盒子， 不了解内部的结构，知道表面的各种操作（按钮）
+
+          面向对象： 不了解原理的情况下，会使用功能
+
+
+（1）什么是对象
+
+          什么是收音机
+
+          对象是一个整体，对外提供一些操作
+           
+          对象： 不了解内部的结构，知道表面的各种操作（按钮）
+
+（2）什么是面向对象
+
+          使用对象时，只关注对象提供的功能，不关注其内部细节
+
+          面向对象： 不了解原理的情况下，会使用功能
+
+          比如JQuery
+
+
+（3）面向对象是一种通用思想，并非只有编程中能用，任何事情都可以用
+
+
+
+  2、JS中的面向对象
+
+面向对象
+         （1）用对象
+         （2）写对象
+
+（1）面向对象编程(OOP)的特点
+
+          抽象：抓住核心问题
+
+                  抽象： 抽----把最主要的特征、跟问题相关的特征抽出来
+
+
+
+          封装：不考虑内部实现，只考虑功能使用
+
+                  封装： 看不到里面的东西，用好表面的功能就行了
+
+
+          继承：从已有对象上，继承出新的对象
+
+                               继承： 从父类上继承出一些方法、属性，子类，又有一些自己的特性
+ 
+                  多重继承
+
+                  多态
+
+
+（2）对象的组成
+
+          方法——函数：过程、动态的
+
+          属性——变量：状态、静态的
+
+
+
+
+ 3、第一个面向对象程序
+
+
+（1）为对象添加方法和属性
+
+        this详解，事件处理中this的本质
+
+                     window
+
+                     this——函数属于谁
+
+        不能在系统对象中随意附加方法、属性，否则会覆盖已有方法、属性
+
+        object对象
+
+
+
+ 4、工厂方式
+
+
+（1）什么是工厂
+
+         原料
+
+         加工
+
+         出厂
+
+
+（2）工厂方式
+
+        用构造函数创建一个类
+
+        什么是类、对象（实例）：模具和零件
+
+
+
+ 5、工厂方式的问题
+
+
+（1）问题
+
+       没有new
+
+       函数重复定义
+
+
+（2）加上new
+
+        偷偷做了两件事：
+
+               替你创建了一个空白对象
+
+               替你返回了这个对象
+
+
+        new和this
+
+
+
+ 6、原型——prototype
+
+   （1）什么是原型
+
+            原型是class，修改他可以影响一类元素
+
+            在已有对象中加入自己的属性、方法
+
+            原型修改对已有对象的影响
+   
+
+   （2）为Array添加sum方法
+
+            给对象添加方法，类似于行间样式
+
+            给原型添加方法，类似于class
+
+
+   （3）原型的小缺陷
+
+            无法限制覆盖
+
+
+
+
+
+ 7、流行的面向对象编写方式
+
+
+（1）用混合方式构造对象
+      
+            混合的的构造函数/原型方式
+      
+            Mixed Constructor Function/Prototype Method
+（2）原则
+      
+            构造函数：加属性
+      
+            原型：加方法
+
+
+（3）对象命名规范
+      
+            类名首字母大写
+
+
+
+
+
+
+
+  ---例1---对象组成.html--------对象组成2.html----------------------
+
+
+（2）对象的组成
+
+          方法——函数：过程、动态的
+
+          属性——变量：状态、静态的
+
+
+   //变量：自由的，不属于任何人，当变量属于一个对象的，就叫属性
+   //属性：属于一个对象的
+
+   //函数：自由， 当函数属于一个对象的，就叫方法
+   //方法：属于一个对象
+
+
+
+var a=12;		//变量：自由的，不属于任何人
+
+alert(a);
+
+var arr=[1,2,3,4,5,6];
+
+arr.a=12;		//属性：属于一个对象的
+
+alert(arr.a);
+</script>
+
+-----------------------------
+
+<script>
+function aaa()			//函数：自由
+{
+	alert('abc');
+}
+
+var arr=[1,2,3,4];
+
+arr.aaa=function ()		//方法：属于一个对象
+{
+	alert('abc');
+};
+
+aaa();
+arr.aaa();
+</script>
+
+
+
+
+---例2------this.html--------------------------------------
+
+
+        this详解，事件处理中this的本质
+
+                     window   全局之下的方法和变量属于window的
+
+                     this——函数属于谁
+
+
+        this :  当前发生事件的对象
+                         当前的方法属于谁，this就是谁 
+
+              
+
+
+<script>
+var arr=[1,2,3,4];
+
+arr.a=12;
+
+arr.show=function ()
+{
+	alert(this.a);
+};
+
+oDiv.onclick=function ()
+{
+	alert(this);
+};
+
+arr.show();
+</script>
+
+
+
+---例3---------第一个面向对象的程序3.html--------------------------------------
+
+
+        不能在系统对象中随意附加方法、属性，否则会覆盖已有方法、属性
+
+        object对象  
+
+                         Date 日期
+
+                         Array 存东西
+
+                         RegExp 正则
+
+                         object  没有功能，所以可以向object添加功能
+
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+function createPerson(name, qq)		//构造函数
+{
+	var obj=new Object();
+	
+	obj.name=name;
+	obj.qq=qq;
+	
+	obj.showName=function ()
+	{
+		alert('我的名字叫：'+this.name);
+	};
+	obj.showQQ=function ()
+	{
+		alert('我的QQ号：'+this.qq);
+	};
+	
+	return obj;
+}
+
+var obj=createPerson('blue', '258248832');
+
+obj.showName();
+obj.showQQ();
+
+var obj2=createPerson('张三', '45648979879');
+
+obj2.showName();
+obj2.showQQ();
+</script>
+</head>
+
+<body>
+</body>
+</html>
+
+
+
+--例4----工厂方式.html--------------------------------------
+
+4、工厂方式
+
+
+（1）什么是工厂
+
+         原料
+
+         加工
+
+         出厂
+
+
+（2）工厂方式
+
+        用构造函数创建一个类
+
+        什么是类、对象（实例）：模具和零件
+
+
+<script>
+function createPerson(name, qq)		//构造函数
+{
+	//原料
+	var obj=new Object();
+	
+	//加工
+	obj.name=name;
+	obj.qq=qq;
+	
+	obj.showName=function ()
+	{
+		alert('我的名字叫：'+this.name);
+	};
+	obj.showQQ=function ()
+	{
+		alert('我的QQ号：'+this.qq);
+	};
+	
+	//出厂
+	return obj;
+}
+
+var obj=createPerson('blue', '258248832');
+
+obj.showName();
+obj.showQQ();
+
+var obj2=createPerson('张三', '45648979879');
+
+obj2.showName();
+obj2.showQQ();
+</script>
+
+
+
+
+
+ ----例5-----工厂方式2.html---------工厂问题--------------------------------
+
+
+ 5、工厂方式的问题
+
+
+（1）问题
+
+       没有new
+
+       函数重复定义---- 如：obj.showName不等于obj2.showName    浪费资源
+
+
+（2）加上new
+
+        偷偷做了两件事：
+
+               替你创建了一个空白对象
+
+               替你返回了这个对象
+
+
+        new和this
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+function createPerson(name, qq)		//构造函数     
+{
+	//原料
+	var obj=new Object();
+	
+	//加工
+	obj.name=name;
+	obj.qq=qq;
+	
+	obj.showName=function ()
+	{
+		alert('我的名字叫：'+this.name);
+	};
+	obj.showQQ=function ()
+	{
+		alert('我的QQ号：'+this.qq);
+	};
+	
+	//出厂
+	return obj;
+}
+
+var obj=createPerson('blue', '258248832');     //没有new
+var obj2=createPerson('张三', '45648979879');
+
+alert(obj.showName==obj2.showName);      // 返回flase    函数重复定义---- 如：obj.showName不等于obj2.showName    浪费资源
+</script>
+</head>
+
+<body>
+</body>
+</html>
+
+
+
+
+---例6-----new2.html-------解决工厂的第一个问题： 没有new------------------
+
+
+（2）加上new
+
+        偷偷做了两件事：
+
+               替你创建了一个空白对象
+
+               替你返回了这个对象
+
+
+        new和this
+
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+function createPerson(name, qq)		//构造函数
+{
+	//系统偷偷替咱们做：
+	//var this=new Object();
+	
+	//加工
+	this.name=name;
+	this.qq=qq;
+	
+	this.showName=function ()
+	{
+		alert('我的名字叫：'+this.name);
+	};
+	this.showQQ=function ()
+	{
+		alert('我的QQ号：'+this.qq);
+	};
+	
+	//也会偷偷做一些：
+	//return this;
+}
+
+var obj=new createPerson('blue', '258248832');     在这里，加上new后，系统会帮做两件事 ：  替你创建了一个空白对象 和 替你返回了这个对象
+var obj2=new createPerson('张三', '45648979879');
+
+obj.showName();
+obj.showQQ();
+//alert(obj.showName==obj2.showName);   // 返回flase  函数重复定义---- 如：obj.showName不等于obj2.showName    浪费资源
+</script>
+</head>
+
+<body>
+</body>
+</html>
+
+
+
+
+--------------------------- ----------------------------------
+
+
+    用构造函数加属性
+
+    用原型加方法
+
+
+ 6、原型——prototype
+
+   （1）什么是原型
+
+            原型是class，修改他可以影响一类元素
+
+            在已有对象中加入自己的属性、方法
+
+            原型修改对已有对象的影响
+
+
+      帮助理解：
+                 class                一次给一组元素加样式               原型
+
+                 行间样式             一次给一个元素加样式                给对象加东西
+   
+
+   （2）为Array添加sum方法
+
+            给对象添加方法，类似于行间样式
+
+            给原型添加方法，类似于class
+
+
+   （3）原型的小缺陷
+
+            无法限制覆盖
+
+ 
+   
+
+  ---原型.html------------------理解什么是原型----------------------------
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+var arr1=new Array(12,55,34,78,676);
+var arr2=new Array(12,33, 1);
+
+Array.prototype.sum=function ()	         //class
+//arr1.sum=function ()	                 //行间样式
+{
+	var result=0;
+	
+	for(var i=0;i<this.length;i++)
+	{
+		result+=this[i];
+	}
+	
+	return result;
+};
+
+alert(arr1.sum());
+alert(arr2.sum());	//?
+</script>
+</head>
+
+<body>
+</body>
+</html>
+
+
+
+
+
+
+-----例7---------原型用到面向对象.html------------解决工厂的第二个问题：函数重复定义----------------
+
+
+    用构造函数加属性
+
+    用原型加方法
+
+          就可以 避免 函数重复定义  和浪费资源
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+function createPerson(name, qq)		//构造函数
+{
+	//系统偷偷替咱们做：
+	//var this=new Object();
+	
+	//加工
+	this.name=name;
+	this.qq=qq;
+	
+	//也会偷偷做一些：
+	//return this;
+}
+
+//  createPerson  是类
+//  obj  obj2     是对象
+
+createPerson.prototype.showName=function ()	//原型
+{
+	alert('我的名字叫：'+this.name);
+};
+
+createPerson.prototype.showQQ=function ()    //使用原型
+{
+	alert('我的QQ号：'+this.qq);
+};
+
+var obj=new createPerson('blue', '258248832');
+var obj2=new createPerson('张三', '45648979879');
+
+/*obj.showName();
+obj.showQQ();
+
+obj2.showName();
+obj2.showQQ();*/
+alert(obj.showName==obj2.showName);    //返回true，    避免 函数重复定义  和浪费资源
+</script>
+</head>
+
+<body>
+</body>
+</html>
+
+
+
+ -----------------------------------------------------------
+
+ 7、流行的面向对象编写方式
+
+
+（1）用混合方式构造对象
+      
+            混合的的构造函数/原型方式
+      
+            Mixed Constructor Function/Prototype Method
+
+            
+       即：        用构造函数加属性
+
+                   用原型加方法
+
+                                     节省资源
+
+（2）原则
+      
+            构造函数：加属性
+      
+            原型：加方法
+
+
+（3）对象命名规范
+      
+            类名首字母大写   如：  CreatePerson(name, qq)	
+
+ -------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+十七、JS面向对象实例
+
+
+
+        实例：面向对象的选项卡
+
+
+              (1) 把面向过程的程序，改写成面向对象的形式
+
+                  原则：
+
+                        不能有函数套函数、但可以有全局变量
+
+
+                  过程：
+
+                         onload	        →	构造函数
+
+                         全局变量	→	属性
+
+                         函数		→	方法
+
+
+                  改错:
+
+                        this、事件、闭包、传参
+
+
+
+             (2)对象与闭包
+
+                       通过闭包传递this
+
+
+
+
+
+   ---------选项卡.html-----------普通的选项卡（面向过程）-----------------------
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 input {background:white;}
+#div1 input.active {background:yellow;}
+#div1 div {width:200px; height:200px; background:#CCC; display:none;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	var aBtn=oDiv.getElementsByTagName('input');
+	var aDiv=oDiv.getElementsByTagName('div');
+	
+	for(var i=0;i<aBtn.length;i++)
+	{
+		aBtn[i].index=i;
+		aBtn[i].onclick=function ()
+		{
+			for(var i=0;i<aBtn.length;i++)
+			{
+				aBtn[i].className=''
+				aDiv[i].style.display='none';
+			}
+			this.className='active';
+			aDiv[this.index].style.display='block';
+		};
+	}
+};
+</script>
+</head>
+
+<body>
+<div id="div1">
+<input class="active" type="button" value="aaa" />
+<input type="button" value="bbb" />
+<input type="button" value="ccc" />
+<div style="display:block;">aaa</div>
+<div>dfsadf</div>
+<div>erwqerwe</div>
+</div>
+</body>
+</html>
+
+
+
+-----选项卡2.html---------修改：函数没有嵌套------------------------------------
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 input {background:white;}
+#div1 input.active {background:yellow;}
+#div1 div {width:200px; height:200px; background:#CCC; display:none;}
+</style>
+<script>
+var aBtn=null;            //将原来的变量改为全局变量，不然在fnClick()取不到aBtn，aDiv
+var aDiv=null;
+
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	aBtn=oDiv.getElementsByTagName('input');
+	aDiv=oDiv.getElementsByTagName('div');
+	
+	for(var i=0;i<aBtn.length;i++)
+	{
+		aBtn[i].index=i;
+		aBtn[i].onclick=fnClick;
+	}
+};
+
+function fnClick()                      //函数不嵌套在window.onload=function ()中
+{
+	for(var i=0;i<aBtn.length;i++)
+	{
+		aBtn[i].className=''
+		aDiv[i].style.display='none';
+	}
+	this.className='active';
+	aDiv[this.index].style.display='block';
+}
+</script>
+</head>
+
+<body>
+<div id="div1">
+<input class="active" type="button" value="aaa" />
+<input type="button" value="bbb" />
+<input type="button" value="ccc" />
+<div style="display:block;">aaa</div>
+<div>dfsadf</div>
+<div>erwqerwe</div>
+</div>
+</body>
+</html>
+
+
+
+
+
+-------选项卡5.html-----------面向对象---------------------------
+
+
+  window.onload：                               构造函数：
+
+           初始化整个程序                           初始化整个对象
+
+
+
+                  过程：
+
+                         onload	        →	构造函数
+
+                         全局变量	→	属性
+
+                         函数		→	方法
+
+
+
+
+                   用构造函数加属性
+
+                   用原型加方法
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 input {background:white;}
+#div1 input.active {background:yellow;}
+#div1 div {width:200px; height:200px; background:#CCC; display:none;}
+</style>
+<script>
+window.onload=function ()
+{
+	new TabSwitch('div1');
+};
+
+function TabSwitch(id)       //构造函数
+{
+	var _this=this;
+	var oDiv=document.getElementById(id);
+	
+	this.aBtn=oDiv.getElementsByTagName('input');
+	this.aDiv=oDiv.getElementsByTagName('div');
+	
+	for(var i=0;i<this.aBtn.length;i++)
+	{
+		this.aBtn[i].index=i;
+		this.aBtn[i].onclick=function ()
+		{
+			_this.fnClick(this);
+		};
+	}
+};
+
+TabSwitch.prototype.fnClick=function (oBtn)
+{
+	//alert(this);
+	for(var i=0;i<this.aBtn.length;i++)
+	{
+		this.aBtn[i].className=''
+		this.aDiv[i].style.display='none';
+	}
+	oBtn.className='active';
+	this.aDiv[oBtn.index].style.display='block';
+}
+</script>
+</head>
+
+<body>
+<div id="div1">
+<input class="active" type="button" value="aaa" />
+<input type="button" value="bbb" />
+<input type="button" value="ccc" />
+<div style="display:block;">aaa</div>
+<div>dfsadf</div>
+<div>erwqerwe</div>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+十八、JS面向对象高级
+
+
+   1、Json方式的面向对象
+
+        把方法包在一个Json里 
+ 
+                  有人管他叫——命名空间
+
+                  在公司里，把同一类方法，包在一起
+
+
+      json ：实现面向对象较简单，但不适合多个对象
+
+            适合方向： 整个程序里只有一个，写起来比较简单
+
+            单体
+
+   2、拖拽和继承
+
+
+        （1）面向对象的拖拽
+
+                       改写原有拖拽
+
+
+        （2）对象的继承
+
+                  什么是继承？
+
+                        在原有类的基础上，略作修改，得到一个新的类
+
+                        不影响原有类的功能
+
+
+                  instanceof运算符
+
+                        查看对象是否是某个类的实例
+
+
+
+   3、使用继承
+
+
+（1）限制范围的拖拽类
+
+            构造函数伪装：
+
+                属性的继承
+
+                     原理：欺骗构造函数
+
+                call的使用
+
+
+           原型链：
+
+               方法的继承
+
+                           原理：复制方法
+
+               覆盖原型和方法复制
+
+
+
+
+  4、系统对象
+
+
+（1）本地对象（非静态对象）
+
+         什么是本地对象
+
+         常用对象
+
+                  Object、Function、Array、String、Boolean、Number、Date、RegExp、Error
+
+
+（2）内置对象（静态对象）
+
+         什么是本地对象
+
+                 Global、Math
+
+
+（3）宿主对象（由浏览器提供的对象）
+
+           DOM、BOM
+
+
+
+
+     
+  ----例1----json的对象.html----json的对象2.html------json的对象3.html----json的对象4.html----json中可以放任何东西---------------
+
+   从 json的对象4.html 中 可以看出：
+
+      json ：实现面向对象较简单，但不适合多个对象
+
+            适合方向： 整个程序里只有一个，写起来比较简单
+
+
+     
+
+<script>
+var json={
+	a: 12,
+	b: 5,
+	c: 'abc',
+	d: function ()
+	{
+		alert('a');
+	}
+};
+
+json.d();
+</script>
+
+
+<script>
+var json={
+	a: 12,
+	show: function ()
+	{
+		alert(this.a);
+	}
+};
+
+json.show();
+</script>
+
+
+
+<script>
+var json={
+	name: 'blue',
+	qq: '258248832',
+	
+	showName: function ()
+	{
+		alert('我的名字叫：'+this.name);
+	},
+	showQQ: function ()
+	{
+		alert('我的QQ号是：'+this.qq);
+	}
+};
+
+json.showName();
+json.showQQ();
+</script>
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+var json={
+	name: 'blue',
+	qq: '258248832',
+	
+	showName: function ()
+	{
+		alert('我的名字叫：'+this.name);
+	},
+	showQQ: function ()
+	{
+		alert('我的QQ号是：'+this.qq);
+	}
+};
+
+var json2={
+	name: '...',
+	qq: '258248832',
+	
+	showName: function ()
+	{
+		alert('我的名字叫：'+this.name);
+	},
+	showQQ: function ()
+	{
+		alert('我的QQ号是：'+this.qq);
+	}
+};
+
+json.showName();
+json.showQQ();
+</script>
+</head>
+
+-------命名空间.html----------------------------------------
+
+        
+
+        把方法包在一个Json里
+ 
+                  有人管他叫——命名空间
+
+                  在公司里，把同一类方法，包在一起
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+var zns={};
+
+zns.common={};
+zns.fx={};
+zns.site={};
+
+zns.common.getUser=function ()
+{
+	alert('a');
+};
+
+zns.fx.getUser=function ()
+{
+	alert('b');
+};
+
+zns.site.getUser=function ()
+{
+	alert('c');
+};
+
+zns.common.getUser();
+zns.fx.getUser();
+zns.site.getUser();
+</script>
+</head>
+
+<body>
+</body>
+</html>
+
+
+
+------------------------------------------------
+
+   2、拖拽和继承
+
+
+        （1）面向对象的拖拽
+
+                       改写原有拖拽
+
+
+        （2）对象的继承
+
+                  什么是继承？
+
+                        在原有类的基础上，略作修改，得到一个新的类
+
+                        不影响原有类的功能
+
+
+                  instanceof运算符
+
+                        查看对象是否是某个类的实例
+
+
+
+
+
+--------call.html------call2.html-------------------
+
+
+  call()可以改变this
+
+
+  可以通过call 继承父类的属性，不包括方法
+
+
+<script>
+function show()
+{
+	alert(this);
+}
+
+//show();     ----》这里弹出的是‘window’
+show.call(12); ----》 这里弹出的是  ‘12’   即call()可以改变this
+</script>
+
+
+  
+<script>
+function show(a, b)
+{
+	alert('this是：'+this+'\na是：'+a+'\nb是：'+b);
+}
+
+//show(12, 5);
+show.call('abc', 12, 5);   // 在call()中，第一个参数是this,其余其次赋值
+</script>
+
+
+
+
+------引用.html----------------------------------------------
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+var arr1=[1,2,3];
+var arr2=arr1;       //这里用到了引用，即arr1 和 arr2 指向的是同一块空间，当arr2改变，arr1也会改变，而不是把arr1的内容复制给arr2
+
+arr2.push(4);
+
+alert(arr1);	//1,2,3,4
+alert(arr2);	//1,2,3,4
+</script>
+</head>
+
+<body>
+</body>
+</html>
+
+
+
+
+------引用2.html----------把arr1的内容复制给arr2-----------这样当arr2改变，arr1就不会改变了，-------------------
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+var arr1=[1,2,3];
+var arr2=[];
+
+for(var i=0;i<arr1.length;i++)
+{
+	arr2.push(arr1[i]);
+}
+
+arr2.push(4);
+
+alert(arr1);	//1,2,3
+alert(arr2);	//1,2,3,4
+</script>
+</head>
+
+<body>
+</body>
+</html>
+
+
+
+-------继承3.html----------------------------------------
+
+   用call() 继承属性
+
+   用 for in 继承方法
+
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+function A()
+{
+	this.abc=12;
+}
+
+A.prototype.show=function ()
+{
+	alert(this.abc);
+};
+
+//继承A
+
+function B()
+{
+	//this->new B()
+	A.call(this);          //通过call 继承A的属性
+}
+
+//B.prototype=A.prototype; //这里不算是继承，是用到了引用，即 B 和 A 指向的是同一块空间，当B改变，A也会改变，而不是把B的内容复制给A
+
+for(var i in A.prototype)     //for in 才算是真正的继承， 继承了A 的方法   当B改变，A不会改变
+{
+	B.prototype[i]=A.prototype[i];
+}
+
+B.prototype.fn=function ()
+{
+	alert('abc');
+};
+
+var objB=new B();
+var objA=new A();
+
+//objA.fn();
+</script>
+</head>
+
+<body>
+</body>
+</html>
+
+
+
+
+
+--------拖拽.html-------------普通的拖拽--------------------
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width:200px; height:200px; background:yellow; position:absolute;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	
+	oDiv.onmousedown=function (ev)
+	{
+		var oEvent=ev||event;
+		
+		var disX=oEvent.clientX-oDiv.offsetLeft;
+		var disY=oEvent.clientY-oDiv.offsetTop;
+		
+		document.onmousemove=function (ev)
+		{
+			var oEvent=ev||event;
+			
+			oDiv.style.left=oEvent.clientX-disX+'px';
+			oDiv.style.top=oEvent.clientY-disY+'px';
+		};
+		
+		document.onmouseup=function ()
+		{
+			document.onmousemove=null;
+			document.onmouseup=null;
+		};
+	};
+};
+</script>
+</head>
+
+<body>
+<div id="div1"></div>
+</body>
+</html>
+
+
+
+
+------拖拽2.html--------消除函数嵌套-----------------------
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width:200px; height:200px; background:yellow; position:absolute;}
+</style>
+<script>
+var oDiv=null;
+var disX=0;
+var disY=0;
+
+window.onload=function ()
+{
+	oDiv=document.getElementById('div1');
+	
+	oDiv.onmousedown=fnDown;
+};
+
+function fnDown(ev)
+{
+	var oEvent=ev||event;
+	
+	disX=oEvent.clientX-oDiv.offsetLeft;
+	disY=oEvent.clientY-oDiv.offsetTop;
+	
+	document.onmousemove=fnMove;
+	document.onmouseup=fnUp;
+}
+
+function fnMove(ev)
+{
+	var oEvent=ev||event;
+	
+	oDiv.style.left=oEvent.clientX-disX+'px';
+	oDiv.style.top=oEvent.clientY-disY+'px';
+}
+
+function fnUp()
+{
+	document.onmousemove=null;
+	document.onmouseup=null;
+}
+</script>
+</head>
+
+<body>
+<div id="div1"></div>
+</body>
+</html>
+
+
+
+-----拖拽3.html---------------------------------
+
+
+                  过程：
+
+                         onload	        →	构造函数
+
+                         全局变量	→	属性
+
+                         函数		→	方法
+
+
+
+
+                   用构造函数加属性
+
+                   用原型加方法
+
+   用call() 继承属性
+
+   用 for in 继承方法
+
+
+
+        ------Drag.js------将Drag函数放到外部文件中-------------
+
+      function Drag(id)
+{
+	var _this=this;
+	this.disX=0;
+	this.disY=0;
+	
+	this.oDiv=document.getElementById(id);
+	this.oDiv.onmousedown=function (ev)
+	{
+		_this.fnDown(ev);
+		
+		return false;            //关闭默认行为，防止移动div时，选中文字
+	};
+};
+
+Drag.prototype.fnDown=function (ev)
+{
+	var _this=this;
+	var oEvent=ev||event;
+	
+	this.disX=oEvent.clientX-this.oDiv.offsetLeft;
+	this.disY=oEvent.clientY-this.oDiv.offsetTop;
+	
+	document.onmousemove=function (ev)
+	{
+		_this.fnMove(ev);
+	};
+	document.onmouseup=function ()
+	{
+		_this.fnUp();
+	};
+};
+
+Drag.prototype.fnMove=function (ev)
+{
+	var oEvent=ev||event;
+	
+	this.oDiv.style.left=oEvent.clientX-this.disX+'px';
+	this.oDiv.style.top=oEvent.clientY-this.disY+'px';
+};
+
+Drag.prototype.fnUp=function ()
+{
+	document.onmousemove=null;
+	document.onmouseup=null;
+};
+
+  
+
+
+  
+       -----LimitDrag.js----------继承Drag.js-----------
+
+          大大减少了代码
+
+          提高了代码的重用性
+     
+
+   用call() 继承属性
+
+   用 for in 继承方法
+
+
+
+function LimitDrag(id)
+{
+	Drag.call(this, id);	//继承属性
+}
+
+for(var i in Drag.prototype)    // 用 for in 继承方法
+{
+	LimitDrag.prototype[i]=Drag.prototype[i];
+}
+
+LimitDrag.prototype.fnMove=function (ev)   //改写父类中的方法
+{
+	var oEvent=ev||event;
+	var l=oEvent.clientX-this.disX;
+	var t=oEvent.clientY-this.disY;
+	
+	if(l<0)
+	{
+		l=0;
+	}
+	else if(l>document.documentElement.clientWidth-this.oDiv.offsetWidth)
+	{
+		l=document.documentElement.clientWidth-this.oDiv.offsetWidth;
+	}
+	
+	this.oDiv.style.left=l+'px';
+	this.oDiv.style.top=t+'px';
+};
+
+
+
+
+
+     --------拖拽3.html-----------------------------
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width:200px; height:200px; background:yellow; position:absolute;}
+#div2 {width:200px; height:200px; background:green; position:absolute;}
+</style>
+<script src="Drag.js"></script>
+<script src="LimitDrag.js"></script>
+<script>
+window.onload=function ()
+{
+	new Drag('div1');
+	new LimitDrag('div2');
+};
+</script>
+</head>
+
+<body>
+<div id="div1">普通拖拽</div>
+<div id="div2">限制范围</div>
+</body>
+</html>
+
+
+
+
+-------------------------------------------------------
+
+
+  4、系统对象
+
+
+（1）本地对象（非静态对象） ： 需要new 下定义  才能用
+
+         什么是本地对象
+
+         常用对象
+
+                  Object、Function、Array、String、Boolean、Number、Date、RegExp、Error
+
+
+（2）内置对象（静态对象）： 不要用 new 的对象，就可以用的对象，如：Math.ceil等等
+
+         什么是本地对象
+
+                 Global、Math
+                                Math.ceil等等
+
+
+（3）宿主对象（由浏览器提供的对象）
+
+           DOM、BOM
+
+
+      -----------------------
+
+           只要是js, 就要拥有 本地对象 和 内置对象
+ 
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+  DOM：   创建  插入  删除 。。。
+ 
+  BOM： 操作浏览器
+
+十九、BOM应用   
+
+
+  1、BOM基础
+
+
+（1）打开、关闭窗口
+
+           open：
+    
+                 蓝色理想运行代码功能
+
+           close：
+
+                 关闭时提示问题
+
+
+（2）常用属性
+
+         window.navigator.userAgent
+
+         window.location
+
+
+
+  2、尺寸及坐标
+
+
+        窗口尺寸、工作区尺寸
+
+
+   （1）可视区尺寸
+
+          document.documentElement.clientWidth    可视区的宽
+
+          document.documentElement.clientHeight   可视区的高
+
+
+
+   （2）滚动距离（两个，处理兼容）
+
+          document.body.scrollTop
+  
+          document.documentElement.scrollTop
+
+
+
+
+
+  3、常用方法和事件
+
+
+（1）系统对话框
+
+
+         警告框：alert(“内容”)，没有返回值
+
+         选择框：confirm(“提问的内容”)，返回boolean
+
+         输入框：prompt()，返回字符串或null
+
+
+
+（2）window对象常用事件
+
+         onload
+
+         onscroll
+
+         onresize 
+
+         例子：回到顶部按钮、侧边栏广告
+
+                 闪烁问题
+
+
+
+
+
+    --1---open.html--------------点击按钮，打开网页   window.open（）--------------------------
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<input type="button" value="打开窗口" onclick="window.open('http://www.zhinengshe.com/');" />
+</body>
+</html>
+
+
+
+
+  --2---write.html-----------------------------------------
+
+
+      document.write（）： 会先清空之前所有代码，再写入代码
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<input type="button" value="write" onclick="document.write('abc')" />
+</body>
+</html>
+
+
+
+  --3----运行.html-----------------------------------------------
+  
+       document  
+
+         全称为  window.document   浏览器的文档
+  
+                   document 表示文档
+                   window   表示浏览器
+
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oTxt=document.getElementById('txt1');
+	var oBtn=document.getElementById('btn1');
+	
+	oBtn.onclick=function ()
+	{
+		var oNewWin=window.open('about:blank', '_blank');   //打开窗口     '_blank' 表示弹出一个新窗口
+		
+		oNewWin.document.write(oTxt.value);                 //往新窗口里写代码，并且运行
+	};
+};
+</script>
+</head>
+
+<body>
+<textarea id="txt1" rows="10" cols="40"></textarea><br>
+<input id="btn1" type="button" value="运行代码" />
+</body>
+</html>
+
+
+
+  --4-----close.html---------关闭窗口window.close()-------------------------------------
+
+   注意：  这段代码在火狐下运行后，点击按钮会没反应，因为在火狐中，window.close() 只能关闭由 window.open（）打开的页面
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<input type="button" value="close" onclick="window.close();" />     //关闭窗口window.close()
+
+                                                                   
+</body>
+</html>
+
+
+
+
+
+  --5-----open_close.html-----------------------------------
+
+   在火狐中，window.close() 只能关闭由 window.open（）打开的页面
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<input type="button" value="open" onclick="window.open('close.html');" />     //window.open（）打开页面
+</body>
+</html>
+
+
+
+
+  --6----userAgent.html-------location.html-----------------------------------------
+
+
+     常用属性
+
+         window.navigator.userAgent    // userAgent 当前浏览器的版本信息
+
+         window.location               //当前页面的地址   不光可以读取，还可以赋值，赋值后，则跳转到指向的页面
+
+
+
+<script>
+     alert(window.navigator.userAgent);    //弹出  当前浏览器的版本信息
+</script>
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+alert(window.location);     //弹出  当前页面的地址
+</script>
+</head>
+
+<body>                               
+<input type="button" value="aaa" onclick="window.location='http://www.zhinengshe.com/';" />  //给 当前页面的地址 赋值  
+</body>
+</html>
+
+
+
+
+ -------尺寸及坐标------------------------------
+
+
+  2、尺寸及坐标
+
+
+        窗口尺寸、工作区尺寸
+
+
+   （1）可视区尺寸
+
+          document.documentElement.clientWidth    可视区的宽
+
+          document.documentElement.clientHeight   可视区的高
+
+
+
+   （2）滚动距离（有两个，处理兼容）
+
+          document.body.scrollTop
+  
+          document.documentElement.scrollTop
+
+
+
+
+
+
+
+    ---7------可视区.html----------------------------
+
+   （1）可视区尺寸
+
+          document.documentElement.clientWidth    可视区的宽
+
+          document.documentElement.clientHeight   可视区的高
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oBtn=document.getElementById('btn1');
+	
+	oBtn.onclick=function ()
+	{
+		alert('宽:'+document.documentElement.clientWidth+'高:'+document.documentElement.clientHeight);
+	};
+};
+</script>
+</head>
+
+<body>
+<input id="btn1" type="button" value="可视区大小" />
+</body>
+</html>
+
+
+
+  ---8-----scrollTop.html-----------------------------
+
+
+   （2）滚动距离（有两个，处理兼容）
+
+          document.body.scrollTop（chrome）
+  
+          document.documentElement.scrollTop（IE、FF）
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+document.onclick=function ()
+{
+	//IE、FF
+	//alert(document.documentElement.scrollTop);
+	
+	//chrome
+	//alert(document.body.scrollTop);
+	
+	var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+	
+	alert(scrollTop);
+};
+</script>
+</head>
+
+<body style="height:2000px;">
+</body>
+</html>
+
+
+
+
+
+  ------------------------------------
+
+
+（2）window对象常用事件
+
+         onload
+
+         onscroll        当滚动滚动条时，发生的事件
+
+         onresize        当窗口改变大小时，发生的事件
+
+         例子：回到顶部按钮、侧边栏广告
+
+                 闪烁问题
+
+
+
+
+
+   --9---固定定位.html----------position:fixed;----------
+
+      可以用固定定位 position:fixed; right:0; bottom:0; 将 div 固定在右下角。
+ 
+      小问题：但是在IE6中， ‘fixed ’ 是无效的
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width:200px; height:150px; background:red; position:fixed; right:0; bottom:0;}
+body {height:2000px;}
+</style>
+</head>
+
+<body>
+<div id="div1"></div>
+</body>
+</html>
+
+
+  --10-----右下角悬浮框2.html-----------------------------------------
+
+  window对象常用事件
+
+         onload
+
+         onscroll        当滚动滚动条时，发生的事件
+
+         onresize        当窗口改变大小时，发生的事件
+
+         例子：回到顶部按钮、侧边栏广告
+
+                 闪烁（抖动）问题
+
+
+    右下角悬浮框：
+                   userAgent > IE6  时，  直接用 fixed
+
+                   IE6                    才用运动
+                      
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width:200px; height:150px; background:red; position:absolute; right:0; bottom:0;}
+body {height:2000px;}
+</style>
+<script>
+window.onscroll=window.onresize=function ()         //window.onresize 处理当窗口改变大小时，div没有固定在右下角的情况
+{
+	var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+	var oDiv=document.getElementById('div1');
+	
+	oDiv.style.top=document.documentElement.clientHeight-oDiv.offsetHeight+scrollTop+'px';
+};
+</script>
+</head>
+
+<body>
+<div id="div1"></div>
+</body>
+</html>
+
+
+
+---11-------confirm.html--------prompt.html--------------------------------
+
+系统对话框
+
+
+         警告框：alert(“内容”)，没有返回值
+
+         选择框：confirm(“提问的内容”)，返回boolean
+
+         输入框：prompt()，返回字符串或null    
+
+
+     -------confirm.html-------选择框：confirm(“提问的内容”)，返回boolean-------
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+var res=confirm('你是否要删除');    返回值  true  或  false  
+
+alert(res);
+</script>
+</head>
+
+<body>
+</body>
+</html>
+
+
+
+  --------prompt.html-----------------
+
+      第一个参数为提示语      第二个参数为 默认值
+
+      返回字符串或null
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+var res=prompt('请输入你的姓名', 'blue');   // 第一个参数为提示语      第二个参数为 默认值
+
+alert(res);     //返回的是 输入的文字 或  null
+</script>
+</head>
+
+<body>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+二十、COOKIE基础与应用
+
+cookie 是 document 的一个属性，即  document.cookie 
+
+
+ 1、cookie基础
+
+
+        什么是cookie？
+
+           （1）页面用来保存信息
+
+                   比如：自动登录、记住用户名
+
+         
+           （2）cookie的特性
+
+                   同一个网站中所有页面共享一套cookie
+
+                   数量、大小有限         ：  4K-10K
+
+                   过期时间
+
+
+           （3）JS中使用cookie
+
+                   document.cookie
+
+
+
+  2、使用cookie - 1
+
+
+         cookie的使用
+
+            （1）设置cookie
+ 
+                    格式：名字=值
+
+                    不会覆盖  ：  只有当name相同时，会覆盖
+
+                    过期时间：expires=时间            当不设置过期时间时，cookie的过期时间为直到浏览器关闭为止。
+
+                                    日期对象的使用
+
+                    封装函数
+
+            
+            （2）读取cookie
+
+                    字符串分割
+
+
+            （3）删除cookie
+
+                    已经过期
+
+
+
+
+  3、使用cookie - 2
+
+
+         cookie的使用
+
+            例子：
+ 
+                 用cookie记录上次登录的用户名：
+
+                             提交时——记录用户名
+
+                             window.onload——读取用户名
+
+
+
+   ---1----cookie.html------------------------------------------
+
+
+                    格式：名字=值
+
+                    不会覆盖
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+document.cookie='user=blue';		//添加   ‘user=blue’就算是一个cookie了
+document.cookie='pass=123456';          //这里不会覆盖上一条信息，即不会覆盖上一个cookie
+
+alert(document.cookie);
+</script>
+</head>
+
+<body>
+</body>
+</html>
+
+
+ --2------Date.html-------Date2.html----------------------------------------------
+
+  注意：这里getMonth()得到的是 0-11，所以需要再加上1
+
+
+  oDate.setDate()： 设置当前的‘天数’  设置的是 oDate 这个对象的时间，而不是系统时间
+
+                  当 oDate.setDate(i)  设置i的值 在 1-30（或31）之间 时，则 i 为 当前的 日期中的 ‘i 号（天）’
+
+                  当 oDate.setDate(i)  设置i的值 超出  30（或31） 时， 会向 ‘月数’ 递进一位
+
+<script>
+var oDate=new Date();  //获取当前系统时间
+
+oDate.setDate(32);   //当 oDate.setDate(i)  设置i的值 超出  30（或31） 时， 会向 ‘月数’ 递进一位
+
+alert(oDate.getFullYear()+'-'+(oDate.getMonth()+1)+'-'+oDate.getDate());  //获取时间的 年 月 日 ， 
+                                                                          //注意：这里getMonth()得到的是 0-11，所以需要再加上1
+</script>
+
+
+
+
+<script>
+var oDate=new Date();
+
+oDate.setDate(oDate.getDate()+8);  // 在原来的时间上再加上 8 天， 即8天后。
+
+alert(oDate.getFullYear()+'-'+(oDate.getMonth()+1)+'-'+oDate.getDate());
+</script>
+
+
+
+
+
+ --3-------cookie过期时间.html----------------------------
+
+         过期时间：expires=时间            当不设置过期时间时，cookie的过期时间为直到浏览器关闭为止。
+
+                   日期对象的使用
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+
+var oDate=new Date();
+
+oDate.setDate(oDate.getDate()+14);             //把oDate的时间设置为14天后
+
+document.cookie='user=blue;expires='+oDate;    //设置过期时间    //‘expires='+oDate’这行代码不会在页面显示的
+                                               
+                                               //当设置过期时间后，cookie 就不会在关闭浏览器后消失，而是在14天后消失。
+alert(document.cookie);
+</script>
+</head>
+
+<body>
+</body>
+</html>
+
+
+
+
+
+--4----封装cookie.html---------------------------------------------------
+
+
+当document.cookie返回所有的cookie时， cookie之间会用 分号‘;’隔开    如： a=12;b=5;c=99
+
+            （2）读取cookie
+
+                    字符串分割
+
+
+            （3）删除cookie
+
+                    已经过期
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+function setCookie(name, value, iDay)    //封装cookie
+{
+	var oDate=new Date();
+	oDate.setDate(oDate.getDate()+iDay);
+	
+	document.cookie=name+'='+value+';expires='+oDate;
+}
+
+function getCookie(name)           //查找并获取cookie
+{
+	var arr=document.cookie.split('; ');   //将 所有cookie 按 分号‘;’ 拆分成数组
+	
+	for(var i=0;i<arr.length;i++)
+	{
+		var arr2=arr[i].split('=');        //再将每一个cookie 按 等号“=” 再拆分数组
+		
+		if(arr2[0]==name)
+		{
+			return arr2[1];       //返回所要得到的那个cookie的value
+		}
+	}
+	
+	return '';    //返回空，表示没找着
+}
+
+function removeCookie(name)   // 删除cookie
+{
+	setCookie(name, 1, -1);   //将要删除的cookie 的过期时间设置为 -1 天， 系统就会将其删除
+}
+
+/*setCookie('userName', 'dancingblue', 365);
+setCookie('password', '123456', 14);*/
+
+//alert(document.cookie);
+//alert(getCookie('sex'));
+removeCookie('password');
+alert(document.cookie);              //cookie 之间会用 分号‘;’隔开    如： a=12;b=5;c=99
+</script>
+</head>
+
+<body>
+</body>
+</html>
+
+
+
+--5--------记住上一次的用户名.html----------------------------
+
+
+    使用cookie - 2
+
+
+         cookie的使用
+
+            例子：
+ 
+                 用cookie记录上次登录的用户名：
+
+                             提交时——记录用户名
+
+                             window.onload——读取用户名
+
+
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+function setCookie(name, value, iDay)
+{
+	var oDate=new Date();
+	oDate.setDate(oDate.getDate()+iDay);
+	
+	document.cookie=name+'='+value+';expires='+oDate;
+}
+
+function getCookie(name)
+{
+	var arr=document.cookie.split('; ');
+	
+	for(var i=0;i<arr.length;i++)
+	{
+		var arr2=arr[i].split('=');
+		
+		if(arr2[0]==name)
+		{
+			return arr2[1];
+		}
+	}
+	
+	return '';
+}
+
+function removeCookie(name)
+{
+	setCookie(name, 1, -1);
+}
+
+window.onload=function ()
+{
+	var oForm=document.getElementById('form1');
+	var oUser=document.getElementsByName('user')[0];    //getElementsByName（）通过name获取一组元素
+	
+	oForm.onsubmit=function ()           // 点击表单提交按钮发生的事件
+	{
+		setCookie('user', oUser.value, 14);   //创建一个保存用户名的cookie，过期日期为14天后
+	};
+	
+	oUser.value=getCookie('user');         //再次打开登录页面时，获取保存用户名的cookie
+};
+</script>
+</head>
+
+<body>
+<form id="form1" action="http://www.zhinengshe.com/">
+	用户名：<input type="text" name="user" /><br>
+    密码：<input type="password" name="pass" /><br>
+	<input type="submit" value="登陆" />
+</form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+二十一、JS中的正则表达式
+
+
+  1、正则表达式基础 - 1   
+
+
+     （1）复习字符串操作
+
+             search		查找
+
+             substring		获取子字符串
+
+             charAt		获取某个字符
+
+             split		分割字符串，获得数组
+ 
+
+      （2）找出字符串中的所有数字
+
+                 用传统字符串操作完成
+
+                 用正则表达式完成
+
+
+
+  2、正则表达式基础 - 2
+
+
+      什么是正则表达式？
+
+            （1）什么叫“正则”？
+
+                     规则、模式
+
+
+            （2）强大的字符串匹配工具
+
+            （3）是一种正常人类很难读懂的文字
+
+            （4）RegExp对象
+
+                        JS风格——new RegExp(“a”, “i”)
+
+                        perl风格——/a/i
+
+
+
+  3、字符串与正则配合 - 1
+
+
+（1）search
+
+          字符串搜索：
+
+                 返回出现的位置
+
+                 忽略大小写：i——ignore
+
+                 判断浏览器类型
+
+
+（2）match
+
+          获取匹配的项目：
+
+               量词：+
+
+               量词变化：\d、\d\d和\d+
+
+               全局匹配：g——global
+
+               例子：找出所有数字
+
+
+
+
+
+
+  4、字符串与正则配合 - 2
+
+
+（1）replace
+
+            替换所有匹配：
+
+                返回替换后的字符串
+
+                例子：敏感词过滤
+
+
+
+
+
+  5、字符串 - 1
+
+
+（1）任意字符
+
+              [abc]
+
+              例子：o[usb]t——obt、ost、out
+
+
+（2）范围
+
+              [a-z]、[0-9]
+
+              例子：id[0-9]——id0、id5
+
+
+（3）排除
+
+              [^a]
+
+              例子：o[^0-9]t——oat、o?t、o t
+
+
+
+
+  6、字符串 - 2
+
+
+（1）组合
+
+            [a-z0-9A-Z]
+
+
+（2）实例：偷小说
+
+            过滤HTML标签
+
+                 自定义innerText方法
+
+
+（2）转义字符
+
+            .（点）——任意字符
+
+            \d、\w、\s
+
+            \D、\W、\S
+
+
+
+
+
+  7、量词
+
+
+（1）什么是量词
+
+
+             出现的次数
+
+             {n,m}，至少出现n次，最多m次
+
+             例子：查找QQ号
+
+
+
+（2）常用量词
+
+
+             {n,}	至少n次
+
+             *		任意次	{0,}
+
+             ？	        零次或一次	{0,1}
+
+             +	        一次或任意次{1,}
+
+             {n}	正好n次
+
+
+
+
+
+  8、常用正则例子
+
+
+        表单校验实例
+
+              校验邮箱
+
+                    行首行尾
+
+
+
+
+
+  --1-----------------------------------------------
+
+
+     复习字符串操作
+
+
+             search		查找，找得到返回所在位置，找不到返回-1
+
+
+             substring		获取子字符串
+
+                                substring（）两种写法： ①有两个参数str.substring(2, 5)： 表示截取的起点和终点， 截取的字符串不包括终点
+                       
+                                                        ②只有一个参数str.substring(1)： 从起点开始，截取直到末尾
+
+
+             charAt		获取某个字符 ：  返回字符串的某一位 
+
+             split		分割字符串，获得数组     把字符串切分成数组
+ 
+
+      找出字符串中的所有数字
+
+                 用传统字符串操作完成
+
+                 用正则表达式完成
+
+
+
+   ---search.html---------------------------------
+
+<script>
+var str='abcdef';
+
+alert(str.search('u'));		//位置, -1
+</script>
+
+
+
+
+  ------substring.html---------------
+
+   substring（）两种写法： ①有两个参数str.substring(2, 5)： 表示截取的起点和终点， 截取的字符串不包括终点
+                       
+                           ②只有一个参数str.substring(1)： 从起点开始，截取直到末尾
+
+<script>
+var str='abcdef';
+
+//alert(str.substring(2, 5));	 //截取到的是  ‘cde’         //不包括结束位置
+alert(str.substring(1));         
+</script>
+
+
+
+  ------charAt.html---------------------------------
+
+
+  charAt 返回字符串的某一位   
+         
+<script>
+var str='abcdef';
+
+alert(str.charAt(0));
+</script>
+
+
+
+
+  ----split.html-----------------------------------------
+
+  split：  把字符串切分成数组
+
+
+
+<script>
+var str='12-56-aaa-89';
+var arr=str.split('-');
+
+alert(arr)
+</script>
+
+
+
+------------------------------------------------------------
+
+        找出字符串中的所有数字
+
+                 用传统字符串操作完成
+
+                 用正则表达式完成
+
+
+
+       ----找出所有的数字.html---------传统的方法------------------
+
+
+
+<script>
+var str='12 fff 87 er334 233 -=-=fa80';
+var arr=[];
+var tmp='';
+
+for(var i=0;i<str.length;i++)
+{
+	if(str.charAt(i)>='0' && str.charAt(i)<='9')  //每当读取到一个数字时，将其存到 tmp 中
+	{
+		tmp+=str.charAt(i);
+	}
+	else
+	{
+		if(tmp)                 //  每当读取到一个非数字的字符时，将之前存在 tmp 的中数字串 添加到 arr数组中，并清空tmp
+		{
+			arr.push(tmp);
+			tmp='';
+		}
+	}
+}
+
+if(tmp)                               //当 字符串str过滤完一遍后，tmp中可能还存有数字串， 将其添加到 arr数组中，并清空tmp
+{
+	arr.push(tmp);
+	tmp='';
+}
+
+alert(arr);
+</script>
+
+
+
+
+   -----找出所有的数字2.html------------正则表达式的方法-------------------
+
+
+<script>
+var str='12 fff 87 er334 233 -=-=fa80';
+
+alert(str.match(/\d+/g));
+</script>
+
+
+
+
+
+---2--------------------------------------------------------------
+
+
+  2、正则表达式基础 - 2
+
+
+      什么是正则表达式？
+
+            （1）什么叫“正则”？
+
+                     规则、模式
+
+
+            （2）强大的字符串匹配工具
+
+            （3）是一种正常人类很难读懂的文字
+
+            （4）RegExp对象
+
+                        JS风格——new RegExp(“a”, “i”)
+
+                        perl风格——/a/i
+
+
+
+  正则表达式两种写法：
+
+        -①--第一个正则表达式.html------  JS风格——new RegExp(“a”, “i”)  --------------------
+
+
+          字符串搜索：
+
+                 返回出现的位置
+
+                 忽略大小写：i——ignore
+
+                 判断浏览器类型
+
+
+<script>
+var re=new RegExp('b', 'i');      //这里是比较简单的正则表达式，代表‘b’本身，  这里的‘i’代表‘ignore’，表示忽略大小写
+var str='abcdef';
+
+alert(str.search(re));
+</script>
+
+
+
+
+       ---②-----第一个正则表达式2.html----   perl风格——/a/i   -------------------------------------
+
+
+<script>
+var re=/a/i;                 //这里是比较简单的正则表达式，代表‘b’本身，  这里的‘i’代表‘ignore’，表示忽略大小写
+var str='abcdef';
+
+alert(str.search(re));
+</script>
+
+
+
+--3----------------------------------
+
+   转义：   \n 换行
+            \d 数字
+
+
+match      ：   把所有匹配的东西，全部提取出来
+
+
+          获取匹配的项目：
+
+               量词：+
+
+               量词变化：\d、\d\d和\d+
+
+               全局匹配：g——global   //找到全部
+
+               例子：找出所有数字
+
+  
+    ------正则.html--------------------
+
+   
+<script>
+var str='adsf 03 23 vcxzxcv';
+var re=/\d/;                   //这里  ‘\d’表示数字
+
+alert(str.search(re));         //  查找第一个数字的位置
+
+</script>
+
+
+
+
+   ------match.html------------------------------
+
+
+match      ：   把所有匹配的东西，全部提取出来
+
+
+          获取匹配的项目：
+
+               量词：+     //个数 、若干
+
+               量词变化：\d、\d\d和\d+
+
+               全局匹配：g——global   //找到全部
+
+               例子：找出所有数字
+
+
+
+
+<script>
+var str='asdf 34 656 cvs33';
+var re=/\d/g;                    //   这里 g 代表 ‘globa’ 表示 找到全部数字， 若没有g,  只会返回 数字 3;
+
+alert(str.match(re));             //因为没有说要返回几个数字串   所以这里返回的结果为  ‘3;4;6;5;6;3;3’ 把全部数字切开
+</script>
+
+
+
+
+
+  -------match2.html-----------------------------------------
+
+    用到了量词 ： 
+                   量词变化：\d、\d\d和\d+ 
+
+           //这里 若 ‘\d+ ’ 用  ‘\d\d’ 替代， 返回的结果为 ‘34;65;63;3’  ,每个数字串的长度为 两个数字
+  
+           //‘\d+ ’返回的结果为  ：,每个数字串的长度 可以不同
+
+<script>
+var str='asdf 34 656 cvs33';
+var re=/\d+/g;                   // 这里的加号‘+’ 表示说 需要 若干 个数字串
+
+alert(str.match(re));            //这里返回的结果为 ‘34;656;33’
+</script>
+
+
+
+
+
+---4----------------------------------------
+
+
+  4、字符串与正则配合 - 2
+
+
+（1）replace
+
+            替换所有匹配：
+
+                返回替换后的字符串
+
+                例子：敏感词过滤
+
+
+
+
+     ----replace.html----------- 用‘0’ 替代 ‘a’  ----------------
+
+ 
+ 全局匹配：g——global   //找到全部
+
+<script>
+var str='abc aaa erw';
+var re=/a/g;                // 若不加上‘g’ ,则只是将第一个‘a’替代成‘0’
+
+alert(str.replace(re, '0'));
+</script>
+
+
+
+
+  ------敏感词过滤.html------------------------------
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oTxt1=document.getElementById('txt1');
+	var oTxt2=document.getElementById('txt2');
+	var oBtn=document.getElementById('btn1');
+	
+	oBtn.onclick=function ()
+	{
+		var re=/北京|百度|淘宝/g;      // 竖号‘|’ 代表‘或’的意思，‘g’代表替换全部
+		
+		oTxt2.value=oTxt1.value.replace(re, '***');
+	};
+};
+</script>
+</head>
+
+<body>
+<textarea id="txt1" rows="10" cols="40"></textarea><br>
+<input id="btn1" type="button" value="过滤" /><br>
+<textarea id="txt2" rows="10" cols="40"></textarea>
+</body>
+</html>
+
+
+
+
+
+---5-----------------------------------------------------------------------
+
+
+    元字符 ---》 方括号
+
+  5、字符串 - 1
+
+
+（1）任意字符
+
+              [abc]   方括号
+
+              例子：o[usb]t——obt、ost、out
+
+
+（2）范围
+
+              [a-z]、[0-9]
+
+              例子：id[0-9]——id0、id5
+
+
+（3）排除
+
+              [^a]
+
+              例子：o[^0-9]t——oat、o?t、o t
+
+
+
+
+
+    ----方括号.html----------------------------
+
+   （1） 方括号[] : '或' 的意思
+
+              [abc]
+
+              例子：o[usb]t——obt、ost、out
+ 
+
+
+<script>
+var str='apc xpc ppc bpc spc tpc';
+var re=/[apx]pc/g;
+
+alert(str.match(re));           // 返回的是   apc ppc xpc
+</script>
+
+
+
+
+
+
+
+    ------------------------------------------
+
+
+
+  （2）范围    包括
+
+              [a-z]、[0-9]
+
+              例子：id[0-9]——id0、id5
+
+
+  （3）排除
+
+              [^a]  //除了a,其他都要
+
+              例子：o[^0-9]t——oat、o?t、o t
+
+                    组合： [^a-z0-9]  : 指除了英文和数字以外，它都要
+
+
+    ------找出所有的数字2.html------- 用中括号表示 --------------
+
+       范围    包括
+
+              [a-z]、[0-9]
+
+              例子：id[0-9]——id0、id5
+
+<script>
+var str='12 fff 87 er334 233 -=-=fa80';
+
+alert(str.match(/[0-9]+/g));              //[0-9] 指0-9 之间的数字都要
+</script>
+
+
+
+
+
+
+
+   -----过滤HTML标签------------------------------
+
+
+（2）实例：偷小说
+
+            过滤HTML标签
+
+                 自定义innerText方法
+
+
+（3）转义字符
+
+            .（点）——任意字符
+
+            \d、\w、\s
+
+            \D、\W、\S
+
+
+
+   采集：  HTML标签 <>  
+
+                                    有bug
+                     <任意字符串>  -------》  改成  <除了<>尖括号意外的任意字符>
+
+             /<.+>/g  指 任意个任意字符   -----》  /<[^<>]+>/g
+              
+   贪婪
+
+
+
+
+   ----过滤HTML标签.html---------------
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oTxt1=document.getElementById('txt1');
+	var oTxt2=document.getElementById('txt2');
+	var oBtn=document.getElementById('btn1');
+	
+	oBtn.onclick=function ()
+	{
+		var re=/<[^<>]+>/g;                     //表示：  <除了<>尖括号意外的任意字符>
+		
+		oTxt2.value=oTxt1.value.replace(re, '');  //将符合正则表达式的HTML标签 替换成空“ ”
+	};
+};
+</script>
+</head>
+
+<body>
+<textarea id="txt1" rows="10" cols="40"></textarea><br>
+<input id="btn1" type="button" value="转换" /><br>
+<textarea id="txt2" rows="10" cols="40"></textarea>
+</body>
+</html>
+
+
+
+
+
+
+  ------------------------------------------
+
+  （3）转义字符
+
+
+            .（点）——任意字符
+
+
+            \d         数字                   [0-9]
+
+
+            \w         英文、数字、下划线     [a-z0-9_]
+
+
+            \s         空白字符
+
+
+
+            \D         非数字                      [^0-9]       
+
+
+            \W         非(英文、数字、下划线)      [^a-z0-9_]  
+
+ 
+            \S         非空白字符
+
+
+   --------------------------------------
+
+   量词： 个数
+
+
+（1）什么是量词
+
+
+             出现的次数
+
+             {n,m}，至少出现n次，最多m次
+
+             例子：查找QQ号
+
+
+（2）常用量词
+
+             {n,m}      至少出现n次，最多m次
+
+             {n,}	至少n次，最多不限
+
+             *		任意次	{0,}              建议最好不要用
+
+             ？	        零次或一次	{0,1}
+
+             +	        一次或任意次{1,}
+
+             {n}	正好n次
+
+
+
+
+    例：  
+
+        ①  {n}	正好n次
+ 
+            \d{8}             //正好8个数字
+
+
+            电话号码的规则：  8位数字， 且第一位不能为0
+   
+                          [1-9]\d{7}        //第一个数字为1-9中，后面再加上7个数字     
+
+                --------------------------------           
+
+        ②{n,m}      至少出现n次，最多m次 
+
+        QQ号的规则：  至少5位，至多11位数字 , 且第一位不能为0
+
+                      [1-9]\d{4，10}
+
+
+                ---------------------------------
+
+        ③？	        零次或一次	{0,1}
+
+        固定电话：
+
+                  010-87496698    ‘010’指‘区号’    可有可无
+                      
+                  87496698  
+
+
+                 (0\d{2,3}-)?[1-9]\d{7}     //   '(0\d{2,3}-)?' 表示可有可无
+
+
+
+
+  ---6------------------------------------------------
+
+             正则表达式 .test(str)   :       检验 str 是否符合正则表达式的规则， 若符合，返回true， 若不符合，返回false     
+
+
+  常用正则例子
+
+
+        表单校验实例
+
+              校验邮箱
+
+                    行首行尾
+
+
+           ^  行首（字符串开头）
+ 
+           $  行尾（字符串结尾）
+
+       邮箱：
+              blue@zhinengshe.com
+
+              dancingblue123456@aaa.com
+
+              dancing_blue@126.com
+
+                                                       注意：   若要得到 点‘.’ 不能直接写，要写成‘\.’
+                                                               
+                                                                若要得到 ‘\d’, 不能直接写，要写成‘\\d’
+            '+ '  :   一次或任意次{1,}
+
+
+       邮箱格式： 一串英文、数字、下划线   @    一串英文、数字      .       一串英文
+                        \w+                @      [a-z0-9]+          \.       [a-z]+                                    
+                
+
+
+
+
+
+        ---校验邮箱.html----------有bug------------------------
+
+           ^  行首（字符串开头）
+ 
+           $  行尾（字符串结尾）
+
+
+    正则表达式 .test(str)   :       检验 str 是否符合正则表达式的规则， 若符合，返回true， 若不符合，返回false     
+
+
+    bug:      '----是blue@zhinengshe.com'  ----》 会返回true
+    
+    问题所在：  test --》 字符串一部分符合要求，就会返回true   
+
+    解决问题：  在正则表达式的开头加上“^”，结尾加上“$”,  表示从开头到结尾只能出现正则表达式中的东西
+     
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oTxt=document.getElementById('txt1');
+	var oBtn=document.getElementById('btn1');
+	
+	oBtn.onclick=function ()
+	{
+		var re=/\w+@[a-z0-9]+\.[a-z]+/i;     //  ‘i’ 忽略大小写
+		
+		if(re.test(oTxt.value))      // 检验 str 是否符合正则表达式的规则， 若符合，返回true， 若不符合，返回false   
+		{
+			alert('合法的邮箱');
+		}
+		else
+		{
+			alert('你丫写错了');
+		}
+	};
+};
+</script>
+</head>
+
+<body>
+<input type="text" id="txt1" />
+<input type="button" value="校验" id="btn1" />
+</body>
+</html>
+
+
+
+  ------校验邮箱2.html----------解决bug------------------------------------------
+
+           ^  行首（字符串开头）
+ 
+           $  行尾（字符串结尾）
+
+
+    bug:      '----是blue@zhinengshe.com'  ----》 会返回true
+    
+    问题所在：  test --》 字符串一部分符合要求，就会返回true   
+
+    解决问题：  在正则表达式的开头加上“^”，结尾加上“$”,  表示从开头到结尾只能出现正则表达式中的东西
+
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oTxt=document.getElementById('txt1');
+	var oBtn=document.getElementById('btn1');
+	
+	oBtn.onclick=function ()
+	{
+		var re=/^\w+@[a-z0-9]+\.[a-z]+$/i;  
+
+                             // 在正则表达式的开头加上“^”，结尾加上“$”,表示从开头到结尾只能出现这个‘\w+@[a-z0-9]+\.[a-z]+$’
+		
+
+		if(re.test(oTxt.value))
+		{
+			alert('合法的邮箱');
+		}
+		else
+		{
+			alert('你丫写错了');
+		}
+	};
+};
+</script>
+</head>
+
+<body>
+<input type="text" id="txt1" />
+<input type="button" value="校验" id="btn1" />
+</body>
+</html>
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+额外学习的：
+
+
+变量的作用域与Java、C等语言不同的是，JavaScript语言没有块范围。
+   
+<script>
+	function test(o)    
+	{
+		//定义变量i，变量i的作用范围是整个函数
+		var i = 0;
+		if (typeof o == "object") 
+		{
+			//定义变量j，变量j的作用范围是整个函数内，而不是if块内。
+			var j = 5;
+			for(var k = 0; k < 10; k++)
+			{
+				//因为JavaScript没有代码块范围
+				//所以k的作用范围是整个函数内，而不是循环体内
+				document.write(k);
+			}
+		}
+		//即使出了循环体，k的值依然存在
+		alert(k + "\n" + j); 
+	}
+	test(document);
+</script>
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+额外知识:
+
+      JavaScript parseInt() 函数
+
+
+    1、定义和用法
+
+         parseInt() 函数可解析一个字符串，并返回一个整数。
+
+
+    2、语法
+
+          parseInt(string, radix)
+
+
+    3、
+      参数	       描述
+
+      string	       必需。要被解析的字符串。
+
+
+      radix	       可选。表示要解析的数字的基数。该值介于 2 ~ 36 之间。
+
+                       如果省略该参数或其值为 0，则数字将以 10 为基础来解析。如果它以 “0x” 或 “0X” 开头，将以 16 为基数。
+
+                       如果该参数小于 2 或者大于 36，则 parseInt() 将返回 NaN。
+
+
+    4、返回值
+
+         返回解析后的数字
+
+
+
+    5、说明
+
+        当参数 radix 的值为 0，或没有设置该参数时，parseInt() 会根据 string 来判断数字的基数。
+
+        举例，如果 string 以 "0x" 开头，parseInt() 会把 string 的其余部分解析为十六进制的整数。
+
+              如果 string 以 0 开头，那么 ECMAScript v3 允许 parseInt() 的一个实现把其后的字符解析为八进制或十六进制的数字。
+
+              如果 string 以 1 ~ 9 的数字开头，parseInt() 将把它解析为十进制的整数。
+
+
+     6、提示和注释
+
+          注释：只有字符串中的第一个数字会被返回。
+
+          注释：开头和结尾的空格是允许的。
+
+          提示：如果字符串的第一个字符不能被转换为数字，那么 parseFloat() 会返回 NaN。
+
+
+
+     7、实例
+
+         在本例中，我们将使用 parseInt() 来解析不同的字符串：
+
+            parseInt("10");		//返回 10   解释：第二个参数没有或其值为 0，则数字将以 10 为基础来解析。 所以输出为 10
+
+            parseInt("19",10);		//返回 19 (10+9)  解释：第二个参数的值为10，所以将十进制数‘19’转换为十进制整数就是‘19’
+
+            parseInt("11",2);		//返回 3 (2+1)    解释：第二个参数的值为2，所以将二进制数‘11’转换为十进制整数就是‘3’
+
+            parseInt("17",8);		//返回 15 (8+7)    解释：第二个参数的值为8，所以将八进制数‘17’转换为十进制整数就是‘15’
+
+            parseInt("1f",16);		//返回 31 (16+15)  解释：第二个参数的值为16，所以将八进制数‘1f’转换为十进制整数就是‘31’
+
+            parseInt("010");		//未定：返回 10 或 8  解释：如果 string 以 0 开头，parseInt() 的一个实现把其后的字符解析为八进制或十六进制的数字。
+
+                                       //“010”这个情况比较特别，是有可能出现8或者10的，主要是因为它既满足“0开头按十进制解析”，和“0 开头ECMAScript v3 允许 parseInt() 的一个实现把其后的字符解析为八进制”这两个条件。所以，有的会出现8，有的会出现10。
+           
+
+            parseInt("0x123")=291    //解释：如果 string 以 "0x" 开头，parseInt() 会把 string 的其余部分解析为十六进制的整数     
+
+                                     //将十六进制数‘123’转换为十进制整数就是291
+
+
+            parseInt("100101110",2)=302    将二进制数“100101110”转换为整数就是302
+
+
+
+注释：只有字符串中的第一个数字会被返回。
+
+注释：开头和结尾的空格是允许的。
+
+提示：如果字符串的第一个字符不能被转换为数字，那么 parseFloat() 会返回 NaN。
+
+例子：
+
+document.write(parseInt("10") + "<br>");    输出结果为：10
+
+document.write(parseInt("10.33") + "<br>");  输出结果为：10
+
+document.write(parseInt("34 45 66") + "<br>");  输出结果为：34
+
+document.write(parseInt(" 60 ") + "<br>");   输出结果为：60
+
+document.write(parseInt("40 years") + "<br>"); 输出结果为：40
+
+document.write(parseInt("He was 40") + "<br>");  输出结果为：NaN
+
+document.write("<br>");
+
+document.write(parseInt("10",10)+ "<br>"); 输出结果为：10
+
+document.write(parseInt("010")+ "<br>");   输出结果为：//未定：返回 10 或 8
+
+document.write(parseInt("10",8)+ "<br>");  输出结果为：8
+
+document.write(parseInt("0x10")+ "<br>");  输出结果为：16
+
+document.write(parseInt("10",16)+ "<br>");  输出结果为：16
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+  额外知识：
+
+      JS实现类的公有、私有、静态方法/属性
+
+
+现在写一个class1类
+
+function class1(){
+
+  this.name="world";//公有属性
+
+  var message="No Messages!";//私有属性
+
+  this.sayHello=function(){//公有方法(可访问所有权限的方法和属性)   
+
+    alert("hello !"+this.name+"I want to say:"+message);
+
+  }
+
+  function getMessage(){//私有方法(只能访问私有的方法和属性)
+
+    alert(message);
+
+  }
+
+}
+
+class1.staticMethod=function(){//定义该类的一个静态方法
+  alert("staticMethod()");
+
+}
+
+
+说起类，其实JS里面所有的function都可以当作一个类来使用，上述的例子就可以看出，你可以new（实例化）这一个类，也可以直接当他是functino调用。
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

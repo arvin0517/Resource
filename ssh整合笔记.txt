@@ -1,0 +1,639 @@
+
+整合ssh，可以两两整合
+
+先 struts2 整合 spring ，在 spring 整合 hibernate
+
+
+整合步骤：   查看 http://blog.csdn.net/erlian1992/article/details/54375833
+
+
+==Action的配置有两种方法：①struts2 自身去配置，   ② 交给sprin 去配置
+
+
+
+==在 applicationContext.xml 中引入外部属性文件（XXX.properties）
+
+        <context:property-placeholder location="classpath:jdbc.properties"  />
+
+        XXX.properties 文件中的值 在applicationContext.xml引用时，可以使用 ${XXXX} 来调用
+
+
+
+<!-- 引入外部的属性文件 -->
+  
+<context:property-placeholder location="classpath:jdbc.properties"/>  
+
+  
+<!-- 配置连接池 -->  
+<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"> 
+ 
+     <property name="driverClass" value="${jdbc.driverClass}"></property>  
+
+     <property name="jdbcUrl" value="${jdbc.url}"></property>  
+
+     <property name="user" value="${jdbc.username}"></property>  
+
+     <property name="password" value="${jdbc.password}"></property>  
+
+</bean> 
+
+
+
+
+
+
+==在DAO中注入SessionFactory:
+
+     -在DAO的类上继承 HibernateDaoSupport类：
+
+     -在配置DAO的时候：   注入sessionFactory
+
+           <--! 配置DAO的类 -->
+
+           <bean id="productDao" class="cn.muke.ssh.dao.ProductDao">
+
+                 <property name="sessionFactory" ref="sessoinFactory" />
+
+           </bean>
+
+      -在DAO中调用模板完成保存的操作：
+
+            -this.getHibernateTemplate().save(product);
+
+
+
+=配置事务管理
+
+  ①在applicationContext.xml中配置事务管理器,并且注入sessionFactory
+
+     
+           <--!配置事务管理器 -->
+
+    <bean id="transactionManager"  class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+      
+            <property name="sessionFactory" ref="sessionFactory" />
+
+    </bean>       
+
+
+   
+  ②开启注解事务（这个一定不能忘了）
+
+        <--!开启注解事务 -->
+
+        <tx:annotation-driven transaction-manager="transactionManager" />
+  
+
+
+  ③在业务层的类（XxxService）添加 @Transactional     （这个也一定不能忘记）
+  
+   
+ 例如：在ProductService类添加 @Transactional
+
+package com.my.service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.my.dao.ProductDao;
+import com.my.entity.Product;
+/**
+ * 商品管理的业务层的类
+ * @author yun
+ *
+ */
+ 
+@Transactional     //该注解表示注入spring提供的的事务管理
+public class ProductService {
+    private ProductDao productDao;
+
+    //spring框架中的构造的方式注入bean： productDao
+    public void setProductDao(ProductDao productDao) {
+        this.productDao = productDao;
+    }
+
+    public boolean save(Product product) {
+        System.out.println("ProductService.save()方法被执行....");
+        productDao.save(product);
+        return true;
+    }
+
+}
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+ssh框架中  
+
+一对多
+
+多对一
+
+
+例： 员工 和 部门 
+ 
+
+  员工对于部门是多对一的关系
+ 
+   ①所以在员工类中 有个部门对象属性
+   
+       //员工的所属部门  
+    private Department department;  （包括getter 和 setter 方法） 
+
+
+   ②Employee.hbm.xml 配置 关联关系映射
+
+     <!-- 多对一关联映射 -->  
+       <many-to-one name="department" class="com.employee.domain.Department" cascade="save-update">  
+             <column name="dno" />  
+       </many-to-one>  
+   
+     
+     另一种写法： <many-to-one name="department" class="com.employee.domain.Department" column="dno" />  
+
+
+
+  部门对于员工是一对多的关系 
+
+   ①所以在部门类中 有个员工集合属性
+
+    //部门员工的集合  
+    private Set<Employee> employee = new HashSet<Employee>(); （包括getter 和 setter 方法）
+
+
+   ②<!-- 一对多关联映射 -->   注意： 一对多关系要用到 <set>....</set>
+
+        <set name="employee" cascade="all" inverse="true">  
+            <key column="dno" />                               "dno" 要与上面相对应
+            <one-to-many class="com.employee.domain.Employee"/>  
+        </set> 
+
+
+
+     当以上没发生错误时，运行程序后，在 employee 表中会有一个外键"dno"
+
+ 
+
+
+
+
+
+
+
+
+==frameSet多个页面组合
+
+==dTree 实现页面跳转
+
+
+==用hibernate时，有一个函数 find(hql) 可以执行sql语句
+
+ 如：   
+        String hql = "select count(*) from Department";  
+        List<Long> list = this.getHibernateTemplate().find(hql);  
+
+
+
+        DetachedCriteria criteria = DetachedCriteria.forClass(Department.class);  
+        List<Department> list = this.getHibernateTemplate().findByCriteria(criteria,begin,pageCount); 
+
+
+
+        this.getHibernateTemplate().save(department);  
+
+        return this.getHibernateTemplate().get(Department.class,did);   //返回一个对象
+
+        this.getHibernateTemplate().update(department);  
+
+        this.getHibernateTemplate().delete(department);
+
+
+
+==添加到值栈中
+
+      （1）像 pageBean 这种不是模型驱动，就需要手动添加到值栈中
+               
+           PageBean<Department> pageBean = departmentService.findByPage(currentPage);  
+           //将pageBean存入到值栈中  
+           ActionContext.getContext().getValueStack().push(pageBean); 
+
+
+      （2）模型驱动本来就在值栈中，所以像department，employee 就不用特地去手动添加到值栈中
+
+
+    /** 
+     * 根据ID查询部门 
+     * @return 
+     */  
+           public String editById(){  
+
+               department = departmentService.editById(department.getDid());//在这里，department不用特地去手动添加到值栈中 
+               return "editSuccess";  
+          }
+
+
+
+==//把用户信息保存在Session域中
+  
+
+         ActionContext.getContext().getSession().put("exsitEmploy",exsitEmploy);  
+
+
+         jsp中调用：     欢迎您：<s:property value="#session.exsitEmploy.ename" />
+
+
+
+
+
+==取值栈中的值：两种方式：
+
+==//            <td width="30%" align="right">部门名称：</td>  
+                <td><s:textfield name="dname" value="%{model.dname}" /></td> 
+
+
+
+
+==//            总记录数：<s:property value="totalSize" />    
+                每页显示:<s:property value="pageCount" />
+
+
+
+
+==//登录失败  
+
+         EmployeeAction中：     
+             
+                this.addActionError("用户名或者密码错误！");  
+                return INPUT; 
+
+             
+           jsp页面中：
+
+                <!-- 显示错误信息 -->  
+                <s:actionerror /> 
+
+
+
+
+
+==迭代取list中的值
+
+            <s:iterator value="list" var="d">  
+                <tr>  
+                    <td align="center"><s:property value="#d.dname" /></td>  
+                    <td align="center">  
+                       <a href="department_editById.action?did=<s:property value="#d.did"/>">  
+                          <img src="<%=basePath %>images/编辑.png" />  
+                       </a>  
+                    </td>  
+                    <td align="center">  
+                        <a href="department_delete.action?did=<s:property value="#d.did"/>">  
+                           <img src="<%=basePath %>images/trash.gif" />  
+                        </a>  
+                    </td>  
+                </tr>  
+            </s:iterator> 
+
+
+
+
+
+
+
+==删除部门
+
+    最好先调用departmentService.findById(department.getDid())，获取要删除的对象，然后再进行删除departmentService.delete(dep); 
+
+    目的是为了可以进行 级联删除
+
+
+
+    /** 
+     * 删除部门 
+     * @return 
+     */  
+
+    public String delete(){  
+        Department dep = departmentService.findById(department.getDid());  
+        departmentService.delete(dep);  
+        return "deleteSuccess";  
+    }  
+
+
+
+
+
+
+
+
+
+==在jsp中获取普通属性和 date属性的方法 ， 它们获取的方法是不一样的
+
+
+     普通属性：   <s:property value="#e.eno" />
+
+     date属性：   <s:date format="yyyy-MM-dd" name="#e.birthday" />  
+
+
+
+    例子：
+           <s:iterator value="list" var="e">  
+                <tr>  
+                    <td align="center"><s:property value="#e.eno" /></td>  
+                    <td align="center"><s:property value="#e.ename" /></td>  
+                    <td align="center"><s:property value="#e.sex" /></td>  
+                    <td align="center"><s:date format="yyyy-MM-dd" name="#e.birthday" /></td>  
+                    <td align="center"><s:date name="#e.joinDay" format="yyyy-MM-dd" /></td>  
+                    <td align="center"><s:property value="#e.department.dname" /></td>  
+                    <td align="center">  
+                        <a href="employee_edit.action?eid=<s:property value="#e.eid"/>">  
+                           <img src="<%=basePath %>images/编辑.png" />  
+                        </a>  
+                    </td>  
+                    <td align="center">  
+                        <a href="employee_delete.action?eid=<s:property value="#e.eid"/>">  
+                           <img src="<%=basePath %>images/trash.gif" />  
+                        </a>  
+                    </td>  
+                </tr>  
+            </s:iterator>  
+
+
+
+
+
+==jsp 中 根据条件 显示或隐藏信息
+
+               <s:if test="currentPage != 1">  
+                    <a href="employee_findAll.action?currentPage=1">[首页]</a>    
+                    <a href="employee_findAll.action?currentPage=<s:property value="currentPage-1"/>">[上一页]</a>    
+               </s:if>   
+               <s:if test="currentPage != pageSize">  
+                    <a href="employee_findAll.action?currentPage=<s:property value="currentPage+1"/>">[下一页]</a>    
+                    <a href="employee_findAll.action?currentPage=<s:property value="pageSize"/>">[尾页]</a>    
+               </s:if>
+
+
+
+
+
+==员工显示所属部门， 需要配置过滤器
+
+    jsp页面中代码：<td align="center"><s:property value="#e.department.dname" /></td>
+
+
+配置过滤器，部门才会显示出来：
+
+  <filter>  
+    <filter-name>openSessionInViewFilter</filter-name>  
+    <filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>  
+  </filter>  
+  <filter-mapping>  
+    <filter-name>openSessionInViewFilter</filter-name>  
+    <url-pattern>*.action</url-pattern>  
+  </filter-mapping>
+
+
+
+
+
+==在 EmployeeAction类 注入departmentService; 就可以调用departmentService的所有方法
+
+
+   //spring注入部门管理的service  
+    private DepartmentService departmentService;  
+      
+    public void setDepartmentService(DepartmentService departmentService) {  
+        this.departmentService = departmentService;  
+    } 
+  
+
+   同时要在配置文件ApplicationContext.xml 注入departmentService：
+
+    <!-- 配置Action的类 -->  
+    <bean id="employeeAction" class="com.employee.action.EmployeeAction" scope="prototype">  
+        <property name="employeeService" ref="employeeService"></property>  
+        <property name="departmentService" ref="departmentService"></property>  
+    </bean>
+
+
+
+
+
+==存入值栈方法   集合list 和 对象 的区别
+
+    ①集合list 用set()
+  
+        //用于查询出所有的部门信息  
+        List<Department> list = departmentService.findAll();  
+        //保存到值栈中  
+        ActionContext.getContext().getValueStack().set("list",list); 
+
+
+       在.jsp 页面中取值：
+
+         <td align="right">部门：</td>  
+         <td><s:select name="department.did" list="list" listKey="did" listValue="dname" headerKey="0" headerValue="--请选择--" /></td>
+
+
+    ②对象 用push()
+
+        PageBean<Employee> pageBean = employeeService.findAll(currentPage);  
+        ActionContext.getContext().getValueStack().push(pageBean);  
+
+
+        jsp页面中取值：
+
+        <s:iterator value="list" var="e"> 
+
+        <tr>  
+            <td align="right">  
+            <span>  
+                 第<s:property value="currentPage" />/<s:property value="pageSize" />页  
+            </span>  
+                 
+            <span>  
+                总记录数：<s:property value="totalSize" />    
+                每页显示:<s:property value="pageCount" /></span>     
+            <span>  
+               <s:if test="currentPage != 1">  
+                    <a href="employee_findAll.action?currentPage=1">[首页]</a>    
+                    <a href="employee_findAll.action?currentPage=<s:property value="currentPage-1"/>">[上一页]</a>    
+               </s:if>   
+               <s:if test="currentPage != pageSize">  
+                    <a href="employee_findAll.action?currentPage=<s:property value="currentPage+1"/>">[下一页]</a>    
+                    <a href="employee_findAll.action?currentPage=<s:property value="pageSize"/>">[尾页]</a>    
+               </s:if>   
+            </span>  
+            </td>  
+        </tr> 
+
+
+
+
+
+
+
+==sex性别属性用单选按钮
+
+        <td><s:radio list="{'男','女'}" name="sex" /></td>  
+
+
+
+
+==员工选择设置部门 用 下拉列表    ： 显示部分是 listValue，  而真正保存数据部分是 listKey
+
+       <tr>  
+         <td align="right">编号：</td>  
+         <td><s:textfield name="eno" /></td>  
+         <td align="right">部门：</td>  
+         <td><s:select name="department.did" list="list" listKey="did" listValue="dname" headerKey="0" headerValue="--请选择--" /></td> 
+       </tr> 
+
+
+
+
+
+
+
+
+
+
+==编辑员工信息时，回显本来的信息
+
+
+  注意：
+        ①单选按钮：
+
+            <td><s:radio list="{'男','女'}" value="%{model.sex}" name="sex" /></td> 
+
+
+        ②下拉列表：
+
+         <td>  
+              <s:select name="department.did" headerKey="0" value="%{model.department.did}" headerValue="--请选择--" list="list" listKey="did" listValue="dname" />  
+         </td>  
+
+
+        ③时间：
+     
+            <td><input type="text" name="birthday" value="<s:date name="model.birthday" format="yyyy-MM-dd"/>" /></td>  
+
+ 
+        ④密码框： 默认是不回显的                showPassword="true" 设置回显
+
+           <td><s:password value="%{model.password}" name="password" showPassword="true"/></td>
+
+例子：
+
+<!-- action对应一个action标签，id对应提交时的对应关系 -->  
+    <s:form id="saveForm" action="employee_update" method="post" namespace="/" theme="simple">  
+        <s:hidden name="eid" value="%{model.eid}"></s:hidden>  
+        <table style="font-size: :16px">  
+            <tr>  
+                <td align="right">员工姓名：</td>  
+                <td><s:textfield value="%{model.ename}" name="ename" /></td>  
+                <td align="right">性别：</td>  
+                <td><s:radio list="{'男','女'}" value="%{model.sex}" name="sex" /></td>  
+            </tr>  
+            <tr>  
+                <td align="right">出生日期：</td>  
+                <td><input type="text" name="birthday" value="<s:date name="model.birthday" format="yyyy-MM-dd"/>" /></td>  
+                <td align="right">入职日期：</td>  
+                <td><input type="text" name="joinDay" value="<s:date name="model.joinDay" format="yyyy-MM-dd"/>" /></td>  
+            </tr>  
+            <tr>  
+                <td align="right">用户名：</td>  
+                <td><s:textfield value="%{model.username}" name="username" /></td>  
+                <td align="right">密码：</td>  
+                <td><s:password value="%{model.password}" name="password" showPassword="true"/></td>  
+            </tr>  
+            <tr>  
+                <td align="right">编号：</td>  
+                <td><s:textfield value="%{model.eno}" name="eno" /></td>  
+                <td align="right">部门：</td>  
+                <td>  
+                    <s:select name="department.did" headerKey="0" value="%{model.department.did}" headerValue="--请选择--" list="list" listKey="did" listValue="dname" />  
+                </td>  
+            </tr>  
+        </table>  
+    </s:form>  
+
+
+
+
+
+
+==级联删除： 当删除部门时，部门下的员工也随着删除
+
+
+  第一步：
+
+          删除部门时，要先获取部门对象，再删除部门对象，不能直接删除对象
+
+
+    /** 
+     * 删除部门 
+     * @return 
+     */  
+    public String delete(){  
+        Department dep = departmentService.editById(department.getDid());   //先获取部门对象
+        departmentService.delete(dep);                                      //再删除部门对象
+        return "deleteSuccess";  
+    }
+
+
+
+  第二步：
+
+       在映射文件Department.hbm.xml中添加 cascade="delete" inverse="true"
+
+        <!-- 一对多关联映射 -->  
+        <set name="employee" cascade="delete" inverse="true">  
+            <key column="dno" />  
+            <one-to-many class="com.employee.domain.Employee"/>  
+        </set> 
+
+
+
+      inverse="true" 是为了让 "一对多" 的一方放弃维护权，
+
+      当没添加 " inverse="true" " 时，当部门名称修改时，再点击显示全部人员的列表中，相关人员的所属部门就不会再显示出来 
+
+
+
+
+
+
+==cascade 还有其它设值
+
+        <!-- 一对多关联映射 -->   
+        <set name="employee" cascade="all" inverse="true">  //这样也可以进行级联操作
+            <key column="dno" />  
+            <one-to-many class="com.employee.domain.Employee"/>  
+        </set> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,11 @@
+
+
+
+1.
+   photoshop   ：图形图像处理
+
+   Illustrator ： 矢量绘画图形  
+
+   Indesign    ：排版
+ 
+   Acrobat     ：电子交互文档    word文档： 当 高版本 向 低版本发送文档，会出现乱码

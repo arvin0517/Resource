@@ -1,0 +1,3213 @@
+
+  
+进击Node.js基础（一）
+
+Node.js是什么?
+
+    Node.js是建立在谷歌Chrome的JavaScript引擎(V8引擎)的Web应用程序框架。 
+
+    Node.js自带运行时环境可在Javascript脚本的基础上可以解释和执行(这类似于JVM的Java字节码)。
+
+    这个运行时允许在浏览器以外的任何机器上执行JavaScript代码。由于这种运行时在Node.js上，所以JavaScript现在可以在服务器上并执行。
+
+    Node.js还提供了各种丰富的JavaScript模块库，它极大简化了使用Node.js来扩展Web应用程序的研究与开发。
+
+    Node.js = 运行环境+ JavaScript库
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+第1章 前言 
+
+   1-1 Node.js基础-前言
+
+
+      nodejs：
+
+         实际上是采用google的chrome浏览器V8引擎，由C++编写的
+  
+         本质上是一个javascript的运行环境
+
+         浏览器引擎可以解析js代码
+
+
+
+     优势：
+
+        nodejs可以解析js代码，没有浏览器端各种安全性的限制，
+  
+        还提供许多系统级别的API：
+
+                         1、文件的读写
+
+                         2、进行的管理
+
+                         3、网络通信
+
+
+
+   1-2 为什么学习Nodejs 
+
+
+          Node-Webkit,appjs :允许用户使用html/css/javascript开发跨平台桌面应用程序，并且兼容Linux，Windows
+
+          Jade：和Nodejs组合使用，方便高校管理后台html模板
+
+          Gost:开元博客程序
+
+          Grunt：Javascript跑各种任务的工具，完成样式工具，语法检查，自动化测试等任务
+
+          gulp: 和grunt功能相似，不过配置比较简单
+
+          Express.js:
+
+          Nodecast:
+
+          Log.io：实时监控项目日志
+
+          PDFKit：生成文档
+
+          Haroopad：Linux上的MarkDown在编辑器
+
+          NoduinoWeb：控制开源硬件
+
+          NodeOS：操作系统
+
+
+       学习的相关网站
+
+                  1、nodejs.org 看nodejs的版本升级，新特性的加入，重要bug的修复等，api变化，功能变化-未来发展趋势，
+
+                  2、www.npmjs.com 模块社区，看他人源代码，学习理念
+
+                  3、github.com 开源项目和源码
+
+                  4、stackoverflow.com 技术解答社区，查询相关资源，环境配置，异常解决方法等
+
+
+
+    NPM 的全称是Node Package Manager ，是一个NodeJS包管理和分发工具，已经成为了非官方的发布Node模块(包)的标准。
+
+
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~·
+
+         额外内容：
+
+                    输入cmd  点击确定后，输入命令java -version   ，就会显示jdk版本和位数
+
+                    如下图：
+
+                          第一个红色框就是jdk版本
+
+                          第二个红色框就是jdk的位数， 如果没有就是32位， 有64——bit 就是64位
+
+
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~·
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+第2章 安装 Nodejs
+ 
+   2-1 Node.js基础-课程简介 
+
+          不同node.js版本对应的接口的不一样，需要找对应的接口文档进行查看
+
+          node.js的版本一定要跟api版本同步
+         
+          本教程node.js的版本是:0.10.3x
+
+
+ 
+   2-2 Nodejs版本常识 
+
+         Node.js的版本
+
+           偶数位为稳定版本
+     
+                 -0.6.x
+
+                 -0.8.x
+
+                 -0.10.x
+
+          奇数位为非稳定版本
+
+                 -0.7.x
+
+                 -0.9.x
+
+                 -0.11.x
+
+
+
+
+   2-3 Windows下安装Nodejs 
+
+
+          下载安装git bash：https://git-scm.com
+        
+          下载安装nodejs：https://nodejs.org
+
+           node 里面自带npm 和命令工具
+ 
+              命令行输入 node -v 查看是否安装成功
+ 
+              命令行输入 npm -v 查看是否安装成功
+
+       git  里查看  nodejs安装是否成功
+
+              //查看nodejs是否安装成功：
+
+                        node -v
+
+              //查看npm版本号：
+
+                        npm -v
+
+       cmd: 
+
+           可输入 "path"   查看是否已 配置好 node.js 的环境变量.         
+  
+           可输入 "node --version"   查看是否安装成功.
+
+               cmd下查看版本，如果输入node找不到，很可能是环境变量的问题
+             
+
+
+
+
+   2-4 Linux下安装Nodejs 
+
+
+          查看Linux服务器发版本： cat /etc/redhat-release ;
+
+          检查Python版本：python -V
+
+          linux下安装nodejs，先安装gcc和g++
+
+          linux下安装node.js，截图的顺序依次是：
+
+                     cat /etc/redhat-release 查看发行版本
+
+                     rpm -q gcc rpm -q gcc-c++ 查看是否安装了gcc和gcc-c++
+
+                     yum -y install gcc gcc-c++ kernel-devel 安装gcc和gcc-c++
+
+          # yum -y update && yun -y groupinstall "Develeopment Tools" 表示全部安装centOS下的环境
+           
+
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        node.js安装之node.js包安装
+
+                     cd /usr/src
+
+                     wget https://nodejs.org/dist/v4.2.6/node-v4.2.6.tar.gz //下载
+
+                     tar -xf node-v4.2.6.tar.gz
+
+                     cd node-v4.2.6
+
+                     ./configure  //配置参数
+
+                     make		//编译
+
+                     sudo make install	//安装
+
+                     node -v
+
+                     npm -v
+
+ 
+          ps:当./configure  提示出错为:gcc版本过低时,查看gcc版本是否高于4.8,否则需要升级
+
+
+             1.获取GCC 4.8.2包：wget http://gcc.skazkaforyou.com/releases/gcc-4.8.2/gcc-4.8.2.tar.gz；
+
+             2.解压缩：tar -xf gcc-4.8.2.tar.gz；
+
+             3.进入到目录gcc-4.8.2，运行：./contrib/download_prerequisites。这个神奇的脚本文件会帮我们下载、配置、安装依赖库，可以节约我们大量的时间和精力。
+
+
+             4.建立输出目录并到目录里：mkdir gcc-build-4.8.2；cd gcc-build-4.8.2；
+
+             5. ../configure --enable-checking=release --enable-languages=c,c++ --disable-multilib。--enable-
+
+                 languages表示你要让你的gcc支持那些语言，
+
+                 --disable-multilib不生成编译为其他平台可执行代码的交叉编译器。
+
+                 --disable-checking生成的编译器在编译过程中不做额外检查，也可以使用--enable-checking=xxx来增加一些检查.
+
+
+                yum -y install gcc gcc-c++ kernel-devel //安装gcc gcc-c++ kernel-devel三个包
+
+                yum -y update && yum -y group install “Development Tools”	//配置make命令的makefile文件里的参数,
+
+
+
+
+
+   2-5 Mac下安装Nodejs 
+
+         xcode-select -p 检查是否安装xcode
+
+         xcode-select -install 安装xcode
+
+         HomeBrew 依赖ruby进行安装
+
+         brew install node 使用HomeBrew安装nodejs
+
+         npm intall -g n 切换版本
+
+
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+     一、安装node.js
+
+
+          1、调出终端：command+空格，调出spotlight，然后输入term，回车。
+
+
+          2、升级系统到最新，升级xcode;
+
+               终端输入：xcode-select -p
+
+               终端输入：xcode-select --install
+
+
+         3、安装安装包管理工具homebrew:
+
+             （1）终端输入命令（浏览器地址输入brew.sh，可以找到下列命令）：
+
+                     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+             （2）会提示按return键继续，然后按回车。
+
+             （3）输入电脑密码。
+
+             （4）系统开始安装。如果要检测是否安装及版本，终端输入：ruby -v
+
+            注：不光是node.js可以通过homebrew安装，git,mongodb等也可以通过它安装。
+
+
+        4、安装node.js
+
+          （1）终端输入：brew install node
+
+                 注：不光是node.js可以通过homebrew安装，git,mongodb等也可以通过它安装。
+
+          （2）检查是否安装：
+
+                 终端输入：node -v
+
+           (3)更新版本，或者切换版本
+
+
+                1）把n这个模块安装到全局，然后利用n可以安装指定版本，也可以通过n管理和切换不同node.js版本
+
+                     终端输入：npm install -g n
+
+                     外注（外注的意思是：这个知识点在视频里没有）：npm是包管理工具，是用来管理node.js的
+
+
+                2）版本：
+
+                     ①如果是想要0.10.22的版本，终端输入：n 0.10.22
+
+                     ②如果是要在不同版本之间切换，终端输入：n，然后用上下键控制选择不同的版本。 
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+第3章 等不及了来尝鲜 
+
+   3-1 Node.js基础-起一个web服务器
+
+
+            进入项目目录，对应的js页面，直接node server.js
+
+            假设server.js路径如下：
+
+                      D:\www\test\Node\begging\server.js
+
+            cmd命令行要这样写：
+
+                更换当前目录到硬盘的其它分区：D:
+  
+                   改变当前目录：cd D:\www\test\Node\begging\
+
+                          执行node命令：node server.js
+
+            ctrl+c 重启服务器
+
+            在浏览器端输入 ：http://127.0.0.1:3000/ 就可以运行js代码
+
+           
+            response.writeHead(a, b) //第一个参数a是返回的状态码，第二参数是个对象包含一些链接参数
+
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~·
+
+        nodejs的运行 ： 有 3 种方法
+
+         首先要在你的电脑上下载node.js并安装,大家可以去官网下载
+ 
+        1、第一种方法：像老师介绍的那样，去官网下载git，安装好后，在桌面上单击鼠标右键，会有一个Git Bash Here，然后在新建一个文件，可以命名为server.js,在这个文件的文件夹上右击，然后单击Git Bash Here，就会进入server.js的环境，可以在这里运行node server,js
+ 
+        2、第二种方法是用命令行进入到server.js的文件夹，给大家介绍一种简单的方法，不用找它的路径，在server.js的文件夹上单击右键同时按住shift键，会看到有"在此处打开命令窗口"，点击它就可以了，接着输入node 文件名。
+
+         3、第三种方法就是在sublime中配置nodejs的环境，在本地运行，首先去https://github.com/tanepiper/SublimeText-Nodejs这里下载，然后再配置，https://my.oschina.net/ximidao/blog/413101（配置教程）配置好后直接在sublime中按ctrl+b
+
+
+ 
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+   简单例子：
+
+    server.js 两种写法：
+         
+           ①   var http = require('http');
+
+                http.createServer(function(req,res){
+  
+                    res.writeHead(200,{'Content-Type':'text/plain'});
+
+                          //response.writeHead(a, b) //第一个参数a是返回的状态码，第二参数是个对象包含一些链接参数
+    
+                    res.end('Hello World hahahahahaah\n');
+
+                }).listen(1337,'127.0.0.1');
+
+                console.log('Server running at http://127.0.0.1:1337/');  
+
+
+           ②     var http = require('http');
+                  var server = http.createServer(function(req,res){
+
+                     res.writeHead(200,{'Content-Type':'text/plain'});
+
+                               //response.writeHead(a, b) //第一个参数a是返回的状态码，第二参数是个对象包含一些链接参数                            
+                     res.end('Hello arvin');
+                  });
+
+                  server.listen(1337,'127.0.0.1');
+                  console.log('Server running at http://127.0.0.1:1337/');
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+   3-2 Node.js基础-命令行中体验
+
+
+         node.js和浏览器执行环境
+
+              相同点：都能执行一般的Js代码
+
+              不同点：全局变量不同，例如window，document等只能在浏览器中取到，而process则只能在node环境中取到。
+
+              宿主：浏览器、node；
+
+
+             全局变量：   
+                            浏览器-window、document;
+
+                            node - process；
+
+
+            nodejs 本质是一个js的执行环境 由于封装和底层的处理赋予了更大的能力
+
+            node自己的运行机制  process
+
+ 
+  例子：  
+ 
+     Chrome浏览器中的 console 中： var a=1; var b=2; var add = function(a,b){return a+b;}; console.log(a,b);
+
+     node环境：    var a=1; var b=2; var add = function(a,b){return a+b;}; add(a,b);
+
+     上面的简单代码均可以在以上环境中运行.          
+
+
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  额外知识:
+
+          console.log():  主要是方便你调式javascript用的。你可以看到你在页面中输出的内容。
+
+          相比alert他的优点是：
+
+          他能看到结构话的东西，如果是alert，淡出一个对象就是[object object],但是console能看到对象的内容。
+
+          console不会打断你页面的操作，如果用alert弹出来内容，那么页面就死了，但是console输出内容后你页面还可以正常操作。
+
+          console里面的内容非常丰富，你可以在控制台输入：console，然后就可看到：
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+第4章 模块与包管理工具 
+
+
+ 4-1 Node.js 的模块 与 Commonjs 规范 
+
+
+        js的天生缺陷——缺少模块化管理机制
+     
+             表现>> JS中容易出现变量被覆盖，方法被替代的情况（既被污染）。
+
+                    特别是存在依赖关系时，容易出现错误。
+ 
+                    这是因为JS缺少模块管理机制，来隔离实现各种不同功能的JS判断，避免它们相互污染。
+
+
+             解决>> 经常采用命名空间的方式，把变量和函数限制在某个特定的作用域内，人肉约定一套命名规范来限制代码，保证代码安全运行。
+
+                    jQuery中有许多变量和方法，但是无法直接访问，必须通过jQuery，$调用 各个方法。
+
+
+      【Commonjs规范】
+
+           不同于jQuery，Commonjs是一套规范，约定了js如何组织，如何编写，包括包，二进制，套接字，单元测试等等。
+
+           大部分标准在拟定和讨论之中，首先把执行不同任务的代码块和代码文件看为独立的模块，
+
+           每一个模块都是一个单独的作用域，但不是孤立的，可能存在依赖关系。
+
+           每个模块分为三个部分，定义、标识和引用。
+
+           这套规范与现实产品如node.js相互影响，良性循环。
+
+           commenjs是一套规范，模块和管理工具
+      
+
+     【NodeJs的模块管理机制】
+
+           基于commonjs实现了模块管理系统。
+
+           node中每一个js文件都是一个独立的模块，在其内部不需要有命名空间，不需要担心变量的污染和方法定义时的隔离。
+
+           同时模块之间可以组合形成更强大的模块或功能包。
+
+           npm即是用来管理各种功能包的。
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ 4-2 模块的分类
+
+      Nodejs中的模块与文件是一一对应的关系。
+
+      模块的分类：
+
+              核心模块       （http fs path） ；
+
+              文件模块        (var util=require('./util.js')) ；
+
+              第三方模块     （通过npm安装的 var express=require('express')）
+
+
+        1.模块的分类: 核心模块、文件模块、第三方模块；
+
+        2.模块的引用：可以通过路径和模块名。模块名引用最终也会被映射为路径。
+
+                      包含了核心函数的核心模块会在node启动时被预先加载。非核心以及第三方模块之后加载。
+
+        3.文件模块、第三方模块 都是非核心模块，文件模块就是本地模块
+
+ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ 4-3 简单的Nodejs模块 
+
+
+       例子：D:\Program Files\nodeSpaces\test\School     
+ 
+        exports 就是require获取的对象
+
+
+     1、 模块的流程：
+
+            创建模块、导出模块、加载模块、使用模块;
+
+
+          module.exports和exports区别：
+
+          module.exports = add;特别的对象类型;(推荐使用,支持现有)
+
+          exports.add = add;传统的模块实例;（exports是辅助方法）
+
+          module.exports最终返回给调用者；
+
+          exports挂载属性和方法，然后把属性赋给module.exports；
+
+
+     2、     
+
+         想让模块成为特别的对象类型，使用module.export;
+
+         想让模块成为传统的模块实例，使用export.  
+
+         module.export是真实存在的东西，
+
+         export是module.export的辅助方法。
+
+         module.export最终返回给调用者；
+
+         export挂载属性和方法，然后把属性赋给module.export
+
+         如果module.export已经有了属性，那么export上的属性会被忽略
+
+         推荐export方式  （教程中推荐使用）
+
+
+     3、require 用来加载代码，而 exports 和 module.exports 则用来导出代码。
+
+        但很多新手可能会迷惑于 exports 和 module.exports 的区别，为了更好的理解 exports 和 module.exports 的关系，
+
+        我们先来巩固下 js 的基础。示例：
+
+####################################################################
+
+为了更好的理解 exports 和 module.exports 的关系，
+
+我们先来巩固下 js 的基础。示例：
+
+test.js
+
+var a = {name: 1};
+var b = a;
+
+console.log(a);
+console.log(b);
+
+b.name = 2;
+console.log(a);
+console.log(b);
+
+var b = {name: 3};
+console.log(a);
+console.log(b);
+
+运行 test.js 结果为：
+
+{ name: 1 }
+{ name: 1 }
+{ name: 2 }
+{ name: 2 }
+{ name: 2 }
+{ name: 3 }
+
+
+解释：a 是一个对象，b 是对 a 的引用，即 a 和 b 指向同一块内存，所以前两个输出一样。当对 b 作修改时，即 a 和 b 指向同一块内存地址的内容发生了改变，所以 a 也会体现出来，所以第三四个输出一样。当 b 被覆盖时，b 指向了一块新的内存，a 还是指向原来的内存，所以最后两个输出不一样。
+
+
+
+################################################################################
+
+
+
+明白了上述例子后，我们只需知道三点就知道 exports 和 module.exports 的区别了：
+
+                                          module.exports 初始值为一个空对象 {}
+
+                                          exports 是指向的 module.exports 的引用
+
+                                          require() 返回的是 module.exports 而不是 exports
+
+
+     我们经常看到这样的写法：
+
+                    exports = module.exports = somethings
+
+      上面的代码等价于:
+
+                    module.exports = somethings
+
+                    exports = module.exports
+
+
+         原理很简单，即 module.exports 指向新的对象时，exports 断开了与 module.exports 的引用，那么通过 exports = module.exports 让 exports 重新指向 module.exports 即可。
+
+##################################################################################
+
+
+
+看到这里，相信大家都看到答案了，exports是引用 module.exports的值。module.exports 被改变的时候，exports不会被改变，而模块导出的时候，真正导出的执行是module.exports，而不是exports
+
+再看看下面例子
+
+foo.js
+
+ exports.a = function(){
+  console.log('a')
+ }
+
+ module.exports = {a: 2}
+ exports.a = 1 
+test.js
+
+ var x = require('./foo');
+
+ console.log(x.a)
+result:
+
+ 2
+exports在module.exports 被改变后，失效。
+
+
+
+######################################################################################
+
+
+javascript里面有一句话，函数即对象，View 是对象，module.export =View, 即相当于导出整个view对象。外面模块调用它的时候，能够调用View的所有方法。
+
+不过需要注意，只有是View的静态方法的时候，才能够被调用，prototype创建的方法，则属于View的私有方法。
+
+foo.js
+
+ function View(){
+
+ }
+
+ View.prototype.test = function(){
+  console.log('test')
+ }
+
+ View.test1 = function(){
+  console.log('test1')
+ }
+module.exports = View
+
+test.js
+
+ var x = require('./foo');
+
+ console.log(x) //{ [Function: View] test1: [Function] }
+ console.log(x.test) //undefined
+ console.log(x.test1) //[Function]
+ x.test1() //test1
+
+########################################################################################
+
+         exports暴露， require相当导入文件 var student =require('./student')
+
+         ##exports.init= function(){} ：  这种最简单，直接就是导出模块 init的方法。
+
+
+       、、、、、、、、、、、、、、、、、、、、、、
+
+
+          误区：
+                exports.add中的add并不是一个方法，而是要暴露的方法名，我在student中定义的方法为add_student，结果下面写成了exports.add=add_student;结果怎么弄都不对。正确的写法应该是：exports.add_student=add_student
+
+       、、、、、、、、、、、、、、、、、、、、、、
+
+       遍历数组students
+
+         students.forEach(function(item,index){
+
+                student.add(item);
+           })
+                
+                 function() 是每次遍历要执行的方法                
+
+                 item：是数组的值
+
+                 index：是下标(位置)
+
+
+简单例子：
+
+nclass.js：
+
+var student = require('./student');
+var teacher = require('./teacher');
+
+function add(teacherName, students){
+
+   teacher.add(teacherName);
+
+   students.forEach(function(item,index){
+
+       student.add(item);
+   })
+}
+
+exports.add = add;
+
+.............................
+
+index.js:
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+第5章 横扫 Nodejs API 
+
+ 5-1 Node.js-不要陷入版本选择的深渊 
+
+
+        nodejs的主要方向：nodejs实现高并发、大规模的运行特性
+
+        nodejs分化
+
+        nodejs可以高并发 nodejs上手之后 就可以同时玩nodejs和iojs       
+
+
+
+-----------------------------------------------------------
+
+
+
+
+ 5-2 URL网址解析的好帮手 
+
+        URL:统一资源定位符；
+ 
+        URI:统一资源标识符；
+
+        URN：Uniform Resource Name，统一资源名称。
+
+      其中，URL,URN是URI的子集。
+
+       url 有三个方法:
+
+             1）url.parse(urlString,bool（可选）,bool（可选）): 将定位符解析成对象,识别无协议的url
+
+             2）url.format(urlObj): 将对象解析成定位符（也就是URL）  ---》作用与 url.parse()相反.
+
+             3）url.resolve(from, to):将一个基本URL和指定超链接目标URL合并
+
+
+      1、URL基础知识点
+
+              protocol:表示url采用的什么协议
+
+              slashes:表示是否有斜线
+
+              host：表示主机
+
+              post:端口（默认80端口不显示）
+
+              hostname:主机名称
+
+              hash:指的是#号后的内容包含#<br>（锚点）
+
+              search：指的是？后#前的内容，包含？（查询字符串参数）
+
+              query：指的是search不包含？的内容(给http服务器发送数据)
+
+              pathname:指的是路径名称，一般指主域名之后的内容（'/返回自己的路径名/'）
+
+              path：路径
+
+              href：代表未解析的url地址
+
+              参数:
+
+                   可选参数1设置为true,对象中query解析出，
+
+                   可选参数2设置为true,对象中host正确解析,pathname正确解!!!协议protocal未明确。
+
+              绝对URI:
+                      http://user:pass@www.example.com:80/dir/index.html?uid=1#ch1
+                      协议   登录信息  服务器地址     端口  文件路径  查询字符串 片段标示符
+
+
+              url.parse(urlString,bool,bool): 将定位符解析成对象,识别无协议的url
+
+                    第二个参数决定query部分以字符串返回还是以对象形式返回，默认为字符串返回即第二个参数默认为false;
+    
+                    第三个参数表示在没有完整协议串的时候（即无http:/https:）的时候‘//’之后的字符如何解释，若为false即将‘//’之后的当做路径解释，若为true则会将‘//’与‘/’之间的字符串解释为主机
+
+
+
+
+例子:
+
+① url.parse(url) : 解析 url 
+
+> url.parse('http://coding.imooc.com/class/134.html?mc_marking=60e5294c605a87b2af7257d06f70505e&mc_channel=syb7')
+
+Url {
+
+  protocol: 'http:',          指定底层使用的协议
+
+  slashes: true,              协议双斜线
+
+  auth: null, 
+
+  host: 'coding.imooc.com',    服务器域名
+
+  port: null,                  端口（默认是 8080 端口）
+
+  hostname: 'coding.imooc.com',  主机名
+
+  hash: null,                     哈希值（通常是页面锚点）
+
+  search: '?mc_marking=60e5294c605a87b2af7257d06f70505e&mc_channel=syb7',    查询字符串参数
+
+  query: 'mc_marking=60e5294c605a87b2af7257d06f70505e&mc_channel=syb7',       发给http服务器的数据（通常等号分隔开的键值叫参数串）
+
+  pathname: '/class/134.html',        访问资源路径名
+
+  path: '/class/134.html?mc_marking=60e5294c605a87b2af7257d06f70505e&mc_channel=syb7',   路径
+ 
+  href: 'http://coding.imooc.com/class/134.html?mc_marking=60e5294c605a87b2af7257d06f70505e&mc_channel=syb7' }  未解析的超链接
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+② url.parse(url,bool):  
+
+    方法中第二个参数 为 true 和 为 false 的区别 : 
+
+          第二个参数决定query部分以字符串返回还是以对象形式返回，默认为字符串返回即第二个参数默认为false;
+
+    (1)当第二个参数为 false（默认为false） 时，
+
+      url.parse('http://coding.imooc.com/class/134.html?mc_marking=60e5294c605a87b2af7257d06f70505e&mc_channel=syb7',false)
+
+      解析后的query是字符串string形式:  query: 'mc_marking=60e5294c605a87b2af7257d06f70505e&mc_channel=syb7',  
+
+
+    (2)当第二个参数为 true 时，
+
+      url.parse('http://coding.imooc.com/class/134.html?mc_marking=60e5294c605a87b2af7257d06f70505e&mc_channel=syb7',true)
+
+      解析后的query是对象形式:
+
+                    query:
+                          { mc_marking: '60e5294c605a87b2af7257d06f70505e',mc_channel: 'syb7' },
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ ③ url.parse(url,bool,bool):  
+
+        方法中第三个参数 为 true 和 为 false 的区别 : 
+
+             第三个参数表示在没有完整协议串的时候（即无http:/https:）的时候‘//’之后的字符如何解释，
+
+                   若为false即将‘//’之后的当做路径解释，
+
+                   若为true则会将‘//’与‘/’之间的字符串解释为主机
+
+
+    (1)当第三个参数为 false（默认为false） 时，则将‘//’之后的当做路径解释，    
+
+        > url.parse('//coding.imooc.com/class/134.html',true,false)
+        Url {
+          protocol: null,
+          slashes: null,
+          auth: null,
+          host: null,
+          port: null,
+          hostname: null,
+          hash: null,
+          search: '',
+          query: {},
+          pathname: '//coding.imooc.com/class/134.html',
+          path: '//coding.imooc.com/class/134.html',
+          href: '//coding.imooc.com/class/134.html' }
+
+
+    (2)当第三个参数为 true 时，则会将‘//’与‘/’之间的字符串解释为主机  
+
+         > url.parse('//coding.imooc.com/class/134.html',true,true)
+         Url {
+           protocol: null,
+           slashes: true,                    <-------
+           auth: null,
+           host: 'coding.imooc.com',         <-------
+           port: null,
+           hostname: 'coding.imooc.com',     <-------
+           hash: null,
+           search: '',
+           query: {},
+           pathname: '/class/134.html',      <-------
+           path: '/class/134.html',          <-------
+           href: '//coding.imooc.com/class/134.html' }
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ ④ url.format(urlObj): 将对象解析成定位符（也就是URL）  ---》作用与 url.parse()相反.
+
+> url.format( {
+...   protocol: 'http:',
+...   slashes: true,
+...   auth: null,
+...   host: 'coding.imooc.com',
+...   port: null,
+...   hostname: 'coding.imooc.com',
+...   hash: null,
+...   search: '?mc_marking=60e5294c605a87b2af7257d06f70505e&mc_channel=syb7',
+...   query:
+...    { mc_marking: '60e5294c605a87b2af7257d06f70505e',
+.....      mc_channel: 'syb7' },
+...   pathname: '/class/134.html',
+...   path: '/class/134.html?mc_marking=60e5294c605a87b2af7257d06f70505e&mc_channel=syb7',
+...   href: 'http://coding.imooc.com/class/134.html?mc_marking=60e5294c605a87b2af7257d06f70505e&mc_channel=syb7' }
+... )
+
+
+输入结果 ： 'http://coding.imooc.com/class/134.html?mc_marking=60e5294c605a87b2af7257d06f70505e&mc_channel=syb7'
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  ⑤ url.resolve(from, to):将一个基本URL和指定超链接目标URL合并
+
+       > url.resolve('http://coding.imooc.com','/haha')
+
+            输出结果：'http://coding.imooc.com/haha'
+
+
+       > url.resolve('http://coding.imooc.com:8080','/haha')
+
+            输出结果：'http://coding.imooc.com:8080/haha'
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+ 5-3 QueryString参数处理小利器
+
+
+   1、querystring模块 的四个方法:
+
+
+        ① querystring.stringify(obj,para1,para2)  //将对象转化成url中query部分的形式 (序列化) ---> 即将对象形式 转成 字符串形式
+
+                    参数：1.要转化的对象
+
+                          2.链接符（默认&）   -----> 键值对 与键值对 之间的分隔符
+
+                          3.键与值之间的符号（默认=） -----> 键值对中 键 与 值 的分隔符
+
+
+
+        ② querystring.parse(string,para1,para2)//将query字符串转化成对象（反序列化）  --->  即将 字符串形式 转成 对象形式
+
+                    参数：
+                          1.query字符串
+
+                          2.链接符（默认&）   -----> 键值对 与 键值对 之间的分隔符
+
+                          3.键与值之间的符号（默认=） -----> 键值对中 键 与 值 的分隔符
+
+                          4.参数的个数（默认最多1000个，0就没有限制）
+
+
+
+        ③ querystring.escape（STR）文字转译  , 将字符串转义
+
+        ④ querystring.unescape（STR） 反转译 , 将转义的字符串还原
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+例子：
+
+（1）querystring.stringify(obj,para1,para2)  //将对象转化成url中query部分的形式 (序列化) ---> 即将对象形式 转成 字符串形式
+
+                    参数：1.要转化的对象
+
+                          2.链接符（默认&）   -----> 键值对 与 键值对 之间的分隔符
+
+                          3.键与值之间的符号（默认=） -----> 键值对中 键 与 值 的分隔符
+
+
+     > querystring.stringify({name:"haha",age:13,from:""})
+
+         输出结果：'name=haha&age=13&from='
+
+
+     > querystring.stringify({name:"haha",age:13,from:""},",")
+
+         输出结果：'name=haha,age=13,from='
+  
+
+     > querystring.stringify({name:"haha",age:13,from:""},",",":")
+
+         输出结果：'name:haha,age:13,from:'
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+例子：
+
+ （2）querystring.parse(string,para1,para2)//将query字符串转化成对象（反序列化）  --->  即将 字符串形式 转成 对象形式
+
+             参数：
+                 1.query字符串
+
+                 2.链接符（默认&）   -----> 键值对 与 键值对 之间的分隔符
+
+                 3.键与值之间的符号（默认=） -----> 键值对中 键 与 值 的分隔符
+
+                 4.参数的个数（默认最多1000个，0就没有限制）
+
+
+    ①  > querystring.parse('name=haha&age=13&from=')
+
+           { name: 'haha', age: '13', from: '' }
+
+     
+
+    ② > querystring.parse('name=haha,age=13,from=')  
+
+            错误的输出：{ name: 'haha,age=13,from=' } ---》没有正确地识别键值对
+
+
+       > querystring.parse('name=haha,age=13,from=',',')
+
+            正确的输出：{ name: 'haha', age: '13', from: '' }
+
+
+
+    ③ > querystring.parse('name:haha,age:13,from:',',')
+
+            错误的输出：{ 'name:haha': '', 'age:13': '', 'from:': '' }  ---》没有正确地识别键值对之中的 键 和 值.
+
+
+        > querystring.parse('name:haha,age:13,from:',',',':')
+
+            正确的输出：{ name: 'haha', age: '13', from: '' }
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+例子：
+   （3）
+       querystring.escape（STR）文字转译  , 将字符串转义
+
+       querystring.unescape（STR） 反转译 , 将转义的字符串还原
+
+    
+       > querystring.escape('哈哈')
+
+               输出结果：'%E5%93%88%E5%93%88'
+
+
+       > querystring.unescape('%E5%93%88%E5%93%88')
+ 
+               输出结果：'哈哈'
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+ 5-4 HTTP知识先填坑 
+
+   http 是一种协议， 电脑与电脑之间要遵守这样的协议规则，才能相互通信， 当然，现在不局限于电脑之间，还包括手机、智能手机等等.
+
+   http 的工作流程:
+
+         //http客户端发起请求，创建端口
+
+         //http服务器在端口监听客户端请求
+
+         //http服务器向客户端返回状态和内容
+
+
+   当我们输入网址，按回车键 或着 按F5刷新页面时，可能整个页面加载完的时间很短，但中间做了很多事。
+
+        首先就是  域名解析，查找ip地址, 在DNS缓存中查找ip地址:
+
+           //1.chrome搜索自身的DNS缓存   
+
+                   ---->(如果没有发现我们输入的域名（如http://www.imooc.com/）对应的ip地址，走第2步)
+
+                   chrome://net-internales/#dns查看浏览器自身的缓存，如果找不到相关记录，则浏览器会搜索操作系统自身的缓存。
+
+
+           //2.搜索操作系统自身的DNS缓存（浏览器没有找到缓存或缓存已经失效）
+
+                                 ---->(如果没有发现我们输入的域名（如http://www.imooc.com/）对应的ip地址，走第3步)
+
+
+           //3.读取本地的host文件（C盘 ->  Windows -> System32 -> drives -> etc -> hosts文件）
+
+                                  ---->(如果没有发现我们输入的域名（如http://www.imooc.com/）对应的ip地址，走第4步)
+
+
+           //4.浏览器发起一个DNS的一个系统调用：
+
+                    ①宽带运营商服务器查看本身缓存；
+
+                    ②运营商服务器发起一个迭代DNS解析的请求；
+
+                    ③运营商服务器把结果返回操作系统内核同时缓存起来，
+
+                    ④操作系统内核把结果返回浏览器
+
+
+
+      域名解析，获取ip地址后:
+
+ 
+           //5.浏览器获得域名对应ip地址后，建立TCP，发起HTTP“三次握手”
+
+           //6.TCP/IP连接建立起来后，浏览器就可以向服务器发送HTTP请求了。
+
+                      每個http請求 可粗略劃分為請求和響應
+
+                          //请求和响应都包括http头和正文的信息
+
+                          //http头发送的是一些附加的信息：内容类型、服务器发送相应的日期、HTTP状态码
+
+                          //正文：用户提交的表单数据
+
+           //7.服务器端接受到这个请求，根据路径参数，经过后端处理后，把处理后的一个结果的数据(例如：整个网页htnl的代码)返回给浏览器。
+
+           //8.浏览器获取到目标网址的数据，例如返回一个HTML文件,HTML文档内的JS/CSS/图片静态资源同样也是一个个HTTP请求，也要包括上述步骤。
+
+           //9.浏览器根据获取到的资源对页面进行渲染，最终把网页呈献给用户
+
+
+
+
+   DNS 域名系统 (Domain Name System) 的缩写
+
+   输入一个URL，浏览器会搜索自身的DNS缓存，没有就搜索操作系统自身的DNS缓存，还没有则找本地HOST文件，HOST文件也没有则发起一个域名请求
+
+   DNS:，建立一套域名解析系统（DNS），只在专门的DNS服务器上配置主机到IP地址的映射，
+
+         网络上需要使用主机名通信的设备，首先需要到DNS服务器查询主机所对应的IP地址
+
+         通常 Internet 主机域名的一般结构为：主机名.三级域名.二级域名.顶级域名。 
+
+         Internet 的顶级域名由 Internet网络协会域名注册查询负责网络地址分配的委员会进行登记和管理，它还为 Internet的每一台主机分配唯一的 IP 地址。
+
+         全世界现有三个大的网络信息中心： 位于美国的 Inter-NIC，负责美国及其他地区； 位于荷兰的RIPE-NIC，负责欧洲地区；位于日本的APNIC ，负责亚太地区[1]  。
+
+
+   操作系统自身的DNS缓存和本地HOSTS文件（C盘 ->  Windows -> System32 -> drives -> etc -> hosts文件）
+
+   每個http請求 可粗略劃分為請求和響應
+
+          //请求和响应都包括http头和正文的信息
+
+          //http头发送的是一些附加的信息：内容类型、服务器发送相应的日期、HTTP状态码
+
+          //正文：用户提交的表单数据
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+ 5-5 HTTP知识填坑之“以慕课网为例分析” 
+
+
+         1、http请求方法：
+
+                 ·Get:获取，读取数据
+
+                 ·Post：提交资源
+
+                 ·Put：更新（头像、资料之类）
+
+                 ·Delete：删除， 请求服务器删除某个资源
+
+                 ·Head 与get方法相同，但服务器不传回资源
+
+                   trace
+
+                   options
+
+
+        2、 Timing资源加载所要耗费的时间线 ：
+
+                 ·Stalled:等待时机，浏览器要发生请求，到能发出请求的时间。不包括DNS查询和连接建立时间
+
+                 ·Proxy negotiation：代理协商的时间
+
+                 ·Request sent：请求时间。从请求报文的第一个字节发出，到最后一个字节发送完毕的时间
+
+                 ·Waiting（TTFB）：请求发出后至收到第一个字节响应的时间
+
+                   Content Download：从接受到响应第一个字节开始到最后一个字节结束花费的时间
+
+
+
+        3、状态码：服务器端返回浏览器，告知浏览器请求成功或失败的信息
+
+                ·1XX请求已经接受
+
+                ·2XX请求成功并处理成功
+
+                ·3XX重定向
+
+                ·4XX客户端错误
+
+                ·5XX服务器端错误
+
+
+                具体的状态码：
+
+                       200：OK，请求成功
+
+                       400：客户端请求有语法错误
+
+                       401：请求未经授权
+
+                       403：收到请求，但不提供服务 ，拒绝提供服务 是因为没有权限等等 
+
+                       404：资源未找到，  没找到 有可能输入的URL地址错误
+
+                       500：服务器端未知错误
+
+                       503：服务器端当前不能处理请求，服务器端当前还不能处理客户端请求  可能需要过一段时间
+
+
+     注意：
+
+          http1.1以前版本默认为非持久链接，所以要有此字段
+
+          connection: keep-alive 建立持久链接，主要是为了节省通信量，不然每次进行http通信就要断开一次
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+ 
+
+ 5-6 HTTP 事件回调进阶
+
+
+       Nodejs中http模块不解析请求的具体内容，只分离出请求头和请求体
+
+       Node.js 核心思想： 非阻塞、单线程 、 事件驱动
+
+
+       1、什么是回调函数？
+
+               回调是异步编程时的基础，将后续逻辑封装成起始函数的参数，逐层嵌套
+
+
+
+       2、什么事同步/异步？
+
+               同步：发送方发送数据后，等待接收方发回响应以后才发下一个数据包的通讯方式
+
+               异步：发送方发出数据后，不等接收方发回响应，接着发送下个数据包的通讯方式
+
+
+
+       3、什么事I/O?
+
+               文件系统里面 磁盘的写入（in）磁盘的读取（out）
+
+
+
+       4、什么是单线程/多线程？
+
+               一次只能执行一个程序叫做单线程
+
+               一次能执行多个程序叫做多线程
+
+
+
+       5、什么是阻塞/非阻塞？
+
+               阻塞：前一个程序未执行完就得一直等待
+
+               非阻塞：前一个程序未执行完时可以挂起，继续执行其他程序，等到使用时再执行
+
+
+
+       6、什么是事件？
+
+               一个触发动作（例如点击按钮）
+
+
+
+       7、什么是事件驱动？
+
+               一个触发动作引起的操作（例如点击按钮后弹出一个对话框）
+
+
+
+       8、什么是基于事件驱动的回调？
+  
+               为了某个事件注册了回调函数，但是这个回调函数不是马上执行，只有当事件发生的时候，才会调用回掉函数，这种函数执行的方式叫做事件驱动~
+
+              这种注册回调就是基于事件驱动的回调，如果这些回调和异步I/O（数据写入、读取）操作相关，可以看作是基于回调的异步I/O。只不过这种回调在nodejs中是由事件来驱动的
+
+
+
+       9、什么是事件循环？
+
+             事件循环Eventloop，倘若有大量的异步操作，如一些I/O的耗时操作，甚至是一些定时器控制的延时操作，它们完成的时候都要调用相应的回调函数，而从完成一些密集的任务，而又不会阻塞整个程序执行的流程，此时需要一种机制来管理，这种机制叫做事件循环
+
+             总而言之，管理大量异步操作的机制叫做事件循环
+
+          EventLoop：
+
+            回调函数队列，异步执行的函数会被压入这个队列；队列被循环查询。
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+callback.js
+
+例子：
+
+1、//回调
+
+function learn(something){
+
+      console.log(something);
+}
+
+
+function we(callback,something){
+
+	 something += " is cool.";
+	 callback(something);
+}
+
+//1、回调有名称的函数
+
+we(learn,"arvin");
+
+//2、回调匿名函数
+
+we(function(something){
+
+    console.log(something);
+
+},"haha");
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+async.js
+
+例子2：
+
+//<script src='a.js'></script>
+//<script src='b.js'></script>
+//<script src='c.js'></script>
+
+//如果是同步，则会被阻塞在这里,无限循环
+// var i = 0;
+// while(true){
+
+// 	i++;
+// }
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// var c = 0
+
+// function printIt(){
+
+// 	console.log(c);
+// }
+
+// function plus(){
+
+// 	c++;
+// }
+
+// plus();
+// printIt();
+
+//以上例子中输出结果为 ：1
+//以上情况中,plus函数 和 printIt函数会按顺序执行,即同步.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// 但当 plus函数 有一些异步操作或者一些耗时的操作，则printIt函数不会等plus函数执行完再执行，
+//而是在plus函数执行的同时，printIt函数也直接执行, 所以输出结果可能和我们期望的不同. 例子如下：
+// var c = 0
+// function printIt(){
+// 	console.log(c);
+// }
+
+// function plus(){
+
+//     setTimeout(function(){
+
+//  	       c++;   	
+
+//     },1000);
+// }
+// plus();
+// printIt();
+
+//以上例子中输出结果为 ：0
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+//将以上例子改动，加上callback回调函数
+var c = 0
+function printIt(){
+	console.log(c);
+}
+
+function plus(callback){
+
+    setTimeout(function(){
+
+ 	       c++;
+ 	       callback();   	
+    },1000);
+}
+
+plus(printIt);
+
+//以上例子中输出结果为 ：1
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+例子：
+
+3、event.js
+
+function clickIt(){
+
+	window.alert("Button is clicked!");
+}
+
+var button = document.getElementById("button");
+
+button.addEventListener('click',clickIt);
+
+
+   为了某个事件注册了回调函数，但是这个回调函数不是马上执行，只有当事件发生的时候，才会调用回掉函数，这种函数执行的方式叫做事件驱动~
+
+   这种注册回调就是基于事件驱动的回调，如果这些回调和异步I/O（数据写入、读取）操作相关，可以看作是基于回调的异步I/O。只不过这种回调在nodejs中是由事件来驱动的
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+ 5-7 HTTP 源码解读之先了解作用域、上下文 
+
+
+           作用域：与调用函数,访问变量的能力有关 
+
+           作用域分为：局部和全局（在局部作用域里可以访问到全局作用域的变量，但在局部作用域外面就访问不到局部作用里面所设定的变量）
+
+           上下文：与this关键字有关 是调用当前可执行代码的引用
+
+           this总是指向调用这个的方法的对象
+
+                 js里的this 通常是当前函数的拥有者，this指向函数的拥有者（即调用这个方法的对象），只在函数内部使用
+
+                 this 是js的一个关键字 代表函数运行时自动生成的一个内部对象 只能在函数内部使用
+
+            this：
+                 1.作为对象的方法 
+
+                        this在方法内部，this就指向调用这个方法的对象
+
+
+                 2.函数的调用
+
+                        this指向执行环境中的全局对象（浏览器->window  nodejs->global）
+
+                                      nodejs中的顶层对象：global
+
+                                      浏览器中的顶层对象：windows
+
+
+                 3.构造函数
+
+                        this所在的方法被实例对象所调用，那么this就指向这个实例对象
+
+
+  --------------------------------------------------------
+
+           更改上下文方法(更改this指向的内容,可方便地实现继承)：
+             
+                    call(list);
+                    apply(array);
+ 
+           根据call()、apply()改变上下文this指向的特性,也可以方便实现继承
+
+           call和apply可用来替换当前的调用对象，使它拥有上级的方法也可用来继承，
+
+           call()可以改变this
+
+
+      额外知识：
+                 apply巧妙用法 ：
+
+                   1、Math.max(param1,param2,...)的参数不支持数组
+
+                         可以使用apply进行替换对象，并传入数组
+
+                         方法：Math.max.apply(null,array)， 无对象可调用用null即可
+
+                   2、Array.prototype.push可以合并数组，但push(param1,param2...paramN)也不支持数组参数
+
+                        方法：
+                              var arr1=new Array("1","2","3");
+
+                              var arr2=new Array("4","5","6");
+
+                              Array.prototype.push.apply(arr1,arr2);
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+例1：scope.js  ----> 了解 全局变量 和 局部变量
+
+var globalVariable = 'This is global variable';   //全局变量
+
+function globalFunction(){                        //全局函数
+
+	var localVariable = 'This is local variable';  //局部变量
+
+	console.log("Visit global/local variable");
+	console.log(globalVariable);                   //局部中可以访问全局变量     
+	console.log(localVariable);
+
+	globalVariable = "This is change variable";
+	console.log(globalVariable);
+
+	function localFunction(){                  //局部方法可以访问它外部的变量
+
+           var innerVariable = "This is inner variable";
+
+           console.log("Visit global/local/inner variable");
+           console.log(innerVariable);
+           console.log(localVariable);
+           console.log(globalVariable);
+
+	}
+
+	localFunction()
+}
+
+globalFunction();
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+例2：context.js  理解上下文:   上下文：与this关键字有关 是调用当前可执行代码的引用
+
+
+//1、声明一个对象变量
+// var pet = {
+// 	word: "...",
+// 	speck: function(){
+
+// 		console.log(this.word);
+// 		console.log(this === pet);
+// 	}
+// }
+
+// pet.speck();
+
+
+....................................................
+....................................................
+
+
+//2、声明一个方法
+
+// function pet(word){
+
+//       console.log(this.word);
+//       console.log(this);
+//       console.log(this === global);
+// }
+
+// pet("...");    //当没明确指定哪个对象调用了pet函数时，在node.js中则为 全局对象global 调用，而如果在浏览器中则指的是 window对象 调用.
+
+                        this指向执行环境中的全局对象（浏览器->window  nodejs->global）
+
+                                      nodejs中的顶层对象：global
+
+                                      浏览器中的顶层对象：windows
+
+....................................................
+....................................................
+
+
+//3、声明一个构造函数，并new一个对象实例
+
+function Pet(word){
+
+	this.word = word;
+	this.speck = function(){
+
+		console.log(this.word);
+		console.log(this);
+	}
+}
+
+var cat = new Pet("haha");
+cat.speck();
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+例3： call_apply.js  开始理解 call 和 apply 的作用
+
+
+     call和apply的作用说白了就是将某个方法赋给另一个对象。
+
+     pet.speak.call(dog,[]);
+
+         将pet的speak方法赋给dog对象，并传递一个数组的参数，
+
+
+var pet = {
+
+    word: "...",
+    speck: function(say){
+
+           console.log(say+ " : "+this.word );
+    }
+}
+
+// pet.speck("Speck");   //输出结果为 “Speck : ...”
+
+
+var dog = {
+
+	word: "wang"
+}
+
+pet.speck.call(dog,"Speck");  //输出结果为 “Speck : wang”
+                              //这行代码指的是 “pet.speck”调用了call函数， 改变了上下文，即改变了this, 从 pet 改为 dog。并传入参数“Speck”
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+例4：call_apply_extends.js  -----》 call 方法将 this 指向 dog ，dog 对象因此有了speak  方法
+
+
+function Pet(word){         //构造函数Pet
+
+	this.word = word;
+	this.speck = function(){
+
+		console.log(this.word);
+	}
+}
+
+
+function Dog(word){       //构造函数Dog
+
+	Pet.call(this,word);  //这里利用call函数 将 this为Pet 改为 this为Dog, 这样使得Dog的实例对象可以调用speck函数.
+	 //pet.apply(this,arguments);  //apply函数与call函数类似,  这里的arguments指的是参数数组.
+}
+
+
+var pet = new Pet("Pet");
+pet.speck();
+
+var dog = new Dog("dog");
+dog.speck();
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+javascript笔记中用到 call 的例子.
+
+
+-------继承3.html----------------------------------------
+
+
+   用call() 继承属性
+
+   用 for in 继承方法
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+function A()
+{
+	this.abc=12;
+}
+
+A.prototype.show=function ()
+{
+	alert(this.abc);
+};
+
+//继承A
+
+function B()
+{
+	//this->new B()
+	A.call(this);          //通过call 继承A的属性
+}
+
+//B.prototype=A.prototype; //这里不算是继承，是用到了引用，即 B 和 A 指向的是同一块空间，当B改变，A也会改变，而不是把B的内容复制给A
+
+for(var i in A.prototype)     //for in 才算是真正的继承， 继承了A 的方法   当B改变，A不会改变
+{
+	B.prototype[i]=A.prototype[i];
+}
+
+B.prototype.fn=function ()
+{
+	alert('abc');
+};
+
+var objB=new B();
+var objA=new A();
+
+//objA.fn();
+</script>
+</head>
+
+<body>
+</body>
+</html>
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+ 5-8 HTTP 源码解读 
+
+
+       1.加 _ 的是私有模块，通过exports暴露
+
+       2.github仓库主页按T可以呼出搜索
+
+       3. 源码解读，涨姿势了
+
+
+          request是IncomingMessage的一个实例 
+
+          response是serverResponse的一个实例，也是OutgoingMessage的一个实例
+
+               代码：  var response = new ServerResponse(request);
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+源码解读1 :
+
+               在_http_server中244行this.addListener('request', requestListener);
+
+               490中self.emit('request', req, res);，出现req和res
+
+               439中var res = new ServerResponse(req);
+
+               103中定义函数function ServerResponse(req)，
+
+               在该函数体中定义了继承util.inherits(ServerResponse, OutgoingMessage);并将OutgoingMessage的this指向res
+
+               OutgoingMessage指_http_outgoing.js中OutgoingMessage
+
+               在_http_outgoing.js中
+
+               在66出现function OutgoingMessage()函数定义，并将this也就是res的许多属性赋值。
+
+               并继承nodejs的stream类
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+
+源码解读2 :
+
+               再回到_http_server的490看req的过程
+
+               this.addListener('connection', connectionListener);
+
+               function connectionListener(socket) 中
+
+               var req = parser.incoming;
+
+               再找parser得到： var parser = parsers.alloc();
+
+               var parsers = common.parsers;
+
+               var common = require('_http_common');
+
+               转向_http_common.js文件中寻找.parses.alloc()
+
+               里面的parse var HTTPParser = process.binding('http_parser').HTTPParser;
+
+               parser.incoming = new IncomingMessage(parser.socket);
+
+               var IncomingMessage = incoming.IncomingMessage;
+
+               var incoming = require('_http_incoming');
+
+               转向_http_incoming.js中IncomingMessage; 定义了一些this的静态属性，集成了Steam.Readable
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+源码解读3 :
+
+
+http.js下：
+
+  调用createServer实际上是返回Server实例，createServer里面的回调函数（参数requestListener）直接作为了Server的参数requestListener
+
+    而这个Server实际上是require('_http_server')
+
+
+_http_server.js下：
+
+  fuction Server(requestListener)里面实际上是为这个requestListener函数与'request'事件绑定到了一起
+
+   而'request'是方法parserOnIncoming里面抛出的一个事件，见488行self.emit('request'.req,res);这个事件也会同时抛出req和res两个对象
+
+    关于req与res两个变量：
+
+      其中，428行可知req变量与另一个叫做shouldKeepAlive的变量作参同时传入此函数parserOnIncoming
+
+      而，由437行可见res变量是new ServerResponse(req)出来的实例
+
+        见101行可见ServerResponse的定义，再由函数体内部113行知此函数继承自OutgoingMessage
+
+          见37行： var outgoingMessage = require('_http_outgoing').OutgoingMessage;
+
+
+_http_outgoing.js下
+
+            67行为function OutgoingMessage的定义
+
+              见93行OutgoingMessage继承自Stream即为一个流的子类
+
+                由函数体内部67-91行可知此函数里面初始化的各种变量全是跟服务器返回的内容有关的东西
+
+      最终可得出res实际上是一个ServerResponse，而ServerResponse是一个Stream，这个Stream里面全是各种服务器返回的各种内容属性（见_http_outgoing.js里的67-91行啊啊）
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+例子：httpT.js   ---》 创建一个server，并监听1337端口.
+
+var http = require('http');
+
+http
+  .createServer(function(req,res){
+
+      res.writeHead(200,{'Content-Type':"text/plain"});
+      res.write("hahahahahah");
+      res.end();
+
+})
+  .listen(1337,"127.0.0.1")
+
+  console.log("starting");
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+ 5-9 HTTP 性能测试
+
+
+                      -n ：总共的请求执行数，缺省是1；
+
+                      -c： 并发数，缺省是1；
+
+                      -t：测试所进行的总时间，秒为单位，缺省50000s
+
+                      -p：POST时的数据文件
+
+                      -w: 以HTML表的格式输出结果
+
+
+                 1.如果没有安装Apache的话，首先要安装Apache
+
+                 2.window系统到apache安装目录的bin文件，然后命令行执行ab -n1000 -c10 http://localhost:2015/
+
+                 3.找到 apache的bin目录 ab -n1000 -c10 http://www.imooc.com/ 输入
+
+                       -n1000 总请求数1000 默认值1
+
+                       -c10 并发数10  默认值1
+
+                       -t 测试的时间
+
+                       -p post数据文件
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ab -n1000 -c10 http://www.imooc.com/ 输入
+ 
+             -n1000 总请求数1000 默认值1
+
+             -c10 并发数10  默认值1
+
+             -t 测试的时间
+
+             -p post数据文件
+
+
+测试结果:
+
+      Requests Per Second:服务器的吞吐率
+
+      Tranfer rate: 单位时间内网络上的流量
+
+      Time per request。用户平均请求的等待时间。相当于平均事务的响应时间。
+
+      Time per request，每个连接请求实际运行时间的平均值。
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+注意：
+
+    1、 这个ab -n1000 -c10 http://localhost:2015/命令，在window系统下，需要先用cd命令定位到你的apache安装目录的bin文件夹。。。
+并且我在powershell中运行的，需要打成.\ab才能运行。。。。
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+ 5-10 HTTP 小爬虫 
+
+
+       1."cheerio"，一个nodeJS模块，类似于jquery，可以将html页面的char转换为document文档对象，然后用类似于jquery的方式进行操作DOM
+
+       2.编写crawler.js文件
+
+       3.在 crawler.js目录下使用如下命令安装cheerio： npm install cheerio
+
+       4.然后运行 crawler.js
+
+
+        "cheerio"，一个nodeJS模块，类似于jquery，可以将html页面的char转换为document文档对象，然后用类似于jquery的方式进行操作DOM
+
+        cheerio 是一个运行于后台,操作dom节点的插件，可以认为是一个jquery
+
+        split()方法是将指定字符串按某指定的分隔符进行拆分，拆分将会形成一个字符串的数组并返回,细节区分
+
+        cheerio：
+
+              1、 现在npm里安装cheerio,命令：npm install cheerio   用法：语言用法跟jQuery完全一样。 
+
+              2.先分析出自己想拿到什么格式的数据 ，然后再一步一步拿到并组装数据--此为第一部分代码
+
+                         如这样格式的数据：
+
+                              理解数据结构
+                                           [{
+                                            chapterTitle:'',
+                                            videos:[{
+                                              title:'',
+                                              id:''
+                                             }]
+                                           }]
+
+        http.get();
+
+        response.on():data、error、end等
+ 
+        foreEach 遍历
+
+        each 遍历
+
+        大致思路:
+
+            1. http get URL 获取html data
+
+            2. 由于是异步 在回调函数里面处理 html data
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+例子1： imooc-crawler.js -->简单例子： 抓取'http://www.imooc.com/learn/478' 整个页面的源代码，不进行加工
+
+var http = require('http');
+
+var url = 'http://www.imooc.com/learn/478';   //被抓取数据的页面
+
+http.get(url,function(res){
+
+   var html = '';
+
+   res.on('data',function(data){        
+
+   	    html += data;
+   })
+
+   res.on('end',function(){
+
+      console.log(html);
+   })
+
+}).on('error',function(){
+
+	console.log('抓取出错!');
+})
+
+
+//输出结果： 整个页面的源代码
+
+//上面的例子，抓取的是整个页面的html代码，没有重点，所以我们一般不这么抓取.需要进一步加工，抓取有用的数据.
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   注意：
+
+(1)、
+      2017年6月29日，学习本节课程，对学习中遇到的问题进行记录，环境windows
+
+           全部代码按照视频编写完成后运行出现问题：
+
+                  1.var cheerio = require('cheerio');
+
+                     问题：使用控制台，在本地node安装目录下使用npm install cheerio 安装cheerio，但在运行代码是显示找不到cheerio模块
+ 
+                     解决方法：因为cheerio.js放在nodejs安装目录中的nodel_modules中，与代码不在同一文件夹下，所以在require（中填写绝对路径）后不报错，（ps：在网上搜索可以配置环境变量，暂未进行配置）
+
+
+                  2.var chapters = $('.learnchapter');
+
+                       因为课程录制时间较早，所以慕课网的class变为chapter
+
+
+                  3.var video = $(this).find('.studyvideo');
+
+                       因为课程录制时间较早，所以慕课网的class变为J-media-item
+
+
+                  4.在代码中感觉有太多for循环的嵌套感觉如果数据过多，会消耗很多时间，但因为我现在属于小白阶段，所以暂时没有好的方法解决
+
+
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+（2）、
+         v4.4.0版本 对代码规范比较多
+
+               例如 视频里的 each(function(item){var chapter = $(this)})是没法运行，
+
+                      应该 each(function(index,item){var chapter = $(item)})
+
+
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ （3）、
+          forEach()和each() 最终结果差不多
+
+              只是 forEach(function(index,item){}),each(function(item,index){})
+
+          each是针对$()对象的方法，参数为(idx,item)
+
+          forEach是JS原生的针对数组的方法，参数为(item,idx,arr)，第三个参数为当前遍历的数组
+
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+ （4）、
+         小白分享爬坑经验：
+
+                  1、cheerio可以理解成一个 Node.js 版的 jquery，对语法不明白的先去学下jquery。
+
+                  2、视屏中慕课网的html源码out了，class名之类的变了。
+
+                  3、video的class名通过find找不到，不明白为什么，换成找标签可以。
+
+
+
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  （5）、视频里有个小小的误区:
+
+           9分20秒开始(包括之后),在each循环内部反复的声明变量会使内存没有必要的损耗,更好的做法是延长变量的生命周期,在函数的顶部先定义,然后每次改变它们的值,由于这些变量本身的类型还是一致的,职责单一,在V8的速度上也会更快.
+
+
+          如果这些这些变量越来越大,性能损耗就会越来越明显.
+
+
+
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   (6)、去掉空格的方法：
+
+                  去掉两边： "  dd   ".trim()
+
+                  "dd"
+
+                  左边："  dd  ".replace(/^\s+/g,"")
+
+                  "dd  "
+
+                  右边："  dd  ".replace(/\s+$/g,"")
+
+                  "  dd"
+
+                  去掉所有："    1  2 34     ".replace(/\s+/g,"")
+
+                  "1234"
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+例子2：  crawler.js
+
+//改进后的小爬虫
+
+var http = require('http');
+var cheerio = require('cheerio');    // 用 npm install cheerio  加载 cheerio模块 进来
+var url = 'http://www.imooc.com/learn/478';   //被抓取数据的页面
+
+
+//希望取出来的数据的数据结构:
+// [{
+//    chapterTitle:"",
+//    videos:[{
+//          videoTitle:'',
+//          id:''
+//    }]
+// }]
+
+function filerChapters(html){    //过滤无用信息的函数
+
+   var $ = cheerio.load(html);
+   var courseData = [];
+   var chapters = $(".chapter");
+
+   chapters.each(function(item){
+
+       var chapter = $(this);
+       var chaptertitle = chapter.find("strong").text().replace(/\s+/g,'').replace(/本章/,'\t本章');  // '/\s+/g' 正则表达式，为了去除所有空格.
+       var videoArray = chapter.find('.video').children('li');
+   	   var chapterData = {
+
+   	   	  chapterTitle: chaptertitle,
+   	   	  videos:[]
+   	   }
+
+       videoArray.each(function(item){
+
+       	   var video = $(this);
+       	   var title = video.find('a').text().replace(/\s+/g,'');    // '/\s+/g' 正则表达式，为了去除所有空格.
+           
+       	     //var id = video.find('a').attr('href').split('video/')[1];  取id的另一种方法
+            var id = video.attr('data-media-id');
+
+           var videoInfo = {
+
+           	 videoTitle: title, 
+           	 videoId: id
+
+           	};
+
+       	   chapterData.videos.push(videoInfo);
+
+       })
+
+       courseData.push(chapterData);
+
+   })
+
+   return courseData;
+}
+
+
+function printCourseInfo(courseData){    //打印出结果的函数
+
+    courseData.forEach(function(item){
+
+           var chapterTitle = item.chapterTitle;
+           console.log(chapterTitle + '\n');
+
+           var videos = item.videos;
+           videos.forEach(function(video){
+                
+                 var videoId = video.videoId;
+                 console.log( ' ' + '【'+ videoId +'】' + video.videoTitle + '\n');
+
+           })
+
+           console.log('\n');  //在每章之间加空白的一行，隔开容易区分它们
+    })
+
+}
+
+http.get(url,function(res){
+
+   var html = '';
+
+   res.on('data',function(data){
+
+   	    html += data;
+   })
+
+   res.on('end',function(){
+
+     var courseData = filerChapters(html);
+      //console.log(courseData);
+     printCourseInfo(courseData);
+   })
+
+}).on('error',function(){
+
+	console.log('抓取出错!');
+})
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+ 5-11 事件模块小插曲 
+
+
+      1、EventEmitter支持多个事件监听，最大为10，也可以自定义最大数
+
+         //添加监听
+
+              var EventEmitter = require('events').EventEmitter;
+
+              var instance = new EventEmitter();
+
+              instance.on('event',function(arguments){});
+
+
+      2、如果超过十个也能执行，不过有可能会造成内存泄漏
+ 
+          //自定义最大数
+
+          //每个setMaxListeners针对的是一个特定事件：即event1,event2,... 默认最大都为10,本例为num
+
+              instance.setMaxListeners(num);
+
+
+      3、事件监听之后，需要emit(发射,发出)才会执行
+
+              instance.emit('event',arguments)  //触发事件
+
+ 
+      4、判断是否监听
+
+            var a = instance.emit('event',arguments)	
+
+            console.log(a) //打印出来的是布尔值true or false
+
+
+   
+      5、移除监听事件
+
+           //移除单个事件监听
+
+            instance.removeListener('event',funcName)	//移除事件需具名函数，匿名函数不行
+
+
+      6、//移除多个事件监听
+
+             instance.removeAllListerners()	//不传参表示移除所有事件监听
+
+             instance.removeAllListerners('event')	//移除特定event的所有事件监听
+
+
+
+      7、计算事件监听数量
+
+             //第一种
+             instance.listeners('event').length
+
+             //第二种
+             EventEmitter.listenerCount(instance,'event')   //EventEmitter.listenerCount(emitter,eventName)在v6.10.3中已经废弃了。
+
+             //第三种
+             instance.listenerCount('event')    
+
+
+               //求出我们对某个监听加的事件的个数
+               //三种方法：
+                   console.log(wife.listeners('求安慰').length);
+                   console.log(wife.listenerCount('求安慰'));
+                   console.log(EventEmitter.listenerCount(wife,'求安慰'));
+
+                
+
+     额外知识:
+
+         EventEmitter是events模块的一个方法。
+
+         console.log打出events是这样的{ [Function: EventEmitter]  
+
+            EventEmitter: [Circular],  
+                 usingDomains: false,
+                     defaultMaxListeners: [Getter/Setter],
+                         init: [Function], 
+                             listenerCount: [Function] }
+
+
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+例子： events\eventTest.js
+
+
+
+var EventEmitter = require('events').EventEmitter;
+
+var wife = new EventEmitter();
+
+
+//wife.addListener() 和 wife.on() 功能一样
+//添加监听
+//EventEmitter支持多个事件监听，最大为10，也可以自定义最大数,
+//当超出10件事时，会发出警告，但事件还是会触发.
+
+
+//修改监听事件数的最大值, 这里修改成11， 则当监听的事件不大于11时，就不会抛出警告
+
+wife.setMaxListeners(11);
+
+
+
+//添加一个名为water 的函数
+function water(who){
+
+ 	console.log('给 ' + who + ' 倒水.');
+}
+
+wife.on('求安慰', water);
+
+// wife.on('求安慰',function(who){
+
+//     console.log('给 ' + who + ' 倒水.');
+// })
+
+wife.on('求安慰',function(who){
+
+	console.log('给 ' + who + ' 倒茶.');
+})
+
+wife.on('求安慰',function(who){
+
+	console.log('给 ' + who + '  洗衣服.');
+})
+
+wife.on('求安慰',function(who){
+
+	console.log('给 ' + who + ' ...4.');
+})
+
+wife.on('求安慰',function(who){
+
+	console.log('给 ' + who + ' ...5.');
+})
+
+wife.on('求安慰',function(who){
+
+	console.log('给 ' + who + ' ...6.');
+})
+
+wife.on('求安慰',function(who){
+
+	console.log('给 ' + who + ' ...7.');
+})
+
+wife.on('求安慰',function(who){
+
+	console.log('给 ' + who + ' ...8.');
+})
+
+wife.on('求安慰',function(who){
+
+	console.log('给 ' + who + ' ...9.');
+})
+
+wife.on('求安慰',function(who){
+
+	console.log('给 ' + who + ' ...10.');
+})
+
+
+//EventEmitter支持多个事件监听，最大为10，也可以自定义最大数,
+//当超出10件事时，会发出警告，但事件还是会触发.
+wife.on('求安慰',function(who){
+
+	console.log('给 ' + who + ' ...11.');
+})
+
+
+//添加不同监听
+//由于上面代码wife.setMaxListeners(11),修改了监听事件数的最大值，所以这里也可以添加11个监听触发的事件
+wife.on('求溺爱',function(who){
+
+	console.log('给' + who + '买衣服');
+})
+
+wife.on('求溺爱',function(who){
+
+	console.log('给' + who + '买包包');
+})
+
+
+
+//emit() 触发事件
+// wife.emit('求安慰','haah');
+// wife.emit('求溺爱','妹子');
+
+
+//移除事件，移除某个指定的事件,    移除监听  必须使用具名函数
+//1、首先是错误示范:  移除事件时，不能用匿名函数
+// wife.removeListener('求安慰',function(who){
+
+// 	console.log('给 ' + who + ' 倒水.');
+// })
+
+//2、正确示范:  移除事件时，给一个具体的函数名
+wife.removeListener('求安慰',water);
+
+
+//批量移除事件
+// wife.removeAllListeners();  //不指定监听,则会把全部都移除，包括'求安慰',和'求溺爱'
+wife.removeAllListeners('求安慰');
+
+
+
+//判断事件是否被监听过， true 为被监听过， false 为没有被监听过
+var hasConfortListen = wife.emit('求安慰','arvin');
+var hasLoveListen = wife.emit('求溺爱','妹子');
+var hasPlayListen = wife.emit('求玩坏','哈士奇');
+
+console.log(hasConfortListen);  // 输出结果为：true, 表示被监听过 
+console.log(hasLoveListen);     // 输出结果为：true, 表示被监听过 
+console.log(hasPlayListen);     // 输出结果为：false, 表示没被监听过 
+
+
+//求出我们对某个监听加的事件的个数
+//三种方法：
+console.log(wife.listeners('求安慰').length);
+console.log(wife.listenerCount('求安慰'));
+console.log(EventEmitter.listenerCount(wife,'求安慰'));
+
+console.log(wife.listenerCount('求溺爱'));
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+  5-12 Node.js：request方法
+
+
+      http-get/request
+
+       1.写http请求，传入配置（包含请求头等配置），侦听过程，侦听结束，侦听错误。用end表示完成。
+
+       2.使用http来做一个注入程序，通过代码来向第三方网站发送提交
+
+       3.get：查询并不提交，默认使用get方法，自动调用req.end()。request使用post方法。
+
+
+         http的get和request可以从后台发起一个http的请求，从而可以获取远程的资源，从而更新和同步远程的资源。
+
+         request接收两个参数，一个是options,一个是回调函数callback（回调函数是一个可选的参数，可加可不加），通过回调函数可以接收到远端服务器的使用术语，也就是response，
+
+         第一个参数可以是一个字符串（若是字符串，会通过URL的parse方法解析为一个对象），也可以是一个对象。
+
+               如果第一个参数是对象的话就可以进行一系列的配置，来定制我们需要发出的请求格式。上图就罗列了比较常用的参数，比如host等。
+
+                    这么多的参数其实不是每一个都要传递，大部分是默认的，我们传递的就是主机、端口、请求头和论证。
+
+         网站视频举例：用request（）进行技术灌水。
+
+         对于某个网站（如慕课网）来说，一个请求是否合法、是否符合要求，就要看请求的路径对不对，然后请求头Header的信息能不能对应得上。
+
+         http.get()方法与 http.request() 唯一的区别是它设置请求方法为 GET 且自动调用 req.end()。
+
+         contentLength 为提交的数据的长度，判断提交的数据的长度是否一致,更改Content-Length的值与post内容长度一致，否则请求可能被服务器拒绝掉。
+
+         http.request 方法的使用 :   传回来的数据是流的形式
+
+
+         get 是 对于 request 的一个封装 
+
+              get 能做的  request 都能做~
+                 
+              http.request(options,[callback])
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+例子： http/comment.js
+
+
+
+//简单的技术灌水
+
+//对于某个网站（如慕课网）来说，一个请求是否合法、是否符合要求，就要看请求的路径对不对，然后请求头Header的信息能不能对应得上。
+
+//-------------------------------------------
+//这些内容是 Request Headers
+
+// Accept:application/json, text/javascript, */*; q=0.01
+// Accept-Encoding:gzip, deflate
+// Accept-Language:zh-CN,zh;q=0.8
+// Connection:keep-alive
+// Content-Length:97
+// Content-Type:application/x-www-form-urlencoded; charset=UTF-8
+// Cookie:imooc_uuid=59ad9a9e-6d5a-4c9d-bfc0-7dd224c07c83; imooc_isnew_ct=1489897677; loginstate=1; apsid=NlNjNhZmVjMDkzMGIwMjMzZTM2ZTk5MjE2YjFkYTkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANDM4MzM0NAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADJjOWE1M2E3NGYzNzNmNGMxNzRjNjQ1M2EzNmM1ZDI5nJatWZyWrVk%3DYT; PHPSESSID=qn8bprfviu59gu9k6lhf282s94; mc_channel=bdqdrmjt; mc_marking=451c2732dc73b94f31bd8f82c64d0e2f; UM_distinctid=15e9012dcb24f3-07109c1f7add5-396b4c0b-100200-15e9012dcb327c; CNZZDATA1261110065=990478240-1505654794-https%253A%252F%252Fwww.baidu.com%252F%7C1505654794; IMCDNS=0; Hm_lvt_f0cfcccd7b1393990c78efdeebff3968=1505446935,1505530894,1505618256,1505655709; Hm_lpvt_f0cfcccd7b1393990c78efdeebff3968=1505669991; imooc_isnew=2; cvde=59bde92702180-147
+// Host:www.imooc.com
+// Origin:http://www.imooc.com
+// Referer:http://www.imooc.com/comment/348
+// User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.110 Safari/537.36
+// X-Requested-With:XMLHttpRequest
+//--------------------------------------------
+
+var http = require('http');
+var querystring = require('querystring');
+
+//postData是要提交的东西
+//通过 querystring.stringify 将要提交的数据序列化
+//数据的格式可以通过 “Form Data” 中获取
+//在“Form Data” 中，我们得知， 两个属性: content 和 cid
+// content : 是我们要提交的评论的内容
+// cid  :  某个教程的编号
+var postData = querystring.stringify({
+
+     'content': 'arvin test two, 赞一个' ,
+     'cid': 348
+});
+
+var options = {
+
+    hostname: 'www.imooc.com',
+    post: 80,    //默认是80端口
+    path: '/course/docomment',
+    method: 'POST',     //  提交数据一般用 post 方法， get 是获取数据
+    headers: {
+
+  'Accept':'application/json, text/javascript, */*; q=0.01',
+   'Accept-Encoding':'gzip, deflate',
+  'Accept-Language':'zh-CN,zh;q=0.8',
+  'Connection':'keep-alive',
+  'Content-Length':postData.length,  //这里需要注意：
+                                     //contentLength 为提交的数据的长度，判断提交的数据的长度是否一致,更改Content-Length的值与post内容长度一致，否则请求可能被服务器拒绝掉。
+  'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8',
+  'Cookie':'imooc_uuid=59ad9a9e-6d5a-4c9d-bfc0-7dd224c07c83; imooc_isnew_ct=1489897677; loginstate=1; apsid=NlNjNhZmVjMDkzMGIwMjMzZTM2ZTk5MjE2YjFkYTkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANDM4MzM0NAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADJjOWE1M2E3NGYzNzNmNGMxNzRjNjQ1M2EzNmM1ZDI5nJatWZyWrVk%3DYT; PHPSESSID=qn8bprfviu59gu9k6lhf282s94; mc_channel=bdqdrmjt; mc_marking=451c2732dc73b94f31bd8f82c64d0e2f; UM_distinctid=15e9012dcb24f3-07109c1f7add5-396b4c0b-100200-15e9012dcb327c; CNZZDATA1261110065=990478240-1505654794-https%253A%252F%252Fwww.baidu.com%252F%7C1505654794; IMCDNS=0; Hm_lvt_f0cfcccd7b1393990c78efdeebff3968=1505446935,1505530894,1505618256,1505655709; Hm_lpvt_f0cfcccd7b1393990c78efdeebff3968=1505669991; imooc_isnew=2; cvde=59bde92702180-147',
+  'Host':'www.imooc.com',
+  'Origin':'http://www.imooc.com',
+  'Referer':'http://www.imooc.com/comment/348',
+  'User-Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.110 Safari/537.36',
+  'X-Requested-With':'XMLHttpRequest' 	
+    }
+
+}
+
+
+var req = http.request(options,function(res){
+
+     console.log('Status: ' + res.statusCode); //请求成功后的状态码
+     console.log('headers' + JSON.stringify(res.headers))
+
+     //我们在接收数据的时候，node是以 流 的形式发送出来的,所以会触发一个 ondata 事件
+     res.on('data',function(chunk){
+
+     	 console.log(Buffer.isBuffer(chunk)); //判断是否是一个 Buffer 类型
+     	 console.log(typeof chunk);
+     }) 
+
+     res.on('end',function(){
+
+     	console.log('鉴定完毕');
+     })
+
+})
+
+//当我们请求挂了，或者出现异常，会触发error事件
+req.on('error',function(e){
+ 
+    console.log('error:' + e.message);
+})
+
+
+//最后需要调用 write 方法，将我们要提交的数据写入到请求体
+req.write(postData);
+
+//最后的最后，需要手动调用end(),表明我已经完成这个请求，即便我们没有数据要写入请求体,也需要调用end()
+req.end();
+
+//运行成功后，刷新页面，可以看到评论成功.
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+ 
+
+进击Node.js基础（二）
+
+
+ 第1章 从Promise 讲起 
+
+ 1-1 Node.js课程前言 
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+ 1-2 先从一个牛逼闪闪的知识点 Promise 讲起
+
+
+       注意：
+          
+         1、第一份代码，就是用传统的js来实现动画的时候，满足调教marginLeft==distance时，必须return停止迭代
+
+            在用promise实现运动时，满足调教marginLeft==distance时，也要添加return，如 ‘return resovle()’,不然不能运动已经运动过的小球
+
+
+         2、cb&&cb() 是指如果cb不为null，即有传入方法时，执行cb()方法，这里用了&&运算符的短路原则，避免当cb为空时执行了cb()方法而报错。
+
+
+         3、当在开头写<!DOCTYPE>时，ball.style.marginLeft = marginLeft后面可以不加px，动画照样运行。
+
+            但是当在开头写<!DOCTYPE html>时，ball.style.marginLeft = marginLeft后面就必须加上+'px',动画才能运行。
+
+  
+         4、promise更多应用：远程API同步，数据库查询，文件读写     
+
+使用promise:
+
+     1、安装 bluebird 到html文件同层文件夹下面:  npm install bluebird，
+
+            安装成功后，在html文件同层文件夹中  node_modules\bluebird 文件夹
+      
+     2、在html文件中
+
+           引入js文件： <script src="./node_modules/bluebird/js/browser/bluebird.js"></script>
+    
+           引入之后，就有一个全局变量：Promise（window.Promise） 注意：P 是大写的               
+    
+
+          //与以上传统的js运动相比，传统的运功若要调换一下3个小球的运动顺序，或着增加或删除小球的运动，是比较麻烦的.
+          //promise 运动是线性的，代码的阅读、维护、体验都得到提升.
+          //使用promise的链式调用:每个promise.then(function(){都需返回promise对象}).then(function(){都需返回promise对象}).....
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+例子1：promise/ball.html 用传统的js来实现 三个小球的运动
+
+
+       注意：
+          
+         第一份代码，就是用传统的js来实现动画的时候，满足调教marginLeft==distance时，必须return停止迭代
+
+         cb&&cb() 是指如果cb不为null，即有传入方法时，执行cb()方法，这里用了&&运算符的短路原则，避免当cb为空时执行了cb()方法而报错。
+
+
+<!-- 用传统的js来实现动画 -->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Promise animation</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		.ball{
+
+			width: 40px ;
+			height: 40px;
+			border-radius: 20px;
+		}
+
+		.ball1{
+
+			background: red;
+		}
+
+		.ball2{
+
+			background: yellow;
+		}
+
+		.ball3{
+
+			background: green;
+		}
+	</style>
+</head>
+<body>
+   <div class="ball ball1" style="margin-left: 0"></div>
+   <div class="ball ball2" style="margin-left: 0"></div>
+   <div class="ball ball3" style="margin-left: 0"></div>
+   <script>
+   	 var ball1 = document.querySelector('.ball1');
+   	 var ball2 = document.querySelector('.ball2');
+   	 var ball3 = document.querySelector('.ball3');
+     //alert(ball1.style.marginLeft);
+     //三个参数： ball：运动的对象， distance: 运动的终点，cb: 回调函数 
+     function animate(ball,distance,cb){
+
+         setTimeout(function(){
+ 
+                 var marginLeft = parseInt(ball.style.marginLeft,10); 
+                 
+                 if(marginLeft == distance){     //判断对象是否已运动到目标终点, 若是，则调用回调函数
+
+                    //满足调教marginLeft==distance时，必须return停止迭代
+                    // cb&&cb() 是指如果cb不为null，即有传入方法时，执行cb()方法，这里用了&&运算符的短路原则，避免当cb为空时执行了cb()方法而报错。
+                 	return cb&&cb();  
+                 	
+                 }
+                 else{
+
+                       //判断对象是在目标终点的左边还是右边，以便向正确的方向运动
+                       if(marginLeft < distance){  
+
+                       	  marginLeft++;
+
+                       }else{
+       
+                          marginLeft--;
+
+                       }
+                 }
+
+               ball.style.marginLeft = marginLeft+'px';
+
+               animate(ball,distance,cb); //函数里面调用函数自身，以便循环调用，达到运动.  实现递归
+         },
+         	13) //13毫秒为运动间隔  
+     }
+
+        animate(ball1,100,function(){
+        	animate(ball2,200,function(){
+        	     animate(ball3,300,function(){
+        			animate(ball3,150,function(){
+        				animate(ball2,150,function(){
+        					animate(ball1,150,function(){
+                                    console.log("运动完毕");
+                                    alert('ok');
+        					})
+        				})
+        			})
+        		})
+        	})
+        })
+   </script>
+</body>
+</html>
+
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1、安装 bluebird 到html文件同层文件夹下面:  npm install bluebird，
+
+        安装成功后，在html文件同层文件夹中  node_modules\bluebird 文件夹
+      
+2、在html文件中
+
+      引入js文件： <script src="./node_modules/bluebird/js/browser/bluebird.js"></script>
+    
+      引入之后，就有一个全局变量：Promise（window.Promise） 注意：P 是大写的               
+    
+
+     //与以上传统的js运动相比，传统的运功若要调换一下3个小球的运动顺序，或着增加或删除小球的运动，是比较麻烦的.
+     //promise 运动是线性的，代码的阅读、维护、体验都得到提升.
+     //使用promise的链式调用:每个promise.then(function(){都需返回promise对象}).then(function(){都需返回promise对象}).....
+
+
+例子2：promise/ball1.html 用promise来实现 三个小球的运动
+
+
+<!-- 用promise来实现动画的时候 -->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Promise animation</title>
+	<meta charset="utf-8">
+	<script src="./node_modules/bluebird/js/browser/bluebird.js"></script>
+	<style type="text/css">
+		.ball{
+
+			width: 40px ;
+			height: 40px;
+			border-radius: 20px;
+		}
+
+		.ball1{
+
+			background: red;
+		}
+
+		.ball2{
+
+			background: yellow;
+		}
+
+		.ball3{
+
+			background: green;
+		}
+	</style>
+</head>
+<body>
+   <div class="ball ball1" style="margin-left: 0"></div>
+   <div class="ball ball2" style="margin-left: 0"></div>
+   <div class="ball ball3" style="margin-left: 0"></div>
+   <script>
+   	 var ball1 = document.querySelector('.ball1');
+   	 var ball2 = document.querySelector('.ball2');
+   	 var ball3 = document.querySelector('.ball3');
+
+      //安装 bluebird 到html文件同层文件夹下面:  npm install bluebird，
+      //安装成功后，在html文件同层文件夹中  node_modules\bluebird 文件夹
+      // 引入js文件："./node_modules/bluebird/js/browser/bluebird.js"
+      // 引入之后，就有一个全局变量：Promise（window.Promise） 注意：P 是大写的   
+     
+      //通过window.Promiise 获取Promise, 注意 P 是大写的
+      var Promise = window.Promise;
+
+      function promiseAnimate(ball,distance){
+
+      	return new Promise(function(resolve,reject){
+      	
+      				 function _animate(){   //将animate函数 拷贝到Promise里面, 在animate前加下划线，表示私有
+      	
+      				         setTimeout(function(){
+      				 
+      				                 var marginLeft = parseInt(ball.style.marginLeft,10);
+      				                 
+      				                 if(marginLeft == distance){     //判断对象是否已运动到目标终点, 若是，则调用回调函数
+      	
+      				                    //满足调教marginLeft==distance时，必须return停止迭代
+      				                    // cb&&cb() 是指如果cb不为null，即有传入方法时，执行cb()方法，这里用了&&运算符的短路原则，避免当cb为空时执行了cb()方法而报错。
+      				                 	//return cb&&cb(); 
+      	
+      				                 	return resolve(); //这里改成 ‘resolve’ , 这里也要加return，不然不能运动已经运动过的小球
+      				                 	
+      				                 }
+      				                 else{
+      	
+      				                       //判断对象是在目标终点的左边还是右边，以便向正确的方向运动
+      				                       if(marginLeft < distance){  
+      	
+      				                       	  marginLeft++;
+      	
+      				                       }else{
+      				       
+      				                          marginLeft--;
+      	
+      				                       }
+      				                 }
+      	
+      				               ball.style.marginLeft = marginLeft+'px';
+      				              // console.log('ball.style.marginLeft' + ball.style.marginLeft);
+      				              // animate(ball,distance,cb); //函数里面调用函数自身，以便循环调用，达到运动.  递归
+      	
+      				              _animate();   //这里改成 加下划线的_animate   //函数里面调用函数自身，以便循环调用，达到运动.  递归
+      				         },
+      				         	13) //13毫秒为运动间隔  
+      				     }  
+      	
+      				       _animate();  //这里是第一次调用_animate  		
+      	      	})
+      }
+
+
+//传统的js运动
+// animate(ball1,100,function(){
+// 	animate(ball2,200,function(){
+// 	     animate(ball3,300,function(){
+// 			animate(ball3,150,function(){
+// 				animate(ball2,150,function(){
+// 					animate(ball1,150,function(){
+//                             console.log("运动完毕");
+//                             alert('ok');
+// 					})
+// 				})
+// 			})
+// 		})
+// 	})
+// })
+
+
+//与以上传统的js运动相比，传统的运功若要调换一下3个小球的运动顺序，或着增加或删除小球的运动，是比较麻烦的.
+//promise 运动是线性的，代码的阅读、维护、体验都得到提升.
+//使用promise的链式调用:每个promise.then(function(){都需返回promise对象}).then(function(){都需返回promise对象}).....
+
+      promiseAnimate(ball1,100)
+        .then(function(){
+        	return promiseAnimate(ball2,200);
+        })
+        .then(function(){
+        	return promiseAnimate(ball3,300);
+        })
+        .then(function(){
+        	return promiseAnimate(ball3,150);
+        })
+        .then(function(){
+        	return promiseAnimate(ball2,150);
+        })
+        .then(function(){
+        	return promiseAnimate(ball1,150);
+        })
+
+
+
+   </script>
+</body>
+</html>
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+ 1-3 牛逼闪闪的 Promise 只需三点 
+
+
+       promise是javascript针对异步请求的解决方案
+
+        1、Promise
+
+             （1）ES6的Promise语言标准
+
+             （2）Promise/A+规范
+
+
+        2、Promise使用场景
+
+             （1）是一种异步的实践方案
+
+             （2）特别是Callback Hell, 可以用同步的方式写异步代码
+
+
+        3、promise对象三种状态:
+
+                     未完成(pending)
+
+                     已完成(fulfilled)
+
+                     失败(rejected)
+
+
+                   只有两种情况：(1->2, 1->3 正确)
+
+                   (2->1, 3->1, 2->3 错误)
+
+                 总结: 只能由未完成变为已完成或失败, 且不可逆, 改变只能一次, 不存在即已完成同时失败
+
+
+       4、
+         then方法必须返回一个Promise对象            
+   
+         多个回调函数，链式写法，实现上个then执行完以后才能执行下一个then
+
+         Promise.then(onFulfilled,onRejected)
+
+         promiseObj.then(onFulfilled,onRejected);
+
+                 onFulfilled = function (value) {
+	
+                        return promiseObj2;
+                 };
+
+                 onRejected = function (err) {};
+
+
+       5、promise库
+ 
+            - bluebird
+
+            - Q
+
+            - then.js
+
+            - es6-promise
+ 
+            ...
+
+            推荐使用bluebird， 可对执行进度查询， 执行性能也进行优化。
+
+
+       6、ES6是什么，与JS的关系？
+
+          ECMAScript 是 JavaScript 语言的国际标准，JavaScript 是 ECMAScript 的实现。
+
+          ES6 的目标，是使得 JavaScript 语言可以用来编写大型的复杂的应用程序，成为企业级开发语言。
+
+          ECMAScript和JavaScript的关系是，前者是后者的规格，后者是前者的一种实现
+
+
+       7、实现异步的方式：
+
+              1-callback 回调方式
+
+              2-事件机制（监听+触发）【订阅者观察者】模式
+
+              3-promise：表示一个异步操作的最终结果，以同步的方式来写代码，执行的操作是异步的，但是保证程序的执行顺序是同步的。
+
+
+       8、// 保证then的执行顺序
+
+		// 规范的链式写法， 清楚的流程
+
+		// 能异步编程的地方都可以使用promise
+
+		// 但是不能为了promise而promise
+
+
+
+       9、Promise A 与 A+ 不同点
+
+            (1)、A+ 规范通过术语 thenable 来区分 promise对象
+
+           （2）、A+ 定义 onFulfilled/onRejected 必须是作为函数来调用，而且调用过程必须是异步的
+
+           （3）、A+严格定义了then 方法链式调用时， onFulilled/onRejected 的调用顺序
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+ 1-4 重写爬虫，更优雅的异步编程 
+
+
+
+ 第2章 横扫 Nodejs API 
+
+ 2-1 横扫 Nodejs API-Buffer的实例化 
+
+ 2-2 横扫 Nodejs API-Buffer使用和源码解读 
+
+ 2-3 横扫 Nodejs API-Stream流动的数据 
+
+ 2-4 横扫 Nodejs API-Stream你是我的小水管 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

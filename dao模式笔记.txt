@@ -1,0 +1,81 @@
+
+实体类
+
+操作数据库的类（连接数据库）
+
+主函数的类
+
+
+主页面---》传数据给后台插入数据的页面
+
+
+后台插入数据的页面---》调用DAOFactory工厂类
+
+
+DAOFactory工厂类----》方法返回一个XXXDAOProxy代理类
+
+
+XXXDAOProxy代理类 ----》 实现接口XXXIEmpDAO类，并且调用XXXDAOImpl接口实现类的所有方法，向其传入一个得到数据库连接的参数Connection conn
+                            IEmpDAO dao = new EmpDAOImpl(this.dbc.getConnection());
+
+
+XXXDAOImpl接口实现类----》实现接口XXXIEmpDAO类，从XXXDAOProxy代理类获取一个得到数据库连接的参数Connection conn，具体实现操作数据库的方法
+      public EmpDAOImpl(Connection conn){
+          this.conn = conn;
+      }
+
+
+
+
+操作接口IEmpDAO---》编写操作数据库的方法，但不具体实现
+
+
+factory工厂模式: 
+
+   粗糙地理解就是： 在工厂中 new 一个对象，并且进行加工，最后再返回这个对象。 
+
+                    这样子的话就不用我们每次都需要去new一个新的对象，只需要调用工厂的方法就可以去得到一个对象.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

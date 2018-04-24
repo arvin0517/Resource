@@ -1,0 +1,7 @@
+
+
+bootstrap 连接jar包的代码：
+
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<script src="../js/jquery.js"></script>
+<script src="../js/bootstrap.min.js"></script>

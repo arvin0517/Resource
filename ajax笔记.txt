@@ -1,0 +1,1242 @@
+
+AJAX的简介：
+
+  AJAX = Asynchronous JavaScript and XML（异步的 JavaScript 和 XML）。
+
+  AJAX 不是新的编程语言，而是一种使用现有标准的新方法。
+
+  AJAX 是与服务器交换数据并更新部分网页的艺术，在不重新加载整个页面的情况下。传统的网页（不使用 AJAX）如果需要更新内容，必须重载整个网页页面。
+
+  AJAX即“Asynchronous Javascript And XML”（异步JavaScript和XML），是指一种创建交互式网页应用的网页开发技术。
+
+  AJAX = 异步 JavaScript和XML（标准通用标记语言的子集）。
+
+  AJAX 是一种用于创建快速动态网页的技术。
+
+  通过在后台与服务器进行少量数据交换，AJAX 可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。
+
+
+
+XMLHttpRequest：
+
+    Ajax 的核心是 JavaScript 对象 XMLHttpRequest。它是一种支持异步请求的技术。简而言之，XMLHttpRequest使您可以使用 JavaScript 向服务器提出请求并处理响应，而不阻塞用户。
+
+
+AJAX的优缺点：
+
+  优点：
+        不需要插件支持
+
+        用户体验极佳
+
+        提升Web程序性能
+
+        减轻服务器和宽带的负担
+
+  缺点：
+        前进后退按钮被破坏
+
+        搜索引擎的支持不够
+
+        开发调试工具缺乏
+
+
+-------------------------------------------
+
+一、AJAX的简介
+
+AJAX 是一种在无需重新加载整个网页的情况下，能够更新部分网页的技术。
+
+
+1、什么是 AJAX ？
+
+    AJAX = 异步 JavaScript 和 XML。
+
+    AJAX 是一种用于创建快速动态网页的技术。
+
+    通过在后台与服务器进行少量数据交换，AJAX 可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。
+
+    传统的网页（不使用 AJAX）如果需要更新内容，必需重载整个网页面。
+
+    有很多使用 AJAX 的应用程序案例：新浪微博、Google 地图、开心网等等。
+
+
+
+2、AJAX是基于现有的Internet标准，并且联合使用它们：
+
+    XMLHttpRequest 对象 (异步的与服务器交换数据)
+
+    JavaScript/DOM (信息显示/交互)
+
+    CSS (给数据定义样式)
+
+    XML (作为转换数据的格式)
+
+
+
+
+
+-----------------------------------------
+
+
+二、XHR 创建对象
+
+
+ 1、XMLHttpRequest对象的介绍：
+
+     XMLHttpRequest 是 AJAX 的基础。
+
+     XMLHttpRequest 对象：
+
+           所有现代浏览器均支持 XMLHttpRequest 对象（IE5 和 IE6 使用 ActiveXObject）。
+
+           XMLHttpRequest 用于在后台与服务器交换数据。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。
+
+
+
+ 2、创建 XMLHttpRequest 对象 
+
+    AJAX - 创建 XMLHttpRequest 对象
+
+
+     ①所有现代浏览器（IE7+、Firefox、Chrome、Safari 以及 Opera）均内建 XMLHttpRequest 对象。
+
+          创建 XMLHttpRequest 对象的语法：
+
+               variable=new XMLHttpRequest();
+
+
+     ②老版本的 Internet Explorer （IE5 和 IE6）使用 ActiveX 对象：
+
+          variable=new ActiveXObject("Microsoft.XMLHTTP");
+
+
+     ③为了应对所有的现代浏览器，包括 IE5 和 IE6，请检查浏览器是否支持 XMLHttpRequest 对象。如果支持，则创建 XMLHttpRequest 对象。如果不支持，则创建 ActiveXObject ：
+
+
+        var xmlhttp;
+
+        if (window.XMLHttpRequest)
+          {
+
+          // code for IE7+, Firefox, Chrome, Opera, Safari
+          xmlhttp=new XMLHttpRequest();
+
+          }
+        else
+          {
+
+          // code for IE6, IE5
+          xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+
+          }
+
+
+-----------------------------------------------
+
+
+
+三、XHR 请求
+
+    AJAX - 向服务器发送请求
+
+    XMLHttpRequest 对象用于和服务器交换数据。
+
+
+
+1、向服务器发送请求
+
+       如需将请求发送到服务器，我们使用 XMLHttpRequest 对象的 open() 和 send() 方法：
+
+            xmlhttp.open("GET","ajax_info.txt",true);
+
+            xmlhttp.send();
+
+
+       ①open(method,url,async)
+
+           规定请求的类型、URL 以及是否异步处理请求。
+
+                method：请求的类型；GET 或 POST
+
+                url：文件在服务器上的位置
+
+                async：true（异步）或 false（同步）
+
+
+       ②send(string)
+
+           将请求发送到服务器。
+
+               string：仅用于 POST 请求
+
+
+
+
+
+2、GET 还是 POST？
+
+      与 POST 相比，GET 更简单也更快，并且在大部分情况下都能用。
+
+      然而，在以下情况中，请使用 POST 请求：
+
+           无法使用缓存文件（更新服务器上的文件或数据库）
+
+           向服务器发送大量数据（POST 没有数据量限制）
+
+           发送包含未知字符的用户输入时，POST 比 GET 更稳定也更可靠
+
+
+
+    （1）HTTP请求方法
+
+               GET——用于获取数据（如：浏览帖子）
+
+               POST——用于上传数据（如：用户注册）
+
+               GET、POST的区别
+
+                    get是在url里传数据：安全性、容量
+
+                    -缓存
+
+
+  
+
+         get方式：放入url
+                            格式：名字=值&名字=值....
+
+         
+         get： 通过网址
+ 
+                  容量小
+                  
+                  安全性差
+
+                  有缓存
+ 
+                  用于获取数据
+
+
+
+         post： 不通过网址
+
+                  容量大（2G）
+
+                  安全性好一点
+
+                  没有缓存
+                
+                  用于上传数据
+
+
+
+
+
+3、GET 请求
+
+
+    -----例1-一个简单的 GET 请求：----存在缺点：可能得到的是缓存的结果-------------------
+   
+
+<html><!DOCTYPE html>
+<html>
+<head>
+<script>
+function loadXMLDoc()
+{
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","/statics/demosource/demo_get.php",true);
+xmlhttp.send();
+}
+</script>
+</head>
+<body>
+
+<h2>AJAX</h2>
+<button type="button" onclick="loadXMLDoc()">Request data</button>
+<div id="myDiv"></div>
+
+</body>
+</html>
+
+
+   
+
+      ----例2---改进例1---------为了避免可能得到的是缓存的结果，请向 URL 添加一个唯一的 ID：------------------
+       
+
+         xmlhttp.open("GET","/statics/demosource/demo_get.php?t=" + Math.random(),true);  //修改这行代码
+         xmlhttp.send();
+
+
+
+      ----例3----如果您希望通过 GET 方法发送信息，请向 URL 添加信息：------------------------------
+
+     
+         xmlhttp.open("GET","/statics/demosource/demo_get2.php?fname=Henry&lname=Ford",true);
+         xmlhttp.send();
+
+
+
+
+
+4、POST 请求
+
+
+  ---例1--一个简单 POST 请求：----------------------------------------
+
+<html><!DOCTYPE html>
+<html>
+<head>
+<script>
+function loadXMLDoc()
+{
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("POST","/statics/demosource/demo_post.php",true);
+xmlhttp.send();
+}
+</script>
+</head>
+<body>
+
+<h2>AJAX</h2>
+<button type="button" onclick="loadXMLDoc()">Request data</button>
+<div id="myDiv"></div>
+ 
+</body>
+</html>
+
+
+
+  ---例2------------------------------------------
+
+   如果需要像 HTML 表单那样 POST 数据，请使用 setRequestHeader() 来添加 HTTP 头。然后在 send() 方法中规定您希望发送的数据：
+
+           xmlhttp.open("POST","/statics/demosource/demo_post2.php",true);
+
+           xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+
+           xmlhttp.send("fname=Henry&lname=Ford");
+
+
+
+
+  ==setRequestHeader(header,value)
+
+      向请求添加 HTTP 头。
+
+        header: 规定头的名称
+
+        value: 规定头的值
+
+
+
+
+
+
+5、url - 服务器上的文件
+
+      
+     open(method,url,async)
+  
+     open()方法的 url 参数是服务器上文件的地址：
+
+           xmlhttp.open("GET","ajax_test.html",true);
+
+           该文件可以是任何类型的文件，比如 .txt 和 .xml，或者服务器脚本文件，比如 .asp 和 .php （在传回响应之前，能够在服务器上执行任务）。
+
+
+
+
+
+6、异步 - True 或 False？
+
+
+     AJAX 指的是异步 JavaScript 和 XML（Asynchronous JavaScript and XML）。
+
+     XMLHttpRequest 对象如果要用于 AJAX 的话，其 open() 方法的 async 参数必须设置为 true：
+
+
+   ①Async=true（异步）
+
+        当使用 async=true 时，请规定在响应处于 onreadystatechange 事件中的就绪状态时执行的函数：
+
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","ajax_info.txt",true);
+xmlhttp.send();
+
+
+
+   ②Async = false（同步）
+
+     如需使用 async=false，请将 open() 方法中的第三个参数改为 false：
+
+           xmlhttp.open(&quot;GET&quot;,&quot;test1.txt&quot;,false);
+
+
+
+  注意：
+
+       我们不推荐使用 async=false，但是对于一些小型的请求，也是可以的。
+
+       请记住，JavaScript 会等到服务器响应就绪才继续执行。如果服务器繁忙或缓慢，应用程序会挂起或停止。
+
+       注意：当您使用 async=false 时，请不要编写 onreadystatechange 函数 - 把代码放到 send() 语句后面即可：
+
+
+<script>
+function loadXMLDoc()
+{
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.open("GET","/statics/demosource/ajax_info.txt",false);
+xmlhttp.send();
+document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+}
+</script>
+
+
+
+-------------------------------------------------------------------------------------------
+
+
+
+四、XHR 响应
+
+
+
+    AJAX - 服务器 响应
+
+    服务器响应：
+
+         如需获得来自服务器的响应，请使用 XMLHttpRequest 对象的 responseText 或 responseXML 属性。
+
+
+            属性	             描述
+
+            responseText	     获得字符串形式的响应数据。
+
+            responseXML	             获得 XML 形式的响应数据。
+
+
+
+  1、responseText 属性
+
+        如果来自服务器的响应并非 XML，请使用 responseText 属性。
+
+        responseText 属性返回字符串形式的响应，因此您可以这样使用：
+
+          实例：
+                document.getElementById("myDiv").innerHTML=xmlhttp.responseText
+
+  --------------------
+<script>
+function loadXMLDoc()
+{
+document.write("我是ajax");
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","/statics/demosource/ajax_info.txt",true);     //在这里，服务器的相应为 .txt 类型
+xmlhttp.send();
+}
+</script>
+
+
+
+
+
+  2、responseXML 属性
+
+        如果来自服务器的响应是 XML，而且需要作为 XML 对象进行解析，请使用 responseXML 属性：
+
+        实例：
+
+           请求 cd_catalog.xml 文件，并解析响应：
+
+               xmlDoc=xmlhttp.responseXML;
+
+               txt="";
+
+               x=xmlDoc.getElementsByTagName("ARTIST");
+
+               for (i=0;i<x.length;i++)
+                 {
+
+                 txt=txt + x[i].childNodes[0].nodeValue + "<br>";
+
+                 }
+
+               document.getElementById("myDiv").innerHTML=txt;
+
+    -------------------------
+ 
+  cd_catalog.xml文件内容为： 
+
+<CATALOG>
+
+<CD>
+<TITLE>Empire Burlesque</TITLE>
+<ARTIST>Bob Dylan</ARTIST>
+<COUNTRY>USA</COUNTRY>
+<COMPANY>Columbia</COMPANY>
+<PRICE>10.90</PRICE>
+<YEAR>1985</YEAR>
+</CD>
+
+<CD>...</CD>
+<CD>...</CD>
+<CD>...</CD>
+<CD>...</CD>
+<CD>...</CD>
+<CD>...</CD>
+<CD>...</CD>
+<CD>...</CD>
+<CD>...</CD>
+
+<CD>
+<TITLE>Unchain my heart</TITLE>
+<ARTIST>Joe Cocker</ARTIST>
+<COUNTRY>USA</COUNTRY>
+<COMPANY>EMI</COMPANY>
+<PRICE>8.20</PRICE>
+<YEAR>1987</YEAR>
+</CD>
+
+</CATALOG>
+
+
+    --------------------------
+
+
+          
+<html><!DOCTYPE html>
+<html>
+<head>
+<script>
+function loadXMLDoc()
+{
+var xmlhttp;
+var txt,x,i;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    xmlDoc=xmlhttp.responseXML;
+    txt="";
+    x=xmlDoc.getElementsByTagName("ARTIST");   //“ARTIST”是一个标签名， 如：<ARTIST>Bonnie Tyler</ARTIST>
+    for (i=0;i<x.length;i++)
+      {
+      txt=txt + x[i].childNodes[0].nodeValue + "<br>";   //获取<ARTIST></ARTIST>之间的文本   通过节点和节点值 可获取
+      }
+    document.getElementById("myDiv").innerHTML=txt;
+    }
+  }
+xmlhttp.open("GET","/statics/demosource/cd_catalog.xml",true);   //服务器响应为 .xml 类型
+xmlhttp.send();
+}
+</script>
+</head>
+
+<body>
+
+<h2>My CD Collection:</h2>
+<div id="myDiv"></div>
+<button type="button" onclick="loadXMLDoc()">Get my CD collection</button>
+ 
+</body>
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+五、XHR readyState
+
+         AJAX - onreadystatechange 事件
+
+  （1）、onreadystatechange 事件
+
+           当请求被发送到服务器时，我们需要执行一些基于响应的任务。
+
+           每当 readyState 改变时，就会触发 onreadystatechange 事件。
+ 
+           readyState 属性存有 XMLHttpRequest 的状态信息。
+   
+
+
+           属性	                                描述
+           
+           onreadystatechange            	存储函数（或函数名），每当 readyState 属性改变时，就会调用该函数。
+
+           readyState	                        存有 XMLHttpRequest 的状态。从 0 到 4 发生变化。
+
+                                                     0: 请求未初始化
+
+                                                     1: 服务器连接已建立
+
+                                                     2: 请求已接收
+
+                                                     3: 请求处理中
+
+                                                     4: 请求已完成，且响应已就绪
+
+            status	                        200: "OK"
+
+                                                404: 未找到页面
+
+
+
+
+   在 onreadystatechange 事件中，我们规定当服务器响应已做好被处理的准备时所执行的任务。
+
+   当 readyState 等于 4 且状态为 200 时，表示响应已就绪：
+
+           实例：
+
+                  xmlhttp.onreadystatechange=function()
+                    {
+                    if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                      {
+                      document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+                      }
+                    }
+
+
+   注意： onreadystatechange 事件被触发 5 次（0 - 4），对应着 readyState 的每个变化。
+
+
+
+
+   （2）、使用回调函数
+
+
+            回调函数是一种以参数形式传递给另一个函数的函数。
+
+            如果您的网站上存在多个 AJAX 任务，那么您应该为创建 XMLHttpRequest 对象编写一个标准的函数，并为每个 AJAX 任务调用该函数。
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+var xmlhttp;
+function loadXMLDoc(url,cfunc)
+{
+if (window.XMLHttpRequest)
+  {// IE7+, Firefox, Chrome, Opera, Safari 代码
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// IE6, IE5 代码
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=cfunc;
+xmlhttp.open("GET",url,true);
+xmlhttp.send();
+}
+function myFunction()
+{
+loadXMLDoc("/statics/demosource/ajax_info.txt",function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+    }
+  });
+}
+</script>
+</head>
+<body>
+
+<div id="myDiv"><h2>使用 AJAX 修改文本内容</h2></div>
+<button type="button" onclick="myFunction()">修改内容</button>
+
+</body>
+
+
+
+
+        ----------javaScript笔记中对 ajax  的理解-------------------------------------------------------------------
+
+
+
+       onreadystatechange事件
+
+           readyState属性：请求状态
+
+               0    （未初始化）还没有调用open()方法
+
+               1    （载入）已调用send()方法，正在发送请求
+
+               2    （载入完成）send()方法完成，已收到全部响应内容
+
+               3    （解析）正在解析响应内容
+
+               4    （完成）响应内容解析完成，可以在客户端调用了
+
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oBtn=document.getElementById('btn1');
+	
+	oBtn.onclick=function ()
+	{
+		//1.创建Ajax对象           //处理兼容问题
+		if(window.XMLHttpRequest)  //这里若单写成XMLHttpRequest会报错，若window.XMLHttpRequest不会报错，而是得到所要的undifind
+		{
+			 //非IE6
+		     //var oAjax=new XMLHttpRequest();
+			var oAjax=new XMLHttpRequest();
+		}
+		else
+		{
+			 //IE6
+			var oAjax=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		
+		//2.连接服务器
+		//open(方法, 文件名, 异步传输)
+		oAjax.open('GET', 'a.txt', true);
+		                  //这里可以将 'a.txt'  写成 'a.txt?t='+new Date().getTime()  处理缓存问题
+		//3.发送请求
+		oAjax.send();
+		
+		//4.接收返回
+		oAjax.onreadystatechange=function ()
+		{
+			//oAjax.readyState	//浏览器和服务器，进行到哪一步了
+			if(oAjax.readyState==4)	// '4' 代表 读取完成，不代表成功
+			{
+				if(oAjax.status==200)	//'200'代表 成功
+				{
+					alert('成功：'+oAjax.responseText); //oAjax.responseText ：文件的内容
+				}
+				else
+				{
+					alert('失败:'+oAjax.status);   //oAjax.status==404  代表失败
+				}
+			}
+		};
+	};
+};
+</script>
+</head>
+
+<body>
+<input id="btn1" type="button" value="读取" />
+</body>
+</html>
+
+
+
+
+
+---例2----new_ajax.js-------将例1中创建ajax的例子修改并封装成函数，放在 new_ajax.js 中---------------------------------------------
+
+
+
+
+
+function ajax(url, fnSucc, fnFaild)
+{
+	//1.创建Ajax对象
+	if(window.XMLHttpRequest)
+	{
+		var oAjax=new XMLHttpRequest();
+	}
+	else
+	{
+		var oAjax=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	//2.连接服务器
+	//open(方法, 文件名, 异步传输)
+	oAjax.open('GET', url, true);       //url参数
+	
+	//3.发送请求
+	oAjax.send();
+	
+	//4.接收返回
+	oAjax.onreadystatechange=function ()
+	{
+		//oAjax.readyState	//浏览器和服务器，进行到哪一步了
+		if(oAjax.readyState==4)	//读取完成
+		{
+			if(oAjax.status==200)	//成功
+			{
+				fnSucc(oAjax.responseText);   //调用fnSucc（str）函数
+			}
+			else
+			{
+				if(fnFaild)                   //当失败 且 存在fnFaild（）函数时，调用fnFaild
+				{
+					fnFaild(oAjax.status);
+				}
+				//alert('失败:'+oAjax.status);
+			}
+		}
+	};
+}
+
+
+
+
+----例3---------my_ajax3.html----------------------------------------------------
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script src="new_ajax.js"></script>
+<script>
+window.onload=function ()
+{
+	var oBtn=document.getElementById('btn1');
+	
+	oBtn.onclick=function ()
+	{
+		ajax('a.txt', function (str){
+			alert(str);
+		});
+	};
+};
+</script>
+</head>
+
+<body>
+<input id="btn1" type="button" value="读取" />
+</body>
+</html>
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+六、AJAX ASP/PHP
+
+    AJAX ASP/PHP 实例
+
+    AJAX 用于创造动态性更强的应用程序。
+
+  
+         AJAX ASP/PHP 实例：
+
+   （1）下面的例子将为您演示当用户在输入框中键入字符时，网页如何与 web 服务器进行通信： 请在下面的输入框中键入字母（A - Z）：
+
+
+
+<html><!DOCTYPE html>
+<html>
+<head>
+<script>
+function showHint(str)
+{
+var xmlhttp;
+if (str.length==0)    //当文本框中的字符串删除到为0时，把提示语设为空，且返回，不用执行接下去的代码
+  { 
+  document.getElementById("txtHint").innerHTML="";
+  return;
+  }
+
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","/statics/demosource/gethint.php?q="+str,true);
+xmlhttp.send();
+}
+</script>
+</head>
+<body>
+
+<h3>Start typing a name in the input field below:</h3>
+<form action=""> 
+First name: <input type="text" id="txt1" onkeyup="showHint(this.value)" />
+</form>
+<p>Suggestions: <span id="txtHint"></span></p> 
+
+</body>
+
+
+           源代码解析：
+
+                    如果输入框为空 (str.length==0)，则该函数清空 txtHint 占位符的内容，并退出函数。
+
+                    如果输入框不为空，showHint() 函数执行以下任务：
+
+                                                 创建 XMLHttpRequest 对象
+
+                                                 当服务器响应就绪时执行函数
+
+                                                 把请求发送到服务器上的文件
+
+                                                 请注意我们向 URL 添加了一个参数 q （带有输入框的内容）
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+七、AJAX 数据库
+
+    AJAX Database 实例
+
+    AJAX 可用来与数据库进行动态通信。
+
+
+    AJAX 数据库实例：
+
+          下面的例子将演示网页如何通过 AJAX 从数据库读取信息：请在下面的下拉列表中选择一个客户：
+
+
+
+<html><!DOCTYPE html>
+<html>
+<head>
+<script>
+function showCustomer(str)
+{
+var xmlhttp;    
+if (str=="")
+  {
+  document.getElementById("txtHint").innerHTML="";
+  return;
+  }
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","/statics/demosource/getcustomer.php?q="+str,true);
+xmlhttp.send();
+}
+</script>
+</head>
+<body>
+
+<form action=""> 
+<select name="customers" onchange="showCustomer(this.value)" style="font-family:Verdana, Arial, Helvetica, sans-serif;">
+<option value="APPLE">Apple Computer, Inc.</option>
+<option value="BAIDU ">BAIDU, Inc</option>
+<option value="Canon">Canon USA, Inc.</option>
+<option value="Google">Google, Inc.</option>
+<option value="Nokia">Nokia Corporation</option>
+<option value="SONY">Sony Corporation of America</option>
+</select>
+</form>
+<br>
+<div id="txtHint">Customer info will be listed here...</div>
+
+</body>
+</html>
+
+
+showCustomer() 函数执行以下任务：
+
+                         检查是否已选择某个客户
+
+                         创建 XMLHttpRequest 对象
+
+                         当服务器响应就绪时执行所创建的函数
+
+                         把请求发送到服务器上的文件
+
+                         请注意我们向 URL 添加了一个参数 q （带有输入域中的内容）
+
+
+   注意：
+
+ 下拉列表：  onchange（）事件
+
+<select name="customers" onchange="showCustomer(this.value)" style="font-family:Verdana, Arial, Helvetica, sans-serif;">
+<option value="APPLE">Apple Computer, Inc.</option>
+<option value="BAIDU ">BAIDU, Inc</option>
+<option value="Canon">Canon USA, Inc.</option>
+<option value="Google">Google, Inc.</option>
+<option value="Nokia">Nokia Corporation</option>
+<option value="SONY">Sony Corporation of America</option>
+</select>
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+八、AJAX XML
+
+      AJAX XML 实例
+
+      AJAX 可用来与 XML 文件进行交互式通信。
+
+      AJAX XML 实例
+
+          下面的例子将演示网页如何使用 AJAX 来读取来自 XML 文件的信息：
+        
+     firstChild.nodeValue取节点中的值
+
+<html><!DOCTYPE html>
+<html>
+<head>
+<script>
+function loadXMLDoc(url)
+{
+var xmlhttp;
+var txt,x,xx,i;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    txt="<table border='1'><tr><th>Title</th><th>Artist</th></tr>";
+    x=xmlhttp.responseXML.documentElement.getElementsByTagName("CD");
+    for (i=0;i<x.length;i++)
+      {
+      txt=txt + "<tr>";
+      xx=x[i].getElementsByTagName("TITLE");
+        {
+        try
+          {
+          txt=txt + "<td>" + xx[0].firstChild.nodeValue + "</td>";
+          }
+        catch (er)
+          {
+          txt=txt + "<td>?</td>";
+          }
+        }
+      xx=x[i].getElementsByTagName("ARTIST");
+        {
+        try
+          {
+          txt=txt + "<td>" + xx[0].firstChild.nodeValue + "</td>";
+          }
+        catch (er)
+          {
+          txt=txt + "<td>?</td>";
+          }
+        }
+      txt=txt + "</tr>";
+      }
+    txt=txt + "</table>";
+    document.getElementById('txtCDInfo').innerHTML=txt;
+    }
+  }
+xmlhttp.open("GET",url,true);
+xmlhttp.send();
+}
+</script>
+</head>
+<body>
+
+<div id="txtCDInfo">
+<button onclick="loadXMLDoc('/statics/demosource/cd_catalog.xml')">Get CD info</button>
+</div>
+
+</body>
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+九、Ajax实例
+
+
+  1、用callback函数（回调函数）的AJAX实例
+
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+var xmlhttp;
+function loadXMLDoc(url,cfunc)
+{
+if (window.XMLHttpRequest)
+  {// IE7+, Firefox, Chrome, Opera, Safari 代码
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// IE6, IE5 代码
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=cfunc;
+xmlhttp.open("GET",url,true);
+xmlhttp.send();
+}
+function myFunction()
+{
+loadXMLDoc("/statics/demosource/ajax_info.txt",function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+    }
+  });
+}
+</script>
+</head>
+<body>
+
+<div id="myDiv"><h2>使用 AJAX 修改文本内容</h2></div>
+<button type="button" onclick="myFunction()">修改内容</button>
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,10 @@
+ 1、org.hibernate.hql.ast.QuerySyntaxException:is not mapped
+       java.lang.IllegalArgumentException: org.hibernate.hql.ast.QuerySyntaxException: t_aty_disease is not mapped [SELECT new com.upup.app.doctor.symptom.entity.Symptom(d.id) FROM t_aty_disease d,t_aty_symptom s where d.id = s.id]
+
+      上面的异常的抛出主要有几个方面：
+
+        (1)、最容易想到的，就是你的from是实体类而不是表名，这个应该大家都知道，注意大小写
+
+        (2)、你的hibernate配置文件中没有加入相应的映射文件<mapping resource=" " />
+
+        (3)、如果上面两方面都对了，，还是不行，那就是你hql语句有错了，好好检查一下，仔细点，不行就重新写一遍，因为我就是因为一个中文空格被折腾了两天啊，就是找不出哪儿出错了，怎么看怎么对，可是就是报错，哈哈...很崩溃的。

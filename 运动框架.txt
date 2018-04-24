@@ -1,0 +1,326 @@
+    
+
+
+  运动框架总结
+
+
+          运动框架演变过程
+
+                startMove(iTarget)			运动框架
+
+                startMove(obj, iTarget)			多物体
+
+                startMove(obj, attr, iTarget)		任意值
+
+                startMove(obj, attr, iTarget, fn)	链式运动
+
+                startMove(obj, json)			多值运动
+
+                startMove(obj, json, fn)		完美运动框架
+
+
+
+
+
+
+（1） startMove(iTarget)	运动框架（只能运动单一物体的单一属性）
+
+
+function startMove(iTarget)
+{
+	var oDiv=document.getElementById('div1');
+	
+	clearInterval(timer);
+	timer=setInterval(function (){
+		var speed=0;
+		
+		if(oDiv.offsetLeft>iTarget)
+		{
+			speed=-10;
+		}
+		else
+		{
+			speed=10;
+		}
+		
+		if(oDiv.offsetLeft==iTarget)
+		{
+			clearInterval(timer);
+		}
+		else
+		{
+			oDiv.style.left=oDiv.offsetLeft+speed+'px';
+		}
+	}, 30);
+}
+
+
+
+
+   -----------------------------------------
+
+
+
+ （2）startMove(obj, iTarget)	多物体运动框架（只能运动多个物体的单一属性）
+
+
+每个div给一个定时器-----给每个div加一个定时器自定义属性aDiv[i].timer=null;
+
+在多物体运动框架中，什么东西都不要共用
+
+function startMove(obj, iTarget)
+{
+	clearInterval(obj.timer);
+	obj.timer=setInterval(function (){
+		var speed=(iTarget-obj.offsetWidth)/6;
+		speed=speed>0?Math.ceil(speed):Math.floor(speed);
+		
+		if(obj.offsetWidth==iTarget)
+		{
+			clearInterval(obj.timer);
+		}
+		else
+		{
+			obj.style.width=obj.offsetWidth+speed+'px';
+		}
+	}, 30);
+}
+
+
+
+
+    ----------------------------------------
+
+
+
+ （3）startMove(obj, attr, iTarget)	任意值（能运动多物体的多个属性）
+
+
+
+function getStyle(obj, name)
+{
+	if(obj.currentStyle)
+	{
+		return obj.currentStyle[name];
+	}
+	else
+	{
+		return getComputedStyle(obj, false)[name];
+	}
+}
+
+
+
+function startMove(obj, attr, iTarget)                           //多物体运动框架
+{
+	clearInterval(obj.timer);
+	obj.timer=setInterval(function (){
+		var cur=parseInt(getStyle(obj, attr));                   //记得转为整型
+		
+		var speed=(iTarget-cur)/6;
+		speed=speed>0?Math.ceil(speed):Math.floor(speed);
+		
+		if(cur==iTarget)
+		{
+			clearInterval(obj.timer);
+		}
+		else
+		{
+			obj.style[attr]=cur+speed+'px';
+		}
+	}, 30);
+}
+
+
+
+            --------优化--------可以改透明度-------------------
+
+
+
+function startMove(obj, attr, iTarget)
+{
+	clearInterval(obj.timer);
+	obj.timer=setInterval(function (){
+		var cur=0;
+		
+		if(attr=='opacity')
+		{
+			cur=Math.round(parseFloat(getStyle(obj, attr))*100); //Math.round 取整 类似四舍五入
+		}                                                            //消除 bug:  0.07*100 = 7.00000000000001 （在IE7）
+		else
+		{
+			cur=parseInt(getStyle(obj, attr));
+		}
+		
+		var speed=(iTarget-cur)/6;
+		speed=speed>0?Math.ceil(speed):Math.floor(speed);
+		
+		if(cur==iTarget)
+		{
+			clearInterval(obj.timer);
+		}
+		else
+		{
+			if(attr=='opacity')
+			{
+				obj.style.filter='alpha(opacity:'+(cur+speed)+')';
+				obj.style.opacity=(cur+speed)/100;
+				
+				document.getElementById('txt1').value=obj.style.opacity;
+			}
+			else
+			{
+				obj.style[attr]=cur+speed+'px';
+			}
+		}
+	}, 30);
+}
+
+
+
+     ----------------------------------------------
+
+
+ （4） startMove(obj, attr, iTarget, fn)	链式运动
+
+
+
+     1、回调函数    
+
+            运动停止时，执行函数
+            
+            运动停止时，开始下一次运动
+
+            例子：土豆网右下角菜单
+
+
+
+
+function startMove(obj, attr, iTarget, fnEnd)     //链式运动框架（能让物体先运动某个属性，再运动另个属性）
+                                                      如：div先变长，再变宽，再增加透明度
+{                                                            缺点：不能两个属性同时运动
+	clearInterval(obj.timer);
+	obj.timer=setInterval(function (){
+		var cur=0;
+		
+		if(attr=='opacity')
+		{
+			cur=Math.round(parseFloat(getStyle(obj, attr))*100);
+		}
+		else
+		{
+			cur=parseInt(getStyle(obj, attr));
+		}
+		
+		var speed=(iTarget-cur)/6;
+		speed=speed>0?Math.ceil(speed):Math.floor(speed);
+		
+		if(cur==iTarget)
+		{
+			clearInterval(obj.timer);
+			
+			if(fnEnd)fnEnd();                //运动停止时，执行函数   运动停止时，开始下一次运动
+		}
+		else
+		{
+			if(attr=='opacity')
+			{
+				obj.style.filter='alpha(opacity:'+(cur+speed)+')';
+				obj.style.opacity=(cur+speed)/100;
+			}
+			else
+			{
+				obj.style[attr]=cur+speed+'px';
+			}
+		}
+	}, 30);
+}
+
+
+
+   ------------------------------------------
+
+
+   （5）startMove(obj, json)	多值运动
+
+          在多值运动框架的基础上，添加 函数 参数，就是完美运动框架
+
+
+
+   （6）startMove(obj, json, fn)  完美运动框架
+
+
+
+
+ 完美运动框架：  可以应对所有基本的运动  
+
+function startMove(obj, json, fnEnd)
+{
+	clearInterval(obj.timer);
+	obj.timer=setInterval(function (){
+		var bStop=true;		//假设：所有值都已经到了
+		
+		for(var attr in json)
+		{
+			var cur=0;
+			
+			if(attr=='opacity')
+			{
+				cur=Math.round(parseFloat(getStyle(obj, attr))*100);
+			}
+			else
+			{
+				cur=parseInt(getStyle(obj, attr));
+			}
+			
+			var speed=(json[attr]-cur)/6;
+			speed=speed>0?Math.ceil(speed):Math.floor(speed);
+			
+			if(cur!=json[attr])  //如果有某个值没到达目标，设bStop为false。
+				bStop=false;
+			
+			if(attr=='opacity')
+			{
+				obj.style.filter='alpha(opacity:'+(cur+speed)+')';
+				obj.style.opacity=(cur+speed)/100;
+			}
+			else
+			{
+				obj.style[attr]=cur+speed+'px';
+			}
+		}
+		
+		if(bStop)   //当所有值都到了，关闭定时器
+		{
+			clearInterval(obj.timer);
+						
+			if(fnEnd)fnEnd();
+		}
+	}, 30);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

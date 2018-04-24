@@ -1,0 +1,1053 @@
+          注意有时要添加${pageContext.request.contextPath}路径
+
+1.建项目，导入jar包，建java包结构，配置web.xml，applicationContext.xml, struts.xml,log4.properties.
+         包结构: dao
+                 daoImpl
+                 service
+                 serviceImpl
+                 Action
+                 entity               
+2.实体和映射创建。
+   创建实体（包括属性，set和get方法） ,
+   创建映射文件xxx.hbm.xml文件。
+   如果表与表之间有关系，就还要创建关联关系映射。
+   在applicationContext.xml中加载映射文件
+
+   若没有数据库，则创建数据库
+
+3.页面引入（html和jsp）
+   页面引入struts的标签库s
+
+4.Action , Service, Dao 的创建及配置
+   创Action类extends ActionSupport  implements ModelDriven<实体类>
+   创建service的接口和service的实现类serviceimpl
+   创建dao接口和dao的实现类daoimpl
+   配置struts，添加action(其中class属性=“在applicationContext.xml找”)
+   在applicationContext.xml中配置bean， 包括action类,业务层类，dao类
+   employeeDaoImpl extends HibernateDaoSupport
+   employeeServiceImpl.java中注入dao
+   employeeAction.java 中注入业务层类employeeService
+ 
+   
+  
+5.applicationContext.xml文件中，分别注入Action,service,dao,sessionFactory
+
+6.在EmpLoyeeAction中
+          Emloyee existEmployee = employeeService.login(employee )
+
+  在EmployeeServiceImpl中
+         Employee existEmployee employeeDao.findByUsernameAndPassword(employee)   return existEmployee   
+
+  在EmployeeDaoImpl
+     public Employee findByUsernameAndPassword(employee){
+
+        String sql = "from Employee where username = ? and password = ?";
+        List<Eemployee> list = this.getHibernateTemplate.find(sql,employee.getUsername(),employee.getPassword())
+        if(list.size()>0){
+             return list.get(0);
+      }
+          return null;   
+   }
+
+  在回到EmpLoyeeAction中添加
+    if(existEmployee==null){
+               //登录失败
+              this.addActionError("用户名或密码错误")       //在这里，再回到登录页面，让它显示错误信息<h2><s:actionArror /><h2>
+              retrun INPUT;
+      }else{
+
+          //登录成功
+          ActionContext.getContext().getSession().put("existEmployee",existEmployee);
+          return SUCCESS;
+   }
+   
+ 在struts.xml中
+       配置     <result name="input">/index.jsp</result>
+                <result name="success" type="redirect">/frame.jsp</result>    //type="redirect" 表示重定向
+
+
+ 登录成功后，可以主页面 添加代码 <s:property value="#session.existEmployee.ename" />
+
+
+
+
+
+综上就可以完成登录管理了
+
+
+
+
+
+
+二、 部门管理模块（记得编写一个点击“部门管理”的管理） 
+         <div class="dtree">
+            <script type="text/javascript">
+             d.add = new dTree('d');
+             d.add('01','-1','员工管理系统')
+             d.add('0101','01','人力资源部')
+             d.add('010101','0101','部门管理'，‘${ pageContext.request.contextPath }/department_findAll.action’,'','right')//这个就是按钮
+            </script>
+         </div>
+
+
+ 
+7. 配置 Action service dao  创建及配置
+
+   创建DepartmentAction中添加
+       private Integer currPage = 1  (setter getter)
+
+      //提供一个查询的方法
+    public String findAll(）{
+
+       
+    }   
+     
+    创建DepartmentService 和 DepartmentServiceImpl
+     
+    再创建 DepartmentDao 和  DepartmentDaoImpl extends HibernateDaoSupport
+
+    在到applicationContext.xml中配置bean (dao, service ,action) //action 记得配置scope="prototype"  
+     
+    全部配置完后，在回到.java文件中
+          DepartmentAction.java中
+                   //注入部门管理的Service
+                     private DepartmentsService  departmentsService;(加上set方法)
+
+          DepartmentService.java中
+                   //注入部门管理的Dao
+                     private DepartmentsDao  departmentsDao;(加上set方法) 
+
+
+     再回到applicationContext.xml配置
+                  <property name="xxx" ref="xxx">
+
+
+8.分页查询
+     
+    (1).DepartmentAction中
+                public String findAll(）{
+                     
+           PageBean<Deparment> pageBean = departmentsService.findByPage(currPage)
+       
+        }  
+         
+   (2). 再创建一个实体类PageBean 分页类
+        public class PageBean<T>{
+ 
+              private int currPage;//当前页数       
+              private int pageSize;//每页显示的记录数
+              private int totalCount;//总记录数
+              private int totalPage;//总页数
+              private List<T> list; //每页显示的数据
+              
+            添加getter和setter
+
+       }
+ 
+    (3).   在DepartmentServiceImpl中 编写findByPage
+             
+          //分页查询部门的方法
+            public PageBean<Department> findByPage(Integer currPage){
+             
+                PageBean<Department> pageBean = new PageBean<Department>();
+
+                //封装当前页数
+                pageBean.setCurrPage(currPage);
+
+                //封装每页显示记录数
+                int pageSize = 3;
+                pageBean.setPageSize(pageSize);
+ 
+                //封装总计录数
+                int totalCount = departmentDao.findCount();  //要到departmentDao编写findCount()
+                pageBean.setTotalCount(totalCount); 
+               
+                //封装总页数
+                   double tc = totalCount;
+                   Double num = Math.ceil(tc / pageSize);   //向上取整 
+                   pageBean.setTotalPage(num.intValue());    //转成整型 
+
+                //封装每页显示的数据
+                int begin = (currPage - 1 ) * pageSize;
+                List<Department> list = departmentDao.findByPage(begin,pageSize);  //要到departmentDao编写findByPage(begin,pageSize)                 
+                pageBean.setList(list);
+            
+                return pageBean
+
+              }
+
+
+    (4).首先在DepartmentDao 创建 int findCount() 和 public List<Department> findByPage(begin,pageSize)
+         
+           在DepartmentDaoImpl 实现findCount() 和  findByPage(begin,pageSize)
+
+              public int findCount(){
+
+                  String sql = "select count(*) from Department";
+                  List<long> list = this.getHibernateTemplate().find(sql); 
+                  if(list.size() > 0){
+
+                     return list.get(0).intValue();
+                  }
+
+                     return 0;
+             } 
+               
+              
+              public List<Department> findByPage(int begin, int pageSize){
+
+                DetachedCriteria criteria  = DetachedCriteria.forClass(Department.class);  //用这函数比较容易查找
+                List<Department> list = this.getHibernateTemplate().findByCriteria(criteria,begin,pageSize);
+                return list;
+
+             }
+
+
+   (5).回到DepartmentAction中，
+
+         public String findAll(）{
+                     
+           PageBean<Deparment> pageBean = departmentsService.findByPage(currPage);
+           
+           //将pageBean存入值栈中。
+           ActionContext.getContext().getValueStack().push(pageBean);
+           return "findAll";
+       
+        }        
+
+
+   (6).回到struts.xml中,添加一个action
+             <action name="department_*" class="departmentAction" method="{1}">
+                 <result name="findAll">/jsp/department/list.jsp</result>
+             </action>
+    
+
+   (7).list.jsp中 配置struts的标准标签库
+  
+        <s:iterator value="list" var="d">
+              <s:property value="#d.dname" />  //部门名称
+        </s:iterator>
+              <s:property value="currPage" />   //当前页数
+              <s:property value="totalPage" />   //总页数
+              <s:property value="totalCount" />   //总记录数
+              <s:property value="pageSize" />   //每页显示多少条记录
+
+      
+       <span>
+
+         <s:if test="currPage != 1">
+            <a href="${ pageContext.request.contextPath }/department_findAll.action?currPage=1">[首页]</a>
+            <a href="${ pageContext.request.contextPath }/department_findAll.action?currPage=<s:property value="currPage-1"/>">[上页]</a>           
+         </s:if> 
+         <s:if test="currPage != totalPage">
+            <a href="${ pageContext.request.contextPath }/department_findAll.action?currPage=<s:property value="currPage-1"/>">[下一页]</a>
+            <a href="${ pageContext.request.contextPath }/department_findAll.action?currPage=<s:property value="totalPage"/>">[尾页]</a>           
+         </s:if>                 
+ 
+       </span>
+        
+
+   (8).在数据库添加数据
+
+
+
+9.添加部门
+
+    （1）.在jsp页面中，
+             “添加”按钮<a href="${pageContenx.request.contextPath }/department_saveUI.action">
+
+
+    （2）.在DepartmentAction.java
+            //跳转到添加部门的页面
+            public String saveUI(){
+
+                   return "saveUI"
+                  
+          }
+
+    （3）.回到struts.xml中,添加一个action
+             <action name="department_*" class="departmentAction" method="{1}">
+                 <result name="findAll">/jsp/department/list.jsp</result>
+                 <result name="saveUI">/jsp/department/add.jsp</result>
+             </action>
+
+    （4）.编写add.jsp(记得引入struts的标签库)
+             
+          <a href="javaScript:document.getElementById(savaForm).submit()">确定保存</a>
+          <a href="javaScript:history.go(-1)">回退</a>
+
+          <s:form id="saveForm" action="department_save" method="post" namespace="/" theme="simple">  //如果去掉 theme="simple",整个布局将非常乱,文本框显示两个文字标签,且在不同行...
+             部门名称:<s:textfield name="dname" />
+             部门介绍：<s:textarea rows="5" cols="5" name="ddesc" />
+          </s:form>
+     
+
+    （5）.在DepartmentAction.java中，
+
+               //添加部门的执行的方法
+               public String save(Department){
+                  
+                       departmentService.save(department);
+                       return"saveSuccess";
+               }
+            
+    （6）.在DepartmentService.java中，添加
+                 创建void save（Department department）;
+
+          然后在DepartmentServiceImpl.java中  需要事物管理，所以添加@Transactional
+                   实现 void save（Department department）;
+            //业务层保存部门的方法
+            public void save（Department department）{
+                   departmentDao.save(department);
+        }
+
+    （7）.在DepartmentDao.java中，添加
+                 创建void save（Department department）;
+
+          然后在DepartmentDaoImpl.java中  
+                   实现 void save（Department department）;
+             //DAO中保存部分的方法
+               public void save(Department department){
+
+                    this.getHibernateTemplate().save(department);
+           }
+              
+
+    （8）.回到struts.xml中,添加一个action
+             <action name="department_*" class="departmentAction" method="{1}">
+                 <result name="findAll">/jsp/department/list.jsp</result>
+                 <result name="saveUI">/jsp/department/add.jsp</result>
+                 <result name="saveSuccess" type="redirectAction">department_findAll.action</result>//添加成功，让它跳转到显示所有部门的页面
+             </action>
+
+10.修改部门
+
+    （1）.在jsp页面中， 记得是添加到<s:iterator value="list" var="d"> xxx </s:iterator>之间
+             “编辑”按钮<a href="${pageContenx.request.contextPath }/department_edit.action?<s:property value="#d.did" />">
+         <s:iterator value="list" var="d">
+              <s:property value="#d.dname" />  //部门名称
+               <a href="${pageContenx.request.contextPath }/department_edit.action?<s:property value="#d.did" />">
+        </s:iterator>
+
+    （2）.在DepartmentAction.java中，
+
+               //编辑部门的执行的方法
+               public String edit(Department){
+                  
+                       department = departmentService.findById(department.getDid());
+                       return"editSuccess";
+               }
+
+    （3）.在DepartmentService.java中，添加
+                 创建Department findById(Interge did);
+
+          然后在DepartmentServiceImpl.java中  
+                   实现 Department findById(Interge did);
+            //业务层根据部门ID查询部门的方法
+            public Department findById(Interge did);{
+                  
+                   return departmentDao.findById(did);
+        }
+
+    （4）.在DepartmentDao.java中，添加
+                 创建Department findById(Interge did);
+
+          然后在DepartmentDaoImpl.java中  
+                   实现 Department findById(Interge did);
+             //DAO中根据部门ID查询部门的方法
+            public Department findById(Interge did);{
+                  
+                   return this.getHibernateTemplate().get(Department.class,did);
+        }
+
+     （5）. 上面运行完后，会回到在DepartmentAction.java中，
+
+               //编辑部门的执行的方法
+               public String edit(Department){
+                  
+                    department = departmentService.findById(department.getDid());  //在这里因为有模型驱动，所以department会默认添加到值栈中
+                    return"editSuccess";
+               }
+
+    （6）.回到struts.xml中,添加一个action
+             <action name="department_*" class="departmentAction" method="{1}">
+                 <result name="findAll">/jsp/department/list.jsp</result>
+                 <result name="saveUI">/jsp/department/add.jsp</result>
+                 <result name="saveSuccess" type="redirectAction">department_findAll.action</result>//添加成功，让它跳转到显示所有部门的页面
+                 <result name="editSuccess">/jsp/department/edit.jsp</result>   //添加这个，让其跳转到edit.jsp
+             </action>
+   
+    （7）.编写edit.jsp(记得引入struts的标签库)
+             与add.jsp相似，可以拷贝add.jsp,进行修改
+
+          <a href="javaScript:document.getElementById(savaForm).submit()">确定保存</a>
+          <a href="javaScript:history.go(-1)">回退</a>
+
+          <s:form id="saveForm" action="department_update" method="post" namespace="/" theme="simple">  //修改action="department_update"
+          <s:hidden name="did" value="%{model.did}" />                                        //添加这行代码
+             部门名称:<s:textfield name="dname" value="%{model.dname}"/>                      //添加value="%{model.dname}"
+             部门介绍：<s:textarea rows="5" cols="5" name="ddesc" value="%{model.ddesc}" />   //添加value="%{model.ddesc}"
+          </s:form>
+
+    （8）.在DepartmentAction.java中，
+
+               //修改部门的执行的方法
+               public String update(){
+                  
+                       departmentService.update(department);
+                       return"updateSuccess";
+               }
+
+
+    （9）.在DepartmentService.java中，添加
+                 创建void update（Department department）;
+
+          然后在DepartmentServiceImpl.java中  
+                   实现 void update（Department department）;
+            //业务层修改部门的方法
+            public void update（Department department）{
+                   departmentDao.update(department);
+        }
+
+
+    （10）.在DepartmentDao.java中，添加
+                 创建void update（Department department）;
+
+          然后在DepartmentDaoImpl.java中  
+                   实现 void update（Department department）;
+             //DAO中修改部门的方法
+               public void save(Department department){
+
+                    this.getHibernateTemplate().update(department);
+           }
+
+
+    （11）.回到struts.xml中,添加一个action
+             <action name="department_*" class="departmentAction" method="{1}">
+               <result name="findAll">/jsp/department/list.jsp</result>
+               <result name="saveUI">/jsp/department/add.jsp</result>
+               <result name="saveSuccess" type="redirectAction">department_findAll.action</result>//添加成功，让它跳转到显示所有部门的页面
+               <result name="editSuccess">/jsp/department/edit.jsp</result>   //添加这个，让其跳转到edit.jsp
+               <result name="updateSuccess" type="redirectAction">department_findAll.action</result>//修改成功，让它跳转到显示所有部门的页面
+             </action>
+
+11.删除部门
+
+    （1）.在jsp页面中， 记得是添加到<s:iterator value="list" var="d"> xxx </s:iterator>之间
+          
+             “删除”按钮<a href="${pageContenx.request.contextPath }/department_delete.action?<s:property value="#d.did" />">
+
+        <s:iterator value="list" var="d">
+              <s:property value="#d.dname" />  //部门名称
+               <a href="${pageContenx.request.contextPath }/department_edit.action?<s:property value="#d.did" />">
+               <a href="${pageContenx.request.contextPath }/department_delete.action?<s:property value="#d.did" />">
+        </s:iterator>
+
+
+    （2）.在DepartmentAction.java中，
+
+               //删除部门的执行的方法
+               public String delete(Department){
+                  
+                     //在删除前，先进行查询比较好，可以进行级联删除。
+                       department = departmentService.findById(department.getDid());
+
+                       departmentService.delete(department);  //departmentService.delete(department.getDid());这段代码比较不好  
+                       return"deleteSuccess";
+               }
+
+    （3）.在DepartmentService.java中，
+                 创建void delete（Department department）;
+
+          然后在DepartmentServiceImpl.java中  
+                   实现 void delete（Department department）;
+            //业务层删除部门的方法
+            public void delete（Department department）{
+                   departmentDao.delete(department);
+        }
+
+
+    （4）.在DepartmentDao.java中，添加
+                 创建void delete（Department department）;
+
+          然后在DepartmentDaoImpl.java中  
+                   实现 void delete（Department department）;
+             //DAO中删除部门的方法
+               public void delete(Department department){
+
+                    this.getHibernateTemplate().delete(department);
+           }
+
+
+   （5）.回到struts.xml中,添加一个action
+            <action name="department_*" class="departmentAction" method="{1}">
+             <result name="findAll">/jsp/department/list.jsp</result>
+             <result name="saveUI">/jsp/department/add.jsp</result>
+             <result name="saveSuccess" type="redirectAction">department_findAll.action</result>//添加成功，让它跳转到显示所有部门的页面
+             <result name="editSuccess">/jsp/department/edit.jsp</result>   //添加这个，让其跳转到edit.jsp
+             <result name="updateSuccess" type="redirectAction">department_findAll.action</result>//修改成功，让它重定向到显示所有部门的页面
+             <result name="deleteSuccess" type="redirectAction">department_findAll.action</result>//删除成功，让它重定向到显示所有部门的页面
+            </action>
+
+
+
+三、 员工管理模块（记得编写一个点击“人员管理”的管理） 
+      <div class="dtree">
+       <script type="text/javascript">
+        d.add = new dTree('d');
+        d.add('01','-1','员工管理系统')
+        d.add('0101','01','人力资源部')
+        d.add('010101','0101','部门管理'，‘${ pageContext.request.contextPath }/department_findAll.action’,'','right')//“部门管理”按钮
+        d.add('010102','0101','人员管理'，‘${ pageContext.request.contextPath }/employee_findAll.action’,'','right')//“人员管理”按钮
+       </script>
+      </div>
+
+1.分页查询
+
+    (1).EmployeeAction中 添加   //分页查询员工的执行的方法
+            
+          public String findAll(）{
+                     
+            return “findAll”; 在这里先让它返回"findAll";
+       
+        }  
+
+    (2).它也要进行分页查询
+      创建EmployeeAction中添加
+        //接收当前页数
+       private Integer currPage = 1  (添加setter getter)（初始值为1）
+
+
+    (3).EmployeeAction中 编写   //分页查询员工的执行的方法
+            
+          public String findAll(）{
+            
+           PageBean<Employee> pageBean = employeeService.findByPage(currPage) ;        
+            return “findAll”; 在这里先让它返回"findAll";
+       
+        } 
+
+    (4). 首先在EmployeeService中创建PageBean<Employee> findByPage(Integer currPage)
+            
+          再在EmployeeServiceImpl中 实现编写findByPage
+             
+          //分页查询部门的方法
+            public PageBean<Employee> findByPage(Integer currPage){
+             
+                PageBean<Employee> pageBean = new PageBean<Employee>();
+
+                //封装当前页数
+                pageBean.setCurrPage(currPage);
+
+                //封装每页显示记录数
+                int pageSize = 3;
+                pageBean.setPageSize(pageSize);
+ 
+                //封装总计录数
+                int totalCount = employeeDao.findCount();  //要到employeeDao编写findCount()
+                pageBean.setTotalCount(totalCount); 
+               
+                //封装总页数
+                   double tc = totalCount;          //先将totalCount转为double类型
+                   Double num = Math.ceil(tc / pageSize);   //向上取整 
+                   pageBean.setTotalPage(num.intValue());    //转成整型 
+
+                //封装每页显示的数据
+                int begin = (currPage - 1 ) * pageSize;
+                List<Employee> list = employeeDao.findByPage(begin,pageSize);  //要到employeeDao编写findByPage(begin,pageSize)                 pageBean.setList(list);
+            
+                return pageBean
+
+              } 
+
+
+    (5).首先在EmployeeDao 创建 int findCount() 和 public List<Employee> findByPage(begin,pageSize)
+
+        在EmployeeDaoImpl 实现findCount() 和  findByPage(begin,pageSize)
+
+              public int findCount(){
+
+                  String sql = "select count(*) from Employee";
+                  List<long> list = this.getHibernateTemplate().find(sql); 
+                  if(list.size() > 0){
+
+                     return list.get(0).intValue(); //转成整型
+                  }
+
+                     return 0;
+             }   
+               
+              
+              public List<Employee> findByPage(int begin, int pageSize){
+
+                DetachedCriteria criteria  = DetachedCriteria.forClass(Employee.class);  //用这函数比较容易查找
+                List<Employee> list = this.getHibernateTemplate().findByCriteria(criteria,begin,pageSize);
+                return list;
+
+             }
+
+   (6).回到EmployeeAction中，
+
+         public String findAll(）{
+                     
+           PageBean<Employee> pageBean = departmentsService.findByPage(currPage);
+           
+           //将pageBean存入值栈中。
+           ActionContext.getContext().getValueStack().push(pageBean);
+           return "findAll";
+       
+        }  
+
+   (6).回到struts.xml中,编写action
+             <action name="employee_*" class="employeeAction" method="{1}">
+                 <result name="input">/index.jsp</result>
+                 <result name="success" type="redirect">/frame.jsp</result>
+                 <result name="findAll" >/jsp/employee/list.jsp</result>  
+             </action>
+
+   (7).list.jsp中 配置struts的标准标签库  别忘了修改路径：${ pageContext.request.contextPath }
+  
+        <s:iterator value="list" var="e">
+             <s:property value="#e.eno" />  //员工名称
+             <s:property value="#e.ename" />
+             <s:property value="#e.sex" />
+             <s:date name="#e.birthday" format="yyyy-MM--dd"/>    //这里要注意。。
+             <s:date name="#e.joinDate" format="yyyy-MM--dd"/>    //这里要注意。。
+             <s:property value="#e.department.dname" />           //这里要注意。。
+        </s:iterator>
+              <s:property value="currPage" />   //当前页数
+              <s:property value="totalPage" />   //总页数
+              <s:property value="totalCount" />   //总记录数
+              <s:property value="pageSize" />   //每页显示多少条记录
+
+      
+       <span>
+
+         <s:if test="currPage != 1">
+            <a href="${ pageContext.request.contextPath }/employee_findAll.action?currPage=1">[首页]</a>
+            <a href="${ pageContext.request.contextPath }/employee_findAll.action?currPage=<s:property value="currPage-1"/>">[上页]</a>           
+         </s:if> 
+         <s:if test="currPage != totalPage">
+            <a href="${ pageContext.request.contextPath }/employee_findAll.action?currPage=<s:property value="currPage-1"/>">[下一页]</a>
+            <a href="${ pageContext.request.contextPath }/employee_findAll.action?currPage=<s:property value="totalPage"/>">[尾页]</a>           
+         </s:if>                 
+ 
+       </span>
+
+
+  (8).因为在员工页面没有显示其所属部门，所以需要配置一个过滤器OpenSessionInViewFilter,就是为了让session在视图层进行开启
+
+
+    <filter>
+        <filter-name>OpenSessionInViewFilter</filter-name>
+        <filter-class>org.springframework.orm.hibernate5.support.OpenSessionInViewFilter</filter-class>  //注意hibernate版本
+    </filter>
+    <filter-mapping>
+        <filter-name>OpenSessionInViewFilter</filter-name>
+        <url-pattern>*.action</url-pattern>
+    </filter-mapping>
+
+
+  (9).在数据库添加数据
+
+2.添加员工  //与添加部门不同在于：需要显示所有部门，让其选择其中一个部门
+
+  （1）.在jsp页面中，
+          “添加”按钮<a href="${pageContenx.request.contextPath }/employee_saveUI.action">
+
+ 
+  （2）.在employeeAction.java
+
+            //跳转到添加员工的页面
+            public String saveUI(){
+                  
+                  //还需要查询所有部门
+                   return "saveUI"
+             }              
+
+      需要查询所有部门： 所以注入业务层类
+               private DepartmentService departmentService;
+               同样提供一个setter方法。
+           
+ （3）.applicationContext.xml文件中，在employeeAction中 注入departmentService
+          <bean id="employeeAction" class="com....EmployeeAction" scope="prototyoe">
+              <property name="employeeService" ref="employeeSevice" />
+              <property name="departmentService" ref="departmentSevice" />        
+ 
+          </bean>
+
+
+
+   (4).回到EmployeeAction中，
+
+       //跳转到添加员工页面执行的方法
+
+            //跳转到添加员工的页面
+            public String saveUI(){
+                  
+                  //查询所有部门
+                  List<Department> list = denpartmentService.findAll();
+                  return NONE;
+             }              
+
+   （5）.在接口DepartmentService.java中，添加         //在这里注意是DepartmentService，不是EmployeeService
+                 创建 List<Department> findAll();
+ 
+          然后在DepartmentServiceImpl.java中  
+                   实现 List<Department> findAll();
+
+            //业务层查询所有部门的方法
+            public  List<Department> findAll() {
+                   return departmentDao.findAll();
+        }
+
+
+   （6）.在接口DepartmentDao.java中，添加         //在这里注意是DepartmentDao，不是EmployeeDao
+                 创建 List<Department> findAll();
+ 
+          然后在DepartmentDaoImpl.java中  
+                   实现 List<Department> findAll();
+
+            //查询全部部门的方法
+            public  List<Department> findAll() {
+                   return this.getHibernateTemplate.find("from Department");
+        }
+
+   (7).回到EmployeeAction中，
+
+       //跳转到添加员工页面执行的方法
+
+            //跳转到添加员工的页面
+            public String saveUI(){
+                  
+                  //查询所有部门
+                  List<Department> list = denpartmentService.findAll();
+                  //保存list
+                  ActionContext.getContext（）.getValueStack().set("list",list)  //集合用set,对象用push.
+                  return "saveUI";
+             }  
+
+
+   (8).回到struts.xml中,编写action
+             <action name="employee_*" class="employeeAction" method="{1}">
+                 <result name="input">/index.jsp</result>
+                 <result name="success" type="redirect">/frame.jsp</result>
+                 <result name="findAll" >/jsp/employee/list.jsp</result>
+                 <result name="saveUI" >/jsp/employee/add.jsp</result>    //与添加部门的jsp相似,还是要注意路径问题
+             </action>
+
+
+    （4）.编写add.jsp(记得引入struts的标签库)
+             
+          <a href="javaScript:document.getElementById(savaForm).submit()">确定保存</a>
+          <a href="javaScript:history.go(-1)">回退</a>
+
+          <s:form id="saveForm" action="department_save" method="post" namespace="/" theme="simple">  //如果去掉 theme="simple",整个布局将非常乱,文本框显示两个文字标签,且在不同行...
+
+             姓名:<s:textfield name="ename" />
+             性别：<s:redio name="sex" list="{‘男’，’女‘}" />
+             用户名:<s:textfield name="usename" />
+             密码:<s:password name="password" />
+             出生日期:<s:textfield name="birthday" />
+             入职时间:<s:textfield name="joinDate" />   //这里，可以使用时间的小控件，即可以选择日期
+
+             所属部门：<s:select name="department.did" list="list"  listKey="did" listValue="dname" headerKey="" headerValue="--请选择--" />
+             //  name="department.did" 完成相应的封装
+             //  list="list"      取出值栈中的“list”
+             //  listValue="dname"   显示的部分         
+             //  listKey="did"    真正提交的部分   
+          
+             编号:<s:textfield name="eno" />
+          </s:form>
+
+    （5）.在EmployeeAction.java中，
+
+               //保存员工的执行的方法
+               public String save(Employee){
+                  
+                       employeeService.save(employee);
+                       return"saveSuccess";
+               }
+
+    （6）.在EmployeetService.java中，添加
+                 创建void save（Employee employee）;
+
+          然后在EmployeeServiceImpl.java中  需要事物管理，所以添加@Transactional  //对于@Transactional不是很清楚
+                   实现 void save（Employee employee）;
+            //业务层保存员工的方法
+            public void save（Employee employee）{
+                   employeeDao.save(employeet);
+        }
+
+    （7）.在EmployeeDao.java中，添加
+                 创建void save（Employee employee）;
+
+          然后在EmployeeDaoImpl.java中  
+                   实现 void save（Employee employee）;
+             //DAO中保存员工的方法
+               public void save(Employee employee){
+
+                    this.getHibernateTemplate().save(employee);
+           }
+
+   (8).回到struts.xml中,编写action
+             <action name="employee_*" class="employeeAction" method="{1}">
+                 <result name="input">/index.jsp</result>
+                 <result name="success" type="redirect">/frame.jsp</result>
+                 <result name="findAll" >/jsp/employee/list.jsp</result>
+                 <result name="saveUI" >/jsp/employee/add.jsp</result>    //与添加部门的jsp相似,还是要注意路径问题
+                 <result name="saveSuccess" type="redirectAction">employee_findAll.action</result>//添加成功，让它跳转到显示所有员工的页面
+             </action>
+
+3.修改员工
+
+    （1）.在jsp页面中， 记得是添加到<s:iterator value="list" var="e"> xxx </s:iterator>之间
+             “编辑”按钮<a href="${pageContenx.request.contextPath }/employee_edit.action?<s:property value="#e.eid" />">  如下：
+
+         <s:iterator value="list" var="e">
+              <s:property value="#e.ename" />  //员工名称
+               <a href="${pageContenx.request.contextPath }/employee_edit.action?<s:property value="#e.eid" />">
+        </s:iterator>
+
+    （2）.在EmployeeAction.java中，
+
+               //编辑员工的执行的方法
+               public String edit(Employee){
+                   
+                //根据员工ID查询员工
+                employee = employeeService.findById(employee.getEid()); //模型驱动  不需要故意去保存，本身就在栈里面。
+
+                //查询所有部门
+                List<Department> list = denpartmentService.findAll();
+                //保存list
+                ActionContext.getContext（）.getValueStack.set("list",list)//集合用set,对象用push. 这个则需要故意保存
+
+                       return"editSuccess";
+               }
+
+    （3）.在EmployeeService.java中，添加
+                 创建Employee findById(Interge Eid);
+
+          然后在EmployeeServiceImpl.java中  
+                   实现 Employee findById(Interge Eid);
+            //业务层根据员工ID查询员工的方法
+            public Employee findById(Interge Eid);{
+                  
+                   return employeeDao.findById(Eid);
+        }
+
+    （4）.在EmployeeDao.java中，添加
+                 创建Employee findById(Interge eid);
+
+          然后在EmployeeDaoImpl.java中  
+                   实现 Employee findById(Interge eid);
+             //DAO中根据部门ID查询部门的方法
+            public Employee findById(Interge eid);{
+                  
+                   return this.getHibernateTemplate().get(Employee.class,eid);
+        }
+
+    (5).回到struts.xml中,编写action
+             <action name="employee_*" class="employeeAction" method="{1}">
+                 <result name="input">/index.jsp</result>
+                 <result name="success" type="redirect">/frame.jsp</result>
+                 <result name="findAll" >/jsp/employee/list.jsp</result>
+                 <result name="saveUI" >/jsp/employee/add.jsp</result>    //与添加部门的jsp相似,还是要注意路径问题
+                 <result name="saveSuccess" type="redirectAction">employee_findAll.action</result>//添加成功，让它跳转到显示所有员工的页面
+                 <result name="editSuccess" >/jsp/employee/edit.jsp</result> //与add.jsp相似，可以拷贝add.jsp,进行修改
+             </action>
+
+
+
+
+    （6）.编写edit.jsp(记得引入struts的标签库)
+             
+          <a href="javaScript:document.getElementById(savaForm).submit()">确定保存</a>
+          <a href="javaScript:history.go(-1)">回退</a>
+
+          <s:form id="saveForm" action="department_update" method="post" namespace="/" theme="simple">  //如果去掉 theme="simple",整个布局将非常乱,文本框显示两个文字标签,且在不同行...
+          <s:hidden name="eid" value="%{model.eid}" />            //添加这行代码
+
+             姓名:<s:textfield name="ename" value="%{model.ename}"/>
+             性别：<s:redio name="sex" list="{‘男’，’女‘}"  value="%{model.sex}" />
+             用户名:<s:textfield name="usename" value="%{model.username}" />
+             密码:<s:password name="password" value="%{model.password}"  showPassword="true" />//密码默认是不回显的，                                                                                          //需加上 showPassword="true"
+
+               //出生日期:<s:textfield name="birthday" /> //这里需要修改成如下：
+             出生日期: <input type="text" name="birthday" value="<s:date name="model.birthday" format="yy.MM.dd" />">
+
+             //入职时间:<s:textfield name="joinDate" />   //这里，可以使用时间的小控件，即可以选择日期
+                       //这里需要修改成如下：
+             入职时间: <input type="text" name="joinDate" value="<s:date name="model.joinDate" format="yy.MM.dd" />">
+               
+
+             所属部门：<s:select name="department.did" list="list" value="%{model.department.did}" listKey="did" listValue="dname" headerKey="" headerValue="--请选择--" />
+             //  name="department.did" 完成相应的封装
+             //  list="list"      取出值栈中的“list”
+             //  listValue="dname"   显示的部分         
+             //  listKey="did"    真正提交的部分 
+             //   value="%{model.department.did}"   //多了这行代码，先附了一个值  
+          
+             编号:<s:textfield name="eno" value="%{model.eno}"/>       
+          </s:form>
+
+
+           注意：在类似 <s:property />，<s:date />标签中，是不需要用到 “%{ }” 的
+                    例如：  <s:date name="model.birthday" format="yy.MM.dd" />
+
+                 但在类似<s:textfield>，<s:password />,<s:select />中就需要用到“%{ }”
+                    例：<s:textfield name="usename" value="%{model.username}" />
+                        <s:password name="password" value="%{model.password}" />
+
+
+
+    （7）.在EmployeeAction.java中，
+
+               //修改员工的执行的方法
+               public String update(){
+                  
+                       employeeService.update(department);
+                       return"updateSuccess";
+               }
+
+
+    （8）.在employeeService.java中，添加
+                 创建void update（Employee employee）;
+
+          然后在EmployeeServiceImpl.java中  
+                   实现 void update（Employee employee）;
+            //业务层修改员工的方法
+            public void update（Employee employee）{
+                   employeeDao.update(employee);
+        }
+
+
+    （9）.在EmployeeDao.java中，添加
+                 创建void update（Employee employee）;
+
+          然后在EmployeeDaoImpl.java中  
+                   实现 void update（Employee employee）;
+             //DAO中修改员工的方法
+               public void save(Employee employee){
+
+                    this.getHibernateTemplate().update(employee);
+           }
+
+
+    (10).回到struts.xml中,编写action
+             <action name="employee_*" class="employeeAction" method="{1}">
+                 <result name="input">/index.jsp</result>
+                 <result name="success" type="redirect">/frame.jsp</result>
+                 <result name="findAll" >/jsp/employee/list.jsp</result>
+                 <result name="saveUI" >/jsp/employee/add.jsp</result>    //与添加部门的jsp相似,还是要注意路径问题
+                 <result name="saveSuccess" type="redirectAction">employee_findAll.action</result>//添加成功，让它跳转到显示所有员工的页面
+                 <result name="editSuccess" >/jsp/employee/edit.jsp</result> //与add.jsp相似，可以拷贝add.jsp,进行修改
+                 <result name="updateSuccess" type="redirectAction">employee_findAll.action</result>//修改成功，让它跳转到显示所有员工的页面
+             </action>
+
+
+
+3.删除员工
+
+    （1）.在jsp页面中， 记得是添加到<s:iterator value="list" var="e"> xxx </s:iterator>之间
+             “删除”按钮<a href="${pageContenx.request.contextPath }/employee_delete.action?<s:property value="#e.eid" />">  如下：
+
+         <s:iterator value="list" var="e">
+ 
+               <a href="${pageContenx.request.contextPath }/employee_delete.action?<s:property value="#e.eid" />"></a>
+        </s:iterator>
+
+
+    （2）.在EmployeeAction.java中，
+
+               //删除员工的执行的方法
+               public String delete(Employee){
+                  
+                     //在删除前，先进行查询比较好，可以进行级联删除。
+                       employee = employeeService.findById(employee.getDid());
+
+                       employeeService.delete(employee);  //原本是employeeService.delete(employee.getDid());这段代码比较不好  
+                       return"deleteSuccess";
+               }
+
+    （3）.在EmployeeService.java中，
+                 创建void delete（Employee employee）;
+
+          然后在EmployeeServiceImpl.java中  
+                   实现 void delete（Employee employee）;
+            //业务层删除员工的方法
+            public void delete（Employee employee）{
+                   employeeDao.delete(employee);
+        }
+
+
+    （4）.在EmployeeDao.java中，添加
+                 创建void delete（Employee employee）;
+
+          然后在EmployeeDaoImpl.java中  
+                   实现 void delete（Employee employee）;
+             //DAO中删除员工的方法
+               public void delete(Employee employee){
+
+                    this.getHibernateTemplate().delete(employee);
+           }
+
+
+    (5).回到struts.xml中,编写action
+             <action name="employee_*" class="employeeAction" method="{1}">
+                 <result name="input">/index.jsp</result>
+                 <result name="success" type="redirect">/frame.jsp</result>
+                 <result name="findAll" >/jsp/employee/list.jsp</result>
+                 <result name="saveUI" >/jsp/employee/add.jsp</result>    //与添加部门的jsp相似,还是要注意路径问题
+                 <result name="saveSuccess" type="redirectAction">employee_findAll.action</result>//添加成功，让它跳转到显示所有员工的页面
+                 <result name="editSuccess" >/jsp/employee/edit.jsp</result> //与add.jsp相似，可以拷贝add.jsp,进行修改
+                 <result name="updateSuccess" type="redirectAction">employee_findAll.action</result>//修改成功，让它跳转到显示所有员工的页面
+                 <result name="deleteSuccess" type="redirectAction">employee_findAll.action</result>//删除成功，让它跳转到显示所有员工的页面
+             </action>
+         
+        //到这里，就可以删除员工了。  
+
+      
+    (6)可能出现的问题：
+      
+      注意1： 当我们删除部门的时候，却不能部门下的员工，要想做到删除部门时，同时删除部门下的员工的这种级联删除。
+       需要满足两个条件：
+         （1） 即我们之前在删除前，先调用查询，再删除。
+               例如：  
+                
+                 在DepartmentAction.java中，
+
+               //删除部门的执行的方法
+               public String delete(Department){
+                  
+                     //在删除前，先进行查询比较好，可以进行级联删除。
+                       department = departmentService.findById(department.getDid());   
+
+                       departmentService.delete(department);  //原本是departmentService.delete(department.getDid());这段代码比较不好  
+                       return"deleteSuccess";
+               }
+
+           （2）在Department.hbm.xml映射文件中，其中的关联关系映射中添加  cascade="delete" ：
+               
+              例如下：
+                 <set name="employee" cascade="delete">
+                        <key column="dao">
+                        <one-to-many class="com.muke.employee.domain.Employee" />
+                 </set>
+
+
+
+         注意2：当我们配置 cascade="delete" 后，当我们修改某部门的名称后，原属于该部门下的员工的所属部门的属性为空。
+                则需要添加 inverse="true"  来使其放弃 1对多 的 对外键的维护权。
+
+              例如下：
+                 <set name="employee" cascade="delete" inverse="true">
+                        <key column="dao">
+                        <one-to-many class="com.muke.employee.domain.Employee" />
+                 </set>
+
+        
+          注意3：完成综上后，我们就可以利用 用户名 和 密码 进行登录了。但有个问题，就是输入后台管理的地址，也是可以直接进入后台管理页面的，这时候需要我们配置 过滤器 和 拦截器  来进行权限的限制。即判断用户是否有登录，没有则跳转到登录页面。
+
+
+                                                                                                              2017/3/22
