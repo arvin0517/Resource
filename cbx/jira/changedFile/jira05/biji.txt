@@ -1,0 +1,8 @@
+so it does not fall into the validation checking
+
+expect result : should skip validation in one or multiple vendors
+
+
+For send factoryAudit are we not need this validation?
+
+or like project said : it is fine for the FA which selected Factory linked to one vendor only to do the validation

@@ -1,0 +1,64 @@
+02 jira 
+
+https://jira.coresolutions.com/browse/CNT-31851
+
+
+---click "send" button :
+--->SendSampleRequestAction.buildSampleTrackerWithSampleReq
+--->sampleReqVendorToST  (inheritance date)
+---> MappingRule === sampleReqVendorToSampleTracker in sampleReqest_dataMappingRule.xlsx
+===> vendor, factory ---> sampleTracker (missing country)
+
+----------------------------------------------
+
+http://192.168.2.47:8080/main/login.jsp
+http://192.168.2.43:8080/main/login.jsp
+2.47是我们开发的测试环境
+2.43是QA的测试环境
+
+-----------------------------------------------
+
+
+
+https://jira.coresolutions.com/browse/CNT-31851
+
+[Test Steps]
+Login system with QAPEGP domain.
+Go to Quality - Sample Request module.
+Create a new Sample Request, fill all mandatory fields, select factory in Vendor Information table.
+Add a record in Item Samples Requested Details grid.
+Click [Send] button, send successfully.
+Go to sample tracker view and open the new sample tracker generated from above sample request.
+Check the value in "Country of Origin" field.
+
+与QAPEGP域登录系统。
+去质量——示例请求模块。
+创建一个新的示例请求,填写所有必填字段,选择工厂供应商信息表。
+添加一个记录样本请求项细节网格。
+点击【发送】按钮,发送成功。
+去样品追踪视图,打开新样品追踪从上面示例请求生成的。
+检查“原产地”字段中的值。
+
+[Actual Result]
+No value in "Country of Origin" field.
+【实际结果】
+在“原产地”字段没有值。
+
+[Expected Result]
+"Country of Origin" should the Country of Origin of the selected Factory.
+【预期结果】
+“原产国”应该选择工厂的原产地。
+
+
+Remark]
+This issue also exists in single sourcing domain, refer to Country of Origin - single domain.png.
+This issue also exists in 6.4.3 beta.2 pgsql upgrade build both single and multiple sourcing domain in pmgqa.coresolutions server, refer to 6.4.3 beta.2.png.
+备注)
+这个问题也存在于单一采购领域,指原产地——单身domain.png。
+这个问题也存在于6.4.3β。2 pgsql升级在pmgqa建立一个或多个采购领域。coresolutions服务器,请参阅6.4.3 beta.2.png。
+
+
+
+
+"Country of Origin" cannot be inherited from factory to Sample Tracker
+“原产国”不能继承了从工厂到样本追踪

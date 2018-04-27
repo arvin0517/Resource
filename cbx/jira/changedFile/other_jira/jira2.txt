@@ -1,0 +1,88 @@
+CNT-28065
+CNT-28715
+---------------------
+CNT-29169
+---------------------
+jimbo
+
+CNT-31998
+
+CbxStatusLabelRenderer
+
+sample_form_1.xml
+
+sample_form_1.zul 
+
+sampleTracker_form_1.xml (139 matches)
+
+ViewAction
+
+view_entity.xml (7 matches)
+
+-------------------------------------
+
+jimbo
+CNT-30127
+
+-------------------------------
+
+CNT-29244  Should show "Active Quick Quotes" link name in Dashboard
+
+----------------------------------------
+
+CNT-29571  Should show "Attribute Summary" column's width is L in Artwork listing view
+
+----------------------------------------
+
+CNT-29731:  Jenkins: cbxb and cbx-biz-db: use the latest cbx jar files   
+ 
+ (因为CBXB还没有pull最新的，所以看不了update file 后的pgsql-build.xml，之后可以找时间看看)
+
+In Git: CBXB:
+
+Update file:
+pgsql-build.xml
+
+Logic:
+
+Define "clean-cbx-jar" target
+Remove the corresponding cbx jar files in the lib folder
+
+Define "retrieve-cbx-libraries" target
+Depends on "clean-cbx-jar" target to remove the old cbx jar files
+Call "get-jar" target to retrieve the latest corresponding cbx jar files
+
+Define "get-jar" target 
+   Retrieve the maven-metadata.xml in the current version SNAPSHOT folder (e.g. com/core/cbx/cbx-common/6.8.0-SNAPSHOT) to get datas to make up the latest cbx-common jar name
+       Cut the version field(e.g. 6.8.0-SNAPSHOT) to get the version number(e.g. 6.8.0)
+   Retrieve the latest cbx-common jar file and rename to the official version (e.g. cbx-common-6.8.0.jar) to lib folder
+
+Update the "build-all" target
+Add the "retrieve-cbx-libraries" after the "clean" in the "depends" tasks
+Will call every time to retrieve the latest cbx libraries after clean.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Update file:
+settings/pgsql-generator.properties 
+Logic:
+Add property "nexus.repository.url" to save the url to nexus server
+
+-----------------------------------------------------------------------------------------
+
+CNT-29795 Show duplicated rows in copied event - actions grid after update status to other in define action details window
+
+
+PopSelectActionTypeComposer	
+
+--------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+

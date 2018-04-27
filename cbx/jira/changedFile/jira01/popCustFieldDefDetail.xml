@@ -1,0 +1,14 @@
+<PopupCustomWin id="popCustFieldDefDetail" labelKey="lbl.popCustFieldDefDetail" size="S">
+  <Toolbar id="popCustFieldDefDetailToolbar">
+    <Buttonbar id="popCustFieldDefDetailActionButtons" align="right">
+      <Field id="ok" labelKey="lbl.popCustFieldDefDetail.ok" type="Button" action="CustFieldDefDetailOkAction"/>
+      <Field id="close" labelKey="lbl.popCustFieldDefDetail.close" type="Button" action="PopupCustomWinCancleAndCloseAction"/>
+    </Buttonbar>
+  </Toolbar>
+  <Grid id="fieldAttributes" labelKey="lbl.popCustFieldDefDetail.fieldAttributes" entityName="CustFieldDefAttr" showHint="false">
+    <columns>
+      <Column id="attrKey" labelKey="lbl.popCustFieldDefDetail.fieldAttributes.attrKey" readonly="true" type="Text" rendererClass="com.core.cbx.custfielddef.form.CustFieldDefAttrKeyCellRenderer"/>
+      <Column id="attrValue" labelKey="lbl.popCustFieldDefDetail.fieldAttributes.attrValue" type="Text"/>
+    </columns>
+  </Grid>
+</PopupCustomWin>

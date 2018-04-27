@@ -1,0 +1,15 @@
+
+https://jira.coresolutions.com/browse/CNT-30202
+
+[Test Steps]
+Login system with QAPEGP domain.
+Go to Quick Quote - Active under Sourcing.
+Select a Quick Quote record which is not confirmed.
+Click [Create Request for Quotation] button.
+Check the warning message.
+[Actual Result]
+Show the warning message: "The below record(s) is not available to create {Module Name} since the document still not yet confirmed.
+Qq: {Quick Quote No.}"
+[Expected Result]
+Should show the warning message: "The below record(s) is not available to create {Module Name} since the document still not yet confirmed.
+{Quick Quote No.}"

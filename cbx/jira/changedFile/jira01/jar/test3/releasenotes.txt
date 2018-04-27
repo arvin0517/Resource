@@ -1,0 +1,2623 @@
+﻿CBX [ UI ]
+Release 6.8.0 on yyyy-MM-dd
+===============================
+  CNT-32132 Coding - [Factory Audit] Data Filter Issue
+  CNT-31952	Enhance dashboard to only display shortcut links but no counter values (Merge CNT-30146 to 6.8)
+  CNT-31963 Cannot show checkbox in vendor submission popup of Sample Tracker after setting the domain attribute "ui.popup.security.winIds.enable"
+
+Release 6.7.0 on yyyy-MM-dd
+===============================
+  CNT-31905 Coding - Filtering Checkbox does not work
+  CNT-31911 [Coding]Columns should not be shifted in grid after applying some data filters (Part 2)
+  CNT-31809 [Coding] - Advanced search for code list field allow user input undefined value to search
+  CNT-31746 [Coding]-Custom fields not arranged in order in table in Item document
+  CNT-31438 (DSG-1509) External Working Domain - Hide the [Add/Remove Columns] button in grid level for External administrator (merge 6.x)
+  CNT-31543	Allow project to hide actions from display in UI but allow to execute in server (merge 6.x)[DSG-1543]
+  CNT-31638	Coding - Sourcing No. cannot be cleared after removing selected Item in Sample Tracker
+  CNT-31755 [Merge CNT-30093 to 6.7] - [Item] Quote Brand dropdown value shows up inconsistently
+  CNT-32009 coding - Data filter does not work after re-ordering column
+
+Release 6.6.0 on yyyy-MM-dd
+===============================
+  CNT-30258 [SNP] Home page display as blank occasionally when enter from SNP
+  CNT-31198 Coding - Should not show warning message when closed popup after saved sample evaluation
+  CNT-31204 [Coding]Cannot save and confirm user successfully after updating a password in compliance with policy requirements
+  CNT-31094 [Coding]Always show red dot with total message count in Header pane of Buyer and Vendor domain (Part 2)
+  CNT-30916 Special handling for sending document containing vendor/factory master as reference (merge 6.x) (DSG-1500)
+  CNT-31163 [Merge to 6.6] Performance issues found in 6.4.1 performance test
+  CNT-31111 [Coding][DSG-1502] Merge CNT-30290 to 6.6 - Minor UI updates to the top pane tabs area
+  CNT-31013 [Merge CNT-26232 to 6.6] Wrong module is displayed when clicking on message icon
+  CNT-31120 [Coding]-[DSG-1429] Cannot open Inspection Booking in Inspection Report
+  CNT-30880 Error handling if CPM sever is down (Part 1) (Merge 6.x) (DSG-1501)
+  CNT-31144 [Coding] - [DSG-1429] "Critical", "Major", "Minor" in Inspection Report>Defect Details tab should be displayed based on template's setting
+  CNT-30926	CPM layout UI changes (merge 6.6) (DSG-1503)
+  CNT-31211 coding - Cannot clear "Remember as default" in Advanced Search
+  CNT-31385 [Merge CNT-30422 to 6.6] - Enlarge popup size for sample submission from sample tracker (DSG-1310)
+  CNT-31399 Coding - [DSG-1283/SNP] Popup message not match with mock up when vendor user clicks User preferences in CBX
+
+
+
+Release 6.5.0 on yyyy-MM-dd
+===============================
+  CNT-30900 [Coding] CpmTask become empty when change tab to 'Change History' in 'Milestone Additional Information' popup in listing view cpm mode
+  CNT-30888 When open Home Milestone view at first time, it shows milestones which is not assignee to current user
+  CNT-30895 [Coding] Display blank page of duplicated window page in Inspection Booking
+  CNT-30817 [Coding] Show invalid warning when left the saved document (all modules) - Without RHP parties
+  CNT-30742 [Coding]Columns should not be shifted in grid after applying some data filters
+  CNT-30805 [Coding] No response when clicking sample icon in Item Sample Requested Details grid in Sample Tracker module
+  CNT-30736 Coding - Show error view when create custom view with same viewname but different module
+  CNT-30627 Coding - Not show the [set as default] button after create custom view
+  CNT-30707 [Coding] [Masters] Fail to create Factories
+  CNT-30652 [Coding] [DSG-1360] There is no need to update the advanced code on existing CPM record with immediate effect
+  CNT-30590 [Coding]Cannot display other sections when collapsing a section with more items in Inspection Report
+  CNT-30222 [Coding] Merge the Batch Update > Inspection Booking button into Batch Update drop-down (DSG-1414)
+  CNT-30582  Coding][DSG-1338] Data filter is missing in some custom fields in grid and look&feel is different from standard fields
+  CNT-30279  [Coding] - Should only click popup icon to open the doc
+  CNT-30340 [Coding][DSG-1231] Inactivation issue whereas user are already connected to the vendor domain
+  CNT-30362 Coding-[DSG-1231] No validation when sending to inactive vendor
+  CNT-30207 [Coding] - No response when clicking Shipment Advice No. in Corrective Action Plans module
+  CNT-30379 [Coding] Show [Update], [Cancel], [+], [Re-Initialize from Profile] button in RHP.Parties section after click [Send] in sample request but cause error
+  CNT-30032 [Coding] [DSG-1264] Total number of record is wrong in CPM view after performing advanced search (Part 2)
+  CNT-30322 Coding： Actions showing in a custom view is different from the ones in the base view
+  CNT-30309 Coding： Actions showing in a custom view is different from the ones in the base view
+  CNT-30238 [Coding] Some data filter issues in VPO table
+  CNT-30147	Coding - "Buyer Selected" and "Vendor Declined" column cannot be sorted in Quick Quote - Items listing view
+  CNT-30289	[Merge CNT-30086 to 6.5] - CPM Layout UI changes (DSG-1411)
+  CNT-30136 Coding - [DSG-1338]Cannot combine data filter in all columns in table
+  CNT-30252 Coding - [DSG-1338] No response to filter "Item Ver." column in Sample Tracker
+  CNT-30404 [Coding]-part D of DSG-1429 - implement the enhancement in Inspection Report except the excel config
+  CNT-30566 [Coding] - [Batch Update Milestone] Review the changes in DynamicEntityImp.java
+  CNT-30608 [Coding] - [UI] Popup Size Issue
+
+
+Release 6.4.0 on yyyy-MM-dd
+===============================
+  CNT-29196 [Coding][DSG-1338] Data filter is missing in some custom fields in grid and look&feel is different from standard fields
+  CNT-29985 [Coding] After click [Save] in Milestone Details view, the value of 'Ref. No.' should not displayed as empty
+  CNT-29268 [Coding] [DSG-1223] Search function does not work in Home > Milestone view
+  CNT-29965 [Coding] Performance issue when saving the item with many colors and sizes
+  CNT-29734 Coding - Missing error message if user leaves the document when the RHP.ResponsibleParties is in Edit Mode
+  CNT-29406 [Coding] Shows a blank page after saving in Costing Detail page
+  CNT-29729 Coding-Show Domain Name instead of Domain ID in the dropdown of [Select working domain]
+  CNT-29655 Coding - Wrongly show the font color in the "Recent Changes" listing view after clicking the browser's refresh button
+  CNT-27946 Merge CNT-27638 to 6.0 development branch - Always show login sessions page even the user did not log into CBX
+  CNT-28973 Coding - Show one blank row in advanced search drop-down in all listing views
+  CNT-29607 [Coding][DSG-1326]Some UI issues in Buyer and Vendor domain
+  CNT-29480 [Coding] [DSG-1236] Only 2 rows should be available for the milestone name
+  CNT-29359 [Coding] [Home - Search] should not switch to Item - All view when click quick search icon in Home
+  CNT-29384 [Coding] [DSG-1323] There should be no inherited values in batch update popup window
+  CNT-29614 [Coding] Should default display "My Milestones" of Home - Milestones view
+  CNT-29651 [Coding]Hide advanced search criteria in Custom View/Personalized View from normal users (DSG-1309) Part-2
+  CNT-29621 [Coding] [DSG-1338] No response when filter the columns which data type as decimal/number
+  CNT-29386 [Coding] [DSG-1341]Should display Attribute Summary's value according to Attribute table records
+  CNT-29341 Coding - Title is shown incorrectly when clicked [Cancel] in the Personalized View
+  CNT-28417 Merge CNT-25780 to 6.X development branch - Performance tuning on OpenModuleDocAction
+  CNT-28418 Merge CNT-23967 to 6.X development branch - Don't write UI Tracking into database
+  CNT-29415 Coding - Change "View sourcing/pricing records" to use relative path URL
+  CNT-29642 Coding - [DSG-1338] Cannot show all records when Copy from another document after applying data filter
+  CNT-29416 Coding - Check and fix coding in which absolute URL is used
+  CNT-29609 [Coding] - DSG-1325 part B - Inspection Report Template & Inspection Report enhancement
+  CNT-29756 [DSG-1442][SNP] For vendor user: Hide the domain dropdown, show SNP login after logout
+  CNT-29862 [Coding] - part 3 of CNT-29799 - "Requirements" Grid new record miss radio box after click [Add] button
+  CNT-29935 Coding - [DSG-1424] [SNP] Vendor / Buyer connection management
+
+Release 6.3.0 on yyyy-MM-dd
+===============================
+  CNT-29576 [Coding] Hide advanced search criteria in Custom View/Personalized View from normal users (DSG-1309) Part-1
+  CNT-29171 [Coding] - Incorrect sorting result with fields having empty value
+  CNT-29044 [Coding] The duplicate view listing cannot keep its searching criteria
+  CNT-28958 [Merge to 6.3] - Import file size limit does not follow the domain attribute setting
+  CNT-28962 [Merge to 6.3] - Cannot switch to the view when clicking the link in "Manage Favorites (Search)"
+  CNT-29000 [Coding]Allow create RFQ from project (DSG-1324) - Part 4
+  CNT-28876 Coding - Ability to show CPM milestone change history (DSG-1285)
+  CNT-29030 [Coding] adopt ZK grid data filter in CBX
+  CNT-28834 Coding - CNT-18390 Sequence number of name for creating custom view cannot autonomous growth
+  CNT-28968 [Merge to 6.3] - Show "No Records" after Add/Remove columns in listing view
+  CNT-28858 [Coding] - UI issues in "Select CPM Template" and "Refresh CPM Template" popup window
+  CNT-28733 [Coding]-[DSG-1236] CPM Addition Information UI issues
+  CNT-28923 Coding - [DSG-1320] Correct item - view quotation/pricing record behavior (6.3)
+  CNT-28927 [Coding] Support batch update on inspection booking (DSG-1323) - Part 4 Popup UI ACL
+  CNT-28841 [Coding]Allow create RFQ from project (DSG-1324) - Part 3
+  CNT-28655 Enhance Vendor PO for inputting item color/size breakdown (DSG-1289)
+  CNT-28443 [Coding] - [DSG-1236] When the task status is "Rejected", CPM Bar/Tracker/Detail should show background color as 'Light Grey'
+  CNT-28964 [Coding] [DSG-1264] Total number of record is wrong in CPM view after performing advanced search
+  CNT-28709 [coding] - Some Item document show error when click on Sample Request button
+  CNT-28970 [Coding] View status not cloned when duplicate window
+  CNT-28908 [Coding]"Email" icon displayed in header pane does not meet with requirement in all modules
+  CNT-28929 [Coding][DSG-1336] Enhance grid data entry performance (Part 1)
+  CNT-27874 [Coding] When milestone's status = Waived, should merge the status, actual end and planned end fields, and display "Wavied" in the middle
+  CNT-28928 [Coding]Missing prompted warning message: "Please select Item and Vendor first." in CAP form
+  CNT-28778 [Coding] - Some fields should not be mandatory when the milestone status set to "Reject" in "CPM.Batch-Update"
+  CNT-28707 [coding] - [RHP] RHP should collapse automatically when clicking somewhere on popup window
+  CNT-28703 [Merge to 6.3] No response when clicking Advanced in the view after search for date field with "Remember above as default" checked
+  CNT-28743 Coding - Missing the search icon in all lookups
+  CNT-28557 Coding - [DSG-1236] There should be no "Close" button in CPM Tracker popup
+  CNT-28760	[Coding] --[DSG-969] --- Part C - Quick Quote - Part 5 : Excel : form and form_security : UI Layout of Quick Quote
+  CNT-28710 Coding - [RFQ] Large blank space between Label and Icon
+  CNT-28885	coding -- [DSG-969] --- Part B - RFI - Part 3 : Action of RFI : [Create.Quick Quote] and [View Quick Quote]
+  CNT-28865 Coding - Cannot open Sample Request in new tab in Sample Evaluations listing view.
+  CNT-28879 Coding - Ability to deactivate / disconnect a vendor (DSG-1231)
+  CNT-28424 Coding - Sorting according to the original records of the view in Home - Tasks module.
+  CNT-29010 Coding - Implement a report to report on all outstanding CPM milestone data (DSG-1342) - Part 1
+  CNT-28873 [DSG-1354] - Part C enhance CPM logic can use DUID to retrieve child level entity
+  CNT-28907 Implement a report to report on all outstanding CPM milestone data (DSG-1342) - Part 2
+
+Release 6.2.0 on yyyy-MM-dd
+===============================
+  CNT-28517 [Coding]Missing mandatory checking in custom field in approval popup and missing custom fields in Home - Approval listing view
+  CNT-28432 [Coding][DSG-1233] There should be no CPM mode icon for views without CPM template applied
+  CNT-28523 [Coding] - [CPM] Advance Search UI Issues
+  CNT-28503 [Coding]Update Vendor/Buyer domain header pane UI to distinguish their identity (Option 1)
+  CNT-28501 [Coding]Ability for administrator to resend invitation request to not yet connected vendors (DSG-1157)
+  CNT-27857 [Coding] - When clicking the icon [Inbox] and Left Navigation, a different Inbox view is displayed
+  CNT-28396 [Coding] Advanced search in CPM views (DSG-1264) - Part 2 Search Action
+  CNT-28276 [Coding]-Show blank page when doing simple search function in CPM Mode listing view (hub domain)
+  CNT-28394 [Coding]  [Part 2]-Enhancements to Inspection (Web) for 6.2 (DSG-1006)
+  CNT-28398 [Coding] - [Part 3]-Enhancements to Inspection (Web) for 6.2 (DSG-1006)
+  CNT-28240 coding - Allow default user group to modify responsible party according to template (DSG-1340)
+  CNT-28317 [Coding] - Advanced search in CPM views (DSG-1264) - Part 1 UI
+  CNT-27771 [Coding][DSG-1233] Button [Export] should be removed in CPM mode
+  CNT-28014 Coding - Selected Color is displayed incorrectly when reopening the Sample Request Template
+  CNT-27874 [Coding] When milestone's status = Waived, should merge the status, actual end and planned end fields, and display "Wavied" in the middle
+  CNT-28260 Coding - CPM related minor bug/changes fixing from 6.0 (DSG-1317) - Part 1 (point 1,2,3,6,7)
+  CNT-28279 Coding - CPM related minor bug/changes fixing from 6.0 (DSG-1317) - Part 2 (point 4)
+  CNT-27890 Coding - [DSG-1233] Default columns show incorrectly in listing view returned from CPM mode by clicking left nav
+  CNT-27937 Coding - [DSG-1233] UI issue in CPM mode of listing view
+  CNT-28198	[Coding] - CNT-28039 [DSG-1179]Should not show warning message when click popup icon of "Factory Name" in Request Revise Sample
+  CNT-28274	coding -- Standardize dropdown menu (form/view listing) expand when mouse-over
+  CNT-25365 Merge CNT-25300 to 6.2 - No response when vendor click the icon of Color/Pattern in Sample Request/Tracker
+  CNT-28433 Coding - Popup issues in Artwork BOM's Primary Color
+  CNT-28203	[Coding] - CNT-28118 No response when click "+" button in Sample Request->Requested Details grid
+
+Release 6.1.0 on yyyy-MM-dd
+===============================
+  CNT-27522 Merge 26767 - Merge CBX code change to use zoomify server
+  CNT-27905 Coding-Strange pattern is displayed in when selecting Requirement in Item when "/" is added in HCL's name
+  CNT-27933 [Coding] [CPM] in rest client, enhance the response code with RestAPIException
+  CNT-27941 [Coding] CPM mode cannot be displayed in VPO - Active / Draft / All listing view
+  CNT-27886 [Coding]Cannot refresh CPM document bar when update Milestone
+  CNT-27373 [Merge to 6.1] [DSG-493] Color did not display in Item Color Lookup
+  CNT-27887 Code - [CPM] Change to fire a cpmId to open a milestone in CpmTaskListWindow.openMilestoneDetail (String refDocRefNo)
+  CNT-27480 Coding - [Part 5: Allow vendor to provide sample evaluation details (DSG-1054)]
+  CNT-27362 [Coding] Cannot reset the view column definition to the original one that was configured by administrator when clicked [Reset to Original] in Add/Remove Columns popup
+  CNT-25615 coding - Part 1 - Allow send sample evaluation from buyer domain to vendor domain (read-only) (6.0) - DSG-1191
+  CNT-27821 [Coding]Missing some fields in popup Document Field Lookup window of CPM Template
+  CNT-27657 [Coding] [DSG-1236] The background color cannot be updated in CPM Tracker window
+  CNT-27818 Merge CNT-26745 to 6.1 hotfix branch - [DSG-1278] Adopt spring session to better support CBX clustering
+  CNT-27030 [Coding] - RHP should not be editable when a new document is created in document and not yet saved
+  CNT-27056 [Coding]Item - Incorrect popup when creating other document from a CAP flagged Item (inside document)
+  CNT-27279 [Coding] - Document is not refreshed after clicking [Add/Remove column] in grid and then performing Save/Save and Confirm action
+  CNT-27389 [Merge to 6.1] "Reset to Original" does not reset the view column/sorting definition to the original one that was configured by administrator (Part 2)
+  CNT-27108 Coding - [DSG-584]When less than or equal to 10 rows should not show scroll bar
+  CNT-27107 Coding - An UI issue in "Critical Path Tracker" popup window
+  CNT-27420 Coding - Shown wrong button name when clicking [Confirm] in Grid.Add/Remove columns popup window
+  CNT-27642 Coding - [DSG-1180]Show incorrect width for "Item name" field in Quotation
+  CNT-27838	coding -- [DSG-1236] Click [Cancel] button in CPM Detail popup but the "Assignee" value saved
+  CNT-27870 Coding - Label of custom action cannot be displayed in Related Activities
+  CNT-27096 Coding - Format of decimal type field will change after saving in Requirement Template and Items' Requirements tab
+  CNT-27858 Coding - Support search for assignee functions in CPM (DSG-1294) - Part2
+  CNT-27715 [Coding] - [DSG-1233] Icon of toggle to CPM mode should be hidden when setting domain attribute to turn off vendor access to CPM
+  CNT-27753	coding -- [DSG-1236] The backgound color of [Approved] milestone is incorrect in CPM Detail popup
+  CNT-27831 [Coding] - [DSG-1233] All milestones which exist in selected CPM bar should be listed in table 'Task' in Batch Update window
+  CNT-27940 [Coding] Convert search in CBX to adopt new CPM architecture (DSG-1223)
+  CNT-27498 Codelist's value displayed in the listing view and document does not match
+  CNT-28119 [Coding] - Display issue in Batch Update window
+
+Release 6.0 on yyyy-MM-dd
+===============================
+
+  CNT-27621 Coding - [DSG-1236] The row background color should be changed to only when the Milestone status is waived
+  CNT-27626	coding -- When update the CPM milestones, the tracker should be reflected with the latest values
+
+
+Release 6.0 on yyyy-MM-dd
+===============================
+
+  CNT-27504 [Coding] - [DSG-1236] Cannot remove attachment in Critical Path Milestone Detail
+  CNT-27501 [Coding] [DSG-1236] The values are all cleared when click on [Cancel] button in the CPM detail popup
+  CNT-27486 Coding - [DSG-1236] Cannot open initialized CPM tracker after adding another shipment item
+  CNT-27460 [Merge to 6.0] 2.108 is down because of NullPointerException
+  CNT-27127 [CPM] - Known Issues
+  CNT-27291 [Coding] [Cpm] "Assigned to me" Can not work normally when assignee is Party contact user
+  CNT-27152 [Merge to 6.1] Log down module/entity along with listing view processing time
+  CNT-27153 [Merge to 6.1] No values in the drop-down list in Sample Type in Advanced Search of Sample Tracker Details view
+  CNT-27077 [Coding] - CPM: Replace existing DataLayer call to use the REST call
+  CNT-27004 [Coding] [Cpm] Milestone detail popup win refNo column no value when this popup trigger in Home -> Milestone view
+  CNT-26164 [Coding] [Cpm] MilestoneDetail-GA.6.0 - Assigned to me / In-progress / Late (DSG-1236) Part 6
+  CNT-27058 [Coding][DSG-871] Duplicated seq should NOT be allowed in Others Tables in Vendor - Custom tab 'Other'.
+  CNT-27008 [Coding] [Cpm] MilestoneDetail-GA.6.0 - Save/Cancel and Validation (DSG-1236) Part 4
+  CNT-26959 [Coding] - [Cpm] Critical Path Tracker (DSG-1236) Part 2
+  CNT-26938 [Coding]-[DSG-1234] Missing milestones in TO-DO/Tasks/Critical Path Management view in Vendor Domain
+  CNT-26713 [Coding] [Cpm] MilestoneDetail-GA.6.0 - Popup UI (DSG-1236) Part 7
+  CNT-26409 Coding-CPM initialization logics enhancements (DSG-1234) - Point #2 [Part II]
+  CNT-26933 [Merge to 6.0] No response when clicking "Select" button in Inspection Report.Shipment Items after copying to a new Inspection Report
+  CNT-26678 [Coding] [Cpm] MilestoneDetail-GA.6.0 - Popup UI (DSG-1236) Part 3
+  CNT-26170 [Merge to 6.0] No response when clicking the 'My Favorite Search' link
+  CNT-26301 [Coding] Review view listing data definition to make sure referenced data is consistent (DSG-1166) Part1
+  CNT-26180 [Merge to 6.0] Custom fields cannot be shown in approval popup
+  CNT-26066 [Coding] CPM initialization logics enhancements (DSG-1234)
+  CNT-26157 Coding - Part 3 - Disallow DRAFT/PENDING editing status document to be delivered to other domain (DSG-1011)
+  CNT-25984 [Merge to 6.0] [DSG-1045] Some columns should not be shown in RFQ listing views for vendor
+  CNT-25966 [Merge to 6.0] [DSG-1168] Should not display the warning message when click the search not in the first time without search criteria
+  CNT-25985 [Merge to 6.0] [5.16 Clean Build] A collection of UI issues-part 2
+  CNT-25980 [Merge to 6.0] [DSG-1168] Should show No record page when there is no record matching the search criteria
+  CNT-25983 [Merge to 6.0] [PGSQL] No response when clicking "Select" button after the operation of add/remove columns
+  CNT-25982 [Merge to 6.0] [PGSQL/Oracle] Cannot save Critical Path successfully after popup mandatory field missing firstly
+  CNT-25350 Coding - Cannot open vendor record in My Recent Items listing view
+  CNT-25276 [DSG-652] Item 2.0 - Redesign Item/Spec/Brief module
+  CNT-26009 [Merge to 6.0] [PGSQL]Image name displays incorrectly when downloading it using Firefox
+  CNT-25953 [Merge to 6.0] There is no warning message when selecting nothing for actions like batch create, mark as, set to xxx and so on
+  CNT-26178 [Merge to 6.0] Drop-down fields in grid cannot be shown properly
+  CNT-26583 Coding - [Cpm] Cpm Bar (DSG-1236) Part 1
+  CNT-26636 Coding - CPM view listing enhancement (DSG-1233) - Part 1
+  CNT-26373 [Merge] CNT-26369 for branch 6.0 - cbx-ui: Upgrade vulnerable third party libraries reported by OWASP
+  CNT-26579 [Merge to 6.0] Drop-down fields in grid cannot be shown properly in IE
+  CNT-26761 Coding - CPM view listing enhancement (DSG-1233) - Part 2
+  CNT-26888 [Merge to 6.0] [Inspection Report] The Seq. number is wrong in Test Item Gird
+  CNT-26968	[Merge to 6.0] [SSO] URL is too long to navigate to JasperReport
+  CNT-27084 Coding - CPM milestone validation enhancement (DSG-1239) Part 1 - Validation inside Milestone Detail Popup
+  CNT-27093 Coding - CPM milestone validation enhancement (DSG-1239) Part 2 - Validation in listing view Quick Edit
+  CNT-27354 Coding - [CPM] Search View CPM Mode - Quick Edit and Advance Edit do not work
+  CNT-27487 Coding - [DSG-1233] Only display the latest version VPO record in CPM mode - All view
+
+Release 5.17.0 on yyyy-MM-dd
+===============================
+  CNT-25214 Coding - [VQ2] Unexpected exception when save vq2 with codelist defined in Requirements section (Others tab)
+	CNT-24935 [Coding] - Implement collaboration between CBX and CVP (CBX Side) - Part 1
+  CNT-24946 Coding - [DSG-1168] Enhance listing views to optionally show nothing on first open
+  CNT-24872 [Coding] Missing display image upload icon in Item - Colors, Sizes & SKUs tab
+  CNT-24898 [Coding]Investigate whether we add new attribute to user profile
+  CNT-24875 [Coding]Fix checkstyle errors for CBX_UI project
+  CNT-24548 [coding][UI issue] Mandatory Red line will miss in Grid columns if the label names occupy more than one row
+  CNT-24776 [Coding] Select Color / Pattern / Size from Item to Sample Request / Sample Tracker (DSG-493)-Part 2
+  CNT-24811 [coding] - Notification Profile setup - remove the red line for some non-mandatory fields
+  CNT-24577 [Coding] HCL Type display issues in different browser - Part 1
+  CNT-24334 coding - Support upload multiple images/attachments in one click (Part 2) (DSG-1114)
+  CNT-24705 coding - [Inspection Report] Validation issue on "More Details" popup
+  CNT-24679 [Coding]Inactive checkbox in Sample Tracker throw exception by tick it when create
+  CNT-24435 Coding - Vendor cannot open the Contract file reference in the Home - Inbox
+  CNT-24484 Coding - CNT-24367 Send the vendor master with factories records and show invalid alert message
+  CNT-24721 coding - [DSG-584] Part2: Implement the UI part for "activities"
+  CNT-24597 [DSG-584] part4: Update the processing logic for Audit log and  "activities"
+  CNT-24587 Coding-Contact Type is missing in Select Email popup for vendor in RFQ
+  CNT-24774 Coding - [DSG-584] Part5: Update the processing logic of Responsible party for "activities"
+  CNT-24587 Coding-Contact Type is missing in Select Email popup for vendor in RFQ
+  CNT-24803 coding -- Changing data list type for code lists / hierarchical code lists / lookup lists should not remove existing codes
+  CNT-24797 [Coding]No response when click Add/Remove Colums button in Color BOM grid of Specification
+  CNT-24941	coding -- Some modules can not show [Responsible Party>Batch Update] button in listing view
+  CNT-25062 Coding:[PGSQL]No any record displays in Order- "Select from Customer..."popup
+  CNT-25185 Coding - Cannot select mutiple Components records in Vq2 doc
+  CNT-25165 Coding:[PGSQL] Search function cannot work in lisitng view and popup window
+
+Release 5.16.0 on yyyy-MM-dd
+===============================
+  CNT-24582 [Coding] [UI] High Priority UI issues on icons, alignment, color & padding etc.
+  CNT-24450 [Coding] Custom field added to grid cannot be found in Add/Remove Columns popup
+  CNT-24522 [Coding][DSG-1118]Cannot set some fields in Item and VQ2 to readonly
+  CNT-24342 [Coding]Missing data in Admin listing view when clicked "Duplicate Window" Icon
+  CNT-24339 [Coding] [enhancement] Make custom field support multi-language in form-part1
+  CNT-24409 Coding-Enhance selectionbox to disable auto search by configuration
+  CNT-24350 [Coding]Whole form will be moved to left after closing ,canceling ,confirming the Forum, Notes,Parties popup in RHP
+  CNT-24166 Coding-Action buttons are lost in the duplicated window when opening from a popup
+  CNT-24328 [ZK8] Fix setHflex() error
+  CNT-23896 [Coding] VQ 2.0 - invalid sorting and sequence number in assortment table
+  CNT-21912 [ZK8.0] ZK 8.0 Porting
+  CNT-24220 Coding - Item/Spec versioning issue in Inspection Booking and Inspection Report
+  CNT-24175 [Coding] - Base Access Right of an External Domain 3.C (DSG-729) - Part I
+  CNT-24215 [Coding] - Missing Business Hierarchy section in Classification Domains
+  CNT-24050 Coding-[DSG-919] Enable ACL for batch update party action on all views
+  CNT-23968 Coding - [DSG-966] Some issues in HTS popup
+  CNT-23918 Coding - Prompt wrong message when updating CPM task and other documents which are being locked by another user within same domain.
+  CNT-24035 Coding - At least one vendor or one responsible party should be defined in Sample Request (Part 2)
+  CNT-24129 Coding - Editable/Readonly fields in VQ2 do not follow the settings defined in Role setup
+  CNT-24240 Coding - CNT-24103 Generated wrong records in Assortment table when refresh records after deleted Colors/Sizes
+  CNT-24297 Coding - No response when clicked on dropdown before Snackbar message disappears
+  CNT-24302 Coding - Throws exception when click [Save & Confirm] in Quality Checklist document.
+  CNT-24307 Coding - [DSG-966] Fail to search the HTS by Section and Chapter
+	CNT-23832		[DSG-964]Lack of mandatory validation in Requirement table of Quotation
+  CNT-24615 [Coding] - [VQ2] When mandatory validation has been applied to some fields in the costing information section, the red lines are not shown
+
+Release 5.15.0 on yyyy-MM-dd
+===============================
+  CNT-23740 [Coding] [REST API] Enhance error repsonse provided to client (Part 1)
+  CNT-23908 [Coding] - Custom fields cannot be shown in Approval popup
+  CNT-23585 Coding-The Section field of copied Requirement cannot be refreshed in Factory Audit Template
+  CNT-23823 [Coding] - Fail to show the [OK] button in Popup.Selection.ResponsibleParties when document is in read mode
+  CNT-23513 Coding - Should only show the item no from Requested item table when type value in Item No.
+  CNT-13734 [Coding] Should display Sort by = "Last Modified on" when click [Reset] in the Sorting pop-up window
+  CNT-23713 [coding][Jasper SSO] When role is embedded in Group and assigned to a user, the user cannot grant the role permission in Jasper Report
+  CNT-23685 [coding][DSG-908] Right hand pane UIX enhancement (part 1)
+  CNT-23640 [Coding] In the followed document inbox/email notification, add a link for user to unfollow the document (DSG-947)
+  CNT-23597 Coding - [DSG-966] Dropdown list search function is not available in HTS popup
+  CNT-23120 [Coding] Fail to reset as default setting in Add Remove Column for Listing View and Grid
+  CNT-23560 Coding - [DSG-966] Duplicate value should not be allowed in "Other Colors/Patterns" in VQ2.0
+  CNT-23633 Coding-[DSG-966] Fail to inherit Quantity UOM to HTS Qty UOM
+	CNT-23112	coding -- CNT-22528 When password is already expired, next login will go to Edit Password page
+  CNT-23771 Coding - [Factory]Display 'ZK' as warning popup title
+  CNT-23754 Coding - [DSG-966] Changed and missing some fields when the document is copied from vq2
+  CNT-23802 Coding - [DSG-966] Missing some columns in Component popup.
+
+Release 5.14.0 on yyyy-MM-dd
+===============================
+  CNT-23126 Coding - Changes in BOM tab of Specification cannot be captured in Change History
+  CNT-23087 Coding - Simple/Advance search issues in Inspection Report - All / Item list view
+  CNT-23099 [Coding] - Advance search can not search the custom field which is "Check box"
+  CNT-22729 [Coding]Vendor should not receive CPM task while "system.external.allowCpm" is false
+  CNT-23010 [Coding] Search result for "Remember above as default" in "Advanced Search" shown as default (DSG-880)
+  CNT-22981 [Coding] Show error in the View Administration listing
+  CNT-22908 [coding]- enhance Fact Audit for CNT-22487 (DSG-920)
+  CNT-22977 [Coding] - Defect Level should be default to 0
+  CNT-22885 [Coding] - Missing change the module color and collapse the sub-menu in Home's short cut bar
+  CNT-22806 Coding - [Home] Incorrect inbox shortcut after click [Back]
+  CNT-22965 [Coding] Add/Remove columns don't work in second time setup
+  CNT-22869 [Coding] Change dashboard counter to display the count up to 999999 instead of max. 99 (DSG-839)
+  CNT-22627 Coding - Always dispay Warning message in Batch Update window
+  CNT-22724 Coding - Should not change Image in RFI Items table when click [OK] button in Existing Item's More Image popup
+  CNT-22803 [Coding] - Missing Right click actions(Open in new tab, Open in new window.) in related document link
+  CNT-22954 [Coding] - In read-only mode, only [Close] button need be shown in More Image popup window
+  CNT-22662 Enhance Quotation (Quotation 2.0) (DSG-966)
+  CNT-22912	[Coding] - CNT-22549 After loading "My Recent Item" the left hand pane unable to collapse automatically
+  CNT-23142	Coding - [Project] Integer field should only allow to input 18 digits.
+  CNT-23139	coding - Missing prompt message when not selecting records to delete in Measurement - Measurement Details grid
+  CNT-23196  Don't preload view definition during selection box initialization
+  CNT-23105	Coding--CNT-22669 The Seq. of some Test Items in Inspection Report are incorrect
+  CNT-22634 Coding - CPM Task Details popup - No need to show RHP and incorrect popup title
+  CNT-23195 Coding - [VQ2.0] The name for HTS can't be shown in the grid --- Known Issue for the JIRA of CNT-22662 (DSG-966)
+  CNT-22599 Coding - Promote wrong message when update CPM TASK which is being locked by another user.
+
+Release 5.13.0 on yyyy-MM-dd
+===============================
+  CNT-22719 [Coding] [Master] The vertical scroll bar on "More.." page cannot display last row normally.
+  CNT-22724 Coding - Should not change Image in RFI Items table when click [OK] button in Existing Item's More Image popup
+  CNT-22627 Coding - Always dispay Warning message in Batch Update window
+  CNT-22416 [Coding]Get exception when clicked [Save] again but do not fill the 'Actual End' field in Critical Path
+  CNT-22546 Coding - When user press "enter" in Item Name on last row of "New Items" section, The "Item Description" field value will be erased
+  CNT-22516 [Coding] [View] Try to persist column width setting into user session first, and persist the data into DB when session become invalid.
+  CNT-22268 [Coding] 'My Favorite Searches' cannot copy searching filtering during creation
+  CNT-22421 [Coding] Null columns display in [Add / Remove Columns] and [Show more...] in Factory Audits
+  CNT-22380 [Coding] - If the Name is empty, just display the {Display Name} in POM Template and Item Spec
+  CNT-22258 [Coding][CPM] Cannot open reference doc in To-Do view
+  CNT-22164 [Coding][CPM] CPM Display In External Party side (DSG-961)
+  CNT-22205 [Coding] [CPM] Allow vendor to initialize/update CPM (DSG-961)
+  CNT-22135 [Coding] First column in table will auto un-check when the custom fields defined in table and first click on add/remove button in table
+  CNT-21457 [Coding]Display messy code in Critical Path - Vendor POs Active listing view
+  CNT-21820	Coding---When password is already expired, the Skip button should be hidden (DSG-924)
+  CNT-21915 Coding - Enhancement in Project (Capture New Item, Create RFI) - [More Images...] (DSG-868)
+  CNT-22069	[Coding] - CNT-21267 (DSG-589)No response when click Send button in RFS popup window
+  CNT-22256 [Coding] [REST API] Default switch working domain to hub when login as a vendor user
+  CNT-22226	[Coding] - CNT-22148 check isDebugEnabled() ActionExecutor before debug logging
+  CNT-22178 Coding - Should not show "ZK" of the prompt message
+  CNT-22536 Coding -CNT-22401 [Inspection Report] Complete the known issue
+  CNT-22634 Coding - CPM Task Details popup - No need to show RHP and incorrect popup title
+  CNT-22631 Coding - [Vendor Domain]Display messy code in CPM tracker.
+
+  CNT-22661 [Coding] No response after clicking "image-mark up" button
+
+  CNT-22688 [Coding]Not available Test Item in Template would still be displayed in the Inspection Report
+Release 5.12.0 on yyyy-MM-dd
+===============================
+  CNT-21604 [Coding] - Attachment popup word wrap up problem which cause file size cannot visible
+  CNT-21169 [Coding] The Copied Factory do not display in Vendor's Factories tab
+  CNT-21529 [Coding] No response when save user in Vendor domain
+  CNT-21201 [Coding] Did not display the edited user name in the locked message in vendor domain
+  CNT-21013 [Coding] - Hyperlink in Invitation Email shall be expired once Registration Confirmation Page is navigated (DSG-918)
+  CNT-20897 [Coding] Missing validation of "Verification Text" in Vendor Registration page
+  CNT-21263 [Coding] (DSG-685) Cannot modify user preference in vendor domain
+  CNT-21444 Merge CNT-20676 to DEV branch - [Sample Request] Attachment can't Download / Replace /Delete when uploaded one file in different GRID
+  CNT-21441  Merge CNT-20750 to DEV branch - [Mark-up] Customize shapes/ icons
+  CNT-21440  Merge CNT-20751 to DEV branch - [Mark-up] Change marked up image background color to white
+  CNT-20625 Coding - Sample evaluation should be updated (and saved) only if there are changes in the sample tracker
+  CNT-21570 Coding - Verify table list and remove if not in use
+  CNT-21598 [Coding] Inspection Booking - Inheritance Definition And Implement Biz/UI Logic
+  CNT-21839 [Coding]Default show admin domain when login with vendor domain
+  CNT-21811 [Coding] - Maximum size of each attached file issue
+  CNT-21881 Coding - (DSG-589) Email should be a mandatory field in RFS popup
+
+Release 5.11.0 on 2016-01-24
+===============================
+Defects Remediated
+------------------
+  CNT-20593 [Coding] - [Vendor Registration Page] Cannot read property 'timeoutUrl' of null
+  CNT-20119 [Coding] Notification profile - Allow recipient to be specified from document field (DSG-726)
+  CNT-19151 [Coding]Remove the MessAdmin
+  CNT-20189 Merge CNT-16750 to DEV branch - Replace dynamic column pagination control
+  CNT-20353 [Coding] [Vendor Registration Page] The link of The CBX Terms of Service is not work
+  CNT-20336 [Coding][Registration Request] Revise the logic to update the document creator of vendor in buyer domain
+  CNT-20317 [Coding][Personalized View] Target Module and Element field is not functioning
+  CNT-20011 [Coding] Vendor Registration Page (CNT-19187) - part 2
+  CNT-19880 [Coding]Buyer Invitation Page (CNT-19185) - Part 2
+  CNT-20142 [Coding] - Implement Vendor Registration (DSG-685) (FD - Point 5 - Buyer-Invitation Email)--Part 2
+  CNT-19480 [Coding]Implement Vendor Registration (DSG-685) (FD - Point 6 - Vendor Registration Page)
+  CNT-20139 [CAP] No prompted message "Please select the Hierarchy first."
+  CNT-20066 Implement multiple images upload in Item & Spec
+  CNT-20067 Implement multiple attachments upload in Item & Spec
+  CNT-20226 coding - Advance Search's "Remember above as default" checkbox is missing in Item listing view
+  CNT-20374 [Coding] Exporting Image (Thumbnail) in "View Export" Function
+  CNT-20369 [Coding] Cannot find the 'Duplicate Window' icon in documents with "Draft" editing status
+  CNT-20404 [Coding] Markup Window [Save] and [Save & Close] not saving the annotations
+  CNT-20615 [Coding]Fixing the vertical alignment issue while Implementing multiple attachments/images upload in Item & Spec
+  CNT-20779 [Coding] Not able to move <Freeze Separator> to the top in Add/Remove Columns
+  CNT-20813 [Coding] Column position is changed after clicking Add/Remove column in Specification POM
+  CNT-20860 [Coding] Forum list filtering (Dashboard / Home > Forum) , Handle Open Doc by referenceNo , Handle Reply message conflict Issue
+  CNT-20634 Coding -[Logging] refine the log level of CBX UI log messages
+  CNT-21003 Coding - Cannot show custom fileds' value of HCL node in Requirement Template
+
+Release 5.10.GA on 2015-08-20
+===============================
+Defects Remediated
+------------------
+  CNT-19095 [Coding]Implement Corrective Action Plans - Part 2
+  CNT-18671 coding - Enhance the Listing view for sample-Sample Tracker
+  CNT-18844 [Coding]The 'Default Contact Name' don't filter by 'User from Group' when input value
+  CNT-15551 [CPM] CPM View - full page scroll bar instead of scroll bar inside the CPM
+  CNT-18342 Missing horizontal scrollbar for Mac OS
+  CNT-17923 Coding - Inbox - show message as read/unread, mark message read/unread is not implemented
+  CNT-18905 [Coding] - Enhance Zoomify file name to include uuid
+  CNT-18329 [Coding] - HCL - [Part 2] handle user deletion of HCL node and mark HCL node as not available
+  CNT-18712 Coding - Implement Requirement Template UI Component
+  CNT-19059 [Coding] - Enhance Zoomify Annotation file name to include uuid
+  CNT-19063 [Coding]"Edit/Amend" Button Enhancement for Document is editing / locked by other user
+  CNT-18245 Coding - Custom fields can't be list out in the views of favoriteView and customView. (For main branch)
+  CNT-19087 Coding - Implement Requirement Template into Specification only
+  CNT-18595	Coding--Prompting user to change password if his current password is nearing expiration
+  CNT-18578 Coding - Review the refresh behavior of a document when user has clicked to 'Amend' the document
+  CNT-18571 Coding - Enhance to allow updating any CPM task fields in CPM batch update
+  CNT-19010 [Coding] Allow user to open the view/document in new tab both in Home Page and SearchView
+  CNT-19463	coding--Review / Revise the domain attribute
+  CNT-19572	Coding - [CPM] Task - batch update cannot see all fields (for DSG-662)
+  CNT-19811 Coding - Missing check the mandatory field in Requirement table
+
+Release 5.10.PR1 on 2015-06-18
+===============================
+Defects Remediated
+------------------
+  CNT-18451 coding - CNT-16833 Missing inherit the Item No in Sample Request's Requested Detail tables
+  CNT-18250 [Coding]RHP cannot be opened anymore after zoom in/out the browser
+  [CNT-17826] - Show "Change Are Not Saved Warning" Pops Up after cancelling a document from edit mode
+  CNT-18296 [Coding] Image upload icon is missing after uploaded a corrupted image.
+  CNT-18349 [Coding]Standardize view/form dropdown menu collapse/expand by mouse-over
+  CNT-18373 [coding]Enhance exception handling for low quality image in Zoomify
+  CNT-18345 Merge CNT-17616 to main branch - "Processing" all the time when creating CPM Template in the first time
+  CNT-18627 [Coding] Improve Document Saved Message
+  CNT-18634 [Coding] Text fields height should not be changed when there is a long value.
+  CNT-17555 [Coding] - Technical change - Enhance AdvancedSearchWin to put correntDoc into actionContext for ListDataViewAction to use
+
+Release 5.9.0 on 2015-06-03
+===============================
+Defects Remediated
+------------------
+  [CNT-17990] - [Coding][AI Plugin] Image can only be zoom once in CBX page
+  [CNT-17546] - The error in the 'Content' field after success save & confirm
+  [CNT-17938] - Coding - Reset did not work in Add / Remove Columns and Sorting in Options.
+  [CNT-18204] - The issue in the listing view when have custom field for this module
+
+Release 5.9.0 on 2015-05-27
+===============================
+Defects Remediated
+------------------
+  [CNT-16964] - Implement new UI design for inbox notification pop up
+
+Release 5.9.0 on 2015-05-23
+===============================
+Defects Remediated
+------------------
+  [CNT-17703] - [Coding]When AI plugin SSO into CBX page,ZK expection(cbxCommonMsg is not define) throws out in browse console
+
+Release 5.9.0 on 2015-05-14
+===============================
+
+Summary
+-------
+    Pending...
+
+New Enhancements
+----------------
+    Pending...
+
+Defects Remediated
+------------------
+    [CNT-17781] - [Coding]Document should be readonly status after opened it
+    [CNT-17543] - Show messy code in warning message when clicking [Reset] button in Add/Remove column window
+    [CNT-17564] - [Coding] Implement a CBX Page to handle the uploaded image from AI
+    [CNT-17557] - [Coding] UI throw exception after save doc
+    [CNT-17318] - [Coding][QA] Implement Sample Evaluation [Action Implementation]
+    [CNT-17402] - [Coding] [Responsible Parties] Implement Responsible Parties
+    [CNT-17495] - [Coding] Implement a CBX Page to handle the uploaded image from AI
+    [CNT-17067] - [Coding]Implement Token Based Authentication SSO solution for CBX Jasper
+    [CNT-17257] - [Coding] Fix download logic to download Mark-up image when image viewer/editor is showing Markup.
+    [CNT-17347] - [Coding][RHP] Implement Forum Panel in RHP
+    [CNT-17398] - [Coding][RHP] Implement Document Information Panel in RHP
+    [CNT-17413] - [Coding][RHP] Implement Responsible Parties Panel in RHP
+    [CNT-17443] - [Coding][RHP] Apply Style / CSS in RHP
+    [CNT-17346] - [Coding][RHP] Implement Right Hand Pane (RHP) Layout
+    [CNT-17399] - [Coding][RHP] Implement Notes Panel in RHP
+    [CNT-17400] - [Coding][RHP] Implement Notes Panel Popup
+    [CNT-17426] - [Coding] - Use generic message instead of "Zoomify Convert tool can't be found" about "Zoomify Convert" tool
+    [CNT-17431] - [Coding] - Replace latest version (03 Apr) of Zoomify Component to the development branch
+    [CNT-17429] - Replace Zoomify Component for Zoomify Known Issues Fixes
+    [CNT-17090] - [Coding]Implement the Responsible Parties Administration UI
+    [CNT-15562] - [Coding][Refactoring] Organize the duplicate code of open the document form
+    [CNT-16802] - [Coding][Personalized view] Advanced search criteria in Personalized view is not taking effect
+    [CNT-17238] - [Coding]Deleted data in matrix grid are still available
+    [CNT-16740] - Coding - [Templates] Add change history to template modules part 1
+    [CNT-17029] - Coding - [Classification] Add product category to existing forms
+    [CNT-17142] - Coding - [Classification] Enhance access control and data filtering based on product category
+    [CNT-17174] - [Coding]Merge CNT-16951 to main branch
+    [CNT-16960] - [Merge] CNT-16179 for main branch
+    [CNT-17023] - Coding - [Logistics -> Shipment Advice] Missing warning message in popup "Vendor PO Shipment Item Lookup" window.
+    [CNT-16651] - Coding - [View] Persist user view settings without requiring to save as another favorite view.
+    [CNT-17326] - Coding - Enhance document header and footer render logic for icon to conform with right hand pane design
+    [CNT-16651] - Coding - [View] Persist user view settings without requiring to save as another favorite view.
+    [CNT-17320] - Coding - Allow configuration of Product Cat validation in validation xls
+    [CNT-17695] - Coding - Cannot open view from view Administration in RD1.
+    [CNT-17753] - Coding - Custom HCL Field is Missing When Setting Domain Attribute "ui.hierarchy.visibility" value is 0
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace last cbx-ui jar file with cbx-ui-5.9.GA.jar
+
+Library dependency
+------------------
+cbx-common-5.0.071.0
+cbx-core-5.9.GA
+
+CBX [ UI ]
+
+Release 5.9.PR1 on 2015-03-23
+===============================
+
+Summary
+-------
+    Pending...
+
+New Enhancements
+----------------
+    Pending...
+
+Defects Remediated
+------------------
+    [CNT-16949] - [Coding][Master] Implement Evaluation Template [Action Implementation]
+    [CNT-16669] - [Coding] [Validation Error] Should display long numbers properly in validation message
+    [CNT-16693] - [Coding][i18n] The Label was hard code in class ImportRawDataListener
+    [CNT-16528] - [Coding][Advanced search] Dropdown is not showing language based on user perference(For 5.9PR1)
+    [CNT-16334] - [Coding][Excel Upload] Excel upload is blocked by "*.xlsm" extension(for 5.9 PR1)
+    [CNT-14855] - [Item] Cannot delete the value of custom field "Product Category".
+    [CNT-15894] - [Products -> Items] Can't open Default Specification of Item when click the icon of it.
+    [CNT-16420] - [Product -> Item] Will popup File Upload window sometimes when clicking the image
+    [CNT-16496] - [Coding][General] The error in advanced search.
+    [CNT-16744] - [Coding][Costing Template]--Got error when click column header sorting record
+    [CNT-16418] - [Vendor Access] No response when click [Create Quotation] button in RFQ.
+    [CNT-16286] - Advance search condition block is missed in popup when open it again.
+    [CNT-16325] - [Sorting] Sorting on views - different results sorting using column header vs using view option.
+    [CNT-16633] - [View] Horizontal Scroll bar cannot move when clicking the buttons '<' and '> in IE.
+    [CNT-16219] - Implement Zoomify exporting a rasterized image function.
+    [CNT-16640] - [Merge] CNT-16319 for 5.9 PR1
+    [CNT-16698] - Coding - Incorrect Date format but show the date value(for 5.9PR1)
+    [CNT-16694] - Coding - [Logistics->Shipment Advice] the error of Batch Update
+    [CNT-16770] - Coding - [Admin] Enhance Custom Field and Data List Type
+    [CNT-15927] - [Orders - > CPO, VPO] Grid will be changed after open the Detail popup in Items & Prices tab
+    [CNT-16877] - Replace Zoomify Component for Zoomify Known Issues Fixes
+    [CNT-16681] - Coding - Show Image tooltiptext for all image
+    [CNT-16634] - [5.9PR1]Coding - Clicking a tab/navigation entry would automatically switch to another tab wrongly
+    [CNT-16875] - Coding - [View Administration] An exception will show when in click the [Create Custom View] button
+    [CNT-16911] - Coding--DataListType's custom codelist should not be set with those Codelists who are having the same DataListType
+    [CNT-16929] - Coding--Edit Sharing button should allow user to update title and shortcut fields
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace last cbx-ui jar file with cbx-ui-5.9.PR1.jar
+
+Library dependency
+------------------
+cbx-common-5.0.071.0
+cbx-core-5.0.9.PR1
+
+Release 5.8 GA on 2015-03-19
+===============================
+
+Summary
+-------
+    This release includes several bugs fixing, performance tuning and new ImageMark component of Zoomify.
+
+New Enhancements
+----------------
+    [CNT-15086] - [Dashboard] Allow projects to show customized view in dashboard [S75]
+    [CNT-14929] - Replace ImageMark Applet to Zoomify Enterprise JS Component
+    [CNT-11752] - [Performance] Review current saving logic to see if any can put to asynchronous processing
+
+Defects Remediated
+------------------
+    [CNT-15919] - Performance Tuning: DataFormatInterceptor
+    [CNT-15346] - [Admin -> Data List Types]Simple search issue��it will list redundancy search result.
+    [CNT-15354] - [Create Custom View] Gets error when clicking Create Custom View
+    [CNT-14223] - [Products - Items] Silent prompt should continuous show when do simple search continuous.
+    [CNT-13786] - Value will overlapping the Status and Version fields when Zoom in the browser to 125%
+    [CNT-13429] - [Admin HCL] Redesign how HCL is stored - Part2
+    [CNT-15636] - [Build] Build script review and update for Version number change
+    [CNT-15521] - Problem of Mandatory field in popup window
+    [CNT-13588] - [All] Sorting result is incorrect by clicking Vendor Name to sort.
+    [CNT-16260] - [Label]Editing status show wrong value in list view.
+    [CNT-12100] - [Advanced Search] Advanced search result is incorrect after changed hierarchy.
+    [CNT-14970] - [Logistics - Critical Path] The default display field did not show on the page.
+    [CNT-14788] - [Home - Followed] Can��t show the thumbnails in list view after click the ��Thumbnail View�� button.
+    [CNT-14948] - [Product -> Item] When deleted the Primary of color, also should shows warning message if the color is used in SKU
+    [CNT-13586] - [Sourcing -> Brief] "- None -" value should be hidden when document is read-only.
+    [CNT-15702] - Image column should be manually upload when click by ADD button in Color table
+    [CNT-15740] - [View] View Administration view listing is not showing records and create custom view should not be granted to non-admin(for 5.8GA))
+    [CNT-15674] - [UI] - Extra blank space in forms
+    [CNT-15124] - [Admin - Reference Data] The UI error of Reference Data table in Lookup List.
+    [CNT-14372] - Text fields height should not be changed when there is a long value.
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace last cbx-ui jar file with cbx-ui-5.8.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.071.0
+cbx-core-5.0.074.0
+
+Release 5.0.074.0 on 2015-01-21
+===============================
+
+Summary
+-------
+    This release includes several bugs fixing, new enhancement of print form and new feature of left navigation panel configuration.
+
+New Enhancements
+----------------
+    [CNT-13985] - cbx-core / cbx-biz: split new repository - cbx-general
+    [CNT-8961]- [CPM] Allow per-domain configuration of fields to display for 1st column in CPM bar (inside document)
+    [CNT-13148] - CNT-13146: Enhance Role Admin UI
+    [CNT-14276] - [View] Allow user to configure what views to display on left navigation pane
+    [CNT-14933] - [General] Validation framework for view / system action
+    [CNT-14456] - Enhance the print form logic
+    [CNT-11752] - [Performance] Review current saving logic to see if any can put to asynchronous processing
+    [CNT-14712] - [Color][Color Palette] show the name when mouse over the color chip
+
+Defects Remediated
+------------------
+    [CNT-14568] - [Shipment Advice] Update fields mapping rule for header fields
+    [CNT-15036] - Missing mapping in Sample Request - vendor should be inherit from Item
+    [CNT-15222] - Review the UUID fields (Vpo)
+    [CNT-15078] - [UI]Date formatting - Didn't popup the error message when fill same illegal date format twice in grid.
+    [CNT-15076] - [General] German label - "Pass xxx days" didn't change according to login user's location.
+    [CNT-13786] - Value will overlapping the Status and Version fields when Zoom in the browser to 125%
+    [CNT-15500] - Change the Module name from Sample Tracking to Sample Tracker
+    [CNT-15214] - Review the UUID fields (Spec)
+    [CNT-15151] - [Multi-lingual] My favorite document view always shows labels in English
+    [CNT-15382] - [Left Shortcut Pane] Closing icon not always in right position (S74)
+    [CNT-13733] - Popup selection window - searching criteria was remembered which should NOT be
+    [CNT-15399] - Decimal field display format in read-only modes are not following the CNT_FORMAT_PROFILE configurations(for S74)
+    [CNT-13241] - CNT-13241 - When click the Favorites search of Project, will always switch to Designs module
+    [CNT-15317] - [Sample Tracker] Correct the [Create], [Mark as]and [Actions] buttons in Sample Tracker and its list view
+    [CNT-15098] - [Lidl security audit report] Authorization flaw �C read only enforcement by JavaScript
+    [CNT-15364] - Incorrect Date format but show the date value
+    [CNT-15343] - [Admin -> Personalized View]Cancel action is invalid.
+    [CNT-15061] - [All] Cannot popup Create Custom View window after refresh current page.
+    [CNT-15340] - Sample Tracker Cannot select individual sample types from Material & Accessories sample request template
+    [CNT-15326] - [Sample Tracking] Cannot select individual sample types from sample request template
+    [CNT-15170] - [Sample Tracking] Cannot display any record in Sample Tracking view
+    [CNT-14787] - Didn't showing the file name when re-upload a attachments.
+    [CNT-15098] - [Lidl security audit report] Password change without the old password
+    [CNT-15098] - [Lidl security audit report] Authorization flaw �C separation of sessions
+    [CNT-14550] - [All] An issue about Advanced Search
+    [CNT-14476] - [Home - Forum] There will always be a <NONE> record in the first row of "Select Reference" popup
+    [CNT-14912] - [Advanced Search] Not able to specify to and from values in number fields "in the range"
+    [CNT-13503] - Redundant WARN logging with error stack trace about form object missing is found causing confusion
+    [CNT-15070] - System File's File is missing Mandatory field marking in UI
+    [CNT-14915] - [Admin -> Notifications] The value can't show in Print Form and Template when click [save & confirm]..
+    [CNT-14919] - [Admin -> Notifications] Get exception in Responsible Parties grid and Pre-defined Attachments grid.
+    [CNT-14976] - HCL module: Exception thrown when defined a custom MemoText field
+    [CNT-14848] - [Orders -> VPO] Get exception when click [Export.XX] button in Active listing page.
+    [CNT-7562]- [Color/Size] The data are inconsistencies if update the color/size before save the document.
+    [CNT-14341] - The screen display incorrectly in 1024*768 screen resolution.
+    [CNT-12484] - Some fields' icon and value overlap in IE10 browser.
+    [CNT-15005] - [Sample Request] Sanity test on Spint72
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace last cbx-ui jar file with cbx-ui-5.0.074.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.071.0
+cbx-core-5.0.074.0
+
+Release 5.0.073.0 on 2014-11-24
+===============================
+
+Summary
+-------
+    This release includes one enhancement of format parse.
+
+New Enhancements
+----------------
+    [CNT-15017] - [Sample Tracking] Some functions do not implement.
+
+Defects Remediated
+------------------
+
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace last cbx-ui jar file with cbx-ui-5.0.073.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.071.0
+cbx-core-5.0.073.0
+
+Release 5.0.072.0 on 2014-11-11
+===============================
+
+Summary
+-------
+    This release includes several bugs fixing and a few new modules.
+
+New Enhancements
+----------------
+    [CNT-14668] - [Sample Request Template] (CNT-13958 Part 1) Implement Sample Request Template Module
+    [CNT-14665] - [Sample Request] (CNT-13958 Part 4) To implement Sample Request module
+    [CNT-14665] - Implement send function of Sample Request module
+    [CNT-14410] - [Admin - Application Configuration] Define Event Details can be amended when event document is readonly.
+    [CNT-14666] - [Sample Tracking] (CNT-13958 Part 5) Implement Sample Tracking
+    [CNT-13317] - [General] Server Response Error Message to pop up once only
+    [CNT-14456] - [sub-task-1] Implement new Module "Print Form And Export Template"
+
+Defects Remediated
+------------------
+    [CNT-14262] - [Validation in Grid] Indicate in error message which specific column fails validation
+    [CNT-14620] - Error in creating Customer / Vendor / Factory / Forwarder / Material / VPO
+    [CNT-14625] - [Advanced Search] Error shows when clicking on advanced search in specific case
+    [CNT-14616] - [Popup] 'Show only selected' should also show the selected items checked
+    [CNT-14615] - [Labels] German label and messages are not shown in some fields
+    [CNT-13036] - The UiException: Not unique in ID space [Page n94Q_].... cause problem.
+    [CNT-14490] - [UI] Date formatting - handling years beyond 9999 and display format in read mode
+    [CNT-13628] - [Validation] NumericRangeValidator: Unexpected validation error -727379969
+    [CNT-14032] - Download file name not supports None-ASCII character
+    [CNT-14367] - [Admin - Hierarchical Code Lists] Warning message still exist and can't Save & Confirm document after change all illegal value.
+    [CNT-14190] - [Followed view] Should show latest version of followed document
+    [CNT-14576] - [CPO/VPO/VPOA] Add fields "Default Shipment information in Header and inherit to new Shipment Schedule
+    [CNT-14106] - The popup window is not suitable
+    [CNT-14588] - [Material] Can't inherited the " Color Palettes" to " Color" and after " Save& confirm",close popup window will popup the warning message.
+    [CNT-14867] - Review class "AbstractPopupDocWin" and "AbstractPopupDocWindow"
+    [CNT-13856] - [UI] Mandatory indication not shown for custom fields included in mandatory validator.
+
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace last cbx-ui jar file with cbx-ui-5.0.072.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.071.0
+cbx-core-5.0.072.0
+
+Release 5.0.071.0 on 2014-10-21
+===============================
+
+Summary
+-------
+    This release includes several bugs fixing, front-end performance tuning and enhancement of customize views.
+
+New Enhancements
+----------------
+    [CNT-13669] - [VMO/VPO] Address & Contact: provide both buttons "Select from Vendors" / "Select from Customer" and some other updates
+    [CNT-14438] - CompositField can not show label for some type, Short Term Solution
+    [CNT-13041] - Issue for project team to configure home screen search bar
+    [CNT-14609] - [UI] Product fix for LDL-1299 performance tuning for large-scale grids
+    [CNT-14465] - [Home] Allow projects to hide "set as default" action in views under Home
+    [CNT-11941] - [General] Support color image combo chip
+    [CNT-14106] - [Views] Allow projects to customize views
+
+Defects Remediated
+------------------
+    [CNT-14027] - [View] Advanced search should restore to original criteria if user cancels action
+    [CNT-13568] - [Templates - Critical Path Template] The "Linked Entity" field no sort function
+    [CNT-14026] - [View] Sorting options pop up - restore to original criteria when user cancels action
+    [CNT-13900] - [Grid] - bug of grid selection
+    [CNT-13241] - Clicking a tab/navigation entry would automatically switch to another tab wrongly
+    [CNT-14369] - [Sourcing -> RFQ] Hierarchy and Email label are not align with other fields in General Information
+    [CNT-14391] - [Products -> Catalogs] Value cannot be show completely in Grid View.
+    [CNT-14100] - [Products - Item] All the copied images have been Marked up when one of them is Marked up.
+    [CNT-14373] - [All - Advanced Search] Advanced Search UI display incorrectly in Chrome.
+    [CNT-14256] - [Matrix Grid]Dynamic Columns Can Not be sortable
+    [CNT-14380] - UI: Some labels are not multi-lingual (Phase 2)
+    [CNT-13846] - [Approval] Mandatory indication should follow the validator
+    [CNT-12821] - [All] One prompt dialog box in Images module is wrong when use the Firefox.
+    [CNT-14495] - [Grid] Selected items in grid should be shown in "show more"
+    [CNT-12827] - [Critical Path Tracker] The description format of the task is incorrect.
+    [CNT-14547] - Reset Password issues (LDL-1163)
+    [CNT-14490] - [UI] Date formatting - handling years beyond 9999 and display format in read mode
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace last cbx-ui jar file with cbx-ui-5.0.071.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.071.0
+cbx-core-5.0.071.0
+
+Release 5.0.070.0 on 2014-09-18
+===============================
+
+Summary
+-------
+    This release includes several bugs fixing and new UI enhancement of configurable row limit of view grid.
+
+New Enhancements
+----------------
+    [CNT-14195] -  Enhance Group Admin UI
+
+Defects Remediated
+------------------
+    [CNT-14023] -  [Change History] Some Change History issues after appoved and for Custom Fields
+    [CNT-13929] -  [CPM] Can't open Critical Path Tracker after added a new shipment items
+    [CNT-14159] -  Wrong Construct CodeList Name View Column SQL in CBXB
+    [CNT-14066] -  [Products->Specification] Color tab have no sorting.
+    [CNT-13893] -  [UI] Mandatory indication not shown for custom fields included in mandatory validator.
+    [CNT-14137] -  Admin: Personalized View Listing - Should show single line for custom view with same name
+    [CNT-14202] -  [CPM Task] Wrongly display the Dashboard Forum inside the CPM Task
+    [CNT-13989] -  [Sourcing �C RFQ] The replace button didn't work in IE11
+    [CNT-13949] -  [UI] Custom field's Text's did not align
+    [CNT-13637] -  [Product -> Specification] Still shows warning message after saved spec
+    [CNT-13952] -  [CPM Task] Issues after Amend CPM Task.
+    [CNT-13955] -  [Views] Select all checkbox should be unchecked after action
+    [CNT-14249] -  [VENDOR] Notes field navigation and text resetting
+    [CNT-13959] -  [ERROR] - NullPointerException in CpmTaskWidget
+    [CNT-14178] -  [View] Status field should be sorted by label
+    [CNT-14020] -  [Project CPM]Can Not initialize CPM for project
+    [CNT-13820] -  [Top] User Name display on top will overlap to search box
+    [CNT-14393] -  UI: Some labels are not multi-lingual (Phase 1) (LDL-1169)
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace last cbx-ui jar file with cbx-ui-5.0.070.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.066.0
+cbx-core-5.0.070.0
+
+Release 5.0.069.0 on 2014-08-25
+===============================
+
+Summary
+-------
+    This release includes several bugs fixing and new UI enhancement of configurable row limit of view grid.
+
+New Enhancements
+----------------
+    [CNT-13605] - [Shipment Advice] Incorrect position of "Hierarchy" and "Summary" sections
+    [CNT-13722] - [Views] Ability to configure row limit in a view and show more rows in a page.
+    [CNT-13778] - Enhance UI layer to catch any Throwable
+
+Defects Remediated
+------------------
+    [CNT-11590] - Roll back document auto assigned value if validation error / exception occurred
+    [CNT-12780] - [Item] Regenerate cost sheet with latest version
+    [CNT-13464] - Fail to load the Project side customized form xml for External Domain
+    [CNT-11460] - [Catalog] Sanity Test - Catalog module
+    [CNT-12884] - [Home - Recent Changes] The Simple search always use the original list view to search
+    [CNT-13086] - [VPO -> CPM View] Shows two [Batch Update] buttons
+    [CNT-13745] - [All - Images tab] Can't upload the JPEG file in image.
+    [CNT-13734] - [Password] User id should be read only when resetting password
+    [CNT-13389] - [All] Value still not show fully after extend the column width in search view.
+    [CNT-13832] - [TypeConverter]Transfer from Date to DateTime error
+    [CNT-13628] - [Validation] NumericRangeValidator: Unexpected validation error -727379969
+    [CNT-13719] - Readonly ACL on tab should be applied on TabDef.
+    [CNT-13773] - Silent prompt message should be cleared if grid size changed
+    [CNT-13318] - [Search] Simple and advanced search with date range criteria
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace last cbx-ui jar file with cbx-ui-5.0.069.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.066.0
+cbx-core-5.0.069.0
+
+Release 5.0.068.0 on 2014-07-25
+===============================
+
+Summary
+-------
+    This release includes several bugs fixing and new UI enhancement of number display format.
+
+New Enhancements
+----------------
+    [CNT-13143] -  [Display Format] Support decimal separator based on locale
+    [CNT-13808] -  [Batch Update] Enable/disable batch update function in view security
+
+Defects Remediated
+------------------
+    [CNT-13548] -  [Forum] Message with javascript got executed
+    [CNT-13484] -  [Admin - Default Template] The "Section" and "Field" no sorting function in "Default Values"
+    [CNT-13468] -  [MatrixGrid] The data were not consistent with UI
+    [CNT-12034] -  Forbid To Upload Animated Gif For User Photo
+    [CNT-13143] -  [Display Format] Support decimal separator based on locale
+    [CNT-12348] -  [All] Wrong module data for simple search.
+    [CNT-13050] -  CPM UI: Should NOT close Task Detail window when click "Assignees" icon. (EUG-909)
+    [CNT-9431] -  [Recent Changes] Set as default function no available in Recent Changes on Home module.
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace last cbx-ui jar file with cbx-ui-5.0.068.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.066.0
+cbx-core-5.0.068.0
+
+Release 5.0.067.0 on 2014-06-17
+===============================
+
+Summary
+-------
+    This release includes several bugs fixing and new UI enhancement.
+
+New Enhancements
+----------------
+    [CNT-11876] -  View: Should search by status name instead of id (STH-913)
+    [CNT-12767] -  Change NaviEntry as a main entity (EUG-839)
+
+Defects Remediated
+------------------
+    [CNT-13360] -  Check null when transform form definition
+    [CNT-12034] -  Forbid To Upload Animated Gif For User Photo
+    [CNT-6453] -  [Sourcing] - Multiple Costing - base on requirement, "Costing Summary" table should default Sort by Customer, POD, Final Dest, Last Modified on desc.
+    [CNT-13234] -  [Admin -> User] Some data are missing after Save & Confirm while update the existing User
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace last cbx-ui jar file with cbx-ui-5.0.067.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.066.0
+cbx-core-5.0.067.0
+
+Release 5.0.066.0 on 2014-05-23
+===============================
+
+Summary
+-------
+    This release includes several bugs fixing and new UI enhancement.
+
+New Enhancements
+----------------
+    [CNT-12934] -  [General] Support dropdown under advanced search
+    [CNT-12872] -  [Grid] Support multiple section within the same grid
+    [CNT-12556] -  Show release and deployment version history in CBX
+
+Defects Remediated
+------------------
+    [CNT-12703] -  About Delete issue in detail screen.
+    [CNT-12331] -  [ERROR] - NullPointerException in ForumComposer
+    [CNT-11791] -  [Several modules] Some search fields in Advanced Search are placed in wrong section
+    [CNT-10565] -  [Password] Find some issues.
+    [CNT-11639] -  [Advanced Search] Update the style sheet (DSG-98)
+    [CNT-12679] -  [All] The check-box should align with beginning.
+    [CNT-12678] -  [Catalog - Basket] Ui issue in Basket.
+    [CNT-12670] -  [QC Template] UI Issue, the layout is not as the same as requirement
+    [CNT-12809] -  [Admin-Notification] Selection box should align with field name.
+    [CNT-12777] -  [Admin -> Notification, Orders ->VPO] VPO Can't mark as Release to Vendor after modified email content in Notification profile
+    [CNT-12667] -  [Home] Recheck the Dashboard Links
+    [CNT-12560] -  [Product -> Specification] Misplaced columns showing in the table.
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace last cbx-ui jar file with cbx-ui-5.0.066.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.066.0
+cbx-core-5.0.066.0
+
+Release 5.0.065.0 on 2014-04-16
+===============================
+
+Summary
+-------
+    This release includes several bugs fixing and new UI enhancement.
+
+New Enhancements
+----------------
+    [CNT-12629] -  [Image] Hard-nut of new UI design implement
+    [CNT-12515] -  Make User ID readonly after save in user profile
+    [CNT-12099] -  Hard-nut of new UI design implement
+
+Defects Remediated
+------------------
+    [CNT-12392] -  [Inspection Checklist] Read mode - no response clicking inspection checklist
+    [CNT-10220] -  [All] When create a new document (NOT saved yet), the "Created by" and "Last Modified by" fields are NOT empty, but with value "on"
+    [CNT-12734] -  [CPO] Hide Change spec button
+    [CNT-12641] -  ACL script generation need to be updated
+    [CNT-12465] -  [Factory Audit] Requirement tab need to remove the checkbox after "comments" column
+    [CNT-11492] -  [CPM] Sanity Test �C CPM
+    [CNT-12799] -  [Admin-User] Can we show the image on user search view?
+    [CNT-12708] -  [Inspection Checklist] Find Issues In Sprint 64 Sanity Test
+    [CNT-12550] -  [Home -> Task] Display so narrow for some Columns' width
+    [CNT-12524] -  [Shortcut] [MH] Align icon and label - inbox and todo
+    [CNT-12409] -  UI issues in "Show more..." window with many custom fields (STH-1133)
+    [CNT-10632] -  The locale of Label don't match user language
+    [CNT-10288] -  [Browser] Found some ui issues after zoomed in or out of page.
+    [CNT-9831] -  Disable date range filter cursor highlight
+    [CNT-7726] -  [Customer PO] [Set] button did not display fully in Shipments & Quatities tab
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace last cbx-ui jar file with cbx-ui-5.0.065.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.065.0
+cbx-core-5.0.065.0
+
+Release 5.0.064.0 on 2014-03-26
+===============================
+
+Summary
+-------
+    This release includes several bugs fixing and new UI enhancement.
+
+New Enhancements
+----------------
+    [CNT-12150] -  [Login Page] Update login page
+    [CNT-11591] -  Refresh the form after validation error (STH-647)
+    [CNT-11784] -  [ALL - Messages] Not standardized font size in Message
+    [CNT-12118] -  [Form] Make document sections collapsible
+    [CNT-12029] -  [shortcut and view] Alignment and padding - from Michael
+
+Defects Remediated
+------------------
+    [CNT-12037] -  [Forum] Post new topic text color when user inputted text and moved out
+    [CNT-11916] -  [Home --> Forum] Some issues in Select Reference popup win
+    [CNT-11707] -  [Order -> CPO, MVPO. VPO] Hierarchy field not show fully in Items table
+    [CNT-11682] -  [Masters -> Costing Template] Display messy code in Apply to dropdown list.
+    [CNT-11668] -  AdvanceSearch poup: To Date is not correctly parsed in favorite view (STH-738)
+    [CNT-11556] -  Home-Approvals: Auto refresh the listing after closing the approval popup (STH-644)
+    [CNT-12177] -  [Ui] Textarea font color and size
+    [CNT-11700] -  [All modules] A bug about Advanced Search - Results per Page
+    [CNT-12091] -  [View] Image thumbnail - maintain image aspect ratio
+    [CNT-12028] -  Link to the document is lost after login (STH-930)
+    [CNT-11236] -  [All] Shows error after clicking Set as Default after modified Options - Add / Remove Columns
+    [CNT-12501] -  Inbox show nothing and exception found.
+    [CNT-11878] -  Client logo area is moving incorrectly in Login page
+    [CNT-11643] -  [Home -> Recent Changes] No respond when click confirm after sort by " Value Before" or "Value After" in Sorting popup window.
+    [CNT-11563] -  [External Access] When login with Vendor domain, login username field is empty
+    [CNT-11235] -  [UI] Advanced Search and Past XXX days search will not align with GO button after Simple search in IE10
+    [CNT-12284] -  [Catalog-Basket] Cannot create offersheet from basket
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace last cbx-ui jar file with cbx-ui-5.0.064.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.064.0
+cbx-core-5.0.064.0
+
+Release 5.0.063.0 on 2014-01-07
+===============================
+
+Summary
+-------
+    This release includes several bugs fixing and new UI enhancement.
+
+New Enhancements
+----------------
+    [CNT-11769] -  [Dashboard] Re-design (DSG-97, 90)
+    [CNT-11847] -  [Home Screen] Search bar on home screen
+    [CNT-11777] -  Implement forum in form
+    [CNT-11774] -  [Top Navigation] Change to flat design (DSG-75)
+    [CNT-11773] -  [Shortcut bar] Sidebar UI enhancement (DSG-74,81)
+    [CNT-11771] -  [Popup selection] Show image as thumbnail in pop up search (DSG-91)
+    [CNT-11770] -  [Views] Rearrange column sequence on views (DSG-92)
+    [CNT-11767] -  [Advanced Search] Empty values in search should be skipped
+    [CNT-11763] -  [Advanced Search] Implement The Function (DSG-98,99)
+    [CNT-11725] -  Support center align in grid/views (DSG-66)
+    [CNT-11764] -  Image thumbnail toolbar
+    [CNT-12071] -  [Dashboard] Bottom left panel - changes
+    [CNT-12033] -  [Forum] Not enough space for text in forum section in document
+    [CNT-12032] -  [Icons and Logos] Replace logo image, login page image and pop up close icon
+
+Defects Remediated
+------------------
+    [CNT-12022] -  [Demo] UI comments by Michael
+    [CNT-11506] -  Mis-alignment of X icon and label (DSG-89)
+    [CNT-11922] -  [View] Comments from Andy
+    [CNT-11722] -  TextArea font and color not correct (DSG-135)
+    [CNT-11921] -  [Image and Popup] Comments from Andy
+    [CNT-11920] -  [Forum] Comments from Andy
+    [CNT-11919] -  [Form] UI comments
+    [CNT-11918] -  [Advanced Search] UI comments - andy
+    [CNT-11894] -  [CPM] Edit on CPM view - columns shifted
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace last cbx-ui jar file with cbx-ui-5.0.063.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.063.0
+cbx-core-5.0.063.0
+
+Release 5.0.062.0 on 2013-12-10
+===============================
+
+Summary
+-------
+    This release includes several bugs fixing and new UI enhancement on forum and form.
+
+New Enhancements
+----------------
+    [CNT-5671] -  [Issue][User Preference] System should validate the email format. (CNT-5671)
+    [CNT-11557] -  Change client logo list
+    [CNT-11387] -  Styling Links (DSG-7)
+    [CNT-11356] -  [Quality -> Inspection Checklists] Should shows warning message when select Factory without select Vendor(Fix for CNT-11275)
+    [CNT-10959] -  Retrieve and review current notification content
+    [CNT-10838] -  Test all non-view SELECT queries for multi-version support
+    [CNT-10743] -  Dashboard views: Popup a layer to show the reference doc if more than one ref doc.
+    [CNT-10231] -  Modify RFQ submission & delivery logics (CNT-10183)
+    [CNT-11653] -  Base UI Change In Form
+    [CNT-11697] -  [Forum] Notify party pop up selection (DSG-84)
+    [CNT-11679] -  [Forum]Thread Messages list of topics (DSG-86)
+    [CNT-11673] -  [View] UI enhancement (DSG-79)
+    [CNT-11659] -  Image thumbnail in document - hover, click and markup behavior change (DSG-82)
+    [CNT-11639] -  [Advanced Search] Update the style sheet (DSG-98)
+    [CNT-11616] -  [Forum] list of topics (DSG-86)
+    [CNT-11615] -  [Forum] Post new topic UI change (DSG-85)
+    [CNT-11589] -  [Forum] Forum main UI enhancement
+    [CNT-11586] -  Update the upload image icon (DSG-73)
+    [CNT-11519] -  [View] Cursors on clickable and non-clickable items (DSG-72)
+    [CNT-11514] -  Photos for users (DSG-83)
+
+Defects Remediated
+------------------
+    [CNT-11361] -  [Templates -> Factory Audit Template] Should add red line under Section as it is mandatory field(Fix for CNT-11224)
+    [CNT-11391] -  BUG: Expanding rows when horizontally scrolling from left to right (DSG-9)
+    [CNT-11363] -  [Spec & AP] Default invalid message in newly added record(Fix for CNT-11197)
+    [CNT-11595] -  [Hierarchy Code List Lookup] Only Active Hierarchy Code List can be shown
+    [CNT-11495] -  [User] Cannot save the user with established password[CNT-11474]
+    [CNT-11488] -  [Forum] Issues Found in S61 Sanity Test
+    [CNT-11412] -  [CPM] Field label should be displayed when the mandatory field is empty
+    [CNT-11368] -  [Templates �C> Approval Templates & Critical Path Templates] Inactive records should not display in User & Group lookup issue(Fix for CNT-10217)
+    [CNT-11009] -  [CPM] "Planned/Revised End Date" must be on/after current Date
+    [CNT-10620] -  [Quality - > Factory Audit] Cost tab should be between Requirements tab & Images & Attachments tab (CNT-10618)
+    [CNT-10219] -  [All] The value in "Created by" and "Last Modified by" fields should NOT be carried to the new document after [copy].
+    [CNT-9996] -  [Quality -> Factory Audit] Cannot sorting by ��Short Description�� field.
+    [CNT-9772] -  [Catalog] Shouldn't show upload image button in "Item" tab (CNT-9729)
+    [CNT-9410] -  Redundant call for LabelManager.getLabel() in FormUIAction's sub classes
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace last cbx-ui jar file with cbx-ui-5.0.062.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.062.0
+cbx-core-5.0.062.0
+
+Release 5.0.061.0 on 2013-11-19
+===============================
+
+Summary
+-------
+    This release includes several bugs fixing and enhancement on login page and tooltip component.
+
+New Enhancements
+----------------
+    [CNT-11163] -  Fix the typo on logon page
+    [CNT-11159] -  [UI] Please change "CNT Login" to "CBX"
+    [CNT-11155] -  [Notification] Always send notification to Inbox; User Preference to determine whether to send to email address also
+    [CNT-11069] -  Close popup when mouse move out the tooltip icon
+    [CNT-10955] -  Remove redundant message after operation which trigger from view listing page executed
+
+Defects Remediated
+------------------
+    [CNT-11116] -  [ALL modules] ID should be reset automatically after deleting Company Name
+    [CNT-10962] -  [Home - >External Document] UI mapping issue.
+    [CNT-11497] -  [VPO/CPO/MPO] Status Column display wrong value
+    [CNT-11334] -  [UI] Column's width is very narrow after define custom field in Data List Type for Code List(CNT-11330)
+    [CNT-11317] -  View: Exception found when click on the Upload button (STH-307)
+    [CNT-11305] -  [Master - Templates] Name should be unique within the domain or sub-domain (it is configurable)
+    [CNT-11277] -  Fix formats for numeric fields
+    [CNT-11261] -  Shipment Advice - Check/fix the field "Delay (Days)"
+    [CNT-11237] -  [Product] Found some messy code in Product module.
+    [CNT-11172] -  Exception happened when external domain user reset expired password
+    [CNT-11104] -  [Forum] Shown some invalid message in forum record.
+    [CNT-11101] -  [Product -> Specification] Selected record from Lookup is not align with corresponding columns in Components table.
+    [CNT-11028] -  Cannot use TAB key on popup windows to navigate from row to row (CNT-10900)
+    [CNT-11012] -  [Home -> Recent Changes] Sorting is invalid.
+    [CNT-11011] -  [Home -> Recent Changes] "Date" should be put into the Date Fields in Advanced Search popup window.
+    [CNT-11007] -  [Home - Dashboard] Should NOT navigate to Orders module when popup Error message.
+    [CNT-10966] -  [Admin -> Role] UI issues
+    [CNT-10952] -  [Dashboard] Reference displays empty after sending notification for Dynamic Days Alert on CPM Task
+    [CNT-10914] -  [All] Advanced Search results are INCORRECT when selecting Date Fields as searching criteria
+    [CNT-10909] -  [Admin - Custom Fields] Duplicated set of Custom Fields will occur when editing the existing module and apply it to another module
+    [CNT-10908] -  [Admin -> User] No effect when save&confirm a new user.
+    [CNT-10876] -  [All] Should not switch to header tab after Save or Save & Confirm (CNT-9796)
+    [CNT-10796] -  ID should be populated automatically after selecting Company Name for Vendor, Customer, Forwarder, Factory
+    [CNT-10763] -  Create user with email notification
+    [CNT-10558] -  [All] Messy code and wrong format of user name display in change history records. (CNT-10479)
+    [CNT-10542] -  Missed relationship in Document matrix for new modules (CNT-10541)
+    [CNT-10452] -  [All] Title name is wrong in "Applies To" grid. (CNT-10425)
+    [CNT-10236] -  Cannot login when back to login page when there is user already logged in
+    [CNT-10010] -  [Home ->Inbox, Tasks, Forums, Approvals] - Should hide Options - Add/Remove Columns button
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace last cbx-ui jar file with cbx-ui-5.0.061.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.061.0
+cbx-core-5.0.061.0
+
+Release 5.0.060.0 on 2013-10-10
+===============================
+
+Summary
+-------
+    This release includes several bugs fixing and new features of show silent confirm message and make favorite view can be setted as default.
+
+New Enhancements
+----------------
+    [CNT-10701] -  Implement the "Integration" tab inside Related Actvities popup
+    [CNT-9848] -  Add description to the conditions in system.xlsx (Column D in condition spreadsheet)
+    [CNT-9211] -  [Set as Default] Missing this sub-menu under "Options" in the page which opened by click the favorite link (CNT-9042)
+    [CNT-8037] -  Remove redundant confirmation message if operation is successful
+
+Defects Remediated
+------------------
+    [CNT-10881] -  [Finance -> Vendor Invoice] When copy the record on Shipment Items table, the ��CBM(m3) / CFT(ft3)�� are NOT copied. (CNT-10746)
+    [CNT-10877] -  [Popup] Remove the hyperlink in all Popups (CNT-10516)
+    [CNT-10860] -  [Home - >External Document] "External Documents-Active" show wrong records. (CNT-10177)
+    [CNT-10858] -  [Sourcing - Quotation - header] Quotation details, find a typo (CNT-8941)
+    [CNT-10856] -  [All] Missing Advanced Search in Item Lookup
+    [CNT-10854] -  [All] Item Lookup should be same as "Item - Active" view
+    [CNT-10847] -  [All] Should Default Sorting with Item No. as asc in Item Lookup
+    [CNT-10843] -  [Admin - User] Suggest to set "password" and "confirm password" to mandatory fields.
+    [CNT-10824] -  Add description to guide user in definition of multiple email addresses
+    [CNT-10811] -  [Home - Forum] Some minor issues about Forum module
+    [CNT-10803] -  [Orders - CPO/VPO] Hierarchy is required for the selection of Responsible Parties
+    [CNT-10727] -  [All] UI issues in Images & Attachments tab
+    [CNT-10708] -  [Forum] Should show module label instead of entity name in Select Reference popup
+    [CNT-10601] -  [My Favorite Searches] The font size of My Favorite Searches link is inconsistent with the other links in Navigation (CNT-10429)
+    [CNT-10460] -  [Home -> Recent Changes ] Simple Search - date range should NOT be readonly (CNT-10373)
+    [CNT-10442] -  [Products ->Item] A default empty record is set in image table when generated item form brief automatically. (CNT-10365)
+    [CNT-10435] -  [Sourcing -> RFQ] Canot receive the email after sent the RFQ (CNT-10422)
+    [CNT-10405] -  [Specifications] Some Columns' value in listing view are not begin with Uppercase letter. (CNT-7511)
+    [CNT-10322] -  [Masters - Customers] Mandatory fields in [Markets & Channels] Tab are not validated when left empty (CNT-7944)
+    [CNT-10307] -  [Design - Label] The width of "General Information" tab and "Further Detail" tab in Label module is too wide
+    [CNT-10279] -  [Home/Forum]-Create new forum can't retrieve the Reference data
+    [CNT-10270] -  [General] Footer text and style is inconsistent across the system (CNT-6047)
+    [CNT-9985] -  Display Date-time in Forum (CNT-9492)
+    [CNT-9861] -  [Code Review Finding] UI layer should not access data layer API directly
+    [CNT-9781] -  User admin setup > header tab layout is wrong
+    [CNT-9120] -  Builder: Cater for mulitple document version (add criteria "IS_LATEST = 1" for update SQL)
+    [CNT-8784] -  Introduce User Name in CBX5 (CNT-8777)
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace last cbx-ui jar file with cbx-ui-5.0.060.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.060.0
+cbx-core-5.0.060.0
+
+Release 5.0.059.0 on 2013-09-05
+===============================
+
+Summary
+-------
+    This release includes several bugs fixing and new features of password policy checking when user login.
+
+New Enhancements
+----------------
+    [CNT-10267] -  Add "related activities" views under Component and vice-versa (CNT-10242)
+    [CNT-10249] -  Applied Password Policy checking when login, reset password in User admin page and reference popup
+    [CNT-10155] -  Enhance SelectionBox to show prompt message to user before selecting data
+    [CNT-10074] -  [Forum] Add Link In Each Document To Popup Forum Layer
+    [CNT-9870] -  [Code Review Finding] Use CNTLogger methods to replace System.out.println() / e.printStackTrace()
+    [CNT-9347] -  Support multi-lingual for the "invalidate user" page messages
+
+Defects Remediated
+------------------
+    [CNT-10293] -  [Orders - Customer Offer Sheet] A default value ("Test") is set in field "Short Description" in Header Tab
+    [CNT-10587] -  [Home -> Forum] Please remove "Mark Selected as Read" and "Mark Selected as Unread" buttons in listing views.
+    [CNT-10520] -  Forum issues (reported by demo on Sprint 58.1.)
+    [CNT-10462] -  [Home] Render the status label cell in Followed view
+    [CNT-10408] -  [Home -> Forum] Display random code in Related lists.
+    [CNT-10316] -  [Products -> Catalogs] when drag the grid scrollbar (Horizontal) passed the Price column, the height of the records will be amplify.
+    [CNT-10286] -  The popup window will be inserted into the bottom line of the page if error happened in product mode
+    [CNT-10260] -  Port of discharge do not have any options in costing sheet
+    [CNT-10241] -  [Home - >External Document] Main list column width issue.
+    [CNT-10239] -  [Sourcing -> Quotation] Image will be lost after save Quotation
+    [CNT-10068] -  [All] Check all the listing view Labels in CBX5
+    [CNT-10013] -  [Design] Switch to a blank page when click the Design tab.
+    [CNT-6960] -  [UI] Style of input boxes for different field types are inconsistent (CNT-6958)
+    [CNT-9985] -  Display Date-time in Forum (CNT-9492)
+    [CNT-9878] -  Modify default favorite view name
+    [CNT-9100] -  [Component] No display the default image on Header tab Image section [CNT-9013, 9022, 9030]
+    [CNT-8531] -  [View] Add/Remove Column: Add checkbox to select/de-select all columns (CNT-8522)
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace last cbx-ui jar file with cbx-ui-5.0.059.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.059.0
+cbx-core-5.0.059.0
+
+Release 5.0.042.0 on 2013-08-05
+===============================
+
+Summary
+-------
+    This release includes several bugs fixing and new features of Forget Password, Reset Password and Password Meter.
+
+New Enhancements
+----------------
+    [CNT-9906] -  Implement Forget Password feature
+    [CNT-9905] -  Implement Base Entity of Password Feature
+    [CNT-9878] -  Modify default favorite view name
+    [CNT-9790] -  Dropdown field content should be auto selected when focus is given to the field (CNT-9788)
+    [CNT-8992] -  [Follow This] Implement the Follow This logic (Phase 1) (CNT-3894)
+    [CNT-8991] -  Implement Password Strength (CNT-8681)
+  [CNT-8990] -  Implement Password Policy (CNT-8680)
+
+Defects Remediated
+------------------
+    [CNT-10057] -  [Costing] Can Not Load Exchange Rate Properly
+    [CNT-10055] -  [Costing] Can Not Load The Latest Costing Template (CNT-10056)
+    [CNT-10019] -  Issue on Costing Template (CNT10018)
+    [CNT-10005] -  [All] The second popup Information window CAN'T be closed after quickly double click the [Save] button.
+    [CNT-9977] -  [All] Sequences of searching view in Navi entry are disordered. (Active view is moved from first view to last view)
+    [CNT-9973] -  [Login Page]Please change the word "Buyer Login" to "Login" (CNT-9799)
+    [CNT-9928] -  [Product -> Item] No user record is available in User Lookup for Responsible Parties field
+    [CNT-9866] -  Optimize View Add/Remove Column Window
+    [CNT-9832] -  [New...] button (beside Default Specification: label) should not show in read-only mode in Item Header and Brief Header
+    [CNT-9820] -  ��Master->Templates->Measurement Templates��Missing Check box column in listing view for user to do further Action.
+    [CNT-9818] -  [Quality -> Factory Audit]The textbox no align with above of the label in Requirements table.
+    [CNT-9807] -  [All] The records which status=Inactive/Canceled should NOT be available in the popup window.
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace last cbx-ui jar file with cbx-ui-5.0.042.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.015.0
+cbx-core-5.0.042.0
+
+Release 5.0.041.0 on 2013-07-08
+===============================
+
+Summary
+-------
+    This release includes several bugs fixing and new enhancements for both Sprint 56 and Sprint 57.
+
+New Enhancements
+----------------
+    [CNT-9321] -  Reduce Grid Row Rendering Time
+    [CNT-8670] -  [View] Add/Remove Column: Add checkbox to select/de-select all columns (CNT-8522)
+    [CNT-9024] -  Enhance on Dashboard Links V2
+    [CNT-9021] -  [Grid] Always display pagination bar; Display current row range and total number of records (CNT-8538)
+    [CNT-9638] -  UI Layer: Real time popup notification to dedicated user
+
+Defects Remediated
+------------------
+    [CNT-9066] - 'Related' filter should list directly related modules instead of all modules
+    [CNT-9546] - UI Unexpected error occurred.
+    [CNT-9439] -  [Performance] Remove Server Side Show Busy
+    [CNT-8697] -  Long Term Solution For Frozen Grid Scroll Issue
+    [CNT-9472] -  Fix ListDataView called twice for every time loading a view
+    [CNT-8815] -  [ERROR] fix error in UI layer (Feb)
+    [CNT-8945] -  Show message in the login page when user is being redirected due to timeout but still accessing the system
+    [CNT-9351] -  UI Issues in Popup Selection Layer
+    [CNT-9394] -  Introduce User Name in CBX5 (CNT-8777)
+    [CNT-9191] -  Retain selection in date range filter until user logout or session timeout
+    [CNT-8969] -  UI form should load the latest version of custom field definition by calling: CustomFieldDefManager (CNT-8984)
+    [CNT-8786] -  [Advanced Search] Add 'is blank' and 'is not blank' operators for general fields (CNT-8573)
+    [CNT-9417] -  Implement the popup error message when anchor date field is invalid on Initialize CPM action
+    [CNT-9514] -  Modify login.jsp with the revised error message (CNT-9405)
+    [CNT-8952] -  [UI] "Request got some unexpected errors" is shown if session timed out (CNT-8800)
+    [CNT-9835] -  Newly saved document is not found in "My Recent Items" list in left navigation
+    [CNT-9773] -  Standardize UI for Upload dialog [UI Part]
+    [CNT-9693] -  Refine UI Exception Handler
+    [CNT-9802] -  Hide "Simple Search", "Advanced Search" and "Date Range Filter" in Home-Dashboard
+    [CNT-9647] -  Change AddRecentAccess action call to be at the time when user logout / session expired
+    [CNT-9755] -  Navi jump to 'Home' automatically while click Personalize View link in 'Admin' navi
+    [CNT-9838] -  [Critical Path - Vendor POs All] Add/Remove Column: Add checkbox to select/de-select all columns (CNT-8522)
+    [CNT-9746] -  Copyright information in login page
+    [CNT-9779] -  [All modules - Actions=>Set to canceled] Wrong sequence of popup messages
+    [CNT-9758] -  [Brief] [View Quotations] exception when click [show more...] button in [View Quotations] popup.
+    [CNT-9775] -  [ERROR] fix javax.imageio.IIOException: Unsupported Image Type [UI Part]
+    [CNT-9605] -  Should NOT call data layer API directly in UI layer [Core part]
+    [CNT-9459] -  Freeze - Columns Issue on Specification Popup Screen.
+    [CNT-9712] -  UI issue in select working domain dropdown
+    [CNT-9592] -  Tab sequence incorrect for input fields within the same cell in the grid
+    [CNT-9599] -  [UI] Should NOT call data layer API directly in UI layer
+    [CNT-9601] -  [Login] Found ui issue in login page. (Overlaped password is shown in input field)
+    [CNT-9713] -  [Project] Issues in Program Lookup
+    [CNT-9150] -  [Home - Forum] Wrong label name
+    [CNT-9780] -  [UI] Date range filter enhancements (CNT-9154)
+    [CNT-9326] -  Revise the "invalidate user session page" messages (CNT-9296)
+    [CNT-9672] -  Refine Server Response Error Message
+    [CNT-9676] -  Hide the "popup icon" for the specification field if there is no spec
+    [CNT-9718] -  [Advanced Search] Get exception when advanced search with Date Fields
+    [CNT-9655] -  [QC Template] Cannot Delete those Records with long label name in Navi-Page on the Left.
+    [CNT-9774] -  [ERROR] fix javax.imageio.IIOException: Unsupported Image Type
+    [CNT-9704] -  [Costing Templates] UI Issues.
+    [CNT-9626] -   [Coding]Always default to "anytime" for all admin view listings (CNT-9241)
+    [CNT-9723] -   [QC Template] UI Issues.
+    [CNT-9690] -   Add Internal Exception Ref ID to the exception/ error popup
+    [CNT-9777] -   Unable to batch Update the CPM Task in UI layer
+    [CNT-9609] -   Fix unexpected error when open Critical Path
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace last cbx-ui jar file with cbx-ui-5.0.041.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.015.0
+cbx-core-5.0.041.0
+
+Release 5.0.039.0 on 2013-04-24
+===============================
+
+Summary
+-------
+    This release includes several bugs fixing and new enhancements
+
+New Enhancements
+----------------
+    [CNT-8938] -  Improves CPM Tracker Performance
+
+Defects Remediated
+------------------
+    [CNT-8315] - Unify Change Tracking View
+    [CNT-8308] - The browser cannot support to save the password after 5.0.035.1
+    [CNT-8819] - The Orders of All & Active Cannot be Reversed in the Left Nevi View. (CNT-8497)
+    [CNT-8900] -  CPM popup to show different key information in the first column based on applied document level
+
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace last cbx-ui jar file with cbx-ui-5.0.039.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.009.0
+cbx-core-5.0.039.0
+
+
+
+Release 5.0.038.0 on 2013-04-03
+===============================
+
+Summary
+-------
+    This release includes several bugs fixing and new enhancements
+
+New Enhancements
+----------------
+    [CNT-8510] - Unify Change Tracking View
+    [CNT-8420] - Integrate MessAdmin into CBX 5 for AMG/CS support management
+    [CNT-8401] - Support per-domain default navi entry
+    [CNT-8598] - Enhance on Dashboard Links (CNT-8529)
+    [CNT-8576] - [CPM] Support 'Add / Remove Columns' in CPM Tracker Views
+    [CNT-8473] - Domain specific default selection of fields per view
+    [CNT-8611] - Enhance document lock checking and enhance the message to display locking user
+
+Defects Remediated
+------------------
+    [CNT-8543] - Cancel function for a not saved document is not working as expected
+    [CNT-8524] - No separator in View listing create menu
+    [CNT-8491] - Firefox cannot retrieve result when printing
+    [CNT-8441] - Get rid of intermittent "powered by ZK" flash after login
+    [CNT-8411] - [ERROR] do not log ERROR if the class specified in form/popup defnition is not found
+    [CNT-8329] - Support 'Add / Remove Columns' in CPM Tracker Views
+    [CNT-7703] - HCLGroup Value Missing After Set Higher Level To None
+    [CNT-8629] - [Selection List] Handling of selection list fields which refers to deleted codes
+    [CNT-8311] - Approval UI changes and fixes on CNT-8040
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace last cbx-ui jar file with cbx-ui-5.0.038.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.009.0
+cbx-core-5.0.038.0
+
+
+
+Release 5.0.037.0 on 2013-03-06
+===============================
+
+Summary
+-------
+    This release includes several bugs fixing and new enhancements
+
+New Enhancements
+----------------
+    [CNT-8170] - [UI] Combine 'Additional Information' and 'Expand Table' into 'Show More...' in document grids
+    [CNT-8250] - Allow a button to be enabled in both read-only and edit mode
+
+Defects Remediated
+------------------
+    [CNT-8369] - No popup message when i modified the data then go to other module second time (CNT-8353)
+    [CNT-8308] - The browser cannot support to save the password after 5.0.035.1
+    [CNT-8305] - UI Layer didn't handle session timeout properly
+    [CNT-7330] - [Enhancement] Document Grid Usability(Bug fixing)
+    [CNT-8146] - Fix error in UI layer
+    [CNT-8155] - fix ActionDenyException when saving an existing favorite view name
+    [CNT-8143] - Fix error when loading view definition for user favorite view
+    [CNT-8172] - Fix issues in Home
+    [CNT-8167] - Define a new domain attribute to default the date range filter in a domain
+    [CNT-8041] - Found the "Expand Table" issue in all modules (CNT-8034)
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace last cbx-ui jar file with cbx-ui-5.0.037.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.009.0
+cbx-core-5.0.037.0
+
+
+
+Release 5.0.036.0 on 2013-02-01
+===============================
+
+Summary
+-------
+    This release includes several bugs fixing and new component Forum
+
+New Enhancements
+----------------
+    [CNT-5361] - Implement the Forum feature on all modules (CNT-3891, CNT-289)
+    [CNT-7961] - [Item][CPM] Implement CPM Tracker Views
+    [CNT-7958] - [Form] Pre-define 10 Custom Action/Buttons
+    [CNT-7682] - Enhance Usability Of Popup Search Window
+
+Defects Remediated
+------------------
+    [CNT-8092] - [Offer Sheet] Get exception when advanced search in Customer Lookup (CNT-8091)
+    [CNT-8074] - [Advanced Search] Issue of dropdown options of search fields after changed to another view
+    [CNT-5460] - Issue on Advanced Search
+    [CNT-7685] - [Catalogs] Get error when i click Showroom link under the Catalogs (CNT-7340)
+    [CNT-7699] - Get exception about Basket Data
+    [CNT-7776] - In Catalog - Parties tab:In Sourcing Agents and Customers table, should Default sort by Company Name in ascending;
+    [CNT-7759] - [Quality Checklist Templates] [Add / Remove Columns] is not Available After Ticking All and Confirming it (CNT-7758)
+    [CNT-7752] - [All] Need click [OK] button twice when switch to other module after edit document (CNT-7693)
+    [CNT-7750] - [All] The Part of Version Info Should be Located at the Bottom of Each Tab (CNT-7743, CNT-7793)
+    [CNT-7749] - [Quotation] Get error when i click [Add] button in Costing Summary table (CNT-7744)
+    [CNT-7721] - [Sorting] Fix Sorting issues
+    [CNT-7716] - [Advanced Search] Fix Advanced Search issues
+    [CNT-7687] - [Catalog] View export data is not same as the listing results (CNT-7361)
+    [CNT-7678] - Issue On Grid Check All
+    [CNT-7641] - Resize The Advance Search Block
+    [CNT-7591] - [CPO&VPO] The textbox not align with label [CNT-7586].
+    [CNT-5317] - After Edit, it always switch to the header tab (CNT-2948)
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace last cbx-ui jar file with cbx-ui-5.0.036.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.009.0
+cbx-core-5.0.036.0
+
+Release 5.0.034.0 on 2013-01-02
+===============================
+
+Summary
+-------
+    This release includes several bugs fixing and main enhancements for HCL UI Component, Grid Sorting and Grid Custom Field Security
+
+New Enhancements
+----------------
+    [CNT-7199] - [UI] HCL UI Component Enhancement (Widen dropdown in Edit mode and change value to label in Read-only mode)
+    [CNT-7090] - Enhancement on UI security for Custom Field on Grid Level
+    [CNT-7048] - Enhance the column sorting with ignore case restriction in the grid
+
+Defects Remediated
+------------------
+    [CNT-7488] - [UI] All Popup layer are too narrow now
+    [CNT-7472] - Content Can't Wrap To Multiple Line In Search View.
+    [CNT-6994] - Follow-up on VPO Header (CNT-4533)
+    [CNT-7034] - Get error when i click sorting button on top. (CNT-7030)
+    [CNT-7168] - [Attachment] Change image/attachment file size limit to 10 MB and update system message
+    [CNT-7096] - Need to skip Data Format Profile framework in some case
+    [CNT-7088] - UI layer class for Related Activities
+    [CNT-7035] - Wrong error message after selected nothing and click [OK] in the popup (EUG-95)
+    [CNT-7033] - [UI] Checkbox and deleted indicator (X) are not align (CNT-6977)
+    [CNT-7028] - Remove the "My Favorite Reports" (CNT-7027)
+    [CNT-6997] - Issues found in Inbox listing view (CNT-6961)
+    [CNT-6995] - Follow-up on Popup message (CNT-4534)
+    [CNT-6993] - Follow-up on Home Issue (CNT-4652)
+    [CNT-6969] - Follow-up on Column Width in Document Grid and Popup is not standard (CNT-6257)
+    [CNT-6968] - Should not show the system info bottom bar in all listing page (Log on behalf of MH) (CNT-6953)
+    [CNT-6960] - Style of input boxes for different field types are inconsistent (CNT-6958)
+    [CNT-6730] - Register client's IP address on each UI action.
+    [CNT-6282] - Update the dimension of text area popup layer (CNT-6281)
+    [CNT-5065] - Reduce the space of the grid button (CNT-4547)
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace last cbx-ui jar file with cbx-ui-5.0.034.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.009.0
+cbx-core-5.0.033.0
+
+
+
+Release 5.0.033.0 on 2012-12-10
+===============================
+
+Summary
+-------
+    This release includes several bugs fixing and main enhancements for form grid sorting and Grid like UI in listing view
+
+New Enhancements
+----------------
+    [CNT-6750] - Enhance UI to support sorting for the tables inside module (CNT-6720)
+    [CNT-6691] - Support Integration Information in CBX5 (CNT-6331) - UI
+    [CNT-6441] - Support Grid like UI in listing view (CNT-6425)
+    [CNT-6730] - Register client's IP address on each UI action.
+
+Defects Remediated
+------------------
+    [CNT-6834] - [Offer Sheet] Company Name label is not align with others in Customer Information section (CNT-6780)
+    [CNT-6536] - Misalignment of field labels and field values
+    [CNT-6957] - [UI] Field label/value alignments are not aligned with the UI Specification (CNT-6956)
+    [CNT-6836] - Centralize Get Date Format Methods
+    [CNT-6829] - Time Format should not display seconds (Log on behalf of MH) (CNT-6219)
+    [CNT-6363] - Followup on CPM Tracker (CNT-4739)
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace last cbx-ui jar file with cbx-ui-5.0.033.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.009.0
+cbx-core-5.0.033.0
+
+
+
+Release 5.0.031.0 on 2012-11-08
+===============================
+
+Summary
+-------
+    This release includes several bugs fixing and main enhancements to support size standard and Showroom
+
+New Enhancements
+----------------
+    [CNT-6368] - Update UI To Support New Size Standard In (CNT-6309)
+    [CNT-6145] - Implement Showroom and Detailed Price list
+
+Defects Remediated
+------------------
+    [CNT-6461] - Grid level's dropdown's cascadeExpr should support using the header level field as the filtering value.
+    [CNT-6296] - Fail To Delete The Recent Item
+    [CNT-6292] - Revise Upload Attachment Over Limit Message
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace last cbx-ui jar file with cbx-ui-5.0.031.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.009.0
+cbx-core-5.0.031.0
+
+
+
+Release 5.0.030.0 on 2012-10-23
+===============================
+
+Summary
+-------
+    This release includes several bugs fixing and main enhancements for data formatting profile
+
+New Enhancements
+----------------
+    [CNT-6377] - Data Formatting Profile UI Layer Update
+
+Defects Remediated
+------------------
+    [CNT-6377] - [Approval] Unexpected error when click on Approval link (CNT-6374)
+    [CNT-6377] - Revise the system messages
+    [CNT-6377] - Unable to single sign-on JasperReports Server because "orgId" request parameter is missing
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace last cbx-ui jar file with cbx-ui-5.0.030.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.009.0
+cbx-core-5.0.030.0
+
+
+
+Release 5.0.029.0 on 2012-10-10
+===============================
+
+Summary
+-------
+    This release includes several bugs fixing and main enhancements.
+
+New Enhancements
+----------------
+    [CNT-6052] - Enhancement on custom field types - dropdown+HCL+text area (CBX_UI)
+    [CNT-5502] - Enhancement on custom field types - dropdown+HCL+text area
+    [CNT-5958] - Support Batch Update on CPM (CNT-5362) (UI part)
+    [CNT-5949] - Add COUNT on the dashboard (CNT-5072)
+
+
+Defects Remediated
+------------------
+    [CNT-6196] - an exception occurs when click any button in Approval window (CNT-6191)
+    [CNT-6184] - Key information in header bar is mssing
+    [CNT-6163] - After input in Header without save, go to other tab to select and go back, the inputted value in Header will be cleared (CNT-6158)
+    [CNT-6090] - Coding - UI Field Update Issue
+    [CNT-6031] - A lot DB queries on "HclNode' when update field value in form.(UI Part)
+    [CNT-6003] - [Quotation] Listing view cached a selection which is no longer visible (CNT-5974)
+    [CNT-6168] - [Dashboard] Misalignment of Dashboard counters (CNT-6155)
+    [CNT-6111] - CPM Task Popup - Change the status field to a codelist field
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace cbx-ui jar file with cbx-ui-5.0.029.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.009.0
+cbx-core-5.0.029.0
+
+
+
+Release 5.0.028.0 on 2012-09-17
+===============================
+
+Summary
+-------
+    This release includes main bugs fixing and enhancements for CPM Tracker view, change history label and custom field type.
+
+New Enhancements
+----------------
+    [CNT-5801] - [Change History UI] - Support label key value renderering for change history listing record.
+    [CNT-5687] - CPM Tracker Views Design on UI and View aspect
+    [CNT-5447] - [CPM] New popup for Reinitialize(UI part)
+    [CNT-5502] - Enhancement on custom field types - dropdown+HCL+text area
+
+Defects Remediated
+------------------
+    [CNT-5873] - Costing Calculation Issue [CNT-4952] (UI Part)
+    [CNT-5316] - Issue found in Sidebar (CNT-3305)
+    [CNT-5069] - Remove the RowNum from listing and popup screens
+    [CNT-5760] - [CPM] Recalculate Plan End Date needs to provide validation for mandatory field on the anchor date
+    [CNT-3093] - [Custom Fields] Custom fields cannot be displayed if custom fields are defined in two domains for the same form
+    [CNT-5318] - The module footer create/modify by is not display with user name (CNT-2805)
+    [CNT-4967] - [All] Incorrect message "IbI,message.common.noDetailInfo" popup when click [Additional Information] (CNT-4966)
+    [CNT-5970] - [Performance] Saving a CPO takes more than 1 minute (CNT-5957)
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace cbx-ui jar file with cbx-ui-5.0.028.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.009.0
+cbx-core-5.0.028.0
+
+
+Release 5.0.027.0 on 2012-09-03
+===============================
+
+Summary
+-------
+    This release includes main bugs fixing and enhancements for view parameter, hierarchy field component
+    to display only SSL no. of levels.
+
+New Enhancements
+----------------
+    [CNT-5685] - [UI] Enhance View parameter
+    [CNT-5635] - Enhancement on the hierarchy field component to display only SSL no. of levels
+
+Defects Remediated
+------------------
+    [CNT-5754] - VPO cannot edit the arrival date, Forwarder date and IN DC Date
+    [CNT-5708] - Resolve module group(tab) and default view mapping by module ID (UI Part)
+    [CNT-5639] - [UI] Put the changes in the Grid/ Selection field to the entity field once user update the grid items/ selection field items.
+    [CNT-5622] - [VPO / CI] Total Amount in header should display as 3 decimal (CNT-5584)
+    [CNT-5601] - Support to customize define selection field popup window title(UI part)
+    [CNT-5589] - After sorting, failed to select in single select popup window. (CNT-5344)
+    [CNT-5588] - Lookup selection cannot be displayed in grid
+    [CNT-5703] - Document should be read-only when open CPM Task Detail (CNT-5478)
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace cbx-ui jar file with cbx-ui-5.0.027.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.009.0
+cbx-core-5.0.027.0
+
+
+
+Release 5.0.026.0 on 2012-08-20
+===============================
+
+Summary
+-------
+    This release includes main bugs fixing and enhancements for set grid height and show error icon for costing calculation failure.
+
+New Enhancements
+----------------
+    [CNT-5276] - Support a new fixed height attribute grids inside a document
+    [CNT-5428] - Costing - Show Error Icon If Calculation Fail In Costing Sheet
+    [CNT-5542] - Support to using hyperlink in email content(CBX_CORE) to open document directly
+
+Defects Remediated
+------------------
+    [CNT-5356] - Change the prompt message for CPM (CNT-5351)
+    [CNT-4924] - UI Change on Module Screens (CNT-4539, CNT-4533)
+    [CNT-5002] - For CNT-4903 All dropdown box should follow the sequence defined in codelist (UI part)
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace cbx-ui-5.0.025.0.jar with cbx-ui-5.0.026.0.jar
+
+
+
+Release 5.0.025.0 on 2012-08-13
+===============================
+
+Summary
+-------
+    This release includes main bugs fixing and enhancement of left navigation panel.
+
+New Enhancements
+----------------
+    [CNT-4412] -  Implement the Collapse/Expand in the View Navigation menu (CNT-4131)
+
+Defects Remediated
+------------------
+    [CNT-5348] - [UI] Custom Fields - No. of decimal places are not consistent in read mode and edit mode
+    [CNT-5298] - [Task] Fix the bug in search grid sorting
+    [CNT-5169] - Rename CPM Buttons (CNT-4644)
+    [CNT-5267] - [UI][Image] Verify image mark-up tools (ImageMARK) source code and build file
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace cbx-ui-5.0.024.0.jar with cbx-ui-5.0.025.0.jar
+
+
+Release 5.0.024.0 on 2012-08-03
+===============================
+
+Summary
+-------
+    This release includes main bugs fixing and enhancement of general UI and Costing popup.
+
+New Enhancements
+----------------
+    [CNT-4927] -  General UI Changes (CNT-4698, CNT-4680, CNT-4678, CNT-4652, CNT-4534, CNT-4536)
+    [CNT-4917] -  Costing - Popup Customization
+
+Defects Remediated
+------------------
+    [CNT-5254] - Dropdown cascade not work in some case
+    [CNT-5065] - Reduce the space of the grid button (CNT-4547)
+    [CNT-4956] - CBX5 shoud support the configuration of the decimal field value rounding mode from CNT_DOMAIN_ATTRIBUTE.
+    [CNT-4926] - Table buttons are expected to be hidden when readonly (CNT-4550)
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace cbx-ui-5.0.023.0.jar with cbx-ui-5.0.024.0.jar
+
+
+
+Release 5.0.023.0 on 2012-07-27
+===============================
+
+Summary
+-------
+    This release includes main bugs fixing and enhancement of drop down to support integer key.
+
+New Enhancements
+----------------
+    [CNT-5175] - [UI] Enhance the drop down component function to support difference value type can be read
+
+
+Defects Remediated
+------------------
+    [CNT-5117] - The integer fields in listing is showing as decimal, say, VER (CNT-5004)
+
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace cbx-ui-5.0.022.0.jar with cbx-ui-5.0.023.0.jar
+
+
+
+Release 5.0.022.0 on 2012-07-21
+===============================
+
+Summary
+-------
+    This release includes main bugs fixing and enhancement of view listing records changes.
+
+New Enhancements
+----------------
+    [CNT-4921] - Default showing 50 records instead of 20 (CNT-4654)
+
+
+Defects Remediated
+------------------
+    [CNT-5003] - Error in selecting a record in popup search view which has $ sign in the name
+    [CNT-4923] - UI Change on CPM (CNT-4538, CNT-4876, CNT-4873)
+    [CNT-4903] - All dropdown box should follow the sequence defined in codelist (CNT-4841)
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace cbx-ui-5.0.021.0.jar with cbx-ui-5.0.022.0.jar
+
+
+
+
+Release 5.0.021.0 on 2012-07-16
+===============================
+
+Summary
+-------
+    This release includes main bugs fixing and enhancement on dashboard and CPM UI.
+
+New Enhancements
+----------------
+    [CNT-4947] - Field auto formatting at UI Layer
+    [CNT-4933] - Jasper report server - support multiple domains - UI
+    [CNT-4634] - UI Enhancement on Listing Page (CNT-4540)
+    [CNT-4695] - Some UI improvement required by Biz team
+    [CNT-4629] - Changes on the Module UI (CNT-4541, 4436, 4537, 4675)
+    [CNT-4635] - UI Change on CPM (CNT-4490, 4434, 4586, 4644)
+    [CNT-4636] - Change on the listing icons (CNT-4435)
+    [CNT-4632] - Changes on Dashboard & General UI (CNT-4531, 4437)
+
+Defects Remediated
+------------------
+    [CNT-4898] - After add/remove columns, simple search in some views, the columns will be reset
+    [CNT-4889] - [UI] Unable to upload image if filename contains space(s)
+    [CNT-4769] - [UI] Some UI issue in vpo module [Sanity test for sprint 36] - Part 3 (UI)
+    [CNT-4802] - When user click on CPM icon and if the corresponding CPM is initialized, it should popup the corresponding CPM
+    [CNT-4796] - [Admin] Implement the Custom Field Setup module (CNT-3858) [UI Implementation]
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace cbx-ui-5.0.020.0.jar with cbx-ui-5.0.021.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.008.0
+cbx-core-5.0.021.0
+
+
+
+Release 5.0.020.0 on 2012-06-29
+===============================
+
+Summary
+-------
+    This release includes main bugs fixing and Enhancement of image loading.
+
+New Enhancements
+----------------
+    [CNT-3968] - [Performance] UI view listing should not get all pages at once
+    [CNT-4439] - Standardize UI Layer prompt message to call the same method to get multi-lingual messages
+    [CNT-3959] - [Performance] Improve performance on image loading
+
+Defects Remediated
+------------------
+    [CNT-4559] - Cannot get Grid when click [Refresh Planned Dates with Latest Anchor Date] button in CPM (CNT-4487)
+    [CNT-4090] - Review service actions to see if need to call worker actions after split LoadDocWorkerAction and SaveDocWorkerAction
+    [CNT-3492] - All dropdown - select a value, click "Delete" button and Tab to mouse out -> got unexpected error
+    [CNT-4422] - Click on "X" to restore a deleted row in the grid doesn't work properly
+    [CNT-4416] - Prompts dialog title still showing "ZK"
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace cbx-ui-5.0.019.0.jar with cbx-ui-5.0.020.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.008.0
+cbx-core-5.0.020.0
+
+
+
+Release 5.0.019.0 on 2012-06-15
+===============================
+
+Summary
+-------
+    This release includes main bugs fixing and Enhancement Of update ZK version to 6.0.1 EE.
+
+New Enhancements
+----------------
+    [CNT-4181] - Upgrade ZK to version 6.0.1 EE
+    [CNT-3966] - Form Schema/View Schema/UI Action Class should be cached
+    [CNT-3963] - [Performance] Slow script running warning display when added many line items sometimes
+    [CNT-4315] - Apply Enhancement Of Label Component To Read-Only Grid Fields
+    [CNT-4314] - Apply Enhancement Of Label Component To Read-Only Header Fields
+    [CNT-4230] - Implement a short term Home-Dashboard
+
+Defects Remediated
+------------------
+    [CNT-4313] - CPM bar should only be shown after it initialized
+    [CNT-4334] - Unlock document when navigate away from document
+    [CNT-4229] - View listing - long text cell data issue
+    [CNT-4237] - Tab order issue in Table Grid (CNT-4051)
+    [CNT-4165] - [CPM] Disable filtering search
+    [CNT-4217] - Advanced search definition problem
+    [CNT-4189] - Remove the workaround after upgraded ZK to version 6.0.1 EE
+    [CNT-4448] - Should not freeze all reference fields in additional information popup
+    [CNT-4485] - Multiple items & shipments are added when generate VPO from CPO
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace cbx-ui-5.0.018.0.jar with cbx-ui-5.0.019.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.005.0
+cbx-core-5.0.019.0
+
+
+
+Release 5.0.018.0 on 2012-06-05
+===============================
+
+Summary
+-------
+    This release includes main bugs fixing and Enhancement Of Document Footer, Label Component, single sign on to reporting server and CPM.
+
+New Enhancements
+----------------
+    [CNT-4158] - Update CBX 5 UI according to Michael's requirements - Part 3 (Document Footer)
+    [CNT-3933] - Implement single sign on to reporting server
+    [CNT-3941] - Update CBX 5 UI according to Michael's requirements - Part 2 (CPM)
+    [CNT-4136] - Enhancement Of Label Component
+
+
+Defects Remediated
+------------------
+    [CNT-4142] - FileUploadBase$SizeLimitExceededException is not catched by system
+    [CNT-3922] - Grid mandatory field red marker (in column header) is shown in read-only mode
+    [CNT-4017] - [CPM] Implement CPM requirement CPM.Bar.8 to show the correct color after task aggregation
+
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace cbx-ui-5.0.017.0.jar with cbx-ui-5.0.018.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.005.0
+cbx-core-5.0.018.0
+
+
+
+Release 5.0.017.0 on 2012-05-29
+===============================
+
+Summary
+-------
+    This release includes main bugs fixing and enhancement for show validation message in popup window.
+
+New Enhancements
+----------------
+    [CNT-4037] - UI Layer not support to show the error message in the popup window
+    [CNT-4033] - Do NOT load full code list if a combo box field is read-only
+
+Defects Remediated
+------------------
+    [CNT-4069] - [CPM] Each CPM task in a CPM template has a unique sequence
+    [CNT-4042] - [Performance] Worker actions should only perform atomic DB logics
+    [CNT-4019] - [UI]Left Hand Side Panel Issues
+    [CNT-4018] - [Customer PO / Vendor PO] Shipments & Quantities - "Shipment No." and "Item No." drop downs need to display value without save before
+    [CNT-3950] - For CNT-3949 Sanity Test for Brief and Quotation - Part 2 (Outstanding Issues)
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace cbx-ui-5.0.016.0.jar with cbx-ui-5.0.017.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.005.0
+cbx-core-5.0.017.0
+
+
+
+Release 5.0.016.0 on 2012-05-21
+===============================
+
+Summary
+-------
+    This release includes main bugs fixing.
+
+New Enhancements
+----------------
+    [CNT-3932] - Add link to access reporting
+    [CNT-3942] - Add On-Off Configuration For Performance Monitoring
+
+Defects Remediated
+------------------
+    [CNT-3814] - Exception using Chrome to access Product tab
+    [CNT-3685] - NO update button available in Detail Cost
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace cbx-ui-5.0.015.0.jar with cbx-ui-5.0.016.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.005.0
+cbx-core-5.0.016.0
+
+
+
+Release 5.0.015.0 on 2012-05-16
+===============================
+
+Summary
+-------
+    This release includes main bugs fixing and enhancement of login page and performance.
+
+New Enhancements
+----------------
+    [CNT-3718] - UI - Performance Tuning (Part 1)
+    [CNT-3519] - Use login_admin.jsp to login, and click logout, it switches to login.jsp
+
+Defects Remediated
+------------------
+    [CNT-3771] - CPM - Date format does not match
+    [CNT-3351] - Document read-only UI issue (Part 2)
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace cbx-ui-5.0.014.0.jar with cbx-ui-5.0.015.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.005.0
+cbx-core-5.0.011.0
+
+
+
+Release 5.0.014.0 on 2012-05-13
+===============================
+
+Summary
+-------
+    This release includes main bugs fixing.
+
+New Enhancements
+----------------
+
+Defects Remediated
+------------------
+    [CNT-3672] - [All] The Layout is displayed in 3 columns rather than 2
+    [CNT-3669] - UI change request from MH
+    [CNT-3644] - Single selection popup window - row click not working in some of the columns
+    [CNT-3694] - UI - Deleted records can't be selected again unless save in grid selectionbox
+    [CNT-3674] - Vendor PO/Customer PO/Offer Sheet - Outstanding Issues (Sprint 30)
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace cbx-ui-5.0.013.0.jar with cbx-ui-5.0.014.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.005.0
+cbx-core-5.0.011.0
+
+
+
+Release 5.0.013.0 on 2012-05-09
+===============================
+
+Summary
+-------
+    This release includes main bugs fixing.
+
+New Enhancements
+----------------
+
+Defects Remediated
+------------------
+    [CNT-513] - Generic view to display search results when user search on "All", "Product", "Sourcing", etc
+    [CNT-3358] - Document read-only issue: the checkbox are displaying in editable mode even document is read-only
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace cbx-ui-5.0.012.0.jar with cbx-ui-5.0.013.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.005.0
+cbx-core-5.0.011.0
+
+
+
+Release 5.0.012.0 on 2012-05-07
+===============================
+
+Summary
+-------
+    This release includes main bugs fixing.
+
+New Enhancements
+----------------
+
+Defects Remediated
+------------------
+    [CNT-3398] - Quotation - top issues
+    [CNT-3239] - The status fields are displaying CODE rather than name (short term solution)
+    [CNT-3316] - Issue about "add to favorite" and "follow this" function
+    [CNT-3340] - Confirmation message should NOT be shown when user has NOT changed field values since last edit/save action
+
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace cbx-ui-5.0.011.0.jar with cbx-ui-5.0.012.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.005.0
+cbx-core-5.0.011.0
+
+
+Release 5.0.011.0 on 2012-04-27
+===============================
+
+Summary
+-------
+    This release includes main bugs fixing.
+
+New Enhancements
+----------------
+
+Defects Remediated
+------------------
+    [CNT-3128] - [CPM] Issues reported by QA on 19-Apr
+    [CNT-3302] - [All] Field validation message is not display properly if only one errors
+
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace cbx-ui-5.0.010.0.jar with cbx-ui-5.0.011.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.005.0
+cbx-core-5.0.011.0
+
+
+
+Release 5.0.010.0 on 2012-04-25
+===============================
+
+Summary
+-------
+    This release includes main bugs fixing.
+
+New Enhancements
+----------------
+
+Defects Remediated
+------------------
+    [CNT-3255] - Code list selection view in popuop window incorrect
+    [CNT-3264] - No label in validation error message for grid fields.
+    [CNT-2728] - Confirmation message should be show when navigate away from a modified document by clicking Toolbar button
+    [CNT-3245] - Document read-only UI issue
+    [CNT-3238] - Hierarchical code list fields problem
+    [CNT-3262] - Popup selection keeps processing and sometimes displays ZK UI error
+    [CNT-3371] - [Product][Sourcing] issues found on Apr-25
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace cbx-ui-5.0.009.0.jar with cbx-ui-5.0.010.0.jar
+
+Library dependency
+------------------
+cbx-common-5.0.005.0
+cbx-core-5.010.0
+
+
+
+Release 5.0.009.0 on 2012-04-24
+===============================
+
+Summary
+-------
+    This release includes main bug fixing and some new features like: new UI, reload page when switch tab  and
+    image Mark-up - Updates for zoom in/out and margins.
+
+New Enhancements
+----------------
+    [CNT-2986] - [UI] Display multilingual error message (System Message) by error ID
+    [CNT-2821] - [Security+UI] Enable Security for Custom Fields
+    [CNT-2647] - Update CBX 5 UI according to Michael's requirements
+    [CNT-3078] - Reload page when switch tab (Home, Products, Sourcing, Orders, Quality, Logistics, Masters, Admin)
+
+Defects Remediated
+------------------
+    [CNT-2678] - Dropdown list fields options has no ordering
+    [CNT-1856] - Document footer: date created and date modified should not display milliseconds
+    [CNT-2977] - [CPM] First column, showing key information of the entity, is missing
+    [CNT-3048] - unable to show color size popup at VPO ( other color size too.)
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace cbx-ui-5.0.008.0.jar with cbx-ui-5.0.009.0.jar
+
+Library dependency
+------------------
+cbx-common: 5.0.003.0
+cbx-core-5.0.009.0
+
+
+
+Release 5.0.007.0 on 2012-04-12
+=============================
+
+Summary
+-------
+    This release includes critical bugs fixing.
+
+New Enhancements
+----------------
+    [CNT-2635] - UI layer issues reported in 2-Apr build release
+    [CNT-2725] - Coding - Matrix Grid - Support Sorting of Row and Column Header according to Seq.
+    [CNT-2734] - Coding - Popup selection for single selection - should allow single click instead of double click
+
+
+Defects Remediated
+------------------
+    [CNT-2587] - Bug - UI issues on CPM
+    [CNT-2757] -  Coding - Dropdown list fields options has no ordering
+    [CNT-2708] -  Popup selection for single selection - should allow single click instead of double click
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace cbx-ui-5.0.006.0.jar with cbx-ui-5.0.007.0.jar
+
+Library dependency
+------------------
+cbx-common: 5.0.003.0
+cbx-core-5.0.007.0
+
+
+
+
+Release 5.0.006.0 on 2012-04-09
+=============================
+
+Summary
+-------
+    This release includes critical bugs fixing.
+
+New Enhancements
+----------------
+    [CNT-2605] - Coding - For CNT 1603 - Confirmation message should be show when navigation away from a modified document
+    [CNT-2595] - Coding - [Brief] Image is disappeared after save
+    [CNT-2568] - Coding - For CNT 2519 - Item - Blocker / Critical Issues
+    [CNT-2546] - Coding - Popup selection field - handling for only single selection allowed
+    [CNT-2535] - Issue with selection field input
+    [CNT-2609] - coding - Enhance ui field to support mapping attribute
+
+Defects Remediated
+------------------
+    [CNT-1856] - Document footer: date created and date modified should not display milliseconds
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace cbx-ui-5.0.005.0.jar with cbx-ui-5.0.006.0.jar
+
+Library dependency
+------------------
+cbx-common: 5.0.003.0
+cbx-core-5.0.006.0
+
+
+
+
+Release 5.0.005.0 on 2012-04-06
+=============================
+
+Summary
+-------
+    This release includes new features as: Error Message, dropdown support for new codelist, Hierarchical Code List,
+    Matix Grid, Cascade dropdown and many bugs fixing.
+
+New Enhancements
+----------------
+    [CNT-1811] - Bug - Fix bugs on CPM related Issue
+    [CNT-1803] - Coding - Biz - Display Validation Error Message
+    [CNT-1801] - Coding - Update CbxCombobox To Support New Codelist
+    [CNT-1791] - Coding - Order - Customer PO - Shipment & Quantities - Item No. dropdown - Exception when Save
+    [CNT-1778] - Coding - Apply "Hierarchical Code List UI" and "Cascade Dropdown" component to Sample Biz Entity
+    [CNT-1728] - Coding - MatrixGrid
+    [CNT-1683] - Coding - UI need to be re-rendered after doing action
+    [CNT-1681] - Coding - Coding - UI - Component to support Hierarchical Code Lists
+    [CNT-1601] - Coding - Coding - Cascade selection UI component
+    [CNT-1596] - UI - Top pane - Remove icons and links which are not ready/functional
+    [CNT-1537] - Remove Renamed Class com.core.cbx.ui.zk.util.ValueFormater
+    [CNT-1509] - UI layer - unable to interpret 2nd level field data from passed in parameter
+    [CNT-987] - Fix ArrayIndexOutOfBoundsException in DefaultCellRenderer (UI Layer)
+    [CNT-1430] - View to support hidden column type for filtering purposes only
+    [CNT-1783] -  Coding - UI - Display Validation Error Message
+    [CNT-1496] -  Change History Grid CreatedOn column can not display Datetime format (which define in CNT_VIEW_COLUMN table by view generation process), UI layer need to support this
+    [CNT-1494] -  Radio group type of change history "value before" and "Value After" display not expected value
+    [CNT-1486] -  UI Layer Transforming the Long number type from Data Layer to Integer after data binding
+    [CNT-1412] -  Deleted image/attachment appears again after saving a document
+
+
+
+Defects Remediated
+------------------
+    [CNT-1666] - UI - Grid Detele button - Cann't delete the items which doesn't save to DB.
+    [CNT-1609] - Purchase production license for image viewer
+    [CNT-1591] - UI - Update UI based on look and feel provided by Michael
+    [CNT-1482] - UI - Test customized ZK components in different browsers according to requirements in CNT-1480
+
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace cbx-ui-5.0.004.0.jar with cbx-ui-5.0.005.0.jar
+
+Library dependency
+------------------
+cbx-common: 5.0.003.0
+cbx-core-5.0.005.0
+
+
+
+Release 5.0.004.0 on 2012-03-18
+=============================
+
+Summary
+-------
+    This release is compatible with cbx-common-5.0.003.0, cbx-core-5.0.004.0 and the latest cbx-biz.
+
+New Enhancements
+----------------
+    [CNT-1409] - UI - Merge Files To UI Sub-System
+    [CNT-1403] - Selected item was cached after data copy even the check box is unchek
+    [CNT-1399] - BaseGrid.getSelectedRows/getSelRecords returns previously selected rows/records even if they are unchecked
+    [CNT-1390] - UI - Selection (Single) - Unable to row-click select a record
+    [CNT-1383] - Text Area popup icon not work in jar cbx-ui-5.0.003.1, cbx-core-5.0.003.0.alpha.1.201203101451, cbx-common-5.0.002.0
+    [CNT-1356] - Coding - Enhancement, Passing the formId value from UI action for Data Layer to use.
+    [CNT-1037] - Multi-Selection field disappear after user try to enter data into more than one text box
+    [CNT-1004] - Missing scoll bar in the popup window
+    [CNT-992] - Dropdown (multiple) : cannot pass parameter
+    [CNT-654] - Coding - Grid rows can be readonly/editable based on condition
+
+Defects Remediated
+------------------
+    [CNT-1414] - Model Implementation - UI Sample
+    [CNT-1357] - All Screens - follow UI standards to fix both control and column widths
+    [CNT-982] - Release new jar for open UI security code
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace cbx-ui-5.0.003.0.jar with cbx-ui-5.0.004.0.jar
+
+
+
+Release 5.0.003.0 on 2012-03-12
+=============================
+
+Summary
+-------
+    This release is compatible with cbx-common-5.0.003.0, cbx-core-5.0.003.0 and the latest cbx-biz.
+
+New Enhancements
+----------------
+    [CNT-980] - Move Customize ZK Components Javascript & Css Files To CBX-UI
+    [CNT-1040] - Unable to use delete button to delete any detail line
+    [CNT-1025] - Error in saving a new document without selected any value in the selection field
+    [CNT-1022] - Cannot delete selected value in a multi-selection field
+    [CNT-1005] - Unable to show popup Win's Grid Buttons' label
+    [CNT-1004] - Missing scoll bar in the popup window
+    [CNT-980] - Move Customize ZK Components Javascript & Css Files To CBX-UI
+    [CNT-968] - Label Field Support Number Type
+    [CNT-967] - Label maxLength setting issue
+    [CNT-965] - Selection Field Single Mold Not Work Issue
+    [CNT-964] - Selection Fields Can't Popup Window Issue
+
+Defects Remediated
+------------------
+    [CNT-1037] - Multi-Selection field disappear after user try to enter data into more than one text box
+    [CNT-992] - Dropdown (multiple) : cannot pass parameter
+
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace cbx-ui-5.0.002.1.jar with cbx-ui-5.0.003.0.jar
+
+
+Release 5.0.002.1 on 2012-03-06
+=============================
+
+Summary
+-------
+    Hot fix for 5.0.002.0
+
+New Enhancements
+----------------
+    [CNT-964] - Fix selection field can't popup win issue
+    [CNT-965] - Fix selection field single not work issue
+    [CNT-967] - Fix label maxLength setting issue
+    [CNT-968] - Fix default number format issue
+
+Defects Remediated
+------------------
+   [CNT-653] - enhancement in UI layer for change history
+
+Notes on Upgrade or New Install
+-------------------------------
+    Replace cbx-ui-5.0.002.0.jar file with cbx-ui-5.0.002.1.jar
+
+
+
+Release 5.0.002.0 on 2012-03-05
+=============================
+Summary
+-------
+    New implementation under new sub-system release policy, with new modules implemented according to requirement release on 2012-02-24.
+
+New Enhancements
+----------------
+   [CNT-654] - Grid rows can be readonly/editable based on condition
+   [CNT-614] - Apply Search View In Popup
+   [CNT-639] - Update UI Engine For Advance Popup Window
+   [CNT-638] - Update Form Definition And Gen Form For Advance Popup Window
+   [CNT-583] - Custom Field Handling
+   [CNT-656] - Update Upload Button Style
+
+Defects Remediated
+------------------
+   [CNT-653] - enhancement in UI layer for change history
+
+
+Notes on Upgrade or New Install
+-------------------------------
+This release is denpendence on cbx-common-5.0.002.0 and cbx-core-5.0.002.0
+
+
+
+Release 5.0.1.0 on 2012-02-21
+=============================
+Summary
+-------
+Initial release for internal demo

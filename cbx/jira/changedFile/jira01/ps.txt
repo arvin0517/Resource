@@ -1,0 +1,71 @@
+
+Update file: CBXB_Excel\root\excel\popup\custFieldDef_popup.xlsx
+ update:
+popCustFieldDefDetail sheet:
+add a rendererClass value to "attrKey"
+rendererClass = "com.core.cbx.custfielddef.form.CustFieldDefAttrKeyCellRenderer" when id = "attrKey"
+id*	label	type*	readonly	rendererClass
+attrKey	Key	Text	TRUE	com.core.cbx.custfielddef.form.CustFieldDefAttrKeyCellRenderer
+
+Update Class: com.core.cbx.custfielddef.form.CustFieldDefAttrKeyCellRenderer extends TextCellRenderer
+Description: 
+add rendererClass for attrKey,
+create com.core.cbx.custfielddef.form.CustFieldDefAttrKeyCellRenderer extends TextCellRenderer, and Override getFieldValue method,add Map to store the key with label to render the attrKey.
+Login:
+1.Define class CustFieldDefAttrKeyCellRenderer extends TextCellRenderer .
+ 
+ 2.override getFieldValue method,add Map to store the key with label to render the attrKey.
+When attrKey's fieldValue is the same as the object key of Map, it returns the object value mapped by the key object to render attrKey label.
+/* Render custom field attributes for Codelist type */
+ public static final String ATTR_RENDER_BOOK_NAME = "Book Name";
+public static final String ATTR_RENDER_MATCH_DATE_FIELD_ID = "Match Date Field ID";
+public static final String ATTR_RENDER_CASCADE = "Cascade";
+public static final String ATTR_RENDER_CASCADE_EXPRESSION = "Cascade Expression";
+/* Render custom field attributes for HclGroup type */
+public static final String ATTR_RENDER_HCL_DATA = "HCL Data";
+public static final String ATTR_RENDER_DISABLE_SSL = "disable SSL";
+public static final Map<String,Object> attrMap = new HashMap<String,Object>();
+static {
+ attrMap.put(CustomFieldDefConstants.ATTR_BOOK_NAME, ATTR_RENDER_BOOK_NAME);
+ attrMap.put(CustomFieldDefConstants.ATTR_MATCH_DATE_FIELD_ID, ATTR_RENDER_MATCH_DATE_FIELD_ID);
+ attrMap.put(CustomFieldDefConstants.ATTR_CASCADE, ATTR_RENDER_CASCADE);
+ attrMap.put(CustomFieldDefConstants.ATTR_CASCADE_EXPRESSION, ATTR_RENDER_CASCADE_EXPRESSION);
+ attrMap.put(CustomFieldDefConstants.ATTR_HCL_DATA, ATTR_RENDER_HCL_DATA);
+ attrMap.put(CustomFieldDefConstants.ATTR_DISABLE_SSL, ATTR_RENDER_DISABLE_SSL);
+ }
+@Override
+ protected Object getFieldValue(final BaseColumn col, final Object data) {
+final String value = (String)super.getFieldValue(col, data);
+ if(attrMap.containsKey(value)){
+return attrMap.get(value);
+ }else{
+return value;
+ }
+}
+
+Update Class: com.core.cbx.ui.zk.cul.grid.renderer.AbstractCellRenderer implements CellRenderer , Serializable
+Description: 
+AbstractCellRenderer.getFieldValue method should not be a static method, so it is changed to non-static method, so that convenient CustFieldDefAttrKeyCellRenderer class to override the getFieldValue method. 
+So remove the "static" in front of the "getFieldValue".
+change:
+ old:
+protected Object static getFieldValue(final BaseColumn col, final Object data) {
+ final String dataIndex = StringUtils.defaultIfBlank(col.getMapping(), col.getId());
+ return FieldValueGetter.getEntityFieldValue((Map<String, Object>) data, dataIndex);
+ }
+new:  remove "static"
+protected Object getFieldValue(final BaseColumn col, final Object data) {
+ final String dataIndex = StringUtils.defaultIfBlank(col.getMapping(), col.getId());
+ return FieldValueGetter.getEntityFieldValue((Map<String, Object>) data, dataIndex);
+ }
+
+Update Class: com.core.cbx.ui.zk.cul.grid.renderer.DropdownCellRenderer extends DefaultCellRenderer
+Description: 
+When AbstractCellRenderer. GetFieldValue method is modified to a non-static method, will influence the DropdownCellRenderer,.
+Because DropdownCellRenderer need use static getFieldValue method, so need to modify the DropdownCellRenderer code.
+make it a different way to use getFieldValue method.
+change:
+old:
+ "final Object value = DefaultCellRenderer.getFieldValue(col, data);"
+new:
+"final Object value = getFieldValue(col, data);"

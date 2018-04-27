@@ -1,0 +1,87 @@
+Background and Objectives 
+Should not trigger validation when sending Factory Audit to Vendor with some inactive vendors.
+The factory audit should be send to all active vendors that linked with that particular Factory.
+
+Root cause analysis (for bugs)
+   when the Factory Audit is created and perform 'Send to vendor', this FA will send out to the vendors who is linked with the selected Factory. However, if one of the linked vendors is inactive, the FA will NOT able to send out to other active vendors.
+   So when the entityName is Factory Audit, cancel the validation of vendors.
+
+----------------------------------------------------------
+
+Update Class: com.core.cbx.validation.validator.ExternalActiveValidator extends AbstractValidator
+Description: when the entityName is Factory Audit,delete the vendor verification code.
+Update Method: ExternalActiveValidator.validate()
+Changes: 
+
+
+-----------------------------------------------------------
+
+Case 1:
+Login as buyer
+Create a Factory associated with multiple vendors
+Set one of those vendors to inactive
+Create a Factory Audit for this Factory
+Click Send to Vendor
+
+Expected result
+The factory audit should be sent to all active vendors that linked with that particular Factory.
+
+
+so it does not fall into the validation checking
+vendor is not referenced ba
+factory audit -> factory
+no referenced vendor in factory audit
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+Coding:
+
+
+Coding For CNT-32490
+----
+
+{panel:title=Source Code|borderStyle=dashed|borderColor=#ccc|titleBGColor=#f0f0f0|bgColor=#FBFBFB}
+
+*CBX_General*
+#  com.core.cbx.validation.validator.ExternalActiveValidator extends AbstractValidator
+{panel}
+
+{panel:title=Summary of testing results|borderStyle=dashed|borderColor=#ccc|titleBGColor=#f0f0f0|bgColor=#FBFBFB}
+
+*[Test Case]:*
+Case 1:
+1.Login as buyer
+2.Create a Factory associated with multiple vendors
+3.Set one of those vendors to inactive
+4.Create a Factory Audit for this Factory
+5.Click Send to Vendor
+
+*[Expected Result]:*
+The factory audit should be sent to all active vendors that linked with that particular Factory.
+
+
+{panel}
+
+
+-----------------------------------------------------------------------------------------------------------
+
+也不是很难啦，Ace gor, 不是有你在吗，不懂都可以问你，感觉你人很好，一直叫我不懂要问你。
+
+
+
+Ace gor, 我考虑了很久，我想申请辞职。
+
+
+
+
+
+
+
+
+
+
+
+
+

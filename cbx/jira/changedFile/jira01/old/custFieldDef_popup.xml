@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<popup module="custFieldDef" position="custFieldDef_popup.xlsx">
+  <sheet id="popCustFieldDefDetail" position="custFieldDef_popup.xlsx,popCustFieldDefDetail">
+    <PopupCustomWin id="popCustFieldDefDetail" label="Field Detail" position="custFieldDef_popup.xlsx,popCustFieldDefDetail,1" size="S">
+      <elements id="default">
+        <element position="custFieldDef_popup.xlsx,popCustFieldDefDetail,8">
+          <id>fieldAttributes</id>
+          <label/>
+          <type>Grid</type>
+        </element>
+        <element position="custFieldDef_popup.xlsx,popCustFieldDefDetail,9">
+          <id>popCustFieldDefDetailToolbar</id>
+          <label/>
+          <type>Toolbar</type>
+        </element>
+      </elements>
+    </PopupCustomWin>
+    <Grid entityName="CustFieldDefAttr" id="fieldAttributes" label="Attributes" position="custFieldDef_popup.xlsx,popCustFieldDefDetail,12" ratio="100%" selectionMode="" showHint="FALSE">
+      <elements id="buttons"/>
+      <elements id="columns">
+        <element position="custFieldDef_popup.xlsx,popCustFieldDefDetail,22">
+          <id>attrKey</id>
+          <label>Key</label>
+          <type>Text</type>
+          <data/>
+          <action/>
+          <actionParams/>
+          <group/>
+          <dataFrom/>
+          <cascade/>
+          <cascadeBy/>
+          <filterBy/>
+          <colspan/>
+          <rowspan/>
+          <mapping/>
+          <scale/>
+          <size/>
+          <prefix/>
+          <mandatory/>
+          <format/>
+          <readonlyFormat/>
+          <comboSorting/>
+          <comboKey/>
+          <hideTitle/>
+          <readonly>TRUE</readonly>
+          <rendererClass/>
+        </element>
+        <element position="custFieldDef_popup.xlsx,popCustFieldDefDetail,23">
+          <id>attrValue</id>
+          <label>Value</label>
+          <type>Text</type>
+          <data/>
+          <action/>
+          <actionParams/>
+          <group/>
+          <dataFrom/>
+          <cascade/>
+          <cascadeBy/>
+          <filterBy/>
+          <colspan/>
+          <rowspan/>
+          <mapping/>
+          <scale/>
+          <size/>
+          <prefix/>
+          <mandatory/>
+          <format/>
+          <readonlyFormat/>
+          <comboSorting/>
+          <comboKey/>
+          <hideTitle/>
+          <readonly/>
+          <rendererClass/>
+        </element>
+      </elements>
+    </Grid>
+    <Toolbar align="" id="popCustFieldDefDetailToolbar" label="" position="custFieldDef_popup.xlsx,popCustFieldDefDetail,26">
+      <elements id="default">
+        <element position="custFieldDef_popup.xlsx,popCustFieldDefDetail,33">
+          <id>popCustFieldDefDetailActionButtons</id>
+          <label/>
+          <type>Buttonbar</type>
+        </element>
+      </elements>
+    </Toolbar>
+    <Buttonbar align="right" id="popCustFieldDefDetailActionButtons" label="" position="custFieldDef_popup.xlsx,popCustFieldDefDetail,36">
+      <elements id="default">
+        <element position="custFieldDef_popup.xlsx,popCustFieldDefDetail,43">
+          <id>ok</id>
+          <label>OK</label>
+          <type>Button</type>
+          <action>CustFieldDefDetailOkAction</action>
+          <actionParams/>
+        </element>
+        <element position="custFieldDef_popup.xlsx,popCustFieldDefDetail,44">
+          <id>close</id>
+          <label>Cancel</label>
+          <type>Button</type>
+          <action>PopupCustomWinCancleAndCloseAction</action>
+          <actionParams/>
+        </element>
+      </elements>
+    </Buttonbar>
+  </sheet>
+</popup>

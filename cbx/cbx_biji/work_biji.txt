@@ -1,0 +1,926 @@
+
+eclipse 安装插件:
+a)Plug-in installation
+The Eclipse in “Section 1: Install” already included the following plug-ins, install them if you don’t have:
+AnyEdit: Use to trim space after each saving
+URL: http://andrei.gmxhome.de/eclipse/
+
+CheckStyle: Used to verify the coding style
+URL: http://eclipse-cs.sourceforge.net/update/
+JD-Eclipse: Used to decompile java class files
+	URL: http://jd.benow.ca/jd-eclipse/update
+	For more information on JD-Eclipse, please visit: http://java.decompiler.free.fr/?q=jdeclipse
+FindBugs: Used to find out potential bug in the code
+	URL: http://findbugs.cs.umd.edu/eclipse
+	For more information on the FindBugs, please visit: http://findbugs.sourceforge.net/index.html
+
+
+---------------------------------------------------------------
+
+[Test Environment]
+  https://qa-cbx5-upgrade.coresolutions.com/main/
+      User ID = Vicky_pegp
+      Password = core@123
+
+
+------------------------------------------------------------
+
+jira:
+
+https://jira.coresolutions.com/browse/CNT-27645
+
+http://192.168.2.55:8081/view/CBX6/job/cbx6-db-upgrade/lastSuccessfulBuild/artifact/cbx-build-dbdump-upgrade-pgsql/release_dbdump/
+
+-------------------------------------------------------------
+
+http://192.168.2.47:8080/main/login.jsp
+
+http://localhost:8083/main/login.jsp
+
+a080301 
+p@ssw0rd#Cbx
+
+develop test sever
+test5@RD2
+p@ssw0rd#Cbx!
+
+
+a080302
+arvin322
+
+Login id = admin, password = p@ssw0rd#Cbx!
+
+ace_pegp
+core@123
+
+--------------------------------------------------------------
+
+邮箱：
+
+arvin.zheng@cbxsoftware.com
+
+https://prism.coresolutions.com/owa/
+
+arvin.zheng
+
+C!dR6f?aCApewa
+
+---------------------------------------------------
+
+
+
+CustFieldDefComposer
+
+PopCustFieldDefDetailComposer
+
+HclComposer
+
+CodelistComposer
+
+CustomFieldDefConstants
+
+CustFieldDef
+
+CustomFieldItemsWorkerAction
+
+CodelistFieldConverter
+
+打包 :mvn compile install -DskipTests=true（要到指定项目文件中打开cmd,输入）
+
+-----------------------------------------------------------------
+
+01 jira
+
+select : Apply to ----> create customFieldItems  （event)
+CustFieldDefComposer---> get Apply to --> event
+in event -- createCustomFieldItems
+
+datasource ----> CustFieldDefAttr
+1. entityDefinition : CBX_Core\genExcel\excel\entity\custFieldDef_entity.xlsx
+
+CustFieldDef---> custFieldDefItem : CustomFieldItems---->fieldAttributes : CustFieldDefAttrs--->attrKey == wrong
+
+datasource.custFieldDefItem.fieldAttributes.attrKey
+
+打包 :mvn compile install -DskipTests=true（要到指定项目文件中打开cmd,输入）
+
+CustomFieldItemsAction　---> CustomFieldItemsWorkerAction.createCustomFieldItems
+---> create : codelist/hclGroup type : customFieldItem 
+---> create CustFieldDefAttr.put(attrKey, "wrongValue")
+
+wrongValue ---> CBX_Core/CustomFieldDefConstants 
+
+so need repackage : CBX_Core jar , after change
+
+
+
+-----------------------------------------------
+
+select * from cnt_custom_field_def_attr;
+
+update cnt_custom_field_def_attr set attr_key = 'Book Name' where attr_key = 'bookName';
+
+update cnt_custom_field_def_attr set attr_key = 'Match Date Field ID' where attr_key = 'matchDateFieldId';
+
+update cnt_custom_field_def_attr set attr_key = 'Cascade Expression' where attr_key = 'cascadeExpression';
+
+update cnt_custom_field_def_attr set attr_key = 'Cascade' where attr_key = 'cascade';
+
+update cnt_custom_field_def_attr set attr_key = 'HCL Data' where attr_key = 'hclData';
+
+update cnt_custom_field_def_attr set attr_key = 'disable SSL' where attr_key = 'disableSsl';
+
+-------------------------------------------------
+
+写sql 用来把错误的数据 改正确， 我们称之为 : Data Patch(数据片)
+
+
+----------------------------------------------------
+
+做完jira,交作业的网址：(交ps,即设计文档)
+https://confluence.coresolutions.com/pages/viewpage.action?title=Sprint+6.8&spaceKey=SEGLab
+
+模板：
+https://confluence.coresolutions.com/display/SEGLab/Program+Spec+CNT-31712
+
+--------------------------------------------------------
+
+jira 01
+
+CODELIST_FIELD_TYPE
+
+Login system with PEGP buyer domain.
+Go to Custom Fields listing view under Admin module, click [Create] button.
+Fill all mandatory fields.
+Click [Detail...] button which Data Type="Codelist" in Custom Fields grid.
+Check in Field Detail popup window.
+Click [Detail...] button which Data Type="HclGroup" in Custom Fields grid.
+Check in Field Detail popup window.
+choic click a customFieldDef
+
+Some UI issue in "Field Detail" popup window
+
+change the wrong attrKey values
+Click a customFieldDef
+Change attrKey value
+Step 5 & 7: Should show the "Key" value correctly according to requirement. 
+
+
+ui 用的是6.6的....
+Business直接加一个
+
+        <dependency>
+            <groupId>com.core.cbx</groupId>
+            <artifactId>cbx-core</artifactId>
+            <version>6.7.0</version>
+        </dependency>
+
+-----------------------------------------------------------------------------------
+
+coding模板：
+https://jira.coresolutions.com/browse/CNT-27645
+
+coding其他模板：
+https://jira.coresolutions.com/browse/CNT-32195
+
+PS:
+  Open Progress: Designing (开始任务)
+  Resolve: Implemented/Fixed（写完PS）
+  Conment: Hi Ace,please help me to review the PS .thanks
+  Assign:  to Ace
+
+Coding:
+  Open Progress:Coding(开始任务)
+  Resolve: Implemented/Fixed(写完coding并push完)
+  Conment: Hi, Ace Li
+           My codes has push to Git branchs:
+           CBX_Core: v6.8-arvin.zheng-cnt-27645
+           please help to review,thanks.
+  Assign: to Ace
+
+
+注意：
+          修改Java文件后，在git push 上去时，记得加 change log.
+--------------------------------------------------------------------------
+
+v6.8-arvin.zheng-cnt-27645
+
+CNT-27645 arvin.zheng
+
+ZH Development DB
+
+------------------------------------
+
+*[Test Result]:*
+
+ Case 1: Step 5 & 7: Should show the "Key" value correctly according to requirement. 
+ Case 2: Step 6 & 8: Should show the "Key" value correctly according to requirement.
+
+------------------------------------------------
+
+02 jira 
+
+https://jira.coresolutions.com/browse/CNT-31851
+
+
+---click "send" button :
+--->SendSampleRequestAction.buildSampleTrackerWithSampleReq
+--->sampleReqVendorToST  (inheritance date)
+---> MappingRule === sampleReqVendorToSampleTracker in sampleReqest_dataMappingRule.xlsx
+===> vendor, factory ---> sampleTracker (missing country)
+
+
+继承规则：
+     需要清楚：是哪个 entity 的 entity_field_id 要继承给另外哪一个 entity 的 entity_field_id， 在 XXX_dataMappingRule.xlsx文件中，要写清楚，而且要相对应
+     ----->首先找到入口，类似于SendSampleRequestAction
+     ----->可以一步一步debug, 找到是哪个entity要继承给另一个entity， 类似于 SampleRequestVendor  要继承给 SampleTracker, 要生成 一个SampleTracker，
+     ----->进一步debug,再找到继承规则，看需求中需要的东西是否有被继承， inheritanceContext、InheritanceTask、DataInheritanceWorkAction
+     ----->当需要的东西没有被继承时，这时可以查找 XXX_dataMappingRule.xlsx文件，看看有哪些entity_field_id 有被继承，哪些没有，将需要被继承的entity_field_id 填写并且相对应上。
+     ------>再generate 修改的xlsx文件等等操作.
+
+----------------------------------------------
+
+http://192.168.2.47:8080/main/login.jsp
+http://192.168.2.43:8080/main/login.jsp
+2.47是我们开发的测试环境
+2.43是QA的测试环境
+
+-----------------------------------------------
+
+jira 02 
+
+[Test Steps]
+Login system with QAPEGP domain.
+Go to Quality - Sample Request module.
+Create a new Sample Request, fill all mandatory fields, select factory in Vendor Information table.
+Add a record in Item Samples Requested Details grid.
+Click [Send] button, send successfully.
+Go to sample tracker view and open the new sample tracker generated from above sample request.
+Check the value in "Country of Origin" field.
+
+[Actual Result]
+No value in "Country of Origin" field.
+[Expected Result]
+"Country of Origin" should the Country of Origin of the selected Factory.
+
+
+
+
+--------------------------------------------------------------
+
+打包可以分两种方式：
+  1、整个项目打包，在指定项目的文件夹下，打开cmd, 输入 mvn compile install -DskipTests=true
+  2、仅仅打包某个或多个java文件， 如果只想打包修改的java文件和被牵连到的java文件，可以先将这些java文件打成jar包,然后解压，拿出里面编译好的class文件,替换掉在类似\6.8.0-SNAPSHOT\cbx-ui-6.8.0-SNAPSHOT.jar或6.8.0-SNAPSHOT\cbx-ui-6.8.0-20170809.161219-27.jar这种jar包下的相同路径下的相同的class文件.
+
+
+仓库
+C:\Users\arvin.zheng\.m2\repository\com\core\cbx\cbx-general
+
+C:\Users\arvin.zheng\.m2\repository\com\core\cbx\cbx-ui\6.8.0-SNAPSHOT\cbx-ui-6.8.0-SNAPSHOT.jar\com\core\cbx\ui\zk\cul\grid\renderer\
+C:\Users\arvin.zheng\.m2\repository\com\core\cbx\cbx-ui\6.8.0-SNAPSHOT\cbx-ui-6.8.0-20170809.161219-27.jar\com\core\cbx\ui\zk\cul\renderer\
+
+------------------------------------------------------------------------------
+
+如果是在SampleRequest_form触发的事件，应该在SampleRequestComposer找，若是到SampleTrackerComposer找触发事件是错的，
+
+同理，如果是在SampleTracker_form触发的事件，应该在SampleTrackerComposer找，若是到SampleRequestComposer找触发事件是错的，
+
+
+触发事件可以在xlsx文件中查看有没有相应的Action或者到 XXXComposer里面找.
+
+
+-------------------------------------------------------------------------
+
+generate 有报错， 可以查看logs 和 reporte
+
+-------------------------------------------------------------------------
+  
+jira 02
+
+select * from CNT_SAMPLE_TRACKER;
+
+select * from CNT_FACT;
+
+select * from CNT_FACT where id = '1d7361b7ea8146c3844a4cf963260b6a';
+
+update CNT_SAMPLE_TRACKER set country_name = (select country_of_origin_name from CNT_FACT where CNT_SAMPLE_TRACKER.factory_id = CNT_FACT.id);
+
+update CNT_SAMPLE_TRACKER set country = (select country_of_origin from CNT_FACT where CNT_SAMPLE_TRACKER.factory_id = CNT_FACT.id);
+
+jira ps
+https://confluence.coresolutions.com/display/SEGLab/Program+Spec+CNT-31851
+
+---------------------------------------------------------------------
+
+这里的'mappingType' 是怎么判断是'Field'还是'Section'的？
+还有在SampleTracker的entity定义中 'country' 的 'entity_field_type' 是 'string-m',在这里'country' 的 'dstFieldType' 怎么是 "entity"?
+
+还有在SampleTracker的entity定义中 'country' 的 'entity_field_type' 是 'string-m'后面是codelist有看到吗
+因为codelist是 entity 来的
+
+
+---------------------------------------------------------------------
+
+ps Jira，coding jira
+
+---------------------------------------------------------------------
+
+jira 01  改做法。
+
+reRendererUI
+1. popup : --> custFieldDef_popup.xlsx --->popCustFieldDefDetail
+2. add rendererClass for attrKey
+3. com.core.cbx.custfielddef.form.CustFieldDefAttrKeyCellRenderer extends TextCellRenderer  add Map to store the key with label
+4. @Override method : getFieldValue
+
+GenericRowRenderer
+
+AbstractCellRenderer
+
+
+select * from cnt_custom_field_def_attr;
+
+update cnt_custom_field_def_attr set attr_key = 'bookName' where attr_key = 'Book Name';
+
+update cnt_custom_field_def_attr set attr_key = 'matchDateFieldId' where attr_key = 'Match Date Field ID';
+
+update cnt_custom_field_def_attr set attr_key = 'cascadeExpression' where attr_key = 'Cascade Expression';
+
+update cnt_custom_field_def_attr set attr_key = 'cascade' where attr_key = 'Cascade';
+
+update cnt_custom_field_def_attr set attr_key = 'hclData' where attr_key = 'HCL Data';
+
+update cnt_custom_field_def_attr set attr_key = 'disableSsl' where attr_key =  'disable SSL' ;
+
+改完数据库的数据，需要清除缓存.
+
+------------------------------------------------------------
+
+target=dataMappingRule
+
+---------------------------------------------
+
+CBX_Common
+CBX_Core
+CBX_UI
+CBX_General
+CBX_Business
+
+------------------------------------
+
+pom 版本改统一
+
+mvn eclipse:clean
+mvn eclipse:eclipse
+
+删除之前打的包
+
+将 core, generate, business 重新clean 和 打包.
+
+mvn clean
+mvn compile install -DskipTests=true（要到指定项目文件中打开cmd,输入）
+
+"compile" 是为了编译
+
+----------------------------------------------- 
+
+gen "custFieldDef_popup" ，output的是一个java文件"PopupConstants" 和  XXX.xml文件（xml文件是需要的）, 只要将output指向business，xml文件就会自动放到business里面.
+
+-------------------------------------------------  
+
+像类似于 jetty-debug.cmd 文件， 如果直接双击运行，若有报错，它的窗口会消失，
+而如果是在指定文件夹里面，先打开cmd窗口， 再输入 "jetty debug.cmd" ,若有报错，它会停留在窗口，可以查看错误。
+
+----------------------------------------------------
+
+如果 http://localhost:8083/main/login.jsp 出现 类似 505 错误， 可能是 哪个项目没有打包，或者说少了项目的包， 项目与项目就是通过 打包 相联系的
+
+要注意，各个项目的pom.xml 里面 版本问题 。
+
+--------------------------------------------------------
+
+数据是数据，弹窗渲染是渲染。
+
+即"存入数据库的值" 和 "弹窗显示出来的值" 是两个不同的操作， 渲染出来的值可以通过 "真实的数据" 修改而成。也可以显示"真实的数据".
+
+--------------------------------------
+
+
+TextareaCellRenderer
+DefaultCellRenderer
+
+如果是弹窗，可以在XXX_opup.xlsx 中看它的DefaultCellRenderer值，看它有没有属于自己的Renderer类，
+
+类似于DefaultCellRenderer="CustFieldDefAttrKeyCellRenderer"（继承TextareaCellRenderer）
+
+没有的话，就可以去默认的Renderer找，类似于TextareaCellRenderer、DefaultCellRenderer等等，它是怎么渲染它的值的， 
+
+-----------------------------------------------------------------
+
+form界面的区别：
+
+   ##Section: 
+
+   ##Grid:  类似于表格
+
+
+----------------------------------------------------------------
+
+jira 03
+
+https://jira.coresolutions.com/browse/CNT-32018
+
+
+Case 1: When Create new Quotation from Item
+new Quotation is create and not yet save
+   actual result: missing [Save and Confirm] button
+   expect result: show [Save and Confirm] button
+input all mandatory fields in Quotation and click [Save] button
+show [Save and Confirm] button
+
+案例1:当创建新的报价项目
+新的报价是创建并没有保存
+实际结果:失踪的【保存并确认】按钮
+预期结果:显示【保存并确认】按钮
+报价中输入所有必填字段,然后单击【保存】按钮
+显示【保存并确认】按钮
+
+Case 2: When Copy Quotation from existing Quotation
+new Quotation is create and not yet save
+actual result: missing [Save and Confirm] button
+expect result: show [Save and Confirm] button
+Click [Save] button
+actual result: missing [Save and Confirm] button
+expect result: show [Save and Confirm] button
+
+例2:当复制从现有报价报价
+新的报价是创建并没有保存
+实际结果:失踪的【保存并确认】按钮
+预期结果:显示【保存并确认】按钮
+点击【保存】按钮
+实际结果:失踪的【保存并确认】按钮
+预期结果:显示【保存并确认】按钮
+
+case: 1.Masters: create vendor ,click"Mark as" to set status is official, and select Hierarchies
+      2.Products: create Item, click "save&confirm"
+      3.create "Request for Quotation" by Item , select vendors , and click "send"
+      4.return Item, click Amend-->View Quotations-->select one item --->click Reply RFQ with Quotation--> into create Quotation
+
+-------------------------------------------------------------------------------
+
+public class DropdownDisableWhenEmptyCellRenderer extends DefaultCellRenderer {
+
+    /* (non-Javadoc)
+     * @see com.core.cbx.ui.zk.cul.grid.renderer.DefaultCellRenderer#render(org.zkoss.zul.Cell, com.core.cbx.ui.zk.cul.grid.BaseColumn, java.lang.Object)
+     */
+    @Override
+    public void render(final Cell cell, final BaseColumn col, final Object data) {
+        final BaseGrid grid = (BaseGrid) ((Row) cell.getParent()).getGrid();
+        final List<DynamicEntity> dropdownStore = col.getStore();
+        final String width = col.getCellWidth();
+        final Object value = getFieldValue(col, data);
+
+------------------------------------------------------------------
+
+
+mvn compile install -DskipTests=true
+
+
+java.lang.IncompatibleClassChangeError: Expected static method com.core.cbx.ui.zk.cul.grid.renderer.RefNoCellRenderer.getFieldValue(Lcom/core/cbx/ui/zk/cul/grid/BaseColumn;Ljava/lang/Object;)Ljava/lang/Object;
+
+java.lang.IncompatibleClassChangeError: Expected static method com.core.cbx.ui.zk.cul.grid.renderer.NumberCellRenderer.getFieldValue(Lcom/core/cbx/ui/zk/cul/grid/BaseColumn;Ljava/lang/Object;)Ljava/lang/Object;
+
+
+红圈里面的代码我没有去改变它， 但是就是这个类里面的getFieldValue()从原来的静态变成不是静态。这样我就要去重新打包这个类吗？
+
+查看log/error, 
+
+RefNoCellRenderer和NumberCellRenderer一样。
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+类似与CBX_UI
+
+--------------------------------------------------------
+
+node.js:
+
+   npm install express -g     # -g是全局安装的意思
+
+--------------------------------------------------------
+
+protected static getFieldValue()
+之所以可以把它改成：protected getFieldValue()
+是因为它的作用域是“protected”,所以这个方法只在父类和子类中调用，没有在其他类里使用，所以把“static”去掉，不影响到除父类和子类以外的其他类。
+如果它的作用域是“public”，就要注意是否会影响到其它类.
+
+--------------------------------------------------------------
+
+generate XXXX_popup 的时候会gen出两个文件： 1.xml文件  2.java文件
+
+1、xml文件是需要的，只要在gen的时候，设置“gen.target.path=D:\\workspace\\CBX_Business”就可以了。 xml文件会自动放到CBX_Business的指定文件夹中。
+
+2、java文件是不需要的
+
+---------------------------------------------------------------
+
+改popup的excel的时候，我们要提交的东西 : 
+1. CBXB_Excel/xml    -----------------> CBXB/xml（将CBXC/xml 里面的"custFieldDef_popup.xml" 文件copy到CBXB_Excel/xml 里面，再提交）
+2. CBXB_Excel/excel/popup
+3. CBX_Business/xxxx.xml  ---------->CBXB/output 里面的,如果指向business的话，就会自己的copy到business
+
+修改Java文件后，在git push 上去时，记得加 change log.
+
+-------------------------------------------------------------
+
+
+jira04
+
+https://jira.coresolutions.com/browse/CNT-30202
+
+QqBatchSearchNewRfqDocAction
+
+
+case:  
+     ---> create vendor (maybe should set vendor status as official by click 'mark as -->official')
+     ---> create item
+     ---> select one item to create request for information
+     ---> Request for Information:  input all mandatory fields, and selent one vendor ,  then click "Send to Vendor"
+     ---> return to Sourcing-->Request for Information --> Item by Vendor
+     ---> select one RIF, --> create --> Quick Quote 
+     ---> Quick Quote: input all mandatory fields, click sava
+     ---> return to Sourcing --> Quick Quote 
+     ---> select one Quick Quote --> create Requset for Quotation
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Login buyer domain
+Open an Item
+Create RFI
+Click "Send"
+Open RFI
+Login vendor domain
+Open the Quick Quote and check the button inside grid
+Login buyer domain
+Open the Quick Quote and check the button inside grid
+
+
+update cnt_domain_attribute set value = 'cube.zh.coresolutions.com' where key = 'mail.smtp.host'
+收不到邮件就用这个
+
+
+update cnt_domain_attribute set value = 'cube.zh.coresolutions.com' where key = 'mail.smtp.host';
+
+select key,value from cnt_domain_attribute where key='mail.smtp.host';
+
+select * from cnt_notification;
+
+cnt_notification_to_email
+
+update cnt_domain_attribute set value = 'localhost' where key = 'mail.smtp.host';
+
+value原来的值： localhost
+
+host: prism.coresolutions.com
+
+select * from cnt_notification_to_email; 
+select * from cnt_notification;
+select key,value from cnt_domain_attribute where key='mail.smtp.host';
+
+delete from cnt_notification_to_email where id='bcf9c9ff40cf431b9b433f478c39ac43';
+delete from cnt_notification where id='89e485e8f33b427d930c5c810161e917';
+
+--------------------------------------------------------------
+192.168.3.153
+
+
+test5@RD2
+p@ssw0rd#Cbx!
+
+2.47:
+
+   buyer:
+         UserID: ace_pegp
+         Password:core@123
+
+   vendor: 
+          UserID:arvin.zheng@cbxsoftware.com
+          old Password: 4Lpf6rf87QYqXFMX
+          new Password: core@123
+
+   vendor: 
+          UserID:1095654362@qq.com
+          old Password: 7ip5g7RHLarEu8B6
+          new Password: core@123   
+
+
+2.43:
+
+   buyer:
+         UserID: admin
+         Password:core@123
+
+   vendor: 
+          UserID:arvin.zheng@cbxsoftware.com
+          old Password: jnxwIK01gWwdtC8r
+          new Password: core@123
+
+
+localhost db-081502:
+ 
+   buyer: 
+          UserID: admin@RD2
+          password:
+
+   vendor:
+          UserID: 1095654362@qq.com
+          password:GmBpLtU4PrCtlDQJ
+          new password: core@123
+   ----------------------------------
+   buyer: 
+          UserID: admin
+          password:
+
+   vendor:
+          UserID: yayaya@123.com
+          password:1bDIeWV8UBwWWKGE
+          new password: core@123  
+
+localhost db-0816:
+ 
+   buyer: 
+          UserID: admin
+          password:
+
+   vendor:
+          UserID: 1095654362@qq.com
+          password:GmBpLtU4PrCtlDQJ
+             
+------------------------------------------------------------------------
+
+我创建了一些新的数据验证，还有在一些旧的数据里面验证。
+
+jira: merged 和 verify 后
+
+      回到jira的页面， click 'Workflow' ---> "Developer Verify"
+
+      然后加comment : 
+             Developer Verified in 2.47 with System Ref.: 6.8.0.n201708150213
+
+-----------------------------------------------------------------------
+
+click 'invite vendor'
+
+send email：需要update的文件:
+ DBSetting.properties：
+ debug_command_listener.bat：
+ java_with_classpath_debug.vbs
+
+--------------------------------------------------
+
+公司共享资源的网址：  类似于数据库等等...
+
+https://confluence.coresolutions.com/pages/viewpage.action?pageId=8914424
+
+----------------------------------------------------------
+
+localhost  jetty9env.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+  <New id="cbxDs" class="org.eclipse.jetty.plus.jndi.EnvEntry">
+    <!-- scope -->
+    <Arg></Arg>
+    <!-- name -->
+    <Arg>jdbc/cbxDs</Arg>
+    <!-- value -->
+    <Arg>
+      <New class="com.zaxxer.hikari.HikariDataSource">
+        <Set name="jdbcUrl">jdbc:postgresql://localhost:5432/p6_081502</Set>
+        <Set name="username">postgres</Set>
+        <Set name="password">p</Set>
+        <Set name="minimumIdle">2</Set>
+        <Set name="maximumPoolSize">20</Set>
+        <Set name="connectionTimeout">300000</Set>
+        <Set name="idleTimeout">60000</Set>
+      </New>
+    </Arg>
+    <!-- override -->
+    <Arg type="boolean">true</Arg>
+  </New>
+</Configure>
+
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+远程数据库：
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+  <New id="cbxDs" class="org.eclipse.jetty.plus.jndi.EnvEntry">
+    <!-- scope -->
+    <Arg></Arg>
+    <!-- name -->
+    <Arg>jdbc/cbxDs</Arg>
+    <!-- value -->
+    <Arg>
+      <New class="com.zaxxer.hikari.HikariDataSource">
+        <Set name="jdbcUrl">jdbc:postgresql://seg-pgsql96.zh.coresolutions.com:5432/cbx6_dev3</Set>
+        <Set name="username">cbx6_dev3</Set>
+        <Set name="password">p</Set>
+        <Set name="minimumIdle">2</Set>
+        <Set name="maximumPoolSize">20</Set>
+        <Set name="connectionTimeout">300000</Set>
+        <Set name="idleTimeout">60000</Set>
+      </New>
+    </Arg>
+    <!-- override -->
+    <Arg type="boolean">true</Arg>
+  </New>
+</Configure>
+
+
+------------------------------------------------------------------
+
+[5:52:09 PM] arvin zheng: 像"The below record(s) is not available to..."这类的label是存在哪里
+[5:59:33 PM] ace li: db里面，但是这个没有问题吧  select * from cnt_label
+[5:59:43 PM] ace li: other.txt里面
+[6:00:01 PM] ace li: 或者systemMessage.txt里面
+
+------------------------------------------------------------------
+
+pgsql-generator.properties
+
+
+localhost:
+
+#
+gen.single.user=postgres
+gen.single.pwd=p
+gen.single.databaseName=p6_0803
+gen.single.serverName=127.0.0.1
+gen.single.port=5432
+
+gen.single.module=sampleRequest
+gen.single.target=dataMappingRule
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+远程数据库:
+
+#
+gen.single.user=cbx6_dev2
+gen.single.pwd=p
+gen.single.databaseName=cbx6_dev2
+gen.single.serverName=seg-pgsql96.zh.coresolutions.com
+gen.single.port=5432
+
+gen.single.module=item
+gen.single.target=form
+
+
+
+------------------------------------------------
+https://jira.coresolutions.com/browse/CNT-30202
+
+点一下jira上面的这个button
+然后加comment : 
+Developer Verified in 2.47 with System Ref.: 6.8.0.n201708180213
+System Ref这个地方有 :
+
+-----------------------------------------------------------------
+
+------------------------------------------------
+
+jira05
+
+https://jira.coresolutions.com/browse/CNT-32490
+
+
+task case:
+          --->click Masters --> Vendors --> create several vendors
+          --->click Masters --> Factories -->create factory
+          --->crate factory :  click Vendors --> selected several exist vendors and click Send to Vendor
+          --->return click Masters --> Vendors -->  Set one of those vendors to inactive 
+          --->click Quality --> Factory Audits --> Active -->  to Create a Factory Audit for this Factory
+          --->create Factory Audits: "Factory Name" select exist factory 
+          --->Factory Audits: click Send to Vendor
+
+
+should not trigger validation  不应该触发验证
+when sending Factory Audit to Vendor with some inactive vendors在发送工厂审计供应商不活跃的供应商
+ trigger validation触发验证
+validation    验证 
+Audit 审计
+
+button inside Factory Audit can directly send the factory audit to vendor side  按钮工厂内部审计可以直接发送工厂审计供应商
+The factory audit should be send to all active vendors that linked with that particular Factory 工厂审计应发送给所有活跃的供应商,与特定的工厂
+
+
+Factory Audit  send to vender:    
+
+1.当只发送给一个vender的时候，就需要验证vendor是否活跃。活跃则发送成功，不活跃则发送失败并出现警告信息
+
+2.当同时发给多个vendor时，只要有一个vendor的状态是active时，就可以跳过状态为inactive的vendor，发送给状态为active的vendor，发送成功.不应该出现警告信息。
+   (注意：像2这种情况，只能发生在 Factory Audit  send to vender 的时候，如果是其他entity send to vender时， 当发现有状态为inactive的vendor，就应该发送失败，出现警告信息)
+
+
+FactoryAuditTemplateValidator
+
+ValidationModel
+
+VendorMasterSendToVendor
+
+com.core.cbx.validation.validator.ExternalActiveValidator    《--- 重要
+
+factAudit_validation.xlsx
+
+fact_validation.xlsx
+
+vendor_validation.xlsx
+
+
+
+VendorFact entity 定义在 vendor_entity.xlsx中
+
+VendorFact entity:    vendorDocStatus
+
+enter keyword
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+AbstractUIAction
+com.core.cbx.validation.validator.ExternalActiveValidator  
+ValidationModel
+AbstractValidator
+BaseAction  
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    ValidationModel.valdateField()
+    ValidationModel.validate()
+
+-------------------------------------------------------------------------
+
+jira05    
+
+SendToVendor 的流程
+
+SendToVendor : 
+postProcess---> SendDocWorkerAction : commandType=SendDoc
+---> backend : SendDocHandler ---> SendDocAction/SendDoc...StatusAction
+--->factAudit.SendDocAction ---> commandType = ReceiveDoc
+--->backend : ReceiveDocHandler -->ReceiveDocAction
+--->{module}.ReceiveDocAction --->
+
+
+[5:30:00 PM] arvin zheng: 我想问那些筛选出status为“active”的vendor的sql语句是写在哪个文件中的
+[5:35:37 PM] ace li: DomainMasterMappingMapper.xml
+
+
+--------------------------------------------------------------------------
+
+others.txt
+
+[8/16/2017 5:52:09 PM] arvin zheng: 像"The below record(s) is not available to..."这类的label是存在哪里
+[8/16/2017 5:59:33 PM] ace li: db里面，但是这个没有问题吧
+[8/16/2017 5:59:43 PM] ace li: other.txt里面
+[8/16/2017 6:00:01 PM] ace li: 或者systemMessage.txt里面
+
+--------------------------------------------------------------------------
+
+当一个东西进行操作后（类似copy，save）,在另一个刚生成的东西里少了某个数据，原因可能出现在继承规则上，在继承时少继承了某些数据. 
+可以查看xxx_dataMappingRule.xlsx
+
+---------------------------------------------------------------------------
+
+
+jira05 
+
+ db : localhost  b6_0824
+ invite vendor:
+    ①  User ID: 1095654362@qq.com
+
+       Password: 6MM2VbcLdDlE9DuV
+
+       new password:core@123
+   
+    ②  User ID: qaqa@123.com
+      
+       Password: lGETNRA1ga00pdfo
+
+       new password: p@ssw0rd#Cbx
+
+-----------------------------------------------------------------------------
+
+当jiraA 和 jiraB 的bug中有重复的问题
+如果jiraA的bug被jiraB修复，
+  
+  那么需要在jiraA的 'Issue Links' 中添加一个link,  添加 'This issue = duplicates' 和 'Issue = jiraB的编号,如：CNT-28065', 
+  还要 把 状态改为Resovled,  Status=Resolved , Resolution=Duplicated.
+  再添加上 Comments:
+                     This issue have been fixed by CNT-28065
+                     So mark as duplicated 
+
+--------------------------------------------------------------------------------
+

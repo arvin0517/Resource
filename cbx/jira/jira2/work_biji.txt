@@ -1,0 +1,200 @@
+[Test Environment]
+  https://qa-cbx5-upgrade.coresolutions.com/main/
+      User ID = Vicky_pegp
+      Password = core@123
+
+
+------------------------------------------------------------
+
+jira:
+
+https://jira.coresolutions.com/browse/CNT-27645
+
+http://192.168.2.55:8081/view/CBX6/job/cbx6-db-upgrade/lastSuccessfulBuild/artifact/cbx-build-dbdump-upgrade-pgsql/release_dbdump/
+
+-------------------------------------------------------------
+
+http://192.168.2.47:8080/main/login.jsp
+
+http://localhost:8083/main/login.jsp
+
+a080301 
+p@ssw0rd#Cbx
+
+develop test sever
+test5@RD2
+p@ssw0rd#Cbx!
+
+
+a080302
+arvin322
+
+Login id = admin, password = p@ssw0rd#Cbx!
+
+ace_pegp
+core@123
+
+--------------------------------------------------------------
+
+邮箱：
+
+arvin.zheng@cbxsoftware.com
+
+https://prism.coresolutions.com/owa/
+
+arvin.zheng
+
+C!dR6f?aCApewa
+
+---------------------------------------------------
+
+
+
+CustFieldDefComposer
+
+PopCustFieldDefDetailComposer
+
+HclComposer
+
+CodelistComposer
+
+CustomFieldDefConstants
+
+CustFieldDef
+
+CustomFieldItemsWorkerAction
+
+CodelistFieldConverter
+
+打包 :mvn compile install -DskipTests=true（要到指定项目文件中打开cmd,输入）
+
+-----------------------------------------------------------------
+
+01 jira
+
+select : Apply to ----> create customFieldItems  （event)
+CustFieldDefComposer---> get Apply to --> event
+in event -- createCustomFieldItems
+
+datasource ----> CustFieldDefAttr
+1. entityDefinition : CBX_Core\genExcel\excel\entity\custFieldDef_entity.xlsx
+
+CustFieldDef---> custFieldDefItem : CustomFieldItems---->fieldAttributes : CustFieldDefAttrs--->attrKey == wrong
+
+datasource.custFieldDefItem.fieldAttributes.attrKey
+
+打包 :mvn compile install -DskipTests=true（要到指定项目文件中打开cmd,输入）
+
+CustomFieldItemsAction　---> CustomFieldItemsWorkerAction.createCustomFieldItems
+---> create : codelist/hclGroup type : customFieldItem 
+---> create CustFieldDefAttr.put(attrKey, "wrongValue")
+
+wrongValue ---> CBX_Core/CustomFieldDefConstants 
+
+so need repackage : CBX_Core jar , after change
+
+
+
+-----------------------------------------------
+
+select * from cnt_custom_field_def_attr;
+
+update cnt_custom_field_def_attr set attr_key = 'Book Name' where attr_key = 'bookName';
+
+update cnt_custom_field_def_attr set attr_key = 'Match Date Field ID' where attr_key = 'matchDateFieldId';
+
+update cnt_custom_field_def_attr set attr_key = 'Cascade Expression' where attr_key = 'cascadeExpression';
+
+update cnt_custom_field_def_attr set attr_key = 'Cascade' where attr_key = 'cascade';
+
+update cnt_custom_field_def_attr set attr_key = 'HCL Data' where attr_key = 'hclData';
+
+update cnt_custom_field_def_attr set attr_key = 'disable SSL' where attr_key = 'disableSsl';
+
+-------------------------------------------------
+
+写sql 用来把错误的数据 改正确， 我们称之为 : Data Patch(数据片)
+
+
+----------------------------------------------------
+
+做完jira,交作业的网址：(交ps,即设计文档)
+https://confluence.coresolutions.com/pages/viewpage.action?title=Sprint+6.8&spaceKey=SEGLab
+
+模板：
+https://confluence.coresolutions.com/display/SEGLab/Program+Spec+CNT-31712
+
+--------------------------------------------------------
+
+
+CODELIST_FIELD_TYPE
+
+Login system with PEGP buyer domain.
+Go to Custom Fields listing view under Admin module, click [Create] button.
+Fill all mandatory fields.
+Click [Detail...] button which Data Type="Codelist" in Custom Fields grid.
+Check in Field Detail popup window.
+Click [Detail...] button which Data Type="HclGroup" in Custom Fields grid.
+Check in Field Detail popup window.
+choic click a customFieldDef
+
+Some UI issue in "Field Detail" popup window
+
+change the wrong attrKey values
+Click a customFieldDef
+Change attrKey value
+Step 5 & 7: Should show the "Key" value correctly according to requirement. 
+
+-----------------------------------------------------------------------------------
+
+coding模板：
+https://jira.coresolutions.com/browse/CNT-27645
+
+coding其他模板：
+https://jira.coresolutions.com/browse/CNT-32195
+
+--------------------------------------------------------------------------
+
+v6.8-arvin.zheng-cnt-27645
+
+
+ZH Development DB
+
+------------------------------------
+
+*[Test Result]:*
+
+ Case 1: Step 5 & 7: Should show the "Key" value correctly according to requirement. 
+ Case 2: Step 6 & 8: Should show the "Key" value correctly according to requirement.
+
+------------------------------------------------
+
+02 jira 
+
+https://jira.coresolutions.com/browse/CNT-31851
+
+
+---click "send" button :
+--->SendSampleRequestAction.buildSampleTrackerWithSampleReq
+--->sampleReqVendorToST  (inheritance date)
+---> MappingRule === sampleReqVendorToSampleTracker in sampleReqest_dataMappingRule.xlsx
+===> vendor, factory ---> sampleTracker (missing country)
+
+----------------------------------------------
+
+http://192.168.2.47:8080/main/login.jsp
+http://192.168.2.43:8080/main/login.jsp
+2.47是我们开发的测试环境
+2.43是QA的测试环境
+
+-----------------------------------------------
+
+2.47 和 2.43 都看了，"Vendor Information"也没有可以选的，在哪里create vendor？
+
+--------------------------------------------------------------
+
+仓库
+C:\Users\arvin.zheng\.m2\repository\com\core\cbx\cbx-general
+
+-----------------------------------------------------------
+  

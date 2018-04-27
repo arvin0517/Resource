@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.core.cbx.system.data.mapper.ColorArvinMapper">
+    <select id="listColorArvins" parameterType="map" resultType="DynamicEntity">
+      SELECT 'ColorArvin' AS "entityName",
+        TCM.ID AS "id",
+        '' AS "thumbnail",
+        TCM.ENTITY_VERSION AS "entityVersion",
+        TCM.CODE AS "label",
+        TCM.SEASON_NAME AS "rgbCode",
+        TCM.DESCRIPTION AS "description",
+        TCM.DOC_STATUS AS "docStatus",
+        TCM.UPDATED_ON AS "updatedOn",
+      FROM TNG_COLOR_MARK TCM
+      WHERE ${restriction}
+      ORDER BY ${orderBy}
+    </select>      
+</mapper>
+
+
+\\zh-nas\Data\Product\training\Freshman_Orientation
+
+Hi, 我叫郑玮，我的英文名字是Arvin。我来自广东揭阳，就读于吉林大学珠海学院软件工程专业，现在是一名大三学生。我喜欢运动，平常喜欢打篮球和羽毛球。想运动的可以找我，随叫随到。平常还喜欢看韩国综艺，想看的话可以介绍几个给你看哦。
+
+
+select * from cnt_entity_definition where entity_name = 'ColorArvin';
+
+select * from cnt_field_definition where parent_id = '896ca8299b6a4456922f2e66c2e9408f' and field_id = 'colorArvinImage';
+
+
+select * from cnt_entity_definition where entity_name = 'ColorArvin';
+
+select * from cnt_field_definition where parent_id = '896ca8299b6a4456922f2e66c2e9408f' and field_id = 'colorArvinImage';
+select * from cnt_field_definition where parent_id = '896ca8299b6a4456922f2e66c2e9408f' and field_id = 'colorArvinAttachment';
+
+select * from cnt_entity_definition ;
+
+delete from cnt_field_definition where parent_id in (select id from cnt_entity_definition where entity_name like '%Arvin%');
+commit;
+delete from cnt_entity_definition where entity_name like '%Arvin%';
+commit;
+
+drop table  CTM_TNG_COLOR_ARVIN;
+
+
+drop table TNG_COLOR_ARVIN;
+
+
+lsqivucoyzgoghej
+
+
+http://blog.csdn.net/z69183787/article/details/8290811
+
+
+D:\arvin_test\system.xlsx
+
+D:\arvin_testseven
+
+Training
+
+[9:44 AM] ace li: custFieldDef_form_1.xml
+
+Common
+
+ https://otto.takari.io/content/sites/m2e.extras/m2eclipse-mavenarchiver/0.17.2/N/LATEST/
+
+
+
+
+Ace, 我测试了一下，要是我不在我创的类CustFieldDefAttrKeyCellRenderer extends TextCellRenderer里重写renderLabel()方法的话，那在CustFieldDefAttrKeyCellRenderer类里调用的renderLabel()是属于AbstractCellRenderer.renderLabel()的。那么在renderLabel()里面调用的getFieldValue()方法也是属于AbstractCellRenderer.getFieldValue()，不是我重写的CustFieldDefAttrKeyCellRenderer.getFieldValue(). 
+
+我理解是我需要重写的是renderLabel()里面调用的getFieldValue()方法，而不是TextCellRenderer.render()里面调用的getFieldValue()方法。
+
+
+
+
+
+
+刚才你帮我打完包后，这里还是报错提示要加static
+
+但我加了static, CBX_General打包失败， 不加static，才能打包成功

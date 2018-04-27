@@ -1,0 +1,29 @@
+cnt-16432
+
+PS:https://confluence.coresolutions.com/display/SEGLab/Program+Spec+CNT-16432
+
+Background and Objectives 
+
+[Affects Version]
+
+Sprint 75.0 beta.1
+
+[Test Steps]
+
+Login in 43 system.
+Go to Application Configuration - View Administration listing page under Admin module.
+Select a record, click [Move Up] button.
+Select a record, click [Move Down] button.
+[Actual Result]
+Step 3, 4: The selected record don't move up or move down in listing.
+[Expected Result]
+Step 3: The Select record should move up a position.
+Step 4: The Select record should move down a position
+
+
+-------------------------------------------------------------------------------
+
+   BatchNaviEntryMoveUpAction.buildBatchActionContext(String, List<DynamicEntity>)
+
+   LoadNaviEntriesAction-->load entry  ---> by call  NaviUtil.getUserNavigationList(user.getId())
+   

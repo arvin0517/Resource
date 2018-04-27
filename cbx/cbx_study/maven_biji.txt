@@ -1,0 +1,546 @@
+
+ Maven基础： http://blog.csdn.net/wang379275614/article/details/43924669
+
+------------------------------------------------------
+
+一、Maven安装配置
+
+想要安装 Apache Maven 在Windows 系统上, 需要下载 Maven 的 zip 文件，并将其解压到你想安装的目录，并配置 Windows 环境变量。 
+
+    所需工具 ： 
+                  JDK 1.8 
+                  Maven 3.3.3 
+                  Windows 7 
+注
+Maven 3.2 要求 JDK 1.6 或以上版本, 而 Maven 3.0/3.1 需要 JDK 1.5 或以上 
+
+1. JDK 和 JAVA_HOME 
+确保已安装JDK，并 “JAVA_HOME” 变量已加入到 Windows 环境变量。
+
+2. 下载Apache Maven 
+
+      访问 Maven官方网站
+
+      下载 Maven 的 zip 文件，例如：apache-maven-3.3.3-bin.zip，将它解压到你要安装 Maven 的文件夹。 
+
+      假设你解压缩到文件夹 –D:\software\yiibai.com\apache-maven (注意：在这一步，只是文件夹和文件，安装不是必需的.)
+
+3. 添加 M2_HOME 和 MAVEN_HOME 
+
+      添加 M2_HOME 和 MAVEN_HOME 环境变量到 Windows 环境变量，并将其指向你的 Maven 文件夹。 
+
+      M2_HOME 或 MAVEN_HOME
+
+      Maven 说只是添加 M2_HOME , 但一些项目仍引用 Maven 的文件夹 MAVEN_HOME, 因此，为了安全也把它添加进去。 
+
+4. 添加到环境变量 - PATH 
+
+      更新PATH变量，添加 Maven bin 文件夹到 PATH 的最后，如：%M2_HOME%\bin, 这样就可以在命令中的任何目录下运行 Maven 命令了。
+
+5. 验证 
+
+      完成，以验证它，执行 mvn –version 在命令提示符下，如下图输出结果： 
+
+           C:\Users\Administrator>mvn -version
+           Apache Maven 3.3.3 (7994120775791599e205a5524ec3e0dfe41d4a06; 2015-04-22T19:57:3
+           7+08:00)
+           Maven home: D:\software\yiibai.com\apache-maven
+           Java version: 1.8.0_40, vendor: Oracle Corporation
+           Java home: D:\Program Files\Java\jdk1.8.0_40
+           Default locale: zh_CN, platform encoding: GBK
+           OS name: "windows 7", version: "6.1", arch: "amd64", family: "dos"
+
+      如果你看到类似消息，说明 Apache Maven 在 Windows 上已安装成功。 
+ 
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+二、Maven启用代理访问
+
+    如果你的公司正在建立一个防火墙，并使用HTTP代理服务器来阻止用户直接连接到互联网。如果您使用代理，Maven将无法下载任何依赖。 
+    为了使它工作，你必须声明在 Maven 的配置文件中设置代理服务器：settings.xml
+
+1. Maven配置文件 
+
+      找到文件{M2_HOME}/conf/settings.xml, 并把你的代理服务器信息配置写入。
+      
+      注：{M2_HOME} => D:\software\yiibai.com\apache-maven 
+
+{M2_HOME}/conf/settings.xml：
+
+<!-- proxies
+   | This is a list of proxies which can be used on this machine to connect to the network.
+   | Unless otherwise specified (by system property or command-line switch), the first proxy
+   | specification in this list marked as active will be used.
+   |-->
+  <proxies>
+    <!-- proxy
+     | Specification for one proxy, to be used in connecting to the network.
+     |
+    <proxy>
+      <id>optional</id>
+      <active>true</active>
+      <protocol>http</protocol>
+      <username>proxyuser</</username>
+      <password>proxypass</password>
+      <host>proxy.host.net</host>
+      <port>80</port>
+      <nonProxyHosts>local.net|some.host.com</nonProxyHosts>
+    </proxy>
+    -->
+  </proxies>
+
+
+取消注释代理选项，填写您的代理服务器的详细信息：
+
+<!-- proxies
+   | This is a list of proxies which can be used on this machine to connect to the network.
+   | Unless otherwise specified (by system property or command-line switch), the first proxy
+   | specification in this list marked as active will be used.
+   |-->
+  <proxies>
+      <proxy>
+      <id>optional</id>
+      <active>true</active>
+      <protocol>http</protocol>
+      <username>yiibai</username>
+      <password>password</password>
+      <host>proxy.yiibai.com</host>
+      <port>8888</port>
+      <nonProxyHosts>local.net|some.host.com</nonProxyHosts>
+    </proxy>
+  </proxies> 
+
+
+2. 保存文件 
+
+      完成后，Apache Maven 应该是能够通过代理服务器立即连接到Internet。 
+
+      注意：重新启动不是必需的。Maven 只是一个命令，当你调用它，它会再次读取该文件。 
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+三、Maven本地资源库
+
+Maven的本地资源库是用来存储所有项目的依赖关系(插件jar和其他文件，这些文件被Maven下载)到本地文件夹。
+
+很简单，当你建立一个Maven项目，所有相关文件将被存储在你的Maven本地仓库。 
+
+默认情况下，Maven的本地资源库默认为 .m2 目录文件夹： 
+
+                   Unix/Mac OS X – ~/.m2 
+                   Windows –C:\Documents and Settings\{your-username}\.m2 
+
+
+1. 更新Maven的本地库
+    
+     通常情况下，可改变默认的 .m2 目录下的默认本地存储库文件夹到其他更有意义的名称，例如，maven-repo 
+
+     找到{M2_HOME}\conf\setting.xml, 更新 localRepository 到其它名称。 
+
+     {M2_HOME}\conf\setting.xml : 
+              <settings><!-- localRepository
+               | The path to the local repository maven will use to store artifacts.
+               |
+               | Default: ~/.m2/repository
+              <localRepository>/path/to/local/repo</localRepository>
+              --><localRepository>D:\software\yiibai.com\apache-maven\repository</localRepository>
+
+
+2. 保存文件 
+
+    执行之后，新的 Maven 本地存储库现在改为D:\software\yiibai.com\apache-maven\repository. 
+
+    执行命令： 
+          C:\worksp> mvn archetype:generate -DgroupId=com.yiibai -DartifactId=NumberGenerator -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
+    详见如下图： http://www.yiibai.com/maven/maven-local-repository.html
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+四、Maven中央存储库
+
+     当你建立一个 Maven 的项目，Maven 会检查你的 pom.xml 文件，以确定哪些依赖下载。
+
+     首先，Maven 将从本地资源库获得 Maven 的本地资源库依赖资源，如果没有找到，然后把它会从默认的 Maven 中央存储库 – http://repo1.maven.org/maven2/查找下载。 
+
+     Maven 的中央资源库网站是这样的： http://www.yiibai.com/maven/maven-central-repository.html#article-start
+
+     Maven中心储存库网站已经改版本，目录浏览可能不再使用。这将直接被重定向到?http://search.maven.org/。这就好多了，现在有一个搜索功能。
+
+     PS：目录浏览功能被禁用，但是，当你建立 Maven 的项目，它仍然会从 “http://repo1.maven.org/maven/”?得到依赖, 您可以从 Maven 验证输出。 
+
+
+评论：
+      Maven中心仓库下载比较慢，改成阿里的仓库会好点
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+五、如何从Maven远程存储库下载？
+
+  根据 Apache Maven 的说明: 
+        在Maven中，当你声明的库不存在于本地存储库中，也没有存在于Maven中心储存库，该过程将停止并将错误消息输出到 Maven 控制台。 
+
+  1. 示例 
+
+     org.jvnet.localizer只适用于 Java.net资源库 
+
+pom.xml ：
+
+<dependency>
+        <groupId>org.jvnet.localizer</groupId>
+        <artifactId>localizer</artifactId>
+        <version>1.8</version>
+</dependency>
+
+当你建立这个 Maven 项目，它将依赖找不到失败并输出错误消息。
+
+
+  2. 声明Java.net储存库 
+
+      告诉 Maven 来获得 Java.net 的依赖，你需要声明远程仓库在 pom.xml 文件这样：  
+
+  pom.xml： 
+       <repositories>
+	  <repository>
+	     <id>java.net</id>
+	     <url>https://maven.java.net/content/repositories/public/</url>
+	  </repository>
+       </repositories>
+
+    现在，Maven的依赖库查询顺序更改为： 
+
+              在 Maven 本地资源库中搜索，如果没有找到，进入第 2 步，否则退出。 
+
+              在 Maven 中央存储库搜索，如果没有找到，进入第 3 步，否则退出。 
+
+              在java.net Maven的远程存储库搜索，如果没有找到，提示错误信息，否则退出。 
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+六、Maven添加远程仓库
+
+     默认情况下，Maven从Maven中央仓库下载所有依赖关系。但是，有些库丢失在中央存储库，只有在Java.net或JBoss的储存库远程仓库中能找到。 
+
+     1. Java.net资源库 
+
+            添加Java.net远程仓库的详细信息在“pom.xml”文件。 
+                        
+                            pom.xml： 
+                                <project ...>
+                                 <repositories>
+                                    <repository>
+                                      <id>java.net</id>
+                                      <url>https://maven.java.net/content/repositories/public/</url>
+                                    </repository>
+                                 </repositories>
+                                </project>
+
+          注：旧的 “http://download.java.net/maven/2” 仍然可用, 但建议升级到最新储存库。 
+
+     2. JBoss Maven存储库 
+ 
+          1. 添加JBoss远程仓库的详细信息在 “pom.xml” 文件中。 
+
+                    <project ...>
+                        <repositories>
+                          <repository>
+	                    <id>JBoss repository</id>
+	                    <url>http://repository.jboss.org/nexus/content/groups/public/</url>
+                          </repository>
+                        </repositories>
+                    </project>
+
+                注意：旧的?http://repository.jboss.com/maven2/?已过时，不再使用。 
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+七、Maven依赖机制
+
+     在 Maven 依赖机制的帮助下自动下载所有必需的依赖库，并保持版本升级。 
+
+
+案例分析: 
+
+让我们看一个案例研究，以了解它是如何工作的。
+
+假设你想使用 Log4j 作为项目的日志。这里你要做什么？
+
+  1.在传统方式 
+
+       访问?http://logging.apache.org/log4j/ 
+
+       下载 Log4 j的 jar 库 
+
+       复制 jar 到项目类路径 
+
+       手动将其包含到项目的依赖 
+
+       所有的管理需要一切由自己做 
+
+       如果有 Log4j 版本升级，则需要重复上述步骤一次。 
+
+  2. 在Maven的方式 
+
+       你需要知道 log4j 的 Maven 坐标，例如： 
+
+                       <groupId>log4j</groupId>
+                       <artifactId>log4j</artifactId>
+                       <version>1.2.14</version>
+
+       它会自动下载 log4j 的1.2.14?版本库。如果“version”标签被忽略，它会自动升级库时当有新的版本时。
+
+       声明 Maven 的坐标转换成 pom.xml 文件。 
+
+                        <dependencies>
+                           <dependency>
+	                     <groupId>log4j</groupId>
+	                     <artifactId>log4j</artifactId>
+	                     <version>1.2.14</version>
+                           </dependency>
+                        </dependencies>
+       
+      当 Maven 编译或构建，log4j 的 jar 会自动下载，并把它放到 Maven 本地存储库
+      所有由 Maven 管理 
+
+解释说明 :
+
+看看有什么不同？那么到底在Maven发生了什么？当建立一个Maven的项目，pom.xml文件将被解析，如果看到 log4j 的 Maven 坐标，然后 Maven 按此顺序搜索?log4j 库： 
+
+                                 在 Maven 的本地仓库搜索 log4j? 
+                                 在 Maven 中央存储库搜索 log4j 
+                                 在 Maven 远程仓库搜索 log4j(如果在 pom.xml 中定义) 
+
+                     Maven 依赖库管理是一个非常好的工具，为您节省了大量的工作。 
+
+如何找到 Maven 坐标？
+         访问 Maven 中心储存库，搜索下载您想要的jar。 
+
+ps: 1、什么是maven坐标?
+    
+       Maven便给我们制定了一套规则那就是使用坐标进行唯一标识。
+       Maven的坐标元素包括groupId、artifactId、version、packaging、classfier。
+       只要我们提供正确的坐标元素，Maven就能找到对应的构件，首先去你的本地仓库查找，没有的话再去远程仓库下载。
+       如果没有配置远程仓库，会默认从中央仓库地址(http://repo1.maven.org/maven2)下载构件，该中央仓库包含了世界上大部分流行的开源项目构件，但不一定所有构件都有，我在以前的开发中就遇到过找不到oracle数据库jar包的问题，不知道现在是否依然如此。
+
+    2、坐标详细说明(http://www.cnblogs.com/AlanLee/p/6156268.html)
+?
+         Maven坐标是通过groupId、artifactId、version、packaging、classfier这些元素来定义的，我们来看看示例：
+
+                        <dependencies>
+                           <dependency>
+	                     <groupId>junit</groupId>
+	                     <artifactId>junit</artifactId>
+	                     <version>3.8.1</version>
+                             <scope>test</scope>
+                           </dependency>
+                        </dependencies>
+
+        我们在平时的开发中一般只需要使用必要的几个元素就好了，不必要的一些元素往往是用不着的，我们来看看每个元素所代表的含义，前面也是有简单的提到过的。
+
+        groupId?：定义当前Maven项目隶属的实际项目。
+ 
+        artifactId?: 该元素定义当前实际项目中的一个Maven项目（模块），推荐的做法是使用实际项目名称作为artifactId的前缀.
+
+        version?: 该元素定义了使用构件的版本，如上例中junit的版本是3.8.1，你也可以改为4.0表示使用4.0版本的junit。
+
+        packaging?：定义Maven项目打包的方式，使用构件的什么包。
+
+        classifier: 该元素用来帮助定义构建输出的一些附件。附属构件与主构件对应，如上例中的主构件为junit-3.8.1.jar,该项目可能还会通过一些插件生成如junit-3.8.1-javadoc.jar,junit-3.8.1-sources.jar,?这样附属构件也就拥有了自己唯一的坐标。
+
+        上述5个元素中，groupId、artifactId、version是必须定义的，packaging是可选的（默认为jar），而classfier是不能直接定义的，需要结合插件使用。
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+一、什么是 Maven 的插件？ 
+
+Maven 是一个执行插件的框架，每一个任务实际上是由插件完成的。Maven 插件通常用于： 
+创建 jar 文件 
+创建 war 文件
+编译代码文件 
+进行代码单元测试 
+创建项目文档 
+创建项目报告 
+
+
+一个插件通常提供了一组目标，可使用以下语法来执行： 
+                          
+                          mvn [plugin-name]:[goal-name]
+
+例如，一个 Java 项目可以使用 Maven 编译器插件来编译目标，通过运行以下命令编译 
+
+                          mvn compiler:compile
+
+------------------------------------------------------------
+
+二、插件类型 
+
+Maven 提供以下两种类型插件： 
+
+类型                 描述
+ 
+构建插件             在生成过程中执行，并在 pom.xml 中的<build/> 元素进行配置 
+
+报告插件             在网站生成期间执行，在 pom.xml 中的 <reporting/> 元素进行配置 
+
+
+以下是一些常见的插件列表： 
+
+插件                  描述 
+
+clean                 编译后的清理目标，删除目标目录
+
+compiler              编译 Java 源文件 
+
+surefile              运行JUnit单元测试，创建测试报告 
+
+jar                   从当前项目构建 JAR 文件 
+
+war                   从当前项目构建 WAR 文件 
+
+javadoc               产生用于该项目的 Javadoc
+
+antrun                从构建所述的任何阶段运行一组 Ant 任务 
+
+
+`````````````````````````````````````````````````````````````````````````````
+
+例子 ：
+我们使用 maven-antrun-plugin 插件在例子中来在控制台打印数据。
+现在在 C:\MVN\project?文件夹?创建一个 pom.xml 文件，内容如下：? 
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+    http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<modelVersion>4.0.0</modelVersion>
+<groupId>com.companyname.projectgroup</groupId>
+<artifactId>project</artifactId>
+<version>1.0</version>
+<build>
+<plugins>
+   <plugin>
+   <groupId>org.apache.maven.plugins</groupId>
+   <artifactId>maven-antrun-plugin</artifactId>
+   <version>1.1</version>
+   <executions>
+      <execution>
+         <id>id.clean</id>
+         <phase>clean</phase>
+         <goals>
+            <goal>run</goal>
+         </goals>
+         <configuration>
+            <tasks>
+               <echo>clean phase</echo>
+            </tasks>
+         </configuration>
+      </execution>     
+   </executions>
+   </plugin>
+</plugins>
+</build>
+</project>
+
+
+接下来，打开命令控制台，并转到包含 pom.xml 的文件夹并执行以下命令 mvn 命令。 
+
+C:\MVN\project>mvn clean
+
+Maven 将开始处理并显示清洁周期/阶段，如下图中输出： 
+
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------
+[INFO] Building Unnamed - com.companyname.projectgroup:project:jar:1.0
+[INFO]    task-segment: [post-clean]
+[INFO] ------------------------------------------------------------------
+[INFO] [clean:clean {execution: default-clean}]
+[INFO] [antrun:run {execution: id.clean}]
+[INFO] Executing tasks
+     [echo] clean phase
+[INFO] Executed tasks
+[INFO] ------------------------------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] ------------------------------------------------------------------
+[INFO] Total time: < 1 second
+[INFO] Finished at: Sat Jul 07 13:38:59 IST 2012
+[INFO] Final Memory: 4M/44M
+[INFO] ------------------------------------------------------------------
+
+
+上面的例子说明了以下关键概念： 
+
+插件可在pom.xml使用的 plugin 元素来指定；
+
+每个插件可以有多个目标；
+
+从插件应使用它的相位元素开始处理定义阶段。这里已经使用 clean 阶段；
+
+可以通过将它们绑定到插件的目标来执行配置任务。这里已经绑定 echo 任务到 maven-antrun-plugin的运行目标； 
+
+就这样，Maven将处理其余部分。如果没有可用的本地存储库，它会下载这个插件； 
+
+```````````````````````````````````````````````````````````````````````````````
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,732 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.core.cbx.fact.data.mapper.FactMapper">
+
+    <select id="listFacts" parameterType="map" resultType="DynamicEntity">
+        SELECT N'Fact' AS "entityName",
+        fact.ID AS "id",
+        N'' AS "thumbnail",
+        fact.ENTITY_VERSION AS "entityVersion",
+        fact.REFERENCE AS "ref",
+        fact.BUSINESS_NAME AS "businessName",
+        fact.SHORT_NAME AS "shortName",
+        fact.FACT_CODE AS "factCode",
+        fact.REF_NO AS "refNo",
+        fact.REFERENCE AS "reference",
+        fact.FACT_TYPE_ID_VALUE AS "factType",
+        fact.PARENT_GROUP AS "parentGroup",
+        fact.COUNTRY AS "country",
+        fact.COUNTRY_Name AS "countryName",
+        fact.INCOTERM AS "incoterm",
+        fact.PRODUCT_CATEGORY_VALUE AS "productCategory",
+        fact.INCOTERM_NAME "incotermName",
+        fact.STATUS AS "status",
+        fact.DOC_STATUS AS "docStatus",
+        fact.EDITING_STATUS AS "editingStatus",
+        fact.VERSION AS "version",
+        fact.INTEGRATION_STATUS AS "integrationStatus",
+        fact.INTEGRATION_NOTE AS "integrationNote",
+        fact.UPDATE_USER_NAME AS "updateUserName",
+        fact.REMARKS AS "remarks",
+        FACT.DEACTIVATION_REASON AS "deactivationReason",
+        FACT.DEACTIVATION_REASON_NAME AS "deactivationReasonName",
+        fact.UPDATED_ON AS "updatedOn",
+        fact.REF_NO AS "docRef",
+        fact.INTEGRATION_SOURCE AS "integrationSource",
+        fact.IS_CPM_INITIALIZED AS "isCpmInitialized",
+        <if test="isCpmMode != null and '' != isCpmMode and isCpmMode == 'true'">
+        CCD.CPM_ID as "cpmDocId",
+        CCD.REF_DOC_REF_NO AS "refDocRefNo",
+        </if>
+        fact.BUSINESS_REF_NO AS "businessRefNo",
+        TAG.SYSTEM_TAG as "systemTag"
+        {SELECTED_CUSTOM_FIELDS}
+        {SELECTED_RESPONSIBLE_PARTY_FIELDS}
+        FROM CNT_FACT fact
+        <if test="isCpmMode != null and '' != isCpmMode and isCpmMode == 'true'">
+        INNER JOIN CNT_CPM_DOC CCD ON CCD.DOC_REF_NO = fact.REF_NO AND CCD.REF_DOC_REF_NO = fact.REF_NO
+        AND CCD.APPLIED_LEVEL = 'entity' AND CCD.MODULE = '${module}'
+        AND CCD.HUB_DOMAIN_ID = fact.HUB_DOMAIN_ID and CCD.IS_LATEST = '1' AND CCD.IS_DELETED != '1'
+        </if>
+        LEFT JOIN CNT_DOC_TAG_CACHE TAG on TAG.REFERENCE_DOC_ID = fact.ID
+        WHERE ${restriction}
+        <if test="mainDoc != null">
+                 <choose>
+                  <when test="mainDoc.getEntityName() =='SourcingRecord'">
+                     AND  fact.ID in
+                     (SELECT FACT_ID FROM CNT_VENDOR_FACT WHERE VENDOR_ID IN
+                     (SELECT VENDOR_ID FROM CNT_SOURCING_RECORD_VENDOR_FACT WHERE SOURCING_RECORD_ID='${mainDoc.id}'))
+                  </when>
+                  <when test="mainDoc.getEntityName() =='Offersheet'">
+                     AND fact.ID IN (SELECT FACT_ID FROM CNT_OS_ITEM WHERE OS_ID='${mainDoc.id}')
+                  </when>
+                   <when test="mainDoc.getEntityName() =='InspectCheck'">
+                     AND  fact.ID in (SELECT FACTORY_ID FROM CNT_INSPECT_CHECK WHERE ID ='${mainDoc.id}')
+                   </when>
+                   <when test="mainDoc.getEntityName() =='FactAudit'">
+                     AND  fact.ID in (SELECT FACT_ID FROM CNT_FACT_AUDIT WHERE ID ='${mainDoc.id}')
+                   </when>
+                   <when test="mainDoc.getEntityName() =='Vpo'">
+                     AND EXISTS
+                     (SELECT 1 FROM CNT_VPO CV INNER JOIN CNT_VPO_ITEM CVI ON CV.ID = CVI.VPO_ID
+                      WHERE CV.HEADER_FACTORY_ID = FACT.ID OR CVI.FACT_ID = FACT.ID)
+                   </when>
+                   <when test="mainDoc.getEntityName() == 'Vq'">
+                     AND fact.ID IN (SELECT factory_id FROM CNT_VQ WHERE ID = '${mainDoc.id}')
+                   </when>
+                   <when test="mainDoc.getEntityName() == 'Vq2'">
+                     AND fact.ID = (SELECT EXISTING_FACTORY_ID FROM CNT_VQ2 WHERE ID = #{mainDoc.id})
+                   </when>
+                   <when test="mainDoc.getEntityName() == 'Vendor'">
+                    AND FACT.ID IN (SELECT FACT_ID FROM CNT_VENDOR_FACT WHERE VENDOR_ID = '${mainDoc.id}')
+                   </when>
+                   <when test="mainDoc.getEntityName() == 'InspectReport'">
+                     AND fact.ID IN (SELECT FACTORY_ID FROM CNT_INSPECT_REPORT WHERE ID = '${mainDoc.id}')
+                   </when>
+                   <when test="mainDoc.getEntityName() == 'InspectBooking'">
+                     AND fact.ID IN (SELECT FACTORY_ID FROM CNT_INSPECT_BOOKING WHERE ID = '${mainDoc.id}')
+                   </when>
+                   <when test="mainDoc.getEntityName() =='Item'">
+                     AND EXISTS (SELECT 1 FROM CNT_ITEM_SLN CIS
+                            INNER JOIN CNT_ITEM_VENDOR_FACT CIVF ON CIS.PARENT_ID = CIVF.ID
+                            WHERE FACT.ID = CIS.REF_ID AND CIS.REF_ENTITY = 'Fact' AND CIS.FIELD_ID = 'factName'
+                            AND CIVF.ITEM_ID='${mainDoc.id}')
+                   </when>
+                   <when test="mainDoc.getEntityName() == 'SampleRequest'">
+                        AND fact.REF_NO IN
+                        (SELECT CSRV.FACTORY_REF FROM CNT_SAMPLE_REQUEST_VENDOR CSRV INNER JOIN CNT_SAMPLE_REQUEST CSR
+                        ON CSRV.PARENT_ID = CSR.ID WHERE CSR.REF_NO = '${mainDoc.refNo}'
+                        AND CSR.VERSION = '${mainDoc.version}' AND CSR.DOMAIN_ID = '${mainDoc.domainId}')
+                    </when>
+                    <when test="mainDoc.getEntityName() == 'SampleTracker'">
+                        AND fact.REF_NO = (SELECT FACTORY_REF FROM CNT_SAMPLE_TRACKER WHERE REF_NO = '${mainDoc.refNo}'
+                        AND VERSION = '${mainDoc.version}' AND DOMAIN_ID = '${mainDoc.domainId}')
+                    </when>
+                    <when test="mainDoc.getEntityName() == 'SampleEvaluation'">
+                        AND fact.REF_NO = (SELECT FACTORY_REF FROM CNT_SAMPLE_EVALUATION WHERE REF_NO = '${mainDoc.refNo}'
+                        AND VERSION = '${mainDoc.version}' AND DOMAIN_ID = '${mainDoc.domainId}')
+                    </when>
+                  <otherwise>
+                   AND 1 = 2
+                 </otherwise>
+                 </choose>
+        </if>
+        AND fact.PROFILE_TYPE = 0
+        <if test="orderBy != null">
+        ORDER BY ${orderBy}
+        </if>
+    </select>
+
+
+    <select id="listFactAddr" parameterType="map" resultType="DynamicEntity">
+        SELECT N'FactAddress' AS "entityName",
+        FACT.ID AS "id",
+        N'' AS "thumbnail",
+        FACT.ENTITY_VERSION AS "entityVersion",
+        FACT.REFERENCE AS "ref",
+        FACT.BUSINESS_NAME AS "businessName",
+        FACT.SHORT_NAME AS "shortName",
+        FACT.FACT_CODE AS "factCode",
+        FACT.REF_NO AS "refNo",
+        CFA.REFERENCE AS "factoryAddressReference",
+        FACT.FACT_TYPE_ID_VALUE AS "factType",
+        FACT.PARENT_GROUP AS "parentGroup",
+        FACT.DEACTIVATION_REASON AS "deactivationReason",
+        FACT.DEACTIVATION_REASON_NAME AS "deactivationReasonName",
+        FACT.COUNTRY AS "defaultCountry",
+        FACT.COUNTRY_NAME AS "defaultCountryName",
+        FACT.INCOTERM AS "incoterm",
+        FACT.INCOTERM_NAME AS "incotermName",
+        FACT.STATUS AS "status",
+        FACT.PRODUCT_CATEGORY_VALUE AS "productCategory",
+        <if test ="_databaseId == 'oracle'">
+            TO_CHAR(CFA.V_IS_DEFAULT) AS "defaultAddress",
+        </if>
+        <if test ="_databaseId == 'pgsql'">
+            CFA.V_IS_DEFAULT AS "defaultAddress",
+        </if>
+        CFA.ADDRESS_TYPE AS "addressType",
+        CFA.BUSINESS_NAME AS "addressCompanyName",
+        CFA.ADDRESS1 AS "address1",
+        CFA.ADDRESS2 AS "address2",
+        CFA.ADDRESS3 AS "address3",
+        CFA.ADDRESS4 AS "address4",
+        CFA.CITY AS "townCity",
+        CFA.STATE AS "stateProvince",
+        CFA.POSTAL_CODE AS "postalCode",
+        CFA.COUNTRY AS "country",
+        CFA.COUNTRY_NAME AS "countryName",
+        CFA.REMARKS AS "notes",
+        CFA.PORT_OF_DISCHARGE AS "portOfLoading",
+        CFA.PORT_OF_DISCHARGE_NAME AS "portOfLoadingName",
+        <if test ="_databaseId == 'oracle'">
+            TO_CHAR(CFA.V_IS_DISABLED) AS "inactive",
+        </if>
+        <if test ="_databaseId == 'pgsql'">
+            CFA.V_IS_DISABLED AS "inactive",
+        </if>
+        FACT.DOC_STATUS AS "docStatus",
+        FACT.EDITING_STATUS AS "editingStatus",
+        FACT.VERSION AS "version",
+        FACT.UPDATE_USER_NAME AS "updateUserName",
+        FACT.UPDATED_ON AS "updatedOn",
+        FACT.REF_NO AS "docRef",
+        FACT.IS_CPM_INITIALIZED AS "isCpmInitialized",
+        <if test="isCpmMode != null and '' != isCpmMode and isCpmMode == 'true'">
+        CCD.CPM_ID as "cpmDocId",
+        CCD.REF_DOC_REF_NO AS "refDocRefNo",
+        </if>
+        FACT.BUSINESS_REF_NO AS "businessRefNo",
+        TAG.SYSTEM_TAG as "systemTag"
+        {SELECTED_CUSTOM_FIELDS}
+        {SELECTED_RESPONSIBLE_PARTY_FIELDS}
+        FROM CNT_FACT FACT
+        INNER JOIN CNT_V_FACT_ADDRESS_MAPPED CFA ON CFA.FACT_ID = FACT.ID
+        <if test="isCpmMode != null and '' != isCpmMode and isCpmMode == 'true'">
+            <if test="_databaseId == 'pgsql'">
+            INNER JOIN CNT_CPM_DOC CCD ON CCD.DOC_REF_NO = FACT.REF_NO AND CCD.REF_DOC_REF_NO = CFA.DUID
+            AND CCD.APPLIED_LEVEL = 'entity.factAddress' AND CCD.MODULE = '${module}'
+            AND CCD.HUB_DOMAIN_ID = FACT.HUB_DOMAIN_ID and CCD.IS_LATEST = '1' AND CCD.IS_DELETED != '1'
+            </if>
+        </if>
+        LEFT JOIN CNT_DOC_TAG_CACHE TAG on TAG.REFERENCE_DOC_ID = FACT.ID
+        WHERE ${restriction}
+        AND fact.PROFILE_TYPE = 0
+        <if test="orderBy != null">
+        ORDER BY ${orderBy}
+        </if>
+    </select>
+
+    <select id="listFactContact" parameterType="map" resultType="DynamicEntity">
+        SELECT N'FactContact' AS "entityName",
+        fact.ID AS "id",
+        N'' AS "thumbnail",
+        FACT.ENTITY_VERSION AS "entityVersion",
+        FACT.REFERENCE AS "ref",
+        FACT.BUSINESS_NAME AS "businessName",
+        FACT.SHORT_NAME AS "shortName",
+        FACT.FACT_CODE AS "factCode",
+        FACT.REF_NO AS "refNo",
+        FACT.REFERENCE AS "reference",
+        FACT.FACT_TYPE_ID_VALUE AS "factType",
+        FACT.PARENT_GROUP AS "parentGroup",
+        FACT.DEACTIVATION_REASON AS "deactivationReason",
+        FACT.DEACTIVATION_REASON_NAME AS "deactivationReasonName",
+        FACT.COUNTRY AS "country",
+        FACT.COUNTRY_NAME AS "countryName",
+        FACT.INCOTERM AS "incoterm",
+        FACT.INCOTERM_NAME AS "incotermName",
+        FACT.STATUS AS "status",
+        FACT.PRODUCT_CATEGORY_VALUE AS "productCategory",
+        <if test ="_databaseId == 'oracle'">
+            TO_CHAR(CFC.V_IS_DEFAULT) AS "defaultContact",
+        </if>
+        <if test ="_databaseId == 'pgsql'">
+            CFC.V_IS_DEFAULT AS "defaultContact",
+        </if>
+        CFC.CONTACT_TYPE AS "contactType",
+        CFC.TITLE AS "salutation",
+        CFC.TITLE_NAME AS "salutationName",
+        CFC.FIRST_NAME AS "fistName",
+        CFC.LAST_NAME AS "lastName",
+        CFC.POSITION AS "position",
+        CFC.DEPARTMENT AS "department",
+        CFC.TEL_NO AS "telNo",
+        CFC.MOBILE_NO AS "mobileNo",
+        CFC.FAX_NO AS "faxNo",
+        CFC.REMARKS AS "notes",
+        <if test ="_databaseId == 'oracle'">
+            TO_CHAR(CFC.V_IS_DISABLED) AS "inactive",
+        </if>
+        <if test ="_databaseId == 'pgsql'">
+            CFC.V_IS_DISABLED AS "inactive",
+        </if>
+        CFC.EMAIL AS "email",
+        FACT.DOC_STATUS AS "docStatus",
+        FACT.EDITING_STATUS AS "editingStatus",
+        FACT.VERSION AS "version",
+        FACT.UPDATE_USER_NAME AS "updateUserName",
+        FACT.UPDATED_ON AS "updatedOn",
+        FACT.REF_NO AS "docRef",
+        FACT.IS_CPM_INITIALIZED AS "isCpmInitialized",
+        <if test="isCpmMode != null and '' != isCpmMode and isCpmMode == 'true'">
+        CCD.CPM_ID as "cpmDocId",
+        CCD.REF_DOC_REF_NO AS "refDocRefNo",
+        </if>
+        FACT.BUSINESS_REF_NO AS "businessRefNo",
+        TAG.SYSTEM_TAG as "systemTag"
+        {SELECTED_CUSTOM_FIELDS}
+        {SELECTED_RESPONSIBLE_PARTY_FIELDS}
+        FROM CNT_FACT FACT
+        INNER JOIN CNT_V_FACT_CONTACT_MAPPED CFC ON CFC.FACT_ID = FACT.ID
+        <if test="isCpmMode != null and '' != isCpmMode and isCpmMode == 'true'">
+            <if test="_databaseId == 'pgsql'">
+            INNER JOIN CNT_CPM_DOC CCD ON CCD.DOC_REF_NO = FACT.REF_NO AND CCD.REF_DOC_REF_NO = CFC.DUID
+            AND CCD.APPLIED_LEVEL = 'entity.factContact' AND CCD.MODULE = '${module}'
+            AND CCD.HUB_DOMAIN_ID = FACT.HUB_DOMAIN_ID and CCD.IS_LATEST = '1' AND CCD.IS_DELETED != '1'
+            </if>
+        </if>
+        LEFT JOIN CNT_DOC_TAG_CACHE TAG on TAG.REFERENCE_DOC_ID = FACT.ID
+        WHERE ${restriction}
+        AND fact.PROFILE_TYPE = 0
+        <if test="orderBy != null">
+        ORDER BY ${orderBy}
+        </if>
+    </select>
+
+    <select id="listFactVendor" parameterType="map" resultType="DynamicEntity">
+        SELECT N'Fact' AS "entityName",
+        FACT.ID AS "id",
+        N'' AS "thumbnail",
+        FACT.ENTITY_VERSION AS "entityVersion",
+        FACT.REFERENCE AS "ref",
+        FACT.BUSINESS_NAME AS "businessName",
+        FACT.SHORT_NAME AS "shortName",
+        FACT.FACT_CODE AS "factCode",
+        FACT.REF_NO AS "refNo",
+        FACT.REFERENCE AS "reference",
+        FACT.FACT_TYPE_ID_VALUE AS "factType",
+        FACT.PARENT_GROUP AS "parentGroup",
+        FACT.REMARKS AS "remarks",
+        FACT.DEACTIVATION_REASON AS "deactivationReason",
+        FACT.DEACTIVATION_REASON_NAME AS "deactivationReasonName",
+        FACT.ADDRESS1 AS "address1",
+        FACT.ADDRESS2 AS "address2",
+        FACT.ADDRESS3 AS "address3",
+        FACT.ADDRESS4 AS "address4",
+        FACT.CITY AS "city",
+        FACT.STATE AS "state",
+        FACT.POSTAL_CODE AS "postalCode",
+        FACT.COUNTRY AS "country",
+        FACT.COUNTRY_NAME AS "countryName",
+        FACT.ADDRESS_REMARKS AS "addressRemarks",
+        FACT.SHIPMENT_METHOD AS "shipmentMethod",
+        FACT.SHIPMENT_METHOD_NAME AS "shipmentMethodName",
+        FACT.INCOTERM AS "incoterm",
+        FACT.INCOTERM_NAME "incotermName",
+        FACT.COUNTRY_OF_ORIGIN AS "countryOfOrigin",
+        FACT.COUNTRY_OF_ORIGIN_NAME AS "countryOfOriginName",
+        FACT.COUNTRY_OF_SHIPMENT AS "countryOfShipment",
+        FACT.COUNTRY_OF_SHIPMENT_NAME AS "countryOfShipmentName",
+        FACT.PORT_OF_LOADING AS "portOfLoading",
+        FACT.PORT_OF_LOADING_NAME AS "portOfLoadingName",
+        FACT.LEAD_TIME AS "leadTime",
+        FACT.EXPORT_LICENSE_NO AS "exportLicenseNo",
+        FACT.CONTACT_NAME AS "contactName",
+        FACT.TEL_NO AS "telNo",
+        FACT.MOBILE_NO AS "mobileNo",
+        FACT.FAX_NO AS "faxNo",
+        FACT.EMAIL AS "email",
+        FACT.CONTACT_REMARKS AS "contactRemarks",
+        FACT.PRODUCT_CATEGORY_VALUE AS "productCategory",
+        FACT.BUSINESS_REGISTRATION_NO AS "businessRegistrationNo",
+        FACT.PLACE_OF_INCORPORATION AS "placeOfIncorporation",
+        FACT.PLACE_OF_INCORPORATION_NAME AS "placeOfIncorporationName",
+        FACT.YEAR_ESTABLISHED AS "yearEstablished",
+        FACT.COMPANY_WEBSITE AS "companyWebsite",
+        FACT.COMPANY_EMAIL AS "companyEmail",
+        FACT.BACKGROUND AS "background",
+        FACT.PREFERRED_LANGUAGE AS "preferredLanguage",
+        FACT.PREFERRED_LANGUAGE_NAME AS "preferredLanguageName",
+        CF.V_PORTAL_ACCESS_ENABLED AS "portalAccessEnabled",
+        FACT.PRODUCTION_FLOOR_AREA AS "productionFloorArea",
+        FACT.PRODUCTION_MONTHLY_CAPACITY AS "productionMonthlyCapacity",
+        FACT.NO_OF_EMPLOYEES AS "noOfEmployees",
+        FACT.PRODUCTS AS "products",
+        FACT.LAST_TECHNICAL_COMPLIANCE_DATE AS "lastTechnicalComplianceDate",
+        FACT.LAST_SOCIAL_COMPLIANCE_DATE AS "lastSocialComplianceDate",
+        FACT.RANK AS "rank",
+        FACT.RANK_NAME AS "rankName",
+        FACT.ASSESSMENT_LEVEL AS "assessmentLevel",
+        FACT.ASSESSMENT_LEVEL_NAME AS "assessmentLevelName",
+        FACT.RISK_LEVEL AS "riskLevel",
+        FACT.RISK_LEVEL_NAME AS "riskLevelName",
+        FACT.PERFORMANCE_LEVEL AS "performanceLevel",
+        FACT.PERFORMANCE_LEVEL_NAME AS "performanceLevelName",
+        FACT.SCORE AS "score",
+        <if test ="_databaseId == 'oracle'">
+            TO_CHAR(CF.V_ACCREDITED) AS "accredited",
+        </if>
+        <if test ="_databaseId == 'pgsql'">
+            CF.V_ACCREDITED AS "accredited",
+        </if>
+        FACT.QA_SUMMARY AS "qaSummary",
+        <if test ="_databaseId == 'oracle'">
+            TO_CHAR(CVFFD.V_IS_DEFAULT) AS "isDefault",
+        </if>
+        <if test ="_databaseId == 'pgsql'">
+            CVFFD.V_IS_DEFAULT AS "isDefault",
+        </if>
+        CFFD.PAYMENT_METHOD AS "paymentMethod",
+        CFFD.PAYMENT_METHOD_NAME AS "paymentMethodName",
+        CFFD.PAYMENT_TERM AS "paymentTerm",
+        CFFD.PAYMENT_TERM_NAME AS "paymentTermName",
+        CFFD.CURRENCY AS "currency",
+        CFFD.CURRENCY_NAME AS "currencyName",
+        CFFD.PAYMENT_INSTRUCTION AS "paymentInstruction",
+        CFFD.ACCOUNT_NAME AS "accountName",
+        CFFD.ACCOUNT_NO AS "accountNo",
+        CFFD.ACCOUNT_REF_NO AS "accountRefNo",
+        CFFD.BANK_NAME AS "bankName",
+        CFFD.BANK_ADDRESSES AS "bankAddresses",
+        CFFD.COUNTRY AS "financialCountry",
+        CFFD.COUNTRY_NAME AS "financialCountryName",
+        CFFD.BANK_CODE AS "bankCode",
+        CFFD.SWIFT_CODE AS "swiftCode",
+        CFFD.VAT_NO AS "vatNo",
+        CFFD.AVG_RATE AS "avgRate",
+        CFFD.TOTAL_RATE AS "totalRate",
+        CFFD.EXPORT_RATE AS "exportRate",
+        CFFD.CREDIT_LIMIT AS "creditLimit",
+        <if test ="_databaseId == 'oracle'">
+            TO_CHAR(CVFFD.V_CREDIT_REPORT) AS "creditReport",
+        </if>
+        <if test ="_databaseId == 'pgsql'">
+            CVFFD.V_CREDIT_REPORT AS "creditReport",
+        </if>
+        CVF.VENDOR_ID AS "vendorId",
+        VENDOR.BUSINESS_NAME AS "vendorName",
+        VENDOR.VENDOR_CODE AS "vendorCode",
+        VENDOR.DOC_STATUS AS "vendorDocStatus",
+        CVF.FACTORY_OWNED_VENDOR_REF AS "factoryOwnedVendorRef",
+        CVF.VENDOR_OWNED_FACTORY_REF AS "vendorOwnedFactoryRef",
+        CVF.RELATE AS "relate",
+        CVF.RELATE_SINCE AS "relateSince",
+        CVF.REMARKS AS "vendorRemarks",
+        FACT.STATUS AS "status",
+        FACT.DOC_STATUS AS "docStatus",
+        FACT.EDITING_STATUS AS "editingStatus",
+        FACT.VERSION AS "version",
+        FACT.INTEGRATION_STATUS AS "integrationStatus",
+        FACT.INTEGRATION_NOTE AS "integrationNote",
+        FACT.UPDATE_USER_NAME AS "updateUserName",
+        FACT.UPDATED_ON AS "updatedOn",
+        FACT.REF_NO AS "docRef",
+        FACT.INTEGRATION_SOURCE AS "integrationSource",
+        FACT.IS_CPM_INITIALIZED AS "isCpmInitialized",
+        <if test="isCpmMode != null and '' != isCpmMode and isCpmMode == 'true'">
+        CCD.CPM_ID as "cpmDocId",
+        CCD.REF_DOC_REF_NO AS "refDocRefNo",
+        </if>
+        FACT.BUSINESS_REF_NO AS "businessRefNo",
+        TAG.SYSTEM_TAG as "systemTag"
+        {SELECTED_CUSTOM_FIELDS}
+        {SELECTED_RESPONSIBLE_PARTY_FIELDS}
+        FROM CNT_FACT FACT
+        INNER JOIN CNT_VENDOR_FACT CVF ON CVF.FACT_ID = FACT.ID
+        <if test="isCpmMode != null and '' != isCpmMode and isCpmMode == 'true'">
+        INNER JOIN CNT_CPM_DOC CCD ON CCD.DOC_REF_NO = FACT.REF_NO AND CCD.REF_DOC_REF_NO = CVF.DUID
+        AND CCD.APPLIED_LEVEL = 'entity.vendorFact' AND CCD.MODULE = '${module}'
+        AND CCD.HUB_DOMAIN_ID = FACT.HUB_DOMAIN_ID and CCD.IS_LATEST = '1' AND CCD.IS_DELETED != '1'
+        </if>
+        LEFT JOIN CNT_V_FACT CF ON CF.ID = FACT.ID
+        LEFT JOIN CNT_FACT_FINANCIAL_DTL CFFD ON CFFD.FACT_ID = FACT.ID
+        LEFT JOIN CNT_V_FACT_FINANCIAL_DTL CVFFD ON CVFFD.FACT_ID = FACT.ID
+        JOIN CNT_VENDOR VENDOR ON VENDOR.ID = CVF.VENDOR_ID
+        LEFT JOIN CNT_DOC_TAG_CACHE TAG on TAG.REFERENCE_DOC_ID = FACT.ID
+        WHERE ${restriction}
+        AND FACT.PROFILE_TYPE = '0'
+        AND VENDOR.IS_LATEST = '1'
+        AND FACT.DOC_STATUS='active'
+        ORDER BY ${orderBy}
+    </select>
+
+    <select id="listPopFactView" parameterType="map" resultType="DynamicEntity">
+        SELECT N'Fact' as "entityName",
+        fact.ID as "id",
+        N'' as "thumbnail",
+        fact.ENTITY_VERSION as "entityVersion",
+        fact.VERSION AS "version",
+        fact.REFERENCE as "ref",
+        fact.business_name as "businessName",
+        fact.fact_code as "factCode",
+        fact.REF_NO as "refNo",
+        fact.reference as "reference",
+        fact.FACT_TYPE_ID_VALUE as "factType",
+        FACT.DEACTIVATION_REASON AS "deactivationReason",
+        FACT.DEACTIVATION_REASON_NAME AS "deactivationReasonName",
+        fact.country as "country",
+        fact.assessment_Level_Name as "assessmentLevelName",
+        fact.rank_Name as "rankName",
+        FACT.PRODUCT_CATEGORY_VALUE AS "productCategory",
+        fact.status as "status",
+        fact.EDITING_STATUS AS "editingStatus",
+        fact.remarks as "remarks",
+        fact.UPDATED_ON as "updatedOn",
+        FACT.PARENT_GROUP as "parentGroup",
+        FACT.DOC_STATUS as "docStatus",
+        TAG.SYSTEM_TAG as "systemTag"
+        {SELECTED_CUSTOM_FIELDS}
+        {SELECTED_RESPONSIBLE_PARTY_FIELDS}
+        FROM CNT_FACT fact
+        LEFT JOIN CNT_DOC_TAG_CACHE TAG on TAG.REFERENCE_DOC_ID = fact.ID
+        WHERE fact.ID IN (
+        SELECT CVF.FACT_ID FROM CNT_VENDOR_FACT CVF WHERE 1=1
+        <if test="vendorId != null">
+            AND CVF.VENDOR_ID = (SELECT CV1.ID FROM CNT_VENDOR CV1 WHERE
+            <if test="_databaseId == 'oracle'">
+            CV1.IS_LATEST=1
+            </if>
+            <if test="_databaseId == 'pgsql'">
+            CV1.IS_LATEST=true
+            </if>
+            AND CV1.REF_NO = (SELECT CV2.REF_NO FROM CNT_VENDOR CV2 WHERE CV2.ID = #{vendorId}
+            ) AND CV1.DOMAIN_ID = FACT.DOMAIN_ID AND CV1.DOC_STATUS='active')
+        </if>
+        <if test="vendorId == null || vendorId == ''">
+            AND 1 > 1
+        </if>
+        ) AND ${restriction}
+        <if
+            test="hierarchyCode != null and hierarchyName != null and rssl == 'true'">
+            AND EXISTS (SELECT 1 FROM CNT_FACT_HC CFHC
+            WHERE CFHC.FACT_ID = fact.ID AND CFHC.HCL_FULL_LINEAGE = #{hierarchyCode}
+            AND CFHC.HCL_NAME = #{hierarchyName} AND CFHC.HCL_NODE_LEVEL =
+            #{ssl})
+        </if>
+        <if
+            test="hierarchyCode != null and hierarchyName != null and rssl == 'false'">
+            AND EXISTS (SELECT 1 FROM CNT_FACT_HC CFHC
+            WHERE CFHC.FACT_ID = fact.ID AND CFHC.HCL_FULL_LINEAGE LIKE
+            '${hierarchyCode}%' AND CFHC.HCL_NAME = #{hierarchyName} AND
+            CFHC.HCL_NODE_LEVEL >= #{ssl}
+            <if test="hclNodeIdsForMaster != null and '' != hclNodeIdsForMaster">
+                AND CFHC.HCL_FULL_LINEAGE IN ('${hclNodeIdsForMaster}')
+            </if>
+            )
+        </if>
+        <if test="productCategoryFieldId != null and '' != productCategoryFieldId and codes != null and '' != codes and codeCount != null and ' != codeCount'">
+           AND (
+                SELECT count(1) FROM CNT_FACT_SLN cs
+                INNER JOIN CNT_CODELIST cc ON cc.Id = cs.REF_ID
+                INNER JOIN CNT_CODElIST_BOOK ccb ON ccb.ID = cc.PARENT_ID
+                WHERE ccb.NAME = 'PRODUCT_CATEGORY'
+                AND cc.CODE IN (${codes})
+                AND cs.FIELD_ID = #{productCategoryFieldId}
+                AND fact.ID = cs.PARENT_ID
+                    ) = ${codeCount}
+           AND fact.PRODUCT_CATEGORY_VALUE IS NOT NULL
+           </if>
+           <if test="productCategoryFieldId != null and '' != productCategoryFieldId and codes != null and '' != codes and (codeCount == null or '' == codeCount)">
+             AND EXISTS (
+                SELECT 1 FROM CNT_FACT_SLN cs
+                INNER JOIN CNT_CODELIST cc ON cc.Id = cs.REF_ID
+                INNER JOIN CNT_CODElIST_BOOK ccb ON ccb.ID = cc.PARENT_ID
+                WHERE ccb.NAME = 'PRODUCT_CATEGORY'
+                AND cc.CODE IN (${codes})
+                AND cs.FIELD_ID = #{productCategoryFieldId}
+                AND fact.ID = cs.PARENT_ID
+                )
+        </if>
+        AND fact.PROFILE_TYPE = 0
+        <if test="orderBy != null">
+        ORDER BY ${orderBy}
+        </if>
+    </select>
+
+    <select id="listPopFactForVendor" parameterType="map" resultType="DynamicEntity">
+        SELECT N'Fact' as "entityName",
+        fact.ID as "id",
+        N'' as "thumbnail",
+        fact.ENTITY_VERSION as "entityVersion",
+        fact.VERSION AS "version",
+        fact.REFERENCE as "ref",
+        fact.business_name as "businessName",
+        fact.fact_code as "factCode",
+        fact.REF_NO as "refNo",
+        fact.reference as "reference",
+        fact.FACT_TYPE_ID_VALUE as "factType",
+        FACT.DEACTIVATION_REASON AS "deactivationReason",
+        FACT.DEACTIVATION_REASON_NAME AS "deactivationReasonName",
+        FACT.PRODUCT_CATEGORY_VALUE AS "productCategory",
+        fact.country as "country",
+        fact.status as "status",
+        fact.remarks as "remarks",
+        fact.UPDATED_ON as "updatedOn",
+        FACT.PARENT_GROUP as "parentGroup",
+        FACT.DOC_STATUS as "docStatus",
+        FACT.EDITING_STATUS AS "editingStatus",
+        TAG.SYSTEM_TAG as "systemTag"
+        {SELECTED_CUSTOM_FIELDS}
+        {SELECTED_RESPONSIBLE_PARTY_FIELDS}
+        FROM CNT_FACT fact
+        LEFT JOIN CNT_DOC_TAG_CACHE TAG on TAG.REFERENCE_DOC_ID = fact.ID
+        <if test="relatedVendorId != null">
+            RIGHT JOIN CNT_VENDOR_FACT VF ON VF.VENDOR_ID = #{relatedVendorId} AND VF.FACT_ID = FACT.ID
+        </if>
+        WHERE ${restriction}
+        <if test="hierarchyCode != null and hierarchyName != null and rssl == 'true'">
+           AND EXISTS (SELECT 1 FROM CNT_FACT_HC CFHC
+            WHERE CFHC.FACT_ID = fact.ID AND CFHC.HCL_FULL_LINEAGE = #{hierarchyCode} AND CFHC.HCL_NAME = #{hierarchyName} AND CFHC.HCL_NODE_LEVEL = ${ssl})
+        </if>
+        <if test="hierarchyCode != null and hierarchyName != null and rssl == 'false'">
+            AND EXISTS (SELECT 1 FROM CNT_FACT_HC CFHC
+            WHERE CFHC.FACT_ID = fact.ID AND CFHC.HCL_FULL_LINEAGE LIKE '${hierarchyCode}%' AND CFHC.HCL_NAME = #{hierarchyName} AND CFHC.HCL_NODE_LEVEL >= ${ssl}
+            <if test="hclNodeIdsForMaster != null and '' != hclNodeIdsForMaster">
+                AND CFHC.HCL_FULL_LINEAGE IN ('${hclNodeIdsForMaster}')
+            </if>
+            )
+        </if>
+        <if test="hclNodeId!= null">
+            AND EXISTS (SELECT 1 FROM CNT_FACT_HC WHERE FACT_ID = fact.ID and
+            HCL_NODE_ID = #{hclNodeId})
+        </if>
+        <if test="productCategoryFieldId != null and '' != productCategoryFieldId and codes != null and '' != codes and (codeCount == null or '' == codeCount)">
+             AND EXISTS (
+                SELECT 1 FROM CNT_FACT_SLN cs
+                INNER JOIN CNT_CODELIST cc ON cc.Id = cs.REF_ID
+                INNER JOIN CNT_CODElIST_BOOK ccb ON ccb.ID = cc.PARENT_ID
+                WHERE ccb.NAME = 'PRODUCT_CATEGORY'
+                AND cc.CODE IN (${codes})
+                AND cs.FIELD_ID = #{productCategoryFieldId}
+                AND fact.ID = cs.PARENT_ID
+                )
+        </if>
+        <if test="productCategoryFieldId != null and '' != productCategoryFieldId and codes != null and '' != codes and codeCount != null and '' != codeCount">
+           AND (
+                SELECT count(1) FROM CNT_FACT_SLN cs
+                INNER JOIN CNT_CODELIST cc ON cc.Id = cs.REF_ID
+                INNER JOIN CNT_CODElIST_BOOK ccb ON ccb.ID = cc.PARENT_ID
+                WHERE ccb.NAME = 'PRODUCT_CATEGORY'
+                AND cc.CODE IN (${codes})
+                AND cs.FIELD_ID = #{productCategoryFieldId}
+                AND fact.ID = cs.PARENT_ID
+                    ) = ${codeCount}
+           AND fact.PRODUCT_CATEGORY_VALUE IS NOT NULL
+         </if>
+        AND fact.PROFILE_TYPE = 0
+        <if test="orderBy != null">
+        ORDER BY ${orderBy}
+        </if>
+    </select>
+
+    <select id="listLatestAuditReport" parameterType="map" resultType="DynamicEntity">
+        SELECT N'FactAudit' AS "entityName" ,
+        factAudit.ID AS "id" ,
+        N'' AS "thumbnail" ,
+        factAudit.ENTITY_VERSION as "entityVersion",
+        factAudit.DOMAIN_ID as "domainId",
+        factAudit.HUB_DOMAIN_ID as "hubDomainId",
+        factAudit.VERSION AS "version" ,
+        factAudit.REPORT_NO AS "reportNo" ,
+        factAudit.REPORT_TYPE_NAME AS "reportType" ,
+        factAudit.AUDIT_DATE AS "auditDate" ,
+        factAudit.AUDITOR_NAME AS "auditor" ,
+        factAudit.AUDIT_RESULT_NAME AS "auditResult" ,
+        factAudit.EXPIRY_DATE AS "expiryDate" ,
+        factAudit.REPORT_DATE AS "reportDate" ,
+        factAudit.EDITING_STATUS AS "editingStatus",
+        factAudit.BUSINESS_REF_NO AS "businessRefNo"
+        FROM CNT_FACT_AUDIT factAudit
+        <if test="factId!= null">
+        WHERE
+        factAudit.FACT_ID = #{factId}
+        AND
+        factAudit.DOC_STATUS='active'
+        AND IS_LATEST = '1'
+        AND EXISTS (
+        (SELECT 1
+        FROM CNT_FACT_AUDIT factaudit2
+        WHERE
+        factaudit2.ID = factAudit.ID
+        AND factaudit2.UPDATED_ON IN (SELECT MAX(factaudit3.UPDATED_ON) FROM
+        CNT_FACT_AUDIT factaudit3
+        WHERE
+        factAudit3.FACT_ID = #{factId}
+        AND
+        factaudit3.REPORT_TYPE = factaudit2.REPORT_TYPE AND
+        factaudit3.REPORT_DATE = factaudit2.REPORT_DATE AND
+        factaudit3.DOC_STATUS='active' AND
+        factaudit3.REPORT_DATE IN
+        (SELECT MAX(factAudit4.REPORT_DATE)
+        FROM CNT_FACT_AUDIT FACTAUDIT4
+        WHERE
+        factAudit4.FACT_ID = #{factId}
+        AND
+        factaudit4.REPORT_TYPE = factaudit3.REPORT_TYPE
+        AND factaudit4.DOC_STATUS='active'
+        ))))
+        </if>
+    </select>
+
+    <select id="listPopupFactAddress" parameterType="map" resultType="DynamicEntity">
+        SELECT N'FactAddress' AS "entityName",
+        FACTADD.ID AS "id",
+        N'' AS "thumbnail",
+        FACTADD.ENTITY_VERSION AS "entityVersion",
+        FACTORY.VERSION AS "version",
+        FACTADD.ADDRESS_TYPE_ID_VALUE AS "addressType",
+        FACTADD.ADDRESS1 AS "address1",
+        FACTADD.ADDRESS2 AS "address2",
+        FACTADD.ADDRESS3 AS "address3",
+        FACTADD.ADDRESS4 AS "address4",
+        FACTADD.CITY AS "city",
+        FACTADD.STATE AS "state",
+        FACTADD.POSTAL_CODE AS "postalCode",
+        FACTADD.COUNTRY AS "country",
+        FACTADD.COUNTRY_NAME AS "countryName",
+        FACTADD.REMARKS AS "remarks",
+        FACTADD.REFERENCE AS "reference",
+        FACTADD.PORT_OF_DISCHARGE AS "portOfDischarge",
+        FACTADD.PORT_OF_DISCHARGE_NAME AS "portOfDischargeName",
+        factadd.LANGUAGE AS "language",
+        factadd.LANGUAGE_NAME AS "languageName",
+        FACTADD.BUSINESS_NAME AS "companyName",
+        FACTADD.FACT_ID AS "parentId",
+        FACTORY.UPDATED_ON AS "updatedOn",
+        FACTORY.DOC_STATUS as "docStatus",
+        FACTORY.EDITING_STATUS AS "editingStatus",
+        TAG.SYSTEM_TAG as "systemTag"
+        {SELECTED_RESPONSIBLE_PARTY_FIELDS}
+        FROM CNT_FACT_ADDRESS FACTADD
+        LEFT JOIN CNT_FACT FACTORY ON FACTORY.ID = FACTADD.FACT_ID
+        LEFT JOIN CNT_DOC_TAG_CACHE TAG on TAG.REFERENCE_DOC_ID = FACTADD.ID
+        WHERE ${restriction}
+        <if test="factId != null" >
+            AND FACTORY.ID = #{factId}
+        </if>
+        AND FACTORY.PROFILE_TYPE = 0
+        <if test="orderBy != null">
+        Order By ${orderBy}
+        </if>
+    </select>
+
+    <select id="listPopupFactContact" parameterType="map" resultType="DynamicEntity">
+        SELECT N'FactContact' AS "entityName",
+        CONTACT.ID AS "id",
+        N'' AS "thumbnail",
+        CONTACT.ENTITY_VERSION AS "entityVersion",
+        FACTORY.VERSION AS "version",
+        CONTACT.CONTACT_TYPE_ID_VALUE AS "contactType",
+        CONTACT.REF_NO AS "refNo",
+        CONTACT.TITLE AS "contactTitle",
+        CONTACT.TITLE_NAME AS "contactTitleName",
+        CONTACT.FIRST_NAME AS "firstName",
+        CONTACT.LAST_NAME AS "lastName",
+        CONTACT.POSITION AS "position",
+        CONTACT.DEPARTMENT AS "department",
+        CONTACT.TEL_NO AS "telNo",
+        CONTACT.MOBILE_NO AS "mobileNo",
+        CONTACT.FAX_NO AS "faxNo",
+        CONTACT.EMAIL AS "email",
+        CONTACT.FACT_ID AS "parentId",
+        FACTORY.UPDATED_ON AS "updatedOn",
+        FACTORY.DOC_STATUS as "docStatus",
+        FACTORY.EDITING_STATUS AS "editingStatus",
+        TAG.SYSTEM_TAG as "systemTag"
+        {SELECTED_RESPONSIBLE_PARTY_FIELDS}
+        FROM CNT_FACT_CONTACT CONTACT
+        LEFT JOIN CNT_FACT FACTORY ON FACTORY.ID = CONTACT.FACT_ID
+        LEFT JOIN CNT_DOC_TAG_CACHE TAG on TAG.REFERENCE_DOC_ID = CONTACT.ID
+        WHERE ${restriction}
+        <if test="factId != null" >
+            AND FACTORY.ID = #{factId}
+        </if>
+        AND FACTORY.PROFILE_TYPE = 0
+        <if test="orderBy != null">
+        ORDER BY ${orderBy}
+        </if>
+    </select>
+
+</mapper>

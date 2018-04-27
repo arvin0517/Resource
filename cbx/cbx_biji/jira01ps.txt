@@ -1,0 +1,63 @@
+
+01£ºUpdate file: CBXB_Excel\root\excel\popup\custFieldDef_popup.xlsx
+
+    update: 
+     
+        popCustFieldDefDetail sheet:
+
+            add a rendererClass value to "attrKey"
+
+            rendererClass = "com.core.cbx.custfielddef.form.CustFieldDefAttrKeyCellRenderer" when id = "attrKey"
+
+
+02:  Define Class: com.core.cbx.custfielddef.form.CustFieldDefAttrKeyCellRenderer extends TextCellRenderer
+
+     Description:  add rendererClass for attrKey,
+
+                   create com.core.cbx.custfielddef.form.CustFieldDefAttrKeyCellRenderer extends TextCellRenderer,
+
+                   and Override getFieldValue method,add Map to store the key with label to render the attrKey.
+
+     Logic: 
+            1.Define class CustFieldDefAttrKeyCellRenderer extends TextCellRenderer .
+         
+            2.override getFieldValue method,add Map to store the key with label to render the attrKey.
+
+              When attrKey's fieldValue is the same as the object key of Map, it returns the object value mapped by the key object to render attrKey label.
+
+                     public static final String ATTR_RENDER_BOOK_NAME = "Book Name";
+
+                     public static final String ATTR_RENDER_MATCH_DATE_FIELD_ID = "Match Date Field ID";
+
+                     public static final String ATTR_RENDER_CASCADE = "Cascade";
+
+                     public static final String ATTR_RENDER_CASCADE_EXPRESSION = "Cascade Expression";
+
+                     public static final String ATTR_RENDER_HCL_DATA = "HCL Data";
+
+                     public static final String ATTR_RENDER_DISABLE_SSL = "disable SSL";
+                
+                @Override
+                protected static Object getFieldValue(final BaseColumn col, final Object data) {
+
+                    final Map<String,Object> attrMap = new HashMap<String,Object>();
+                    attrMap.put("bookName", ATTR_RENDER_BOOK_NAME);
+                    attrMap.put("matchDateFieldId", ATTR_RENDER_MATCH_DATE_FIELD_ID);
+                    attrMap.put("cascade", ATTR_RENDER_CASCADE);
+                    attrMap.put("cascadeExpression", ATTR_RENDER_CASCADE_EXPRESSION);
+                    attrMap.put("hclData", ATTR_RENDER_HCL_DATA);
+                    attrMap.put("disableSsl", ATTR_RENDER_DISABLE_SSL);
+
+                  final String dataIndex = StringUtils.defaultIfBlank(col.getMapping(), col.getId());
+                  if(attrMap.containsKey(FieldValueGetter.getEntityFieldValue((Map<String, Object>) data, dataIndex))){
+
+                          return attrMap.get(FieldValueGetter.getEntityFieldValue((Map<String, Object>) data, dataIndex));
+
+                    }else{
+
+                          return FieldValueGetter.getEntityFieldValue((Map<String, Object>) data, dataIndex);
+                    }
+                }
+
+
+

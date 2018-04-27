@@ -1,0 +1,5 @@
+1、修改了cbx_core 的 代码没有变化，   需要打包， 而且要注意 pom.xml ， 注意版本。
+
+2、数据库最好每天重建一个新的，两种方式：
+
+git如何避免”warning: LF will be replaced by CRLF“提示？
